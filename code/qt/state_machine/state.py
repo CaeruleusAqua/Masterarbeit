@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-
+from PyQt4.QtGui import *
 
 class State:
     __metaclass__ = ABCMeta
@@ -12,11 +12,14 @@ class State:
         self.snapy_node = node
         if self.snapy_node:
             self.globals.snapy = self.snapy_node.pos
+            self.globals.info.setItem(0, 0, QTableWidgetItem("Node"))
+            self.globals.info.setItem(0, 1, QTableWidgetItem(str(self.snapy_node.id)))
         else:
             self.globals.snapy = None
 
+
     @abstractmethod
-    def mouse_event(self, event, x, y):
+    def mouse_event(self, event):
         pass
 
     @abstractmethod

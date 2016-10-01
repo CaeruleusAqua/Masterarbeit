@@ -12,6 +12,13 @@ class Graph:
         self.node_counter += 1
         self.nodes.append(node)
 
+    def popLastNode(self):
+        try:
+            return self.nodes.pop()
+        except IndexError:
+            return None
+
+
     def addLane(self, lane):
         lane.id = self.lane_counter
         self.lane_counter += 1

@@ -5,3 +5,4 @@ class Lane:
         self.nodes = list()
         self.points = list()
         self.polygon = list()
+        self.surface_corners = list()

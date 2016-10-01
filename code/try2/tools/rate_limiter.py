@@ -35,7 +35,10 @@ class Rate:
             print "fast_drop"
 
     def sleep_rate(self, fps):
-        rate=1./fps
+        rate = 1. / fps
+        if rate < self.rate:
+            rate = self.rate
+
         if self.last == 0:
             self.last = time.time()
             time.sleep(rate)
@@ -44,7 +47,6 @@ class Rate:
             diff = tmp - self.last
             self.last = tmp + rate - diff
             time.sleep(max(0, rate - diff))
-
 
 
 if __name__ == '__main__':

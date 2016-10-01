@@ -1,33 +1,90 @@
-#!/usr/bin/env python
 from PyQt4 import QtCore, QtGui
 
-from qt_qui.drawing_area import DrawingArea
+from draw_area import DrawArea
+from node_infos import MyTable
+from state_machine import StateHandler
+
+
+class LayoutWrapper(QtGui.QWidget):
+    def __init__(self):
+        super(LayoutWrapper, self).__init__()
+        self.handler = StateHandler("test.json")
+
+
+
+        self.drawArea = DrawArea(self.handler)
+        self.drawArea.setBackgroundRole(QtGui.QPalette.Base)
+        self.drawArea.setSizePolicy(QtGui.QSizePolicy.Ignored,
+                                    QtGui.QSizePolicy.Ignored)
+
+        self.scrollArea = QtGui.QScrollArea()
+        self.scrollArea.setBackgroundRole(QtGui.QPalette.Dark)
+        self.scrollArea.setWidget(self.drawArea)
+
+        table = MyTable()
+        tableItem = QtGui.QTableWidgetItem()
+
+        table.resize(400, 250)
+        table.setRowCount(4)
+        table.setColumnCount(2)
+        #table.setItem(0, 0, QtGui.QTableWidgetItem("Item (1,1)"))
+
+        self.handler.info=table
+
+        self.table = table
+        self.table.setMaximumWidth(300)
+        hbox = QtGui.QHBoxLayout()
+        hbox.addWidget(self.scrollArea)
+        #hbox.addStretch(1)
+        hbox.addWidget(self.table)
+        vbox = QtGui.QVBoxLayout()
+        vbox.addLayout(hbox)
+        self.setLayout(vbox)
 
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
+        self.printer = QtGui.QPrinter()
         self.scaleFactor = 0.0
 
-        self.imageLabel = DrawingArea()
-        self.imageLabel.setBackgroundRole(QtGui.QPalette.Base)
-        self.imageLabel.setSizePolicy(QtGui.QSizePolicy.Ignored,
-                                      QtGui.QSizePolicy.Ignored)
-        self.imageLabel.setScaledContents(True)
+        # self.drawArea.setScaledContents(True)
 
-        self.scrollArea = QtGui.QScrollArea()
-        self.scrollArea.setBackgroundRole(QtGui.QPalette.Dark)
-        self.scrollArea.setWidget(self.imageLabel)
-        self.scrollArea.setMouseTracking(True)
 
-        self.setCentralWidget(self.scrollArea)
+        # self.setCentralWidget(self.scrollArea)
+
+        self.wrap = LayoutWrapper()
+
+        self.setCentralWidget(self.wrap)
 
         self.createActions()
         self.createMenus()
 
-        self.setWindowTitle("Image Viewer")
-        self.resize(500, 400)
+        self.setWindowTitle("Roundabout Editor")
+        # self.resize(500, 400)
+
+
+        ############### testing ###############
+        fileName = "test.png"
+        image = QtGui.QImage(fileName)
+        if image.isNull():
+            QtGui.QMessageBox.information(self, "Image Viewer",
+                                          "Cannot load %s." % fileName)
+            return
+
+        self.wrap.drawArea.setPixmap(QtGui.QPixmap.fromImage(image))
+        self.scaleFactor = 1.0
+
+        self.printAct.setEnabled(True)
+        self.fitToWindowAct.setEnabled(True)
+        self.updateActions()
+
+        if not self.fitToWindowAct.isChecked():
+            self.wrap.drawArea.adjustSize()
+
+
+        #############  testing end  ############
 
     def open(self):
         fileName = QtGui.QFileDialog.getOpenFileName(self, "Open File",
@@ -39,14 +96,26 @@ class MainWindow(QtGui.QMainWindow):
                                               "Cannot load %s." % fileName)
                 return
 
-            self.imageLabel.setPixmap(QtGui.QPixmap.fromImage(image))
+            self.wrap.drawArea.setPixmap(QtGui.QPixmap.fromImage(image))
             self.scaleFactor = 1.0
 
+            self.printAct.setEnabled(True)
             self.fitToWindowAct.setEnabled(True)
             self.updateActions()
 
             if not self.fitToWindowAct.isChecked():
-                self.imageLabel.adjustSize()
+                self.drawArea.adjustSize()
+
+    def print_(self):
+        dialog = QtGui.QPrintDialog(self.printer, self)
+        if dialog.exec_():
+            painter = QtGui.QPainter(self.printer)
+            rect = painter.viewport()
+            size = self.drawArea.pixmap().size()
+            size.scale(rect.size(), QtCore.Qt.KeepAspectRatio)
+            painter.setViewport(rect.x(), rect.y(), size.width(), size.height())
+            painter.setWindow(self.drawArea.pixmap().rect())
+            painter.drawPixmap(0, 0, self.drawArea.pixmap())
 
     def zoomIn(self):
         self.scaleImage(1.25)
@@ -55,7 +124,7 @@ class MainWindow(QtGui.QMainWindow):
         self.scaleImage(0.8)
 
     def normalSize(self):
-        self.imageLabel.adjustSize()
+        self.drawArea.adjustSize()
         self.scaleFactor = 1.0
 
     def fitToWindow(self):
@@ -69,6 +138,9 @@ class MainWindow(QtGui.QMainWindow):
     def createActions(self):
         self.openAct = QtGui.QAction("&Open...", self, shortcut="Ctrl+O",
                                      triggered=self.open)
+
+        self.printAct = QtGui.QAction("&Print...", self, shortcut="Ctrl+P",
+                                      enabled=False, triggered=self.print_)
 
         self.exitAct = QtGui.QAction("E&xit", self, shortcut="Ctrl+Q",
                                      triggered=self.close)
@@ -86,9 +158,13 @@ class MainWindow(QtGui.QMainWindow):
                                             enabled=False, checkable=True, shortcut="Ctrl+F",
                                             triggered=self.fitToWindow)
 
+        self.aboutQtAct = QtGui.QAction("About &Qt", self,
+                                        triggered=QtGui.qApp.aboutQt)
+
     def createMenus(self):
         self.fileMenu = QtGui.QMenu("&File", self)
         self.fileMenu.addAction(self.openAct)
+        self.fileMenu.addAction(self.printAct)
         self.fileMenu.addSeparator()
         self.fileMenu.addAction(self.exitAct)
 
@@ -99,8 +175,12 @@ class MainWindow(QtGui.QMainWindow):
         self.viewMenu.addSeparator()
         self.viewMenu.addAction(self.fitToWindowAct)
 
+        self.helpMenu = QtGui.QMenu("&Help", self)
+        self.helpMenu.addAction(self.aboutQtAct)
+
         self.menuBar().addMenu(self.fileMenu)
         self.menuBar().addMenu(self.viewMenu)
+        self.menuBar().addMenu(self.helpMenu)
 
     def updateActions(self):
         self.zoomInAct.setEnabled(not self.fitToWindowAct.isChecked())
@@ -109,7 +189,7 @@ class MainWindow(QtGui.QMainWindow):
 
     def scaleImage(self, factor):
         self.scaleFactor *= factor
-        self.imageLabel.resize(self.scaleFactor * self.imageLabel.pixmap().size())
+        self.drawArea.resize(self.scaleFactor * self.drawArea.pixmap().size())
 
         self.adjustScrollBar(self.scrollArea.horizontalScrollBar(), factor)
         self.adjustScrollBar(self.scrollArea.verticalScrollBar(), factor)
@@ -120,6 +200,3 @@ class MainWindow(QtGui.QMainWindow):
     def adjustScrollBar(self, scrollBar, factor):
         scrollBar.setValue(int(factor * scrollBar.value()
                                + ((factor - 1) * scrollBar.pageStep() / 2)))
-
-
-

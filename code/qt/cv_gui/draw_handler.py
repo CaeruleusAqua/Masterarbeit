@@ -53,37 +53,15 @@ class DrawHandler(threading.Thread):
                     cv2.circle(self.screen, (node.pos[0], node.pos[1]), 2, (0, 0, 255), 2)
                     for lane in node.lanes:
                         cv_ext.draw_arrowed_polyline(self.screen, lane.points, (0, 255, 255))
-                        for point in lane.surface_corners:
-                            cv2.circle(self.screen, (point[0], point[1]), 2, (0, 255, 255), 2)
 
                 for lane in self.handler.graph.lanes:
                     cv2.polylines(self.screen, [np.array(lane.polygon)], False, (0, 255, 255))
 
                 if self.handler.mark is not None:
-                    cv2.circle(self.screen, (self.handler.mark[0],self.handler.mark[1]), 5, (0, 0, 255), 1)
+                    cv2.circle(self.screen, self.handler.mark, 5, (0, 0, 255), 1)
 
                 if self.handler.snapy is not None:
-                    cv2.circle(self.screen, (self.handler.snapy[0],self.handler.snapy[1]), 5, (0, 0, 0), 1)
-
-                for node in self.handler.drawable.nodes:
-                    cv2.circle(self.screen, (node.pos[0], node.pos[1]), 2, (255, 255, 0), 2)
-
-                for surface in self.handler.drawable.surfaces:
-                    anchor = surface.getAnchor()
-                    nodes = surface.nodes
-                    cv2.circle(self.screen, (anchor.pos[0], anchor.pos[1]), 2, (0, 0, 255), 2)
-                    cv2.circle(self.screen, (nodes[0].pos[0], nodes[0].pos[1]), 2, (255, 0, 0), 2)
-                    cv2.circle(self.screen, (nodes[1].pos[0], nodes[1].pos[1]), 2, (255, 0, 0), 2)
-                    cv2.circle(self.screen, (nodes[2].pos[0], nodes[2].pos[1]), 2, (255, 0, 0), 2)
-                    cv2.circle(self.screen, (nodes[3].pos[0], nodes[3].pos[1]), 2, (255, 0, 0), 2)
-                    cv2.line(self.screen, (nodes[0].pos[0], nodes[0].pos[1]), (nodes[1].pos[0], nodes[1].pos[1]), (255, 0, 0), 2)
-                    cv2.line(self.screen, (nodes[1].pos[0], nodes[1].pos[1]), (nodes[2].pos[0], nodes[2].pos[1]), (255, 0, 0), 2)
-                    cv2.line(self.screen, (nodes[2].pos[0], nodes[2].pos[1]), (nodes[3].pos[0], nodes[3].pos[1]), (255, 0, 0), 2)
-                    cv2.line(self.screen, (nodes[3].pos[0], nodes[3].pos[1]), (nodes[0].pos[0], nodes[0].pos[1]), (255, 0, 0), 2)
-
-
-
-
+                    cv2.circle(self.screen, self.handler.snapy, 5, (0, 0, 0), 1)
 
             vis = copy.copy(self.screen)
             self.overlay.setCursor(self.cursor_pos)

@@ -1,6 +1,8 @@
 #!/usr/bin/env python2
 from PyQt4 import QtCore, QtGui
-from qt_qui import MainWindow
+from qt_gui import MainWindow
+from qt_gui import MouseEvent
+
 
 
 if __name__ == '__main__':

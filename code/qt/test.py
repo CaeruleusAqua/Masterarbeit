@@ -31,6 +31,7 @@ class Window(QWidget):
                                  QPoint(250, 100)])
 
     def paintEvent(self, event):
+        print "debug"
         painter = QPainter()
         painter.begin(self)
         painter.fillRect(event.rect(), QBrush(Qt.white))
@@ -46,8 +47,8 @@ class Window(QWidget):
         painter.drawPolyline(self.polygon)
         painter.setBrush(QBrush(Qt.blue))
         painter.drawPath(self.path)
-        if self.dragging!=None:
-            painter.drawRect(QRect(50, 50, 400, 400))
+        #if self.dragging!=None:
+        #    painter.drawRect(QRect(50, 50, 400, 400))
 
         painter.end()
 

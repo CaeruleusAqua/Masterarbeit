@@ -1,10 +1,15 @@
 #!/usr/bin/env python2
 
-import json
-
-from cv_gui.handler import Handler
-from objects import *
+from cv_gui.draw_handler import DrawHandler
+from state_machine import StateHandler
 
 if __name__ == '__main__':
-    tmp = Handler([800, 600],'test.json')
+    threads = list()
+
+    tmp = DrawHandler(StateHandler("test.json"))
     tmp.start()
+    threads.append(tmp)
+    for t in threads:
+        t.join()
+    print "Exiting Main Thread"
+
