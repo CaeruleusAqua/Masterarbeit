@@ -1,6 +1,6 @@
 import math
 
-class Graph:
+class ObjectContainer:
     def __init__(self):
         self.node_counter = 0
         self.lane_counter = 0

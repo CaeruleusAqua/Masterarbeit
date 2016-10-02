@@ -57,7 +57,7 @@ class JsonHandler():
         for key, value in node_dict.iteritems():
             value.lanes = [lane_dict[id] for id in value.lanes]
 
-        graph = Graph()
+        graph = ObjectContainer()
         graph.lanes = [x for x in lane_dict.itervalues()]
         graph.nodes = [x for x in node_dict.itervalues()]
         graph.lane_counter = obj['lane_counter']

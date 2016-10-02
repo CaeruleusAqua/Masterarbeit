@@ -5,6 +5,7 @@ class Node:
         self.nodes = list()
         self.pos = [pos[0], pos[1]]
         self.border = list()
+        self.type = "Node"
 
     def connect(self, node, lane):
         self.lanes.append(lane)
@@ -17,3 +18,12 @@ class Node:
 
     def connected_to(self, node):
         return node in self.nodes
+
+    def action(self):
+        pass
+
+
+
+
+
+
