@@ -1,7 +1,7 @@
-from States.toRoundabout import ToRoundaboutState
+import States
 
 
-class StartState:
+class Start:
     def __init__(self, globals):
         self.globals = globals
         self.name = "startStat"
@@ -16,6 +16,6 @@ class StartState:
         print "Roundabout distance: ", self.globals.roundabout.getDistance()
         if self.globals.roundabout.getDistance() < 3:
             print "\033[1;33m------------------------------State_Change----------------------------------\033[0m"
-            self.globals.currentState = ToRoundaboutState(self.globals)
+            self.globals.currentState = States.ToRoundabout(self.globals)
 
         self.globals.setSpeed()

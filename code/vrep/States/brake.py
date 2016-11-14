@@ -1,4 +1,4 @@
-class BrakingState:
+class Brake:
     def __init__(self, globals, distance, nextState):
         self.globals = globals
         self.name = "BrakingState"

@@ -1,8 +1,7 @@
-from adaptiveCruiseControl import AdaptiveCruiseControl
-from braking import BrakingState
+import States
 
 
-class ToRoundaboutState:
+class ToRoundabout:
     def __init__(self, globals):
         self.globals = globals
         self.name = "ToRoundaboutState"
@@ -31,7 +30,7 @@ class ToRoundaboutState:
 
         if self.globals.roundabout.getDistance() - 1 < self.globals.car_length / 2:
             print "\033[1;33m------------------------------State_Change----------------------------------\033[0m"
-            self.globals.currentState = AdaptiveCruiseControl(self.globals)
+            self.globals.currentState = States.AdaptiveCruiseControl(self.globals)
             return
 
         for enemy in enemys:
@@ -81,5 +80,5 @@ class ToRoundaboutState:
 
         if self.brake is not None:
             print "\033[1;33m------------------------------State_Change----------------------------------\033[0m"
-            self.globals.currentState = BrakingState(self.globals, self.brake, ToRoundaboutState(self.globals))
+            self.globals.currentState = States.Brake(self.globals, self.brake, ToRoundabout(self.globals))
             self.globals.currentState.run()

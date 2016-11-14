@@ -5,12 +5,12 @@ import time
 
 import matplotlib.pyplot as plt
 import numpy as np
-from objects.Enemy import Enemy
-from objects.Roundabout import Roundabout
-from objects.lane import Lane
+from Objects import Enemy
+from Objects import Roundabout
+from Objects import Lane
 
-from States.startState import StartState
-from objects.VrepObject import VrepObject
+import States
+from Objects import VrepObject
 from remoteApi import vrep
 from remoteApi import vrepConst
 
@@ -39,7 +39,7 @@ class CarLogic:
 
         self.handleBuffer = []
 
-        self.currentState = StartState(self)
+        self.currentState = States.Start(self)
         self.roundabout = None
         self.rot_buffer = None
         self.rot_rate = None

@@ -348,7 +348,7 @@ sim_pathproperty_endpoints_at_zero                    =0x0400
 sim_pathproperty_keep_x_up                            =0x0800
 
 
- # drawing objects
+ # drawing Objects
 # following are mutually exclusive 
 sim_drawing_points          =0            # 3 values per point (point size in pixels)
 sim_drawing_lines            =1            # 6 values per line (line size in pixels)
@@ -374,7 +374,7 @@ sim_drawing_25percenttransparency    =0x04000 # the drawing object will be 25% t
 sim_drawing_12percenttransparency    =0x08000 # the drawing object will be 12.5% transparent
 sim_drawing_emissioncolor            =0x10000 # When used in combination with sim_drawing_itemcolors or sim_drawing_vertexcolors then the specified colors will be for the emissive component
 sim_drawing_facingcamera            =0x20000 # Only for trianglepoints quadpoints discpoints and cubepoints. If specified the normal verctor is calculated to face the camera (each item data requires 3 values less)
-sim_drawing_overlay                    =0x40000 # When specified objects are always drawn on top of "regular objects"
+sim_drawing_overlay                    =0x40000 # When specified Objects are always drawn on top of "regular Objects"
 sim_drawing_itemtransparency        =0x80000  # +1 value per item (each item has its own transparency value (0-1)). Not compatible with sim_drawing_vertexcolors
 
 # banner values 
@@ -382,7 +382,7 @@ sim_drawing_itemtransparency        =0x80000  # +1 value per item (each item has
 sim_banner_left                        =0x00001 # Banners display on the left of the specified point
 sim_banner_right                    =0x00002 # Banners display on the right of the specified point
 sim_banner_nobackground                =0x00004 # Banners have no background rectangle
-sim_banner_overlay                    =0x00008 # When specified banners are always drawn on top of "regular objects"
+sim_banner_overlay                    =0x00008 # When specified banners are always drawn on top of "regular Objects"
 sim_banner_followparentvisibility    =0x00010 # if the object is associated with a scene object then it follows that visibility otherwise it is always visible
 sim_banner_clickselectsparent        =0x00020 # if the object is associated with a scene object then clicking the banner will select the scene object
 sim_banner_clicktriggersevent        =0x00040 # if the banner is clicked an event is triggered (sim_message_eventcallback_bannerclicked and sim_message_bannerclicked are generated)
@@ -394,7 +394,7 @@ sim_banner_bitmapfont                =0x00800 # If specified a fixed-size bitmap
                                              # to the specified position. Bitmap fonts are not clickable
 
 
-# particle objects following are mutually exclusive 
+# particle Objects following are mutually exclusive
 sim_particle_points1        =0  # 6 values per point (pt1 and pt2. Pt1 is start position pt2-pt1 is the initial velocity vector). i
                                 #Point is 1 pixel big. Only appearance is a point internally handled as a perfect sphere
 sim_particle_points2        =1    # 6 values per point. Point is 2 pixel big. Only appearance is a point internally handled as a perfect sphere
@@ -406,8 +406,8 @@ sim_particle_spheres        =4    # 6 values per sphere. Internally a perfect sp
 
 
 # following can be or-combined
-sim_particle_respondable1to4        =0x0020 # the particles are respondable against shapes (against all objects that have at least one bit 1-4 activated in the global respondable mask)
-sim_particle_respondable5to8        =0x0040 # the particles are respondable against shapes (against all objects that have at least one bit 5-8 activated in the global respondable mask)
+sim_particle_respondable1to4        =0x0020 # the particles are respondable against shapes (against all Objects that have at least one bit 1-4 activated in the global respondable mask)
+sim_particle_respondable5to8        =0x0040 # the particles are respondable against shapes (against all Objects that have at least one bit 5-8 activated in the global respondable mask)
 sim_particle_particlerespondable    =0x0080 # the particles are respondable against each other
 sim_particle_ignoresgravity            =0x0100 # the particles ignore the effect of gravity. Not compatible with sim_particle_water
 sim_particle_invisible                =0x0200 # the particles are invisible
