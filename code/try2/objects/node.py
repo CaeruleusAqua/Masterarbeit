@@ -6,6 +6,8 @@ class Node:
         self.pos = [pos[0], pos[1]]
         self.border = list()
         self.type = "Node"
+        self.parents = list()
+        self.movable = True
 
     def connect(self, node, lane):
         self.lanes.append(lane)
@@ -19,11 +21,11 @@ class Node:
     def connected_to(self, node):
         return node in self.nodes
 
-    def action(self):
-        pass
+    def setPos(self,pos):
+        self.pos = [pos[0], pos[1]]
+        self.update()
 
-
-
-
-
+    def update(self):
+        for parent in self.parents:
+            parent.update()
 

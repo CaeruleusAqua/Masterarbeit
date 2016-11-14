@@ -7,7 +7,6 @@ class StateHandler:
     def __init__(self, file):
 
         self.graph = ObjectContainer()
-        self.drawable = DrawableContainer()
 
         self.mark = None
         self.snapy = None
@@ -33,4 +32,5 @@ class StateHandler:
         self.state.overlay_event()
 
     def shutdown(self):
-        self.file.close()
+        pass
+        #self.file.close()

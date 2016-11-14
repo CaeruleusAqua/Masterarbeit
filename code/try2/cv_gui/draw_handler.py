@@ -4,7 +4,6 @@ import threading
 
 import cv2
 
-from objects import *
 from overlay import Overlay
 from tools import Rate
 from tools import cv_ext
@@ -17,7 +16,7 @@ class DrawHandler(threading.Thread):
         self.max_rate = 60
         self.rate = Rate(self.max_rate)
         self.cursor_pos = (0, 0)
-        self.image = cv2.imread('test.png')
+        self.image = cv2.imread('test2.jpg')
         self.width = self.image.shape[1]
         self.height = self.image.shape[0]
         self.screen = None
@@ -30,7 +29,7 @@ class DrawHandler(threading.Thread):
         self.event = 200
 
         self.handler = handler
-        handler.overlay=self.overlay
+        handler.overlay = self.overlay
 
     def mouse_event(self, event, x, y, flags, param):
         self.event = 200
@@ -53,37 +52,18 @@ class DrawHandler(threading.Thread):
                     cv2.circle(self.screen, (node.pos[0], node.pos[1]), 2, (0, 0, 255), 2)
                     for lane in node.lanes:
                         cv_ext.draw_arrowed_polyline(self.screen, lane.points, (0, 255, 255))
-                        for point in lane.surface_corners:
-                            cv2.circle(self.screen, (point[0], point[1]), 2, (0, 255, 255), 2)
 
                 for lane in self.handler.graph.lanes:
                     cv2.polylines(self.screen, [np.array(lane.polygon)], False, (0, 255, 255))
 
                 if self.handler.mark is not None:
-                    cv2.circle(self.screen, (self.handler.mark[0],self.handler.mark[1]), 5, (0, 0, 255), 1)
+                    cv2.circle(self.screen, (self.handler.mark[0], self.handler.mark[1]), 5, (0, 0, 255), 1)
 
                 if self.handler.snapy is not None:
-                    cv2.circle(self.screen, (self.handler.snapy[0],self.handler.snapy[1]), 5, (0, 0, 0), 1)
+                    cv2.circle(self.screen, (self.handler.snapy[0], self.handler.snapy[1]), 5, (0, 0, 0), 1)
 
-                for node in self.handler.drawable.nodes:
-                    cv2.circle(self.screen, (node.pos[0], node.pos[1]), 2, (255, 255, 0), 2)
-
-                for surface in self.handler.drawable.surfaces:
-                    anchor = surface.getAnchor()
-                    nodes = surface.nodes
-                    cv2.circle(self.screen, (anchor.pos[0], anchor.pos[1]), 2, (0, 0, 255), 2)
-                    cv2.circle(self.screen, (nodes[0].pos[0], nodes[0].pos[1]), 2, (255, 0, 0), 2)
-                    cv2.circle(self.screen, (nodes[1].pos[0], nodes[1].pos[1]), 2, (255, 0, 0), 2)
-                    cv2.circle(self.screen, (nodes[2].pos[0], nodes[2].pos[1]), 2, (255, 0, 0), 2)
-                    cv2.circle(self.screen, (nodes[3].pos[0], nodes[3].pos[1]), 2, (255, 0, 0), 2)
-                    cv2.line(self.screen, (nodes[0].pos[0], nodes[0].pos[1]), (nodes[1].pos[0], nodes[1].pos[1]), (255, 0, 0), 2)
-                    cv2.line(self.screen, (nodes[1].pos[0], nodes[1].pos[1]), (nodes[2].pos[0], nodes[2].pos[1]), (255, 0, 0), 2)
-                    cv2.line(self.screen, (nodes[2].pos[0], nodes[2].pos[1]), (nodes[3].pos[0], nodes[3].pos[1]), (255, 0, 0), 2)
-                    cv2.line(self.screen, (nodes[3].pos[0], nodes[3].pos[1]), (nodes[0].pos[0], nodes[0].pos[1]), (255, 0, 0), 2)
-
-
-
-
+                for border in self.handler.graph.borders:
+                    cv2.line(self.screen, (border.node_a.pos[0], border.node_a.pos[1]), (border.node_b.pos[0], border.node_b.pos[1]), (255, 0, 0), 2)
 
             vis = copy.copy(self.screen)
             self.overlay.setCursor(self.cursor_pos)

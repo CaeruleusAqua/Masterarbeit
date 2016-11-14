@@ -4,5 +4,8 @@ class Lane:
         self.anchor = None
         self.nodes = list()
         self.points = list()
-        self.polygon = list()
-        self.surface_corners = list()
+        self.parents = list()
+
+    def update(self):
+        for parent in self.parents:
+            parent.update()
