@@ -5,14 +5,14 @@ import time
 
 import matplotlib.pyplot as plt
 import numpy as np
+from objects.Enemy import Enemy
+from objects.Roundabout import Roundabout
+from objects.lane import Lane
 
-from Enemy import Enemy
-from VrepObject import VrepObject
-from lane import Lane
+from States.startState import StartState
+from objects.VrepObject import VrepObject
 from remoteApi import vrep
 from remoteApi import vrepConst
-from startState import StartState
-from Roundabout import Roundabout
 
 
 class CarLogic:
@@ -202,9 +202,9 @@ except KeyboardInterrupt:
 
 # plt.plot(tmp.speed_array)
 # plt.plot(tmp.alpha_array)
-plt.plot(tmp.angle,'b')
-plt.plot(tmp.new,'g')
-plt.plot(tmp.old,'r')
+#plt.plot(tmp.angle,'b')
+#plt.plot(tmp.new,'g')
+#plt.plot(tmp.old,'r')
 # plt.plot(tmp.rate_arr)
 #plt.plot(tmp.radius)
-plt.show()
+#plt.show()

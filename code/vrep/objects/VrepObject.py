@@ -19,12 +19,11 @@ class VrepObject(object):
     def getDistance(self):
         return math.sqrt(self.pos[0] * self.pos[0] + self.pos[1] * self.pos[1] + self.pos[2] * self.pos[2])
 
-
     def update(self, reference):
         if self.pos == None:
             self.pos = vrep.simxGetObjectPosition(self.clientID, self.handle, reference, vrepConst.simx_opmode_streaming)[1]
         else:
             self.pos = vrep.simxGetObjectPosition(self.clientID, self.handle, reference, vrepConst.simx_opmode_buffer)[1]
 
-    def setPosition(self, pos,relative):
-        vrep.simxSetObjectPosition(self.clientID,self.handle,relative,pos, vrepConst.simx_opmode_oneshot)
+    def setPosition(self, pos, relative):
+        vrep.simxSetObjectPosition(self.clientID, self.handle, relative, pos, vrepConst.simx_opmode_oneshot)
