@@ -39,8 +39,8 @@ class Enemy(VrepObject):
 
     def estimateSpeed(self):
         # ---------------- estimate enemy speed on lane ------------------
-        print "----------------" + str(self.name) + "----------------"
-        print "fuck: ",self.lane
+        # print "----------------" + str(self.name) + "----------------"
+        # print "fuck: ",self.lane
         if self.lane is not None:
             # calculate intersection position
             intersection_position = self.globals.roundabout.getPosition()
@@ -60,7 +60,7 @@ class Enemy(VrepObject):
 
                 intersection_position = np.array([d, 0, 0])
             else:
-                print "intersection_position far away.."
+                # print "intersection_position far away.."
                 intersection_position = np.array([999, 0, 0])  ## far away
 
             # calculate object -- intersection distance
@@ -68,10 +68,10 @@ class Enemy(VrepObject):
 
             # get roundabout angle with Law of cosines
             b = c = self.lane.r
-            print "a: ", a
-            print "b: ", b
-            print "c: ", c
-            print "acos :", ((b ** 2 + c ** 2 - a ** 2) / (2 * b * c))
+            # print "a: ", a
+            # print "b: ", b
+            # print "c: ", c
+            # print "acos :", ((b ** 2 + c ** 2 - a ** 2) / (2 * b * c))
             # print "\033[1;33mArccos: + " + str((b ** 2 + c ** 2 - a ** 2) / (2 * b * c)) + "\033[0m"
             if not (-1 <= ((b ** 2 + c ** 2 - a ** 2) / (2 * b * c)) <= 1):
                 # roundabout distorted or data noisy
