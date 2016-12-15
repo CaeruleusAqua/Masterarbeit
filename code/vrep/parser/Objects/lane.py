@@ -6,3 +6,6 @@ class Lane:
         self.lanemarking_left = None
         self.pointmodel = None
         self.parent = None
+        self.connections = []
+        self.connections_str = []
+

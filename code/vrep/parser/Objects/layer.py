@@ -1,8 +1,9 @@
-class Road:
+class Layer:
     def __init__(self):
         self.id = None
         self.name = None
-        self.lanes = list()
+        self.height = None
+        self.roads = list()
         self.parent = None
 
 

@@ -101,7 +101,7 @@ for road in scenario.roads:
     print "ID: " + str(road.id)  + " Name: " + str(road.name)
     for lane in road.lanes:
         print "    ID: " + str(lane.id) + " Width: " + str(lane.width)
-        print "        " + str(lane.pointmodel)
+        #print "        " + str(lane.pointmodel)
         for point in lane.pointmodel:
             plt.plot(point[0],point[1], 'ro')
 

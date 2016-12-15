@@ -5,5 +5,7 @@ class Scenario:
         self.coordinatesystem = None
         self.parent = None
         self.name = None
+        self.origin = None
+        self.rotation = 0
         self.vertexes = list()
-        self.roads = list()
+        self.layer = list()

@@ -53,6 +53,7 @@ class CarLogic:
 
         # initHandles
         self.radar = vrep.simxGetObjectHandle(self.clientID, 'radar', vrepConst.simx_opmode_blocking)[1]
+        vrep.simxGet
         self.car_handle = vrep.simxGetObjectHandle(self.clientID, 'anchor', vrepConst.simx_opmode_blocking)[1]
         self.roundabout = Roundabout(self.clientID, 'Roundabout_center', [Lane(0.5, 1.0, 'c'), Lane(1.1, 1.3, 'b'), Lane(1.3, 1.55, 'p')])
         self.debug = VrepObject(self.clientID, 'Sphere')

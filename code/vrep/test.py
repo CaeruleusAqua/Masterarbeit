@@ -1,10 +1,6 @@
 #!/usr/bin/env python
-import numpy as np
+from parser.parser import Parser
 
-
-original = np.arange(50000)
-double = original/500.0
-half = double.astype(np.float16)
-
-print (double-half.astype(np.float))
-
+parser = Parser()
+parser.parseSCN("resources/scenario.scn")
+parser.saveSCN("resources/scenario_new.scn")
