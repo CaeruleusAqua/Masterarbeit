@@ -2,27 +2,22 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import threading
 
-import opendavinci.odvdvehicle_pb2 as odvdVehicle
-import opendavinci.odvdxc90_pb2 as odvdXC90
-import opendavinci.automotivedata_pb2 as automotive
-from mpc_model import OdeModel
 from opendavinci.DVnode import DVnode
-from tools import Rate
-from tools import getch
-import math
+from opendavinci import automotivedata_pb2
 
 filename = sys.argv[1]
 
-
 node = DVnode(cid=216)
+
 
 def callback(container):
     global node, filename
-    print container
-    node.writeToFile(container,filename)
-
+    node.writeToFile(container, filename)
+    if container.dataType == 19:
+        msg = automotivedata_pb2.geodetic_WGS84()
+        msg.ParseFromString(container.serializedData)
+        print msg
 
 
 node.registerContainerCallback(callback)
