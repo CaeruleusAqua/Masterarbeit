@@ -6,6 +6,8 @@ class Scenario:
         self.parent = None
         self.name = None
         self.origin = None
+        self.ground = None
+        self.aerialimage = None
         self.rotation = 0
         self.vertexes = list()
         self.layer = list()

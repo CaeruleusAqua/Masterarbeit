@@ -1,10 +1,13 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
+import numpy as np
+
+from Objects import GroundLayer
 from Objects import Lane
 from Objects import Layer
 from Objects import Road
 from Objects import Scenario
-import numpy as np
+from Objects import ScenarioImage
 
 
 class Parser:
@@ -43,6 +46,15 @@ class Parser:
             lines += "RIGHTLANEMARKING " + str(lane.lanemarking_right) + endl
 
         # TODO connections
+        for con in lane.connections:
+            lines += "(1." + str(con[0][0].parent.id) + "." + str(con[0][0].id) + "." + str(con[0][1] + 1) + ")"
+            lines += " -> "
+            lines += "(1." + str(con[1][0].parent.id) + "." + str(con[1][0].id) + "." + str(con[1][1] + 1) + ")" + endl
+
+
+
+            # (1.1.1.27) -> (1.2.1.1)
+
         lines += "POINTMODEL" + endl
         for id, vertex in enumerate(lane.pointmodel):
             if len(vertex) == 2:
@@ -81,10 +93,18 @@ class Parser:
                 f.write(repr(vertex[1]) + endl)
                 f.write(repr(vertex[1]) + endl)
             f.write("ROTATION " + str(self.scenario.rotation) + endl)
+            f.write("GROUND " + str(self.scenario.ground.name) + endl)
+            f.write(self.scenario.ground.aerialimage.getLines())
+            f.write(self.scenario.ground.heightimage.getLines())
+            f.write("GROUNDHEIGHT " + str(self.scenario.ground.height) + endl)
+            f.write("MINHEIGHT " + str(self.scenario.ground.minheight) + endl)
+            f.write("MAXHEIGHT " + str(self.scenario.ground.maxheight) + endl)
+            f.write("ENDGROUND" + endl)
+
             # TODO Add missing lines
             for layer in self.scenario.layer:
                 f.write(self.layerLines(layer))
-            f.write("ENDSCENARIO")
+            f.write("ENDSCENARIO" + endl)
 
     def printSCN(self):
         for road in self.scenario.roads:
@@ -98,6 +118,7 @@ class Parser:
         current_lane = None
         current_object = None
         current_layer = None
+        ground_layer = None
         x = None
         y = None
         z = None
@@ -113,9 +134,67 @@ class Parser:
                 elif line.startswith("DATE "):
                     self.scenario.date = line.split(' ')[1].rstrip()
 
+                elif line.startswith("GROUND "):
+                    ground_layer = GroundLayer()
+                    self.scenario.ground = ground_layer
+                    self.scenario.ground.name = line.split(' ')[1].rstrip()
+                    while ground_layer is not None:
+                        line = f.readline()
+                        if line.startswith("AERIALIMAGE"):
+                            image = ScenarioImage()
+                            image.name = "AERIALIMAGE"
+                            for i in xrange(6):
+                                line = f.readline()
+                                if line.startswith("IMAGE"):
+                                    image.file = line.split(' ')[1].rstrip('\n')
+                                elif line.startswith("ORIGINX"):
+                                    image.originx = float(line.split(' ')[1])
+                                elif line.startswith("ORIGINY"):
+                                    image.originy = float(line.split(' ')[1])
+                                elif line.startswith("MPPX"):
+                                    image.mppx = float(line.split(' ')[1])
+                                elif line.startswith("MPPY"):
+                                    image.mppy = float(line.split(' ')[1])
+                            self.scenario.ground.aerialimage = image
+
+
+
+
+                        elif line.startswith("HEIGHTIMAGE"):
+                            image = ScenarioImage()
+                            image.name = "HEIGHTIMAGE"
+                            for i in xrange(6):
+                                line = f.readline()
+                                if line.startswith("IMAGE"):
+                                    image.file = line.split(' ')[1].rstrip('\n')
+                                elif line.startswith("ORIGINX"):
+                                    image.originx = float(line.split(' ')[1])
+                                elif line.startswith("ORIGINY"):
+                                    image.originy = float(line.split(' ')[1])
+                                elif line.startswith("MPPX"):
+                                    image.mppx = float(line.split(' ')[1])
+                                elif line.startswith("MPPY"):
+                                    image.mppy = float(line.split(' ')[1])
+                            self.scenario.ground.heightimage = image
+
+                        elif line.startswith("GROUNDHEIGHT"):
+                            self.scenario.ground.height = float(line.split(' ')[1])
+
+                        elif line.startswith("MINHEIGHT"):
+                            self.scenario.ground.minheight = float(line.split(' ')[1])
+
+                        elif line.startswith("MAXHEIGHT"):
+                            self.scenario.ground.maxheight = float(line.split(' ')[1])
+
+                        elif line.startswith("ENDGROUND"):
+                            ground_layer = None
+
+
+
                 elif line.startswith("ORIGINCOORDINATESYSTEM"):
                     line = f.readline()
                     self.scenario.coordinatesystem = line
+
 
                 elif line.startswith("ORIGIN\n"):
                     line = f.readline()
@@ -136,7 +215,11 @@ class Parser:
 
                 elif line.startswith("LAYER "):
                     current_layer = Layer()
+                    current_layer.parent = self.scenario
                     current_layer.name = line.split(' ')[1].rstrip()
+
+                elif line.startswith("HEIGHT "):
+                    current_layer.height = float(line.split(' ')[1])
 
                 elif line.startswith("LAYERID"):
                     current_layer.id = int(line.split(' ')[1])
@@ -148,6 +231,7 @@ class Parser:
 
                 elif line.startswith("ROAD\n"):
                     current_road = Road()
+                    current_road.parent = current_layer
                     while current_road is not None:
                         line = f.readline()
                         if line.startswith('ENDROAD\n'):
@@ -162,6 +246,7 @@ class Parser:
 
                         elif line.startswith("LANE\n"):
                             current_lane = Lane()
+                            current_lane.parent = current_road
                             while current_lane is not None:
                                 line = f.readline()
                                 if line.startswith('ENDLANE\n'):
@@ -175,10 +260,10 @@ class Parser:
                                     current_lane.width = float(line.split(' ')[1])
 
                                 elif line.startswith('LEFTLANEMARKING '):
-                                    current_lane.lanemarking_left = (line.split(' ')[1])
+                                    current_lane.lanemarking_left = (line.split(' ')[1]).rstrip()
 
                                 elif line.startswith('RIGHTLANEMARKING '):
-                                    current_lane.lanemarking_right = (line.split(' ')[1])
+                                    current_lane.lanemarking_right = (line.split(' ')[1]).rstrip()
 
                                 elif line.startswith('('):
                                     # current_lane.connections_str.append(line)
@@ -205,11 +290,14 @@ class Parser:
 
                 line = f.readline()
 
+        ## connection s are defined as (layer.road.lane.vertex)
         for layer in self.scenario.layer:
             for road in layer.roads:
                 for lane in road.lanes:
                     for conn in lane.connections_str:
                         [start, end] = conn.replace(">", "").split("-")
-                        start = np.asarray(map(int,start.split(".")))-1
-                        end = np.asarray(map(int,end.split(".")))-1
-                        lane.connections.append(((lane, start[3]), (self.scenario.layer[end[0]].roads[end[1]].lanes[end[2]], 0)))
+                        start = np.asarray(map(int, start.split("."))) - 1
+                        end = np.asarray(map(int, end.split("."))) - 1
+                        # print start
+                        # print end
+                        lane.connections.append(((lane, start[3]), (self.scenario.layer[end[0]].roads[end[1]].lanes[end[2]], end[3])))

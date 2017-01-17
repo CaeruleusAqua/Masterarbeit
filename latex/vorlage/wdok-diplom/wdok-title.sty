@@ -1,0 +1,122 @@
+%%
+%% wdok-title
+%% @(#) Time-stamp: <2005-04-20T17:36:45 mxp>
+%% Created by Michael Piotrowski <mxp@iws.cs.uni-magdeburg.de>
+
+%% NOTE:  This package is only usable with the mparticle and mpreport
+%% classes because it uses variables defined there (prefixed with mp@).
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wdok-title}[2005/01/10 Title page for WDOK theses]
+
+\RequirePackage{graphicx}
+\RequirePackage{ifthen}
+\RequirePackage{keyval}
+
+%% To add flexibility, we will not use the ordinary processing of
+%% package options, but put them through the |keyval| package.
+%% This section is from the |hyperref| package.
+\def\ProcessOptionsWithKV#1{%
+  \let\@tempa\@empty
+  \@for\CurrentOption:=\@classoptionslist\do{%
+    \@ifundefined{KV@#1@\CurrentOption}%
+    {}%
+    {\edef\@tempa{\@tempa,\CurrentOption,}}}%
+  \edef\@tempa{%
+    \noexpand\setkeys{#1}{\@tempa\@ptionlist{\@currname.\@currext}}}%
+  \@tempa
+  \AtEndOfPackage{\let\@unprocessedoptions\relax}}
+
+%% Declare the options.
+\newcommand{\@wdoktitletype}{diplom}
+\define@key{wdoktitle}{type}{\renewcommand{\@wdoktitletype}{#1}}
+
+%% Process them.
+\ProcessOptionsWithKV{wdoktitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifthenelse{\equal{\@wdoktitletype}{master}}%
+{\newcommand{\@thesisname}{Master's Thesis}}%
+{\newcommand{\@thesisname}{Diplomarbeit}}
+
+\ifthenelse{\equal{\@wdoktitletype}{master}}%
+{\newcommand{\@supervisortext}{Supervisors}}%
+{\newcommand{\@supervisortext}{Betreuer}}
+
+\ifthenelse{\equal{\@wdoktitletype}{master}}%
+{\newcommand{\@readertext}{Reader}}%
+{\newcommand{\@readertext}{Gutachter}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\supervisor}[1]{\def\@supervisor{#1}}
+\newcommand{\reader}[1]{\def\@reader{#1}}
+
+\renewcommand{\maketitle}{%
+  \begin{titlepage}%
+    %%
+    \def\fakultaet{FAKULT\"AT F\"UR INFORMATIK}
+    \par\hspace{-\mp@margwd}%
+    \unitlength1mm
+    \begin{picture}(-2,12)
+      \put(-1,11){\rule{\mp@fullwd}{1mm}}
+
+      \put(-4,-17){
+        \parbox[b]{140mm}{
+          \raggedleft{
+            \fontsize{14}{18}\selectfont
+            OTTO-VON-GUERICKE-UNIVERSIT\"AT MAGDEBURG\\
+            ~\\
+            \fontfamily{ptm}\fontsize{12}{14}\selectfont \fakultaet\\
+            Institut f\"ur Wissens- und Sprachverarbeitung\\
+            ~\\
+          }%
+        }%
+      }%
+      \put(140,-20){\includegraphics[height=30mm]{ovgu-siegel}}
+%      \@ifundefined{pdfoutput}{
+%        \put(140,-20){\includegraphics[height=30mm]{ovgu-siegel.eps}}
+%      }
+%      {
+%        \put(140,-20){\includegraphics[height=30mm]{ovgu-siegel.pdf}}
+%      }
+      \put(-1,-20){\rule{140mm}{.25mm}}
+    \end{picture}
+    
+    %% typeset the title
+    \vspace{5cm}
+    \begin{flushleft}
+      \sffamily\huge
+      \@thesisname\\[1ex]
+      \@title\\[1ex]
+      \normalsize
+      \@author\\
+      \@date
+      \vspace{1cm}
+      \@ifundefined{@supervisor}{}
+      {
+        \par
+        \textbf{\@supervisortext}\\
+        \@supervisor
+      }
+      \@ifundefined{@reader}{}
+      {
+        \par
+        \textbf{\@readertext}\\
+        \@reader
+      }
+      %%
+      \vfill
+      Otto-von-Guericke-Universit\"at Magdeburg\\
+      Fakult\"at f\"ur Informatik\\
+      Universit\"atsplatz 2\\
+      39106 Magdeburg
+    \end{flushleft}
+
+    \hspace{-\mp@margwd}%
+    \rule{\mp@margwd}{2.25mm}%
+    \hspace{-\mp@margwd}%
+    \rule{\mp@fullwd}{.25mm}%
+  \end{titlepage}%
+}

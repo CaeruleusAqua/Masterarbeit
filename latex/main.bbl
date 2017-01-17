@@ -1,0 +1,102 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.8 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{anyt/global/}
+    \entry{ral13}{book}{}
+      \name{author}{1}{}{%
+        {{hash=acec29179d4aca722efb84fd2ecabc2b}{%
+           family={Stra{ß}en-\bibnamedelimb und\bibnamedelimb Verkehrswesen.\bibnamedelimi Arbeitsgruppe\bibnamedelima Stra{ß}enentwurf},
+           familyi={S\bibinitperiod\bibinitdelim u\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Forschungsgesellschaft},
+           giveni={F\bibinitperiod},
+           prefix={für},
+           prefixi={f\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {FGSV-Verlag}%
+      }
+      \strng{namehash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{fullhash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{authornamehash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{authorfullhash}{acec29179d4aca722efb84fd2ecabc2b}
+      \field{labelalpha}{RAL}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{FGSV (Series)}
+      \field{shorthand}{RAL}
+      \field{title}{Richtlinien für die Anlage von Landstrassen (RAL)}
+      \field{year}{2013}
+    \endentry
+    \entry{rast06}{book}{}
+      \name{author}{1}{}{%
+        {{hash=acec29179d4aca722efb84fd2ecabc2b}{%
+           family={Stra{ß}en-\bibnamedelimb und\bibnamedelimb Verkehrswesen.\bibnamedelimi Arbeitsgruppe\bibnamedelima Stra{ß}enentwurf},
+           familyi={S\bibinitperiod\bibinitdelim u\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Forschungsgesellschaft},
+           giveni={F\bibinitperiod},
+           prefix={für},
+           prefixi={f\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {FGSV-Verlag}%
+      }
+      \strng{namehash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{fullhash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{authornamehash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{authorfullhash}{acec29179d4aca722efb84fd2ecabc2b}
+      \field{labelalpha}{RASt}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9783939715214}
+      \field{series}{FGSV (Series)}
+      \field{shorthand}{RASt}
+      \field{title}{Richtlinien für die Anlage von Stadtstra{ß}en: RASt 06}
+      \field{year}{2007}
+    \endentry
+    \entry{man06}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=acec29179d4aca722efb84fd2ecabc2b}{%
+           family={Stra{ß}en-\bibnamedelimb und\bibnamedelimb Verkehrswesen.\bibnamedelimi Arbeitsgruppe\bibnamedelima Stra{ß}enentwurf},
+           familyi={S\bibinitperiod\bibinitdelim u\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Forschungsgesellschaft},
+           giveni={F\bibinitperiod},
+           prefix={für},
+           prefixi={f\bibinitperiod}}}%
+      }
+      \strng{namehash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{fullhash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{authornamehash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{authorfullhash}{acec29179d4aca722efb84fd2ecabc2b}
+      \field{labelalpha}{Str06}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Merkblatt für die Anlage von Kreisverkehren}
+      \field{year}{2006}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

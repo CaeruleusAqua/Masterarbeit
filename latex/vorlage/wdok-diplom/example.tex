@@ -1,0 +1,393 @@
+% Time-stamp: <2008-03-17T14:24:07 mxp>
+\documentclass[11pt,twoside,openright]{mpreport}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{mathptmx}
+\usepackage[scaled=0.85]{helvet}
+% \usepackage{courier}         % if you really want to use Courier
+% \usepackage{amsmath}         % if you need additional math symbols
+\usepackage{hyperref}
+\usepackage{ngerman}
+\usepackage{wdok-title}
+
+% Examples for the definition of convenience commands
+\newcommand{\package}[1]{\texttt{#1}}
+\newcommand{\foreign}[1]{\emph{#1}}
+\newcommand{\q}[1]{»#1«}
+
+% Scale Courier by 0.9
+% cf. <http://groups.google.de/groups?selm=yfid76obspu.fsf@triumf.ca>
+%\DeclareFontFamily{T1}{pcr}{}
+%\DeclareFontShape{T1}{pcr}{m}{n}{
+%   <-> s*[.9]pcrr8t
+%}{}
+
+% Title page information
+\title{Titel der Arbeit}
+\author{Manfred Mustermann}
+\supervisor{Themensteller\\
+  Betreuer}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Hinweise}
+
+\section{Die klasse \package{mpreport}}
+
+Die klasse \package{mpreport} wurde von Michael Piotrowski entwickelt
+und kann grundsätzlich als direkter ersatz für die
+\LaTeX-standardklasse \package{report} verwendet werden. Einige
+unterschiede zwischen \package{mpreport} und \package{report} sind
+jedoch zu erwähnen.
+
+\package{mpreport} verwendet automatisch A4 als seitenformat, es muss
+also nicht extra angegeben werden.
+
+Weiterhin lädt \package{mpreport} automatisch das paket
+\package{graphicx}, das für die einbindung von grafiken benötigt wird.
+Es ist also nicht nötig, \package{graphicx} explizit zu laden.
+
+Der vielleicht größte unterschied ist, dass bei \package{mpreport}
+bild- und tabellenunterschriften innerhalb einer \texttt{figure}- bzw.
+\texttt{table}-umgebung \emph{vor} dem eigentlichen bild bzw. der
+eigentlichen tabelle definiert werden sollten, z.\,b.:
+
+\begin{verbatim}
+\begin{table}[!ht]
+  \caption{Erläuterung zur tabelle}
+  \begin{tabular}{|l|l|}
+    .
+    .
+    .
+  \end{tabular}
+  \label{tab:terms}
+\end{table}
+\end{verbatim}
+
+Vergleiche auch die beispiele im quelltext dieses dokuments. Die
+angabe der bild- bzw. tabellenunterschrift nach dem bild bzw. der
+tabelle resultiert in einem unerwünschten und unschönen
+erscheinungsbild.
+
+
+\section{Das paket \package{wdok-title}}
+
+Dieses paket\footnote{\package{wdok-title} wurde ebenfalls von Michael
+  Piotrowski entwickelt} wird -- wie üblich -- mittels
+\verb=\usepackage{wdok-title}= eingebunden und sorgt dafür, dass der
+befehl \verb=\maketitle= das für diplomarbeiten in der arbeitsgruppe
+WDOK gewünschte titelblatt erzeugt. Für die dafür zusätzlich
+benötigten informationen definiert es zusätzlich zu den normalen
+befehlen für die titelseite (\verb=\title=, \verb=\author= und
+\verb=\date=) den folgenden befehl:
+
+\begin{itemize}
+\item \verb=\supervisor{...}= für die angabe des betreuers
+\end{itemize}
+
+Mehrere namen können durch \verb=\\= getrennt angegeben werden.
+Beispiel:
+
+\begin{verbatim}
+\title{Ganzheitliche Dokumentenverarbeitung}
+\author{Manfred Mustermann}
+\supervisor{Prof. Dr. Dietmar Rösner\\
+  Michael Piotrowski, M.A.}
+\end{verbatim}
+
+\package{wdok-title} benötigt die dateien
+
+\begin{itemize}
+\item \verb=ovgu-siegel.eps=
+\item \verb=ovgu-siegel.pdf=
+\end{itemize}
+
+Diese dateien\footnote{Erstere wird bei verwendung von \texttt{latex}
+  + \texttt{dvips}, letztere bei verwendung von \texttt{pdflatex}
+  benutzt} werden bei der installation am besten in demselben
+verzeichnis abgelegt, in dem sich auch \verb=wdok-title.sty= befindet.
+
+
+\section{Allgemeine hinweise}
+
+Die minimale empfohlene präambel für eine deutschsprachige arbeit
+sieht folgendermaßen aus:
+
+\begin{verbatim}
+\documentclass[11pt,twoside,openright]{mpreport}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{mathptmx}
+\usepackage[scaled=0.9]{helvet}
+\usepackage{courier}
+\usepackage{ngerman}
+\usepackage{wdok-title}
+\end{verbatim}
+
+Für eine englischsprachige \foreign{master's thesis} würde man
+folgende präambel verwenden:
+
+\begin{verbatim}
+\documentclass[11pt,twoside,openright]{mpreport}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{mathptmx}
+\usepackage[scaled=0.9]{helvet}
+\usepackage{courier}
+\usepackage[type=master]{wdok-title}
+\end{verbatim}
+
+Die option \verb/type=master/ ändert die beschriftung des titelblatts
+entsprechend.
+
+Bei bedarf können zusätzliche pakete hinzugefügt werden. Hierbei
+sollte man allerdings versuchen, die anzahl möglichst gering zu halten
+und nicht benötigte pakete zu entfernen, um möglichen konflikten
+vorzubeugen.
+
+Empfehlenswert ist jedoch die verwendung von \package{hyperref}, um
+bei der PDF-ausgabe anklickbare hyperlinks zu erhalten:
+
+\begin{verbatim}
+\usepackage{hyperref}
+\end{verbatim}
+
+Beispiele für zusätzliche pakete, die man evtl. benötigt, sind
+\package{amsmath} für zusätzliche mathematische symbole und
+\package{listings} oder ein anderes paket für programmlistings (leider
+bei den meisten \TeX-distributionen nicht standardmäßig installiert).
+
+Auf zwei dokumente, die als ergänzung zu den einschlägigen büchern
+sinnvoll sind, soll hier noch verwiesen werden:
+
+\begin{itemize}
+\item Das \LaTeXe-Sündenregister oder: Veraltete Befehle, Pakete und
+  andere Fehler:
+  \url{http://www.ctan.org/tex-archive/info/l2tabu/german/l2tabu.pdf}
+
+\item Using Imported Graphics in \LaTeX and pdf\LaTeX:
+  \url{http://ctan.org/tex-archive/info/epslatex.pdf}
+\end{itemize}
+\section{Verwendung von \package{longtable} mit \package{mpreport}}
+
+Wenn das paket \package{longtable} verwendet wird, kann die in der
+datei \verb=longtable.inc= mitgelieferte definition in die präambel
+des dokuments aufgenommen werden, damit die tabellenunterschriften
+genau wie bei normalen tabellen im rand erscheinen:
+
+\begin{verbatim}
+\input{longtable.inc}
+\end{verbatim}
+
+\section{Verwendung von \package{listings} mit \package{mpreport}}
+
+Damit die unterschriften von mit \package{listings} erstellen
+programmlistings im rand erscheinen, kann die in der datei
+\verb=listings.inc= mitgelieferte definition in die präambel
+aufgenommen werden:
+
+\begin{verbatim}
+\input{listings.inc}
+\end{verbatim}
+
+\section{Zu den schriften}
+
+Die verwendeten schriftarten Times, Helvetica und Courier sind --
+insbesondere in dieser kombination -- ästhetisch leider nicht
+besonders überzeugend. Ihre verwendung ist allein praktischen
+überlegungen geschuldet: Andere kombinationen aus dem satz der 35
+\q{klassischen} PostScript-standardschriften wären auch nicht viel
+besser, während die verwendung ganz anderer schriften installations-
+und konfigurationsaufwand erfordern würde.
+
+Während Times und Helvetica vielleicht noch geschmackssache sind, ist
+Courier für die anwendungen, in denen man eine schrift mit fester
+laufweite einsetzt, wie z. b. dateinamen, kodebeispiele, URLs u.\,ä.
+objektiv ungeeignet:
+
+\begin{enumerate}
+\item Courier ist sehr breit. Bereits einzelne in Courier
+  gesetzte wörter in einem absatz führen oft zu umbruchproblemen.
+  Programmkode ist üblicherweise für eine bildschirmbreite von 80
+  zeichen formatiert; bei verwendung von Courier ist es jedoch sehr
+  schwierig, 80 spalten auf der breite einer A4-seite vernünftig
+  darzustellen.
+\item Adobe Courier, die meistens verwendete variante, ist sehr
+  leicht, so dass der kontrast zu den anderen schriften zu groß ist.
+\item Bei dateinamen, kodebeispiele, URLs u.\,ä. kommt es auf jedes
+  zeichen an. Bei Courier sind sich jedoch die ziffer eins und das
+  kleine L sowie die ziffer null und großbuchstabe O sehr ähnlich und
+  leicht zu verwechseln. Beispiele in Courier:
+  {\fontfamily{pcr}\selectfont typeln type1 Open 0pen}
+\end{enumerate}
+
+Insofern bleibt man besser bei der \TeX-standardschrift Computer
+Modern Typewriter.
+
+\chapter{A Chapter}
+\section{A Section}
+
+Lorem ipsum dolor sit amet, \textsf{consectetuer adipiscing elit}, sed diam
+nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+molestie consequat, vel illum dolore eu feugiat nulla facilisis at
+vero eros et accumsan et iusto odio dignissim qui blandit praesent
+luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+volutpat.
+
+\section{Another Section}
+
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
+vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum
+dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
+vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+consequat, vel illum dolore eu feugiat nulla facilisis at.
+
+\subsection{A Subsection}
+
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
+vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+delenit augue duis dolore te feugait nulla facilisi.
+
+\begin{table}[!ht]
+  \caption{Index terms generated by different methods}
+  \begin{tabular}{|l|l|p{0.55\textwidth}|}
+    \hline
+            & Entscheidung & Bundesverfassungsgerichts\\
+    \hline
+    STEM    & entscheidung & bundesverfassungsgerich\\
+    \hline
+    NODCMP  & entscheiden  & bundesverfassungsgericht\\
+    \hline
+    DCMP    & entscheiden  & bund, verfassen, gericht\\
+    \hline
+    BOTH    & entscheiden  & bundesverfassungsgericht, bund,
+                             verfassen, gericht\\
+    \hline
+  \end{tabular}
+  \label{tab:terms}
+\end{table}
+
+\subsubsection{A Subsubsection}
+
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
+vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+delenit augue duis dolore te feugait nulla facilisi.
+
+\section{Section}
+
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
+vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+delenit augue duis dolore te feugait nulla facilisi.
+
+\begin{figure}[htbp]
+  \caption{Lorem ipsum}
+  \includegraphics[width=\textwidth]{image}
+  \label{fig:test}
+\end{figure}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
+exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
+vulputate velit esse molestie consequat, vel illum dolore eu feugiat
+nulla facilisis at.
+
+
+\chapter*{A Starred Chapter}
+
+Vero eros et accumsan et iusto odio dignissim qui blandit praesent
+luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+
+\chapter{Another Chapter}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+molestie consequat, vel illum dolore eu feugiat nulla facilisis at
+vero eros et accumsan et iusto odio dignissim qui blandit praesent
+luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+volutpat.
+
+\section{The Last Section}
+
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
+vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum
+dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
+vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+consequat, vel illum dolore eu feugiat nulla facilisis at.
+
+\appendix
+
+\chapter{An Appendix}
+
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
+suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem
+vel eum iriure dolor in hendrerit in vulputate velit esse molestie
+consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+delenit augue duis dolore te feugait nulla facilisi.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
+exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
+vulputate velit esse molestie consequat, vel illum dolore eu feugiat
+nulla facilisis at.
+
+
+\end{document}
+
+%%% Local variables:
+%%% TeX-PDF-mode: t
+%%% End:
