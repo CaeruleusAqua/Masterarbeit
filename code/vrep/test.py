@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-from parser.parser import Parser
+from parser import Parser
 
 parser = Parser()
 parser.parseSCN("resources/scenario.scn")
