@@ -3,11 +3,18 @@ import pickle
 import struct
 import sys
 
+
+
 import matplotlib.pyplot as plt
+
+#print "Hello"
 
 import opendavinci.automotivedata_pb2 as auto
 import opendavinci.opendavinci_pb2 as od
-from tools import gps
+from tools import WGS84Coordinate
+
+
+
 
 if len(sys.argv) < 2:
     print "\033[1;31;40mError: Missing Parameters, minimum number of parameter is 1 \033[0;37;40m"
@@ -16,24 +23,61 @@ if len(sys.argv) < 2:
     print ""
     sys.exit(234)
 
+
+
 x = list()
 y = list()
 lat = list()
 lon = list()
+accel = list()
+vel = list()
+times_vel = list()
+times_acc = list()
+times_yaw = list()
+yawRate = list()
 
+trans = WGS84Coordinate(57.772840, 12.769964)
+start = None
 
 # Print Container's content.
 def printContainer(c):
-    # print "Container ID = " + str(c.dataType)
+    global start
+    if start is None:
+        start = c.sent.seconds
+
+
+    #print "Container ID = " + str(c.dataType)
     if c.dataType == 19:
         msg = auto.geodetic_WGS84()
         msg.ParseFromString(c.serializedData)
-        x.append(gps.lat2y_m(msg.latitude))
-        y.append(gps.lon2x_m(msg.longitude))
+        a,b = trans.transformToCart(msg.latitude,msg.longitude)
+        x.append(b)
+        y.append(a)
         lat.append(msg.latitude)
         lon.append(msg.longitude)
-        # print msg
+        #print msg
 
+    # if c.dataType == 512:
+    #     times_vel.append(float(c.sent.seconds - start) + (c.sent.microseconds) / 1000000.0)
+    #     msg = XC90.opendlv_proxy_reverexc90_CarSpeed()
+    #     msg.ParseFromString(c.serializedData)
+    #     vel.append(msg.VehicleLgtSpeed)
+    #
+    # if c.dataType == 197:
+    #     times_yaw.append(float(c.sent.seconds - start) + (c.sent.microseconds) / 1000000.0)
+    #     msg = fh16.opendlv_proxy_reverefh16_VehicleDynamics()
+    #     msg.ParseFromString(c.serializedData)
+    #     yawRate.append(msg.yawRate)
+    #
+    # if c.dataType == 514:
+    #     times_acc.append(float(c.sent.seconds - start) + (c.sent.microseconds) / 1000000.0)
+    #     msg = XC90.opendlv_proxy_reverexc90_IMU1()
+    #     msg.ParseFromString(c.serializedData)
+    #     accel.append(msg.IMULgtAcceleration)
+
+        #print msg
+
+count = 0
 
 # Read contents from file.
 with open(sys.argv[1], "rb") as f:
@@ -47,6 +91,9 @@ with open(sys.argv[1], "rb") as f:
 
     byte = f.read(1)
     while byte != "":
+        count += 1
+        if count%100000 == 0:
+            print count
         buf = buf + byte
         bytesRead = bytesRead + 1
 
@@ -79,9 +126,12 @@ with open(sys.argv[1], "rb") as f:
         # Read next byte.
         byte = f.read(1)
 
-pickle.dump((lat, lon), open("gps.p", "wb"))
+pickle.dump((lat, lon), open("gps_cw.p", "wb"))
 
 fig = plt.figure()
-plt.plot(x, y, 'ro')
-plt.axes().set_aspect('equal', 'datalim')
+#plt.plot(y, x, 'ro')
+#plt.plot(times_acc,accel)
+#plt.plot(times_vel,vel)
+plt.plot(times_yaw,yawRate)
+#plt.axes().set_aspect('equal', 'datalim')
 plt.show()
