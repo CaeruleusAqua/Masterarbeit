@@ -60,14 +60,14 @@ class Parser:
             if len(vertex) == 2:
                 lines += "ID " + str(int(id + 1)) + endl
                 lines += "VERTEX2" + endl
-                lines += "X " + repr(vertex[0]) + endl
-                lines += "Y " + repr(vertex[1]) + endl
+                lines += "X " + repr(round(vertex[0],8)) + endl
+                lines += "Y " + repr(round(vertex[1],8)) + endl
             if len(vertex) == 3:
                 lines += "ID " + str(int(id + 1)) + endl
                 lines += "VERTEX3" + endl
-                lines += "X " + repr(vertex[0]) + endl
-                lines += "Y " + repr(vertex[1]) + endl
-                lines += "Z " + repr(vertex[1]) + endl
+                lines += "X " + repr(round(vertex[0],8)) + endl
+                lines += "Y " + repr(round(vertex[1],8)) + endl
+                lines += "Z " + repr(round(vertex[2],8)) + endl
         lines += "ENDPOINTMODEL" + endl
         lines += "ENDLANE" + endl
 
@@ -80,7 +80,7 @@ class Parser:
             f.write("VERSION " + str(self.scenario.version) + endl)
             f.write("DATE " + str(self.scenario.date) + endl)
             f.write("ORIGINCOORDINATESYSTEM" + endl)
-            f.write(str(self.scenario.coordinatesystem))
+            f.write(str(self.scenario.coordinatesystem) + endl)
             f.write("ORIGIN" + endl)
             vertex = self.scenario.origin
             if len(vertex) == 2:
@@ -94,8 +94,10 @@ class Parser:
                 f.write(repr(vertex[1]) + endl)
             f.write("ROTATION " + str(self.scenario.rotation) + endl)
             f.write("GROUND " + str(self.scenario.ground.name) + endl)
-            f.write(self.scenario.ground.aerialimage.getLines())
-            f.write(self.scenario.ground.heightimage.getLines())
+            if self.scenario.ground.aerialimage is not None:
+                f.write(self.scenario.ground.aerialimage.getLines())
+            if self.scenario.ground.heightimage is not None:
+                f.write(self.scenario.ground.heightimage.getLines())
             f.write("GROUNDHEIGHT " + str(self.scenario.ground.height) + endl)
             f.write("MINHEIGHT " + str(self.scenario.ground.minheight) + endl)
             f.write("MAXHEIGHT " + str(self.scenario.ground.maxheight) + endl)
