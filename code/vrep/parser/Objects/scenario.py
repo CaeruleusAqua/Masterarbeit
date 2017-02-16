@@ -49,5 +49,6 @@ class Scenario:
                 for segment in lane.lineSegments:
                     if segment.isInSegment(pos):
                         possible_objects.append(segment)
+        return possible_objects
 
 

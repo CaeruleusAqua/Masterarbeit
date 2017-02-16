@@ -8,6 +8,7 @@ from Objects import Layer
 from Objects import Road
 from Objects import Scenario
 from Objects import ScenarioImage
+from Objects import LineSegment
 
 
 class Parser:
@@ -60,14 +61,14 @@ class Parser:
             if len(vertex) == 2:
                 lines += "ID " + str(int(id + 1)) + endl
                 lines += "VERTEX2" + endl
-                lines += "X " + repr(round(vertex[0],8)) + endl
-                lines += "Y " + repr(round(vertex[1],8)) + endl
+                lines += "X " + repr(round(vertex[0], 8)) + endl
+                lines += "Y " + repr(round(vertex[1], 8)) + endl
             if len(vertex) == 3:
                 lines += "ID " + str(int(id + 1)) + endl
                 lines += "VERTEX3" + endl
-                lines += "X " + repr(round(vertex[0],8)) + endl
-                lines += "Y " + repr(round(vertex[1],8)) + endl
-                lines += "Z " + repr(round(vertex[2],8)) + endl
+                lines += "X " + repr(round(vertex[0], 8)) + endl
+                lines += "Y " + repr(round(vertex[1], 8)) + endl
+                lines += "Z " + repr(round(vertex[2], 8)) + endl
         lines += "ENDPOINTMODEL" + endl
         lines += "ENDLANE" + endl
 
@@ -121,9 +122,6 @@ class Parser:
         current_object = None
         current_layer = None
         ground_layer = None
-        x = None
-        y = None
-        z = None
         with open(file, 'r') as f:
             line = f.readline()
             while line:
@@ -228,7 +226,7 @@ class Parser:
 
                 if line.startswith('ENDLAYER\n'):
                     self.scenario.layer.append(current_layer)
-                    current_road = None
+                    current_layer = None
 
 
                 elif line.startswith("ROAD\n"):
@@ -269,7 +267,8 @@ class Parser:
 
                                 elif line.startswith('('):
                                     # current_lane.connections_str.append(line)
-                                    current_lane.connections_str.append(line.replace("(", "").replace(")", "").replace(" ", "").replace("\n", ""))
+                                    current_lane.connections_str.append(
+                                        line.replace("(", "").replace(")", "").replace(" ", "").replace("\n", ""))
 
 
 
@@ -278,19 +277,64 @@ class Parser:
                                     while pointmodel is not None:
                                         line = f.readline()
                                         if line.startswith('ENDPOINTMODEL\n'):
+
+                                            ## building line segments
+                                            for index in xrange(len(pointmodel) - 1):
+                                                current_lane.lineSegments.append(LineSegment(pointmodel[index], pointmodel[index + 1], current_lane))
                                             current_lane.pointmodel = pointmodel
                                             pointmodel = None
+
                                         elif line.startswith("VERTEX2"):
                                             x = float(f.readline().split(' ')[1])
                                             y = float(f.readline().split(' ')[1])
-                                            pointmodel.append((x, y))
+                                            pointmodel.append(np.array([x, y]))
                                         elif line.startswith("VERTEX3"):
                                             x = float(f.readline().split(' ')[1])
                                             y = float(f.readline().split(' ')[1])
                                             z = float(f.readline().split(' ')[1])
-                                            pointmodel.append((x, y, z))
+                                            pointmodel.append(np.array([x, y, z]))
 
                 line = f.readline()
+
+            def parseSCE(self, file):
+                current_road = None
+                current_lane = None
+                current_layer = None
+                with open(file, 'r') as f:
+                    line = f.readline()
+                    while line:
+                        if line.startswith("LAYERID"):
+                            current_layer = self.scenario.layer[int(line.split(' ')[1]) - 1]
+
+                        elif line.startswith('ENDLAYER\n'):
+                            current_layer = None
+
+
+                        elif line.startswith("ROAD\n"):
+                            current_road = Road()
+                            while current_road is not None:
+                                line = f.readline()
+                                if line.startswith('ENDROAD\n'):
+                                    current_road = None
+
+                                elif line.startswith('ROADID '):
+                                    current_road = current_layer.roads[int(line.split(' ')[1]) - 1]
+
+
+                                elif line.startswith("LANE\n"):
+                                    current_lane = Lane()
+                                    while current_lane is not None:
+                                        line = f.readline()
+                                        if line.startswith('ENDLANE\n'):
+                                            current_lane = None
+
+                                        if line.startswith('LANETYPE '):
+                                            current_lane.type = line.split(' ')[1]
+
+                                        elif line.startswith('LANEID '):
+                                            current_lane = current_road.lanes[int(line.split(' ')[1]) - 1]
+
+                        line = f.readline()
 
         ## connection s are defined as (layer.road.lane.vertex)
         for layer in self.scenario.layer:
@@ -302,4 +346,5 @@ class Parser:
                         end = np.asarray(map(int, end.split("."))) - 1
                         # print start
                         # print end
-                        lane.connections.append(((lane, start[3]), (self.scenario.layer[end[0]].roads[end[1]].lanes[end[2]], end[3])))
+                        lane.connections.append(
+                            ((lane, start[3]), (self.scenario.layer[end[0]].roads[end[1]].lanes[end[2]], end[3])))

@@ -12,12 +12,20 @@ from Objects import Roundabout
 from Objects import VrepObject
 from remoteApi import vrep
 from remoteApi import vrepConst
+from parser import Parser
+import matplotlib.pyplot as plt
+import struct
+
+from opendavinci.DVnode import DVnode
+import cv2
 
 
 class CarLogic:
     def __init__(self, port):
         self.clientID = -1
         self.port = port
+        self.parser = Parser()
+        self.parser.parseSCN("resources/Scenarios/simulation/scenario.scn")
 
         # Parameters:
         self.time = time.time()
@@ -49,14 +57,23 @@ class CarLogic:
         self.new = list()
         self.radius = list()
 
+        self.point_cloud = []
+        self.cloud_state = 0
+
+        self.cpc = None
+
+        self.node = DVnode(cid=211)
+        self.node.connect()
+
         self.connect()
 
         # initHandles
-        self.radar = vrep.simxGetObjectHandle(self.clientID, 'radar', vrepConst.simx_opmode_blocking)[1]
-        #vrep.simxGet
+        # self.radar = vrep.simxGetObjectHandle(self.clientID, 'radar', vrepConst.simx_opmode_blocking)[1]
+        # vrep.simxGet
         self.car_handle = vrep.simxGetObjectHandle(self.clientID, 'anchor', vrepConst.simx_opmode_blocking)[1]
         self.roundabout = Roundabout(self.clientID, 'Roundabout_center', [Lane(0.5, 1.0, 'c'), Lane(1.1, 1.3, 'b'), Lane(1.3, 1.55, 'p')])
         self.debug = VrepObject(self.clientID, 'Sphere')
+        self.car = VrepObject(self.clientID, 'mycar')
 
         self.enemys = list()
         self.enemys.append(Enemy(self.clientID, 'enemy_car1', 'c', self))
@@ -80,6 +97,52 @@ class CarLogic:
         for enemy in self.enemys:
             enemy.update(self.car_handle)
         self.roundabout.update(self.car_handle)
+        self.car.update(-1)
+
+        self.point_cloud += vrep.simxCallScriptFunction(self.clientID, 'velodyneVPL_16', vrep.sim_scripttype_childscript, 'getvel', [], [], [], bytearray(),
+                                                        vrepConst.simx_opmode_blocking)[2]
+        self.cloud_state += 1
+        if self.cloud_state == 2:
+
+            ## cloud is complete:
+            angle = np.round(np.array(self.point_cloud[0::3]) / math.pi * 180, 3)
+            layer_angle = (np.array(self.point_cloud[1::3]) / math.pi * 180 - 90).round().astype(np.int32)
+            ranges = (np.array(self.point_cloud[2::3]) * 1000 + 0.5).astype(np.uint16)
+
+            self.cpc = np.zeros((1803, 16), dtype=np.uint16)
+
+            old_angle = None
+            sample_index = 0
+            for index, value in enumerate(angle):
+                mapped_angle = int(value * 5 + 0.5) / 5.0
+                if mapped_angle != old_angle:
+                    sample_index += 1
+                ##print layer_angle[index]
+                self.cpc[180 + int(mapped_angle * 5)][(layer_angle[index]+15)/2] = ranges[index]
+                #z = round(float(ranges[index]) / 100.0 * math.sin(float(layer_angle[index]) / 180.0 * math.pi), 4)
+                #print "Angle: " + str(layer_angle[index]) + " : " + str(z)
+                old_angle = mapped_angle
+
+            print sample_index
+
+            shaped_cpc = self.cpc.reshape(1803 * 16)
+            msg = self.node.proto_dict[49]()
+            msg.distances = shaped_cpc.tobytes()
+            msg.startAzimuth = 215
+            msg.endAzimuth = -145
+            msg.entriesPerAzimuth = 16
+
+            container = self.node.proto_dict[0]()
+            container.dataType = 49
+            container.serializedData = msg.SerializeToString()
+            self.node.publish(container)
+            print "Bounds:"
+            print angle.min()
+            print angle.max()
+            # struct.pack('q', int_)
+
+            self.cloud_state = 0
+            self.point_cloud = []
 
         # estimate rotation Rate (z- axis)
         rot = self.getOrientation()
@@ -149,8 +212,9 @@ class CarLogic:
 
     def run(self):
         vrep.simxStopSimulation(self.clientID, vrep.simx_opmode_blocking)
+        print "Stopped"
+        time.sleep(5)
         vrep.simxSynchronous(self.clientID, True)
-        time.sleep(1)
         vrep.simxStartSimulation(self.clientID, vrep.simx_opmode_blocking)
 
         while True:
@@ -198,4 +262,5 @@ except KeyboardInterrupt:
 # plt.plot(tmp.old,'r')
 # plt.plot(tmp.rate_arr)
 # plt.plot(tmp.radius)
+# plt.plot(tmp.angle)
 # plt.show()

@@ -19,7 +19,7 @@
 # GLOBAL CONFIGURATION
 #
 global.car = file://data/Models/Car1.objx
-global.scenario = file:///home/storm/workspace/Masterarbeit/code/vrep/resources/Scenarios/AstaZero-CityArea.scnx
+global.scenario = file:///home/storm/workspace/Masterarbeit/code/vrep/resources/Scenarios/simulation/simulation.scnx
 global.showGrid = 0
 
 # Location of the origin of the reference frame (example: 57.70485804 N, 11.93831921 E)
