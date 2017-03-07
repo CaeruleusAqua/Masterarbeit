@@ -56,9 +56,9 @@
 
 
 \begin{document}
-%\maketitle
+\maketitle
 
-%\tableofcontents
+\tableofcontents
 
 \chapter*{Eidesstattliche Erklärung}
 Ich erkläre hiermit an Eides statt, dass ich die vorliegende Arbeit selbständig und
@@ -297,6 +297,7 @@ In aktuellen Abreiten mit 3D-LIDAR Daten werden de Daten haufig als erstes in ei
 Danach werden direckt benachbarte Messungen mit ähnlichen Messwerten zusammengefasst. Alternativ werden die Messungen auch anhand eines Distanzkritterums 
 zusammengefasst. Erstere Methode hate den Nachteil, dass einzelne Ausreißer dazu führen, das das Objekt in mehrer Cluster zerfällt.
 Letztere wird meißt mit einem KD-Tree oder einer ähnlichen Datenstrucktur kombiniert, welche typischerweise hohe Kosten für die Erstellung verursachen.
+Da der Baum nach jeder 360 Grad messung neu Aufgebaut werden muss ist das Problematisch
 
 Hier wird eine Methode vorgeschlagen welche die Vorteile beider Methoden kombiniert. Dauzu ist es nötig zu wissen, wie die Daten von der OpenDAVINCI 
 Middleware geliefert werden. Das OpenDAVINCI auf der Übertragung der Daten mit UDP Multicast setzt, werden die Daten in einer Kompakten form übertragen, welche in einen einzigen
@@ -307,12 +308,41 @@ UDP Frame passt.\\
 startAzimuth : float \\
 endAzimuth : float \\
 entriesPerAzimuth : uint32 \\
-distances : bytes}
+distances : byte[]}
 {getStartAzimuth : float\\
-\cdots}
+\dots}
 \end{tikzpicture}
-\end{center}\\
+\end{center}
+Dabei wird von einer konstanten Drehrate des Sensors ausgegangen, was in einer äquidistanten der Messwerte resultiert. Die Anzahl der Messungen pro Azimuth
+wird in entriesPerAzimuth festgehalten und entspricht für den Velodyne VLP16 16. Um nun an die Eigentlichen Messwerte zu kommen müssen jeweils zwei distance Werte zu
+einem Unsigned 16Bit Integer umgewandelt werden, welcher dann die Messung in cm enthält. Jeweils 16 dieser Werte ergeben dann einen Messframe in dem der Polarwinkel
+auf einen Bereich zwischen -15 und +15 abgebildtet werden muss. Nachdem die sphärische Daten wiederhergestellt wurden, werden diese In Kartesische umgewandelt und
+in eine Punkt Datenstruktur gespeichert. 
 
+\begin{center}
+\begin{tikzpicture} 
+\umlclass{Point}{
+azimuth : float \\
+measurement : float \\
+visited : bool \\
+isGround : bool \\
+point : vector3f \\
+}
+{getAzimuth : float\\
+\dots}
+\end{tikzpicture}
+\end{center}
+
+Diese wird wiedrrum in ein Statisches 2 Dimensionales Array Gespeichert: Points[2000][16]. Die Reihenfolge der Daten wird dabei beibehalten.
+Diese Datenstruktur stellt nun im weiteren verlauf unsere Pointcloud dar.
+
+Auf dieser Basis wird nun ein DBSCAN (Density-Based Spatial Clustering of Applications with Noise) \cite{DBSCAN} ausgeführt. Der DBSCAN Algorithms hat dabei folgende Vorteile.
+Im Gegensatz beispielsweise zum K-Means-Algorithmus, muss nicht im vornherein bekannt sein, wie viele Cluster existieren. Der Algorithmus kann Cluster beliebiger Form 
+(z.B. nicht nur kugelförmige) erkennen. Das macht den DBSCAN damit für uns zu optimalen Kandidaten. DBSCAN selbst ist von linearer Komplexität.
+Die meiste Rechenzeit wird jedoch überlichweise durch die Nachbarschafts berechnung verursacht. Genau hier setzen wir an, anstatt der Bereichsanfrage über eine Baum-Struktur
+nutzten wir aus, dass Messungen in einer kleinen Nachbarschaft einen ähnlichen Azimuth Winkel haben. Dazu untersuchen wir für jeden Messwert jeweils zwei weitere Einträge nach links
+und rechts in unserem Array. Effektiv müssen wir daher $5 \cdot 16 = 80$ werte Überprüfen. Die Laufzeit der Bereichsanfrage kann deshalb in linearer Komplexität durchgeführt
+werden. Alle Messwerte die Zuvor als Grund Klassifiziert wurden, werden bei der Berchnung übersprungen, zusätzlich entfällt der Aufbau eines KD-Trees. 
 
 
 Die Zusammenfassung von Messwerten zu Objekten wird üblicherweise
