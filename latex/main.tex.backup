@@ -1,24 +1,47 @@
-\documentclass[12pt,paper=a4,oneside,
-%headings=small,
-open=right,
-numbers=noenddot,
-titlepage=true,
-abstract=false,
-bibliography=nottotoc,	
-listof=flat,
-caption=tableheadings,	
-parskip
-]{scrreprt}
+% \documentclass[12pt,paper=a4,oneside,
+% %headings=small,
+% open=right,
+% numbers=noenddot,
+% titlepage=true,
+% abstract=false,
+% bibliography=nottotoc,	
+% listof=flat,
+% caption=tableheadings,	
+% parskip
+% ]{scrreprt}
+% \usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}  
+% \usepackage{a4wide}
+
+% \usepackage[hidelinks]{hyperref}
+% \usepackage{wdok-title}
+
+% Time-stamp: <2008-03-17T14:24:07 mxp>
+\documentclass[11pt,oneside,openright]{mpreport}
+\usepackage[type=master]{wdok-title}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}  
-\usepackage{a4wide}
-\usepackage{graphicx} 
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{mathptmx}
+\usepackage[scaled=0.9]{helvet}
+\usepackage{courier}
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+\usepackage{siunitx}
+\usepackage{todonotes}
+\usepackage[style=numeric]{biblatex}
+\addbibresource{main.bib}
+\usepackage{mathtools}
+\usepackage{svg}
+\usepackage{tikz}
+\usepackage{tikz-uml}
 
 
+% Examples for the definition of convenience commands
+\newcommand{\package}[1]{\texttt{#1}}
+\newcommand{\foreign}[1]{\emph{#1}}
+\newcommand{\q}[1]{»#1«}
 
-\usepackage{helvet}
-%\renewcommand{\familydefault}{\sfdefault}
-%\fontfamily{phv}\selectfont
 
 \newtheorem{defi}{Definition}[chapter]
 \newtheorem{satz}{Satz}[chapter]
@@ -28,9 +51,14 @@ parskip
 \title{Autonomous driving in urban environments, roundabouts}
 \author{Julian-B. Scholle}
 
+%\supervisor{Themensteller\\
+%  Betreuer}
+
 
 \begin{document}
-\maketitle
+%\maketitle
+
+%\tableofcontents
 
 \chapter*{Eidesstattliche Erklärung}
 Ich erkläre hiermit an Eides statt, dass ich die vorliegende Arbeit selbständig und
@@ -40,190 +68,22 @@ Hilfsmittel nicht benutzt habe. Die aus fremden Quellen direkt oder indirekt
 Die Arbeit wurde bisher in gleicher oder ähnlicher Form keinem anderen
 Prüfungsamt vorgelegt und auch nicht veröffentlicht.
 
-
 \noindent Göteborg, den \today
 \begin{flushright}
 $\overline{~~~~~~~~~\mbox{Julian-B. Scholle}~~~~~~~~~}$
 \end{flushright}
 
-\chapter{Introduction}
+\include{Introduction}
+\include{basics}
 
-Das autonome Fahren und die Vernetzung von Fahrzeugen mit Ihrer Umwelt sind zusammen mit der Elektromobilität die meistdiskutierten Themen der Automobilbranche.
-Zu Recht: Autonomes Fahren besitzt das Potenzial, im Mobilitätsmarkt völlig neue Strukturen entstehen zu lassen.
-%%https://www2.deloitte.com/de/de/pages/consumer-industrial-products/articles/autonomes-fahren-in-deutschland.html
+\chapter{Methodology}
+Gefragt wird hier nach den Kriterien dafür, welche Methode für eine bestimmte Art der Anwendung geeignet ist, warum eine bestimmte Methode angewandt werden muss oder angewendet wird und keine andere. Verständnisfragen zum methodischen Weg werden hier geklärt. Die Methodologie ist demnach eine Metawissenschaft und somit eine Teildisziplin der Wissenschaftstheorie. Demgegenüber bezeichnet Methodik das Methodenwissen des Praktikers oder des Wissenschaftlers.
 
-\section{Motivation}
-
-Da die Technische Hochschule Chalmers ergänzend zu Volvos “DriveMe” Projekt das Projekt
-“CampusShuttle” initiiert, “CampusShuttle” ist ein interdisziplinäres Forschungsprojekt
-der Technischen Hochschule Chalmers und der Universität Göteborg.
-
-Das Projekt ist dabei im ReVeRe (Chalmers Research Vehicle Resource) angesiedelt. Die Vision ist dabei ein selbstfahrendes
-Auto zwischen den beiden Campus der Technische Hochschule Chalmers.
-
-Dabei soll, im Rahmen des Projekts, das Fahrzeug in verschiedenen Verkehrsszenarien untersucht
-werden. Der Fokus liegt dabei besonders auf den Stadtverkehr, das Fahrzeug muss dabei nicht
-nur in der Lage sein mit anderen Autos zu interagieren, sondern ebenfalls mit Straßenbahnen,
-Bussen, Fahrrädern und Fußgängern sicher agieren. 
+\section{Selection of Sensors}
+\section{Selection of Algorithms}
+\section{Simulation Enviroment}
 
 
-
-\section{Roundabouts in Law}
-% In Deutschland gibt es kein Gesetzt was den genauen Konstuktion von Kreisverkehren vorschreibt.
-% Stattdessen werden die Elemente der Landstraßen und Stadtstraßen in Richtlinien für die Anlage von Landstraßen (RAL) bzw.
-% den Richtlinien für die Anlage von Stadtstraßen (RASt) behandelt. Diese Richtlinien sind auch für die
-% Wahl einer zweckmäßigen Knotenpunktart bei der Verknüpfung von Straßen maßgebend. Für diese Abreit sind die 
-% Richtlinien für die Anlage von Stadtstraßen (RASt) relevant. Die dort behandelten Abwägungsüberlegungen orientieren sich an verkehrlichen Größen, umfeldbezogenen Merkmalen,
-% wirtschaftlichen Kriterien und raumordnerischen oder städtebaulichen Vorgaben. Die Richtlinien regeln auch grundlegend die entwurfstechnische und betriebliche Ausbildung von Kreisverkehren.
-%
-In Germany, there is no law stipulating the exact construction of roundabouts.
-Instead, the elements of the rural roads and city streets are dealt with in guidelines for the construction of rural road (RAL)
-and the guidelines for the construction of urban roads (RASt)\cite{Strasen2006}. These guidelines are also relevant to the choice of a convenient junction type when linking roads.
-The guidelines for the installation of urban roads (RASt) are relevant for this dispute.
-The considerations discussed there are based on traffic variables, area-related characteristics, economic criteria and spatial planning or urban planning requirements. 
-The guidelines also regulate the basic design and operational formation of roundabouts.
-\subsection{Elements of a Roundabout}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.7\textwidth]{bilder/kreisverkehr.png} %70% der Textbreite
-\caption{Definition of individual design elements and dimensions of a roundabout}
-\label{roundabout_parts}
-\end{center}\end{figure}
-
-
-\begin{defi}[roundabout island]
-The roundabout island is the constructional area in the middle of the roundabout, which is surrounded by vehicles.
-For miniature roundabouts, the roundabout island is crossable.
-\end{defi}
-
-\begin{defi}[circular path]
-%Die Kreisfahrbahn ist die Fahrbahn, die zum Umfahren der Kreisinsel
-%dient. Ein ggf. vorhandener Innenring ist verkehrsrechtlich nicht Be-
-%standteil der Kreisfahrbahn (VwV-StVO zu §9a V., Rn. 5).
-
-%%TODO
-The circular path is the road that serves to drive the roundabout island. An inner ring, if present, is not part of the circular path (VwV-StVO zu §9a V., Rn. 5).
-\end{defi}
-
-\begin{defi}[circular ring with ($B_K$)]
-% Die bauliche Breite umfasst die Kreisfahrbahn und einen ggf. gepflasterten
-% Innenring. Sie ist abhängig vom Außendurchmesser und der angestrebten
-% Verkehrsführung (ein- oder zweistreifig). Die Randstreifenbreite orientiert
-% sich an der maßgebenden durchgehenden Fahrbahn.
-The structural width includes the circular track and a paved inner ring, if any. It is dependent on the outer diameter and the desired traffic routeing (one or two lanes). 
-The edge strip width is oriented on the relevant continuous roadway.
-\end{defi}
-
-\begin{defi}[outer diameter ($D$)]
-The outer diameter is measured at the outer edge of the circular ring. It is the essential measure for describing the size of the roundabout.
-\end{defi}
-
-\begin{defi}[inner diameter ($D_I$)]
-The inner diameter is the diameter of the roundabout island.
-\end{defi}
-
-\begin{defi}[road divider]
-% Der Fahrbahnteiler ist die baulich ausgeführte Insel zwischen Kreisausfahrt
-% und -zufahrt einer angeschlossenen Straße. Er dient der Trennung der
-% Kreisaus- und -zufahrten, der Führung des Verkehrs sowie den Fußgängern
-% und Radfahrern als Überquerungshilfe.
-%
-The road divider is the structurally designed island between the circular exit
-and circular driveway. It serves to separate the circular exit and circular driveway, the management of the traffic, as well as the pedestrians and cyclists as cross-bordering aid.
-\end{defi}
-
-\begin{defi}[lane width of the circular driveway ($B_Z$) and circular exit ($B_A$)]
-% Die Breite der Kreiszufahrt und Ausfahrt wird am Beginn der Eckausrundung gemessen.
-The width of the circular driveway and exit is measured at the beginning of the corner.
-\end{defi}
-
-\begin{defi}[Corner rounding radius ($R_Z$ and $R_A$) ]
-% Dies ist der Radius der Ausrundung am rechten Fahrbahnrand zwischen 
-% der Kreiszufahrt und der Kreisfahrbahn. Bei einem Korbbogen mit einer
-% Radienfolge aus drei unterschiedlichen Radien ist RZ der Radius R2 des
-% mittleren Bogens. Bei der Ausbildung des Fahrbahnrandes als Schleppkurve ist RZ der kleinste Radius des Fahrbahnrandes.
-% 
-This is the radius of the rounding at the right edge of the road between the circular driveway and the circular path.
-For a elliptical arch with a radius sequence of three different radii, $R_Z$ is the radius $R_2$ of the central arc.
-When the road edge is formed as a tractrix, $R_Z$ is the smallest radius of the road edge.
-\end{defi}
-
-\subsection{Types of Roundabouts}
-There are several types of roundabouts, which are differentiated by the different application criteria and the partly different design principles according to the situation inside and outside built areas.
-Furthermore, a division is made as a function of its size.
-
-
-\subsubsection{Mini Roundabout}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{bilder/mini_roundabout.png} %70% der Textbreite
-\caption{Mini Roundabout}
-\label{roundabout_mini}
-\end{center}\end{figure}
-
-Within built-up areas, smaller outer diameters are possible under certain conditions.
-These roundabouts are called mini roundabout. The roundabout island must then be capable of being passed over.
-The outer diameter should be at least 13 m, so that the circular island does not become too small.
-Larger outer diameters make driving easier. Outer diameters of more than 22m, however, do not offer any transport advantages.
-From an outside diameter of about 22 m, therefore, the installation of a small roundabout with 26 m is generally more convenient.
-Bypasses are generally not required in the areas where mini roundabout can be used.
-
-
-\subsubsection{Small Roundabout}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{bilder/small_roundabout.png} %70% der Textbreite
-\caption{Small Roundabout}
-\label{roundabout_small}
-\end{center}\end{figure}
-
-The small roundabout has a single lane circular path and single lane circular driveways and exits. The roundabout island is not passable.
-The outer diameter must be at least 26 m. Bypasses can be set up for driving geometric reasons or to increase performance.
-
-
-\subsubsection{Two-lane Passable Roundabout}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{bilder/twolaned_roundabout.png} %70% der Textbreite
-\caption{Two-lane Passable Roundabout}
-\label{roundabout_twolaned}
-\end{center}\end{figure}
-
-% Reicht die Kapazität des Kleinen Kreisverkehrs nicht aus und kann diese nicht durch die Anlage von Bypässen sicher gestellt werden,
-% kann die Kreisfahrbahn eines Kleinen Kreisverkehrs zweistreifig befahrbar ausgebildet werden.
-% An einem solchen Kreisverkehr ist die Kreisfahrbahn so breit, dass Pkw im Kreis nebeneinander fahren können.
-% Wird eine weitere Erhöhung der Kapazität erforderlich, können einzelne Kreiszufahrten ebenfalls zweistreifig ausgeführt werden,
-% wenn Fußgänger und Radfahrer regelmäßig nicht zu berücksichtigen sind. Kreisausfahrten werden aus Sicherheitsgründen immer einstreifig ausgeführt.
-% Aus geometrischen Gründen muss der Außendurchmesser bei zweistreifiger Befahrbarkeit mindestens 40 m betragen.
-%
-If the capacity of the small roundabout is not sufficient and can not be ensured by the installation of bypasses,
-the circular path of a small roundabout can be designed to be two-lane driveable.
-At such a roundabout, the circular path is so wide that cars can travel side by side in a circle.
-If a further increase in the capacity is required, individual circular driveway can also be carried out in two lanes, if pedestrians and cyclists are not to be considered regularly.
-For safety reasons, circular exits are always carried out in single lanes.
-For geometrical reasons, the outer diameter must be at least 40 m for two-laned accessibility.
-
-
-\subsubsection{Large Roundabout}
-
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{bilder/large_roundabout.png} %70% der Textbreite
-\caption{Large Roundabout}
-\label{roundabout_large}
-\end{center}\end{figure}
-
-%Große Kreisverkehre mit zwei oder mehreren durch Markierungen gekennzeichnete Fahrstreifen auf der Kreisfahrbahn sollen bei enger
-%Abstimmung zwischen Knotenpunktentwurf und Verkehrssteuerung nur mit Lichtsignalanlage betrieben wer den.
-Large Roundabouts with two or more lanes marked by markers on the circular path should be operated with a light signaling system only,
-if the nodal point design and traffic control are closely coordinated.
-
-\section{Method}
 \chapter{Research}
 Klare, logische Gliederung\\\\
 Möglichst ausgeglichene Kapitel (bezüglich Umfang und Zahl der Unterkapitel)\\\\
@@ -232,7 +92,249 @@ Ist auch innerhalb der einzelner Kapitel oder Abschnitte sinnvoll strukturiert\\
 Kapitel und Unterkapitel beginnen stets mit einer ganz kurzen Einleitung (in der Regel 1-3 Sätze, die erklären, was im Folgenden zu erwarten ist)\\\\
 Kurze, aussagekräftige Überschriften in einheitlichem Stil\\\\
 Beschreibung von Konzepten. Technische Details, wie z.B. Quellcode, umfangreiche Auflistungen, ergänzende Abbildungen usw. kommen in den Anhang.\\\\
+
+\section{Object Detection}
+
+\subsection{Ground Removal}
+Um in einer PointCloud Ojekte zu erkennen ist es nötig, zu wissen, welche Messungen zu Boden und welche zu Objekten gehören. Es gibt viele Möglichkeiten dieses
+zu erreichen. Die Naivste Methode ist das entfernen, der Bodenplatte anhand ihrer Z-Koordinate. Diese Mehode hat allerdings viele Nachteile, zum einen muss
+der LIDAR Sensor exakt gerade auf em Fahrzeug angebracht werden, zum anderen muss das Fahrzeug ein sehr steifes Fahrwerk haben, um eventuelle Neigungen des Sensors zu verhindern.
+Weiterhin erlaubt dies ausschließlich die Entfernung von Palanaren Grundflächen, alo flache nicht hügelige Untergründe. Eine weitere Verbreitete Methode ist das 
+Entfernen der Bodenplatte auf basis eines Statistischer mittelwertes \cite{Zhang}.  Diese Methode benötigt allerdings auch eine Kalibireirung der Sensorabstandes zum Boden.
+Und die Bestimmung weiterer Schwellwerte, welche umgebungsabhäng sind. Die Votreile beider Methoden sind ihre gering nötige rechenleistung und laufzeit O(n).
+Bessere Methoden wie Gradientenbasierende explansions algrythmenm benötigen einen Startpunkt der als Bodenplatte identifiziert werden kann.
+Eine weitere Möglichkeit ist die Beschreibung von Objekten als Konvexe Objecte \cite{5164280}, die ebenfalls auf Basis der Gradienten beschrieben werden kann.
+Vorteil dieser Methode ist das keine Initiale Position für die Bodenplatte benötigt wird.
+
+Für unseren Anwendungsfall mit dem Velodyne VLP-16 besteht das Problem darin, dass die Auflösung des Sensor in der Höhe sehr gering ist. Abhängig von der Entfernung des 
+Fahrzeuges innerhalb der benötigten Reichweite fallen nur zwei Lagen auf die Testfahrzeuge, wesshalb Gradientenbasierende Methoden hier zuverlässig versagen. Da die Gradienten zu klein sind und
+die verkelinerung der nötigen Thresholds zu haufigen false Postitives führt. Die Methode des Statistischen Mittelwertes und die Methode auf basis der Z-Koordinate,
+leider am Fahrwerk des Volvo XC90 SUV. Die Höhe das Fahrzeuges ändert sich aunteranderem durch veränderung des Fahrprofiles (Sport/Eco, etc.) um mehrere Zentimeter.
+Auch leicht erhöhte geschwindigekiten im Kreisverkehr (ca 30 km/h) führen zu einer deutlichen Seitenneigung des Fahrzeuges. Darum wird nun eine weitere Methode vorgeschlagen.
+Die Erkennung einer Grundfläche in den Messdaten. 
+
+Für die Erknnung des Bodens gehen wir von Folgenden Annahmen aus, die Straße lösst sich approximativ als Ebene im R3 darstellen. Weiterin ist die Grundfläche die niedrigste
+Fläche im Koordinatensystem. Daher wird im ersten schritt der in Polarkoordinaten vorliegende Datensatz in  in mehrere Tortenstück förmige Segmente geteilt.
+Innerhalb dieser Tortenstücke wird dann eine Suche nach den 10 Messungen mit dem niedrigsten Z Wert gesucht. Die Einteilung in Segmente ist desshalb nötig
+um zu verhindern, dass alle Messerte in ein einziges lokales Minima laufen. Aus diesem Vorgefilterten Messwerten werden nun für einen RANSAC drei zufällige,
+jedoch nich in benachbarten Segementen liegende Messwerte, herausgesucht. Aus diesm dei Punkten wird nun eine Ebene in der Hessischen Normalform gebildet
+,was eine effiziente Distanzberechnung zu anderen Punken erlaubt. Danach sammeln wir alle weiten Punkte aus unseren Minima, anahnd eines Distanzkriteriums.
+Danach wird aus der Ebene und den neu Gesammelten Punkte durch einen Planefitting Algorithms [\cref{subssec:planefitting}] eine neue Ebene und derren Fehler berechnet.
+Der Fehler wird über die Summe der quadratischen Abstände aller Punkte zur Ebene berechnet.
+
+Bevor wir die Ebene jedoch als eventueller Lösungskanidat hinzufügen wird geprüft ob sich die Ebene innerhalb von einem plausiblen Parameterbereich befindet.
+Dazu zählt, dass die Entfernung der Ebene zwischen 1.9m und 2.2m bewegen sollte, dies entspricht in etwa der Montagehöhe des Velodyne Sensors.
+
+Die Anzahl an Iterationen des RANSAC ist auf 50 Begrenzt. Nach dem Durchlauf des RANSAC werden alle Punkte in der Pointcloud anhand ihrer Distanz zur Ebene als
+Groundflache makiert. Als threshold wurde hier ein Wert von 0.5m genommen.
+
+
+\subsubsection{Planefitting}
+\label{subssec:planefitting}
+Zum Planefitting einer be ne wird üblicherweise eine SVD (Singular Value Decomposition) genutzt. SVD hat eine Komplexität von $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007},da das Planefitting innehalb 
+des RANSAC's sehr häufig mit einer großen Anzahl an Punkten ausgefürht wird, führt das Ausführen des SVD innhalb des RANSAC zu einer sehr hohen laufzeit.
+Deshalb wird an dieser Stelle ein ``Linear least Squares (LLSQ)'' Algorithus mit einigen optimierungen eingesetzt. Bei der verwendung des LLSQ gilt es zu beachten,
+dass nicht der abstand der Punkte zur eben optimiert wird, sondern der Abstand der Punkte zur Ebene entlang einer Achse (in unserem Fall der z Achse) siehe \cref{LLSQ_MIN}.
+Das kann zu Problemen führen, wenn die Punkte weit gestreut, also weit von der Optimalen Ebene entfert sind. Da wir unsere Punkte innhalb des RANSAC allerdings anhand eines 
+Distanzkriteriums vorselektieren, stellt dies kein Problem dar.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Linear least Squares (LLSQ)  \cite{LLSQ}}
+\includesvg[width=0.5\textwidth]{Linear_least_squares_min}
+\label{LLSQ_MIN}
+%\end{center}
+\end{figure}
+
+Die Darstellung einer Ebene in Koordinatenform sieht wie folgt aus: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Da wir eine Ebene im R3 betrachten, ist dieses Gleichungsystem überbestimmt.
+Da wir unsere Ebene in Richtung der Z-Achse optimieren wollen setzten wir Parameter c auf 1 und können unser Gleichungssystem nun einfach nach z auflösen: $a\vec{x} + b\vec{y} + d = -\vec{z}$.
+Die Vektoren $\vec{x},\vec{y},\vec{z}$ stellen dabei die zu fittenden Punkte dar.
+In Matrixschreibweise:
+
+\begin{align*}
+X \vec{\beta} &= \vec{z}\\
+\begin{bmatrix}
+x_0 & y_0 & 1 \\
+x_1 & y_1 & 1 \\
+ & \dots & \\
+x_n & y_n & 1 
+\end{bmatrix} 
+\begin{bmatrix}
+a \\
+b \\
+d 
+\end{bmatrix}
+&= 
+\begin{bmatrix}
+-z_0 \\
+-z_1 \\
+\dots \\
+-z_n 
+\end{bmatrix} 
+\end{align*}
+
+Dieses Sytem hat üblicherweise keine Lösung, unser eigentliches Ziel ist jeoch auch nicht extakte lösungen für $\vec\beta$ zu finden sondern eine gute näherung $\hat{\beta}$ dafür:
+
+\begin{align*}
+\hat{\beta} = \min{(|| \vec{z} - X\vec{\beta} ||^2)}
+\end{align*}
+
+Das können wir tun indem wir unsere Gleichung mit der Transponierten unserer Punktmatrix $X$ mulltiplizieren:
+\begin{align*}
+(X^TX) \hat{\beta} &= X^T \vec{z}\\
+\begin{bmatrix}
+x_0 & x_1 & \dots & x_n \\
+y_0 & y_1 & \dots & y_n \\
+1 & 1 & \dots & 1  
+\end{bmatrix} 
+\begin{bmatrix}
+x_0 & y_0 & 1 \\
+x_1 & y_1 & 1 \\
+ & \dots & \\
+x_n & y_n & 1 
+\end{bmatrix} 
+\begin{bmatrix}
+a \\
+b \\
+d 
+\end{bmatrix} 
+ &= 
+\begin{bmatrix}
+x_0 & x_1 & \dots & x_n \\
+y_0 & y_1 & \dots & y_n \\
+1 & 1 & \dots & 1  
+\end{bmatrix} 
+\begin{bmatrix}
+-z_0 \\
+-z_1 \\
+\dots \\
+-z_n 
+\end{bmatrix} 
+\end{align*}
+
+Dieses Gleichungssystem könne man nun mit der Berechnung der Inverse von $(X^TX)$ auflösen. Da die Berechnung von Inversematritzen mit $\mathcal{O}(n^3)$ ebenfalls aufwändig ist,
+nun ein weiterer Trick um rechenleistung zu sparen.
+Nach dem Multiplizieren der Transponierten erhalten wir:
+\begin{align*}
+\begin{bmatrix}
+\sum x_i x_i & \sum x_i y_i & \sum x_i \\
+\sum y_i x_i & \sum y_i y_i & \sum y_i \\
+\sum x_i & \sum y_i & N
+\end{bmatrix} 
+\begin{bmatrix}
+a \\
+b \\
+d 
+\end{bmatrix} 
+ = 
+\begin{bmatrix}
+\sum x_i z_i \\
+\sum y_i z_I \\
+\sum z_i 
+\end{bmatrix} 
+\end{align*}
+
+Gut zu sehen sind hier die Summen in den Randbereichen der Matrix X und dem Vektor $\vec{z}$. Diese können wir auf Null setzten, wenn wir alle Punkte relativ zum Mittelwert-Punkt
+aller Punkte definieren, also $P_i = P_i - \overline{P}$. Nun erhalten wir:
+
+\begin{align*}
+\begin{bmatrix}
+\sum x_i x_i & \sum x_i y_i & 0 \\
+\sum y_i x_i & \sum y_i y_i & 0 \\
+0 & 0 & N
+\end{bmatrix} 
+\begin{bmatrix}
+a \\
+b \\
+d 
+\end{bmatrix} 
+ = 
+\begin{bmatrix}
+\sum x_i z_i \\
+\sum y_i z_I \\
+0 
+\end{bmatrix} 
+\end{align*}
+
+Nun können wir d ebenfalls auf Null setzten, denn wenn alle unsere Punkte relativ zum Mittelwert-Punkt sind, dann läuft auch unsere Ebene immer durch diesen Punkt. Daher können wir 
+nun eine komplette Dimension streichen:
+
+\begin{align*}
+\begin{bmatrix}
+\sum x_i x_i & \sum x_i y_i \\
+\sum y_i x_i & \sum y_i y_i
+\end{bmatrix} 
+\begin{bmatrix}
+a \\
+b 
+\end{bmatrix} 
+ = 
+\begin{bmatrix}
+\sum x_i z_i \\
+\sum y_i z_i
+\end{bmatrix} 
+\end{align*}
+
+Das Gleichungssystem können wir nun einfach mit der Cramer's rule lösen
+\begin{align*}
+D &= \sum x_i x_i \cdot \sum y_i y_i - \sum x_i y_i \cdot \sum x_i y_i \\
+a &= \frac{\sum y_i z_i \cdot \sum x_i y_i - \sum x_i z_i \cdot \sum y_i y_i }{D}\\
+b &= \frac{\sum x_i y_i \cdot \sum x_i z_i - \sum x_i x_i \cdot \sum y_i z_i }{D}\\
+\vec{n} &= [a, b, 1]^T
+\end{align*}
+Dabei gibt es zu beachten, dass die Determinante nicht Null oder nahe Null sein darf.
+Da der winkel zwischen dem Fahrzeug und der Ebene jedoch immer nahe 90 Grad liegt, ist die Determinante typischweise sehr groß. 
+Sollte die Determinante doch nahe 0 (nicht gleich 0) sein, wird die Berechnung trotzudem durchgeführt, da dies auch zu einem 
+großen Fehler im Fitting führt. Dies ist an dieser Stelle erwünscht, da der RANSAC ungeültige Ebenen anhand des Fehlers ausssortiert.
+Ist die Determinante extakt Null, wird die Berechnungstatdessen mit einem kleinen Wert für D fortgesetzt.
+
+Aus dem Normalenvektor $\vec{n}$ und dem Mittelwert-Punkt $\overline{P}$ können wir nun wieder die Hessische Normalenvektor bestimmen.
+
+Letztendlich haben wir so den Algorithms von $\mathcal{O}(m^2n) $ auf $\mathcal{O}(n) $ runterbrechen können.
+
+\subsection{Clustering}
+In aktuellen Abreiten mit 3D-LIDAR Daten werden de Daten haufig als erstes in eine Heightmap projeziert \cite{Zhang,Himmelsbach2009,Li2016}.
+Danach werden direckt benachbarte Messungen mit ähnlichen Messwerten zusammengefasst. Alternativ werden die Messungen auch anhand eines Distanzkritterums 
+zusammengefasst. Erstere Methode hate den Nachteil, dass einzelne Ausreißer dazu führen, das das Objekt in mehrer Cluster zerfällt.
+Letztere wird meißt mit einem KD-Tree oder einer ähnlichen Datenstrucktur kombiniert, welche typischerweise hohe Kosten für die Erstellung verursachen.
+
+Hier wird eine Methode vorgeschlagen welche die Vorteile beider Methoden kombiniert. Dauzu ist es nötig zu wissen, wie die Daten von der OpenDAVINCI 
+Middleware geliefert werden. Das OpenDAVINCI auf der Übertragung der Daten mit UDP Multicast setzt, werden die Daten in einer Kompakten form übertragen, welche in einen einzigen
+UDP Frame passt.\\
+\begin{center}
+\begin{tikzpicture} 
+\umlclass{CompactPointCloud}{
+startAzimuth : float \\
+endAzimuth : float \\
+entriesPerAzimuth : uint32 \\
+distances : bytes}
+{getStartAzimuth : float\\
+\cdots}
+\end{tikzpicture}
+\end{center}\\
+
+
+
+Die Zusammenfassung von Messwerten zu Objekten wird üblicherweise
+
+\subsection{Object Tracking}
+
+\subsection{Classification}
+
+\subsection{State Estimation}
+
+
+\section{Mapping}
+\subsection{OpenDAVINIC Map}
+\subsection{Simplification}
+
+
+
+
 \chapter{Evaluation}
+
+\section{Simuation}
+\section{Real Measurements}
 \chapter{Conclusions}
 Kann in mehrere Unterkapitel gegliedert werden\\\\
 Greift Thesen oder Fragestellungen aus der Einleitung wieder auf\\\\
@@ -243,8 +345,6 @@ Kann auch eigene Bewertungen oder Meinungen enthalten\\\\
 Gibt eine Ausblick auf mögliche Konsequenzen oder notwendige weitere zu lösende Probleme
 \chapter{Future Work}
 
-sdasdas
-\bibliography{master}
-\bibliographystyle{alpha}
+\printbibliography
 
 \end{document}          

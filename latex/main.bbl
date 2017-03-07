@@ -18,7 +18,186 @@
 
 
 \refsection{0}
-  \sortlist[entry]{anyt/global/}
+  \sortlist[entry]{nty/global/}
+    \entry{Himmelsbach2009}{article}{}
+      \name{author}{3}{}{%
+        {{hash=a7a8b9530523ae109d78af5f8e764e3e}{%
+           family={Himmelsbach},
+           familyi={H\bibinitperiod},
+           given={M},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cfd1448cbf669591ac27ba0eaea47d4e}{%
+           family={Luettel},
+           familyi={L\bibinitperiod},
+           given={T},
+           giveni={T\bibinitperiod}}}%
+        {{hash=a4fc578b8e4373de3315c030b955d293}{%
+           family={Wuensche},
+           familyi={W\bibinitperiod},
+           given={H.-J.},
+           giveni={H\bibinithyphendelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{26b6ed2dad7aa3a560a80a5e35004b06}
+      \strng{fullhash}{26b6ed2dad7aa3a560a80a5e35004b06}
+      \strng{authornamehash}{26b6ed2dad7aa3a560a80a5e35004b06}
+      \strng{authorfullhash}{26b6ed2dad7aa3a560a80a5e35004b06}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper describes a LIDAR-based perception system for ground robot mobility, consisting of 3D object detection, classification and tracking. The presented system was demonstrated on-board our autonomous ground vehicle MuCAR-3, enabling it to safely navigate in urban traffic-like scenarios as well as in off-road convoy scenarios. The efficiency of our approach stems from the unique combination of 2D and 3D data processing techniques. Whereas fast segmentation of point clouds into objects is done in a 2 1/2D occupancy grid, classifying the objects is done on raw 3D point clouds. For fast object feature extraction, we advocate the use of statistics of local point cloud properties, captured by histograms over point features. In contrast to most existing work on 3D point cloud classification, where real-time operation is often impossible, this combination allows our system to perform in real-time at 0.1s frame-rate.}
+      \field{isbn}{978-1-4244-3803-7}
+      \field{journaltitle}{2009 IEEE/RSJ International Conference on Intelligent Robots and Systems}
+      \field{title}{{Real-time object classification in 3D point clouds using point feature histograms}}
+      \field{year}{2009}
+      \field{pages}{994\bibrangedash 1000}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1109/IROS.2009.5354493
+      \endverb
+      \verb{url}
+      \verb http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=5354493
+      \endverb
+    \endentry
+    \entry{Holmes2007}{article}{}
+      \name{author}{3}{}{%
+        {{hash=68070fafc9b5eaa00d05b2acef9dffbb}{%
+           family={Holmes},
+           familyi={H\bibinitperiod},
+           given={M},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a13df2b1bf8eefb0cde5629896252dde}{%
+           family={Gray},
+           familyi={G\bibinitperiod},
+           given={a},
+           giveni={a\bibinitperiod}}}%
+        {{hash=d049d104eacbb995906e568bb71c189a}{%
+           family={Isbell},
+           familyi={I\bibinitperiod},
+           given={C},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{16cf8a94c8e7dd23da57e797ff632ae0}
+      \strng{fullhash}{16cf8a94c8e7dd23da57e797ff632ae0}
+      \strng{authornamehash}{16cf8a94c8e7dd23da57e797ff632ae0}
+      \strng{authorfullhash}{16cf8a94c8e7dd23da57e797ff632ae0}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Workshop on Efficient Machine Learning}
+      \field{number}{1}
+      \field{title}{{Fast SVD for large-scale matrices}}
+      \field{volume}{1}
+      \field{year}{2007}
+      \field{pages}{2\bibrangedash 3}
+      \range{pages}{2}
+    \endentry
+    \entry{Li2016}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=a9c8728e355996d027a7e56b60820a18}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=bdcd1a06f2e39b7068049e68530704f4}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Tianlei},
+           giveni={T\bibinitperiod}}}%
+        {{hash=1c3a2dc4e9ad36c98e17a912894eaa02}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={Tian},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Robotics: Science}%
+        {Systems Foundation}%
+      }
+      \strng{namehash}{66c48d0472719546abac1309358db3a0}
+      \strng{fullhash}{66c48d0472719546abac1309358db3a0}
+      \strng{authornamehash}{66c48d0472719546abac1309358db3a0}
+      \strng{authorfullhash}{66c48d0472719546abac1309358db3a0}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{—Convolutional network techniques have recently achieved great success in vision based detection tasks. This paper introduces the recent development of our research on transplanting the fully convolutional network technique to the detection tasks on 3D range scan data. Specifically, the scenario is set as the vehicle detection task from the range data of Velodyne 64E lidar. We proposes to present the data in a 2D point map and use a single 2D end-to-end fully convolutional network to predict the objectness confidence and the bounding boxes simultaneously. By carefully design the bounding box encoding, it is able to predict full 3D bounding boxes even using a 2D convolutional network. Experiments on the KITTI dataset shows the state-of-the-art performance of the proposed method.}
+      \field{booktitle}{Robotics: Science and Systems XII}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{9780992374723}
+      \field{title}{{Vehicle Detection from 3D Lidar Using Fully Convolutional Network}}
+      \field{year}{2016}
+      \verb{doi}
+      \verb 10.15607/RSS.2016.XII.042
+      \endverb
+      \verb{eprint}
+      \verb 10.15607
+      \endverb
+      \verb{url}
+      \verb http://www.roboticsproceedings.org/rss12/p42.pdf
+      \endverb
+    \endentry
+    \entry{5164280}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=7e3192ab108854267f5bc24b89006f81}{%
+           family={Moosmann},
+           familyi={M\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=13b96758a4dc7e1fcac326f2064ad06d}{%
+           family={Pink},
+           familyi={P\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+        {{hash=3b61897c951ecf9dcb5f80d8c9346933}{%
+           family={Stiller},
+           familyi={S\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d151104404ff20d64f7d909a731f94f}
+      \strng{fullhash}{4d151104404ff20d64f7d909a731f94f}
+      \strng{authornamehash}{4d151104404ff20d64f7d909a731f94f}
+      \strng{authorfullhash}{4d151104404ff20d64f7d909a731f94f}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2009 IEEE Intelligent Vehicles Symposium}
+      \field{issn}{1931-0587}
+      \field{month}{6}
+      \field{title}{Segmentation of 3D lidar data in non-flat urban environments using a local convexity criterion}
+      \field{year}{2009}
+      \field{pages}{215\bibrangedash 220}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/IVS.2009.5164280
+      \endverb
+      \keyw{automated highways;graph theory;image segmentation;object detection;radar imaging;3D lidar data segmentation;3D lidar measurement;graph-based approach;local convexity criterion;local convexity measures;nonflat urban environment;object detection;unstructured offroad environment;Information geometry;Intelligent vehicles;Laser radar;Multidimensional signal processing;Object detection;Optimization methods;Roads;Sensor fusion;Signal processing algorithms;Vegetation mapping}
+    \endentry
+    \entry{man06}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=acec29179d4aca722efb84fd2ecabc2b}{%
+           family={Stra{ß}en-\bibnamedelimb und\bibnamedelimb Verkehrswesen.\bibnamedelimi Arbeitsgruppe\bibnamedelima Stra{ß}enentwurf},
+           familyi={S\bibinitperiod\bibinitdelim u\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={Forschungsgesellschaft},
+           giveni={F\bibinitperiod},
+           prefix={für},
+           prefixi={f\bibinitperiod}}}%
+      }
+      \strng{namehash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{fullhash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{authornamehash}{acec29179d4aca722efb84fd2ecabc2b}
+      \strng{authorfullhash}{acec29179d4aca722efb84fd2ecabc2b}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Merkblatt für die Anlage von Kreisverkehren}
+      \field{year}{2006}
+    \endentry
     \entry{ral13}{book}{}
       \name{author}{1}{}{%
         {{hash=acec29179d4aca722efb84fd2ecabc2b}{%
@@ -36,9 +215,8 @@
       \strng{fullhash}{acec29179d4aca722efb84fd2ecabc2b}
       \strng{authornamehash}{acec29179d4aca722efb84fd2ecabc2b}
       \strng{authorfullhash}{acec29179d4aca722efb84fd2ecabc2b}
-      \field{labelalpha}{RAL}
-      \field{sortinit}{R}
-      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{series}{FGSV (Series)}
@@ -63,9 +241,8 @@
       \strng{fullhash}{acec29179d4aca722efb84fd2ecabc2b}
       \strng{authornamehash}{acec29179d4aca722efb84fd2ecabc2b}
       \strng{authorfullhash}{acec29179d4aca722efb84fd2ecabc2b}
-      \field{labelalpha}{RASt}
-      \field{sortinit}{R}
-      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{9783939715214}
@@ -74,27 +251,83 @@
       \field{title}{Richtlinien für die Anlage von Stadtstra{ß}en: RASt 06}
       \field{year}{2007}
     \endentry
-    \entry{man06}{manual}{}
+    \entry{LLSQ}{online}{}
       \name{author}{1}{}{%
-        {{hash=acec29179d4aca722efb84fd2ecabc2b}{%
-           family={Stra{ß}en-\bibnamedelimb und\bibnamedelimb Verkehrswesen.\bibnamedelimi Arbeitsgruppe\bibnamedelima Stra{ß}enentwurf},
-           familyi={S\bibinitperiod\bibinitdelim u\bibinitperiod\bibinitdelim V\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim S\bibinitperiod},
-           given={Forschungsgesellschaft},
-           giveni={F\bibinitperiod},
-           prefix={für},
-           prefixi={f\bibinitperiod}}}%
+        {{hash=9c677286866aad38f8e9b660f5411814}{%
+           family={Wikipedia},
+           familyi={W\bibinitperiod}}}%
       }
-      \strng{namehash}{acec29179d4aca722efb84fd2ecabc2b}
-      \strng{fullhash}{acec29179d4aca722efb84fd2ecabc2b}
-      \strng{authornamehash}{acec29179d4aca722efb84fd2ecabc2b}
-      \strng{authorfullhash}{acec29179d4aca722efb84fd2ecabc2b}
-      \field{labelalpha}{Str06}
-      \field{sortinit}{S}
-      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \strng{namehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{fullhash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authornamehash}{9c677286866aad38f8e9b660f5411814}
+      \strng{authorfullhash}{9c677286866aad38f8e9b660f5411814}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{Merkblatt für die Anlage von Kreisverkehren}
-      \field{year}{2006}
+      \field{title}{Linear least squares (mathematics)}
+      \field{urlday}{6}
+      \field{urlmonth}{3}
+      \field{urlyear}{2017}
+      \field{year}{2017}
+      \field{urldateera}{ce}
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics)
+      \endverb
+    \endentry
+    \entry{Zhang}{article}{}
+      \name{author}{5}{}{%
+        {{hash=0bf1b08466636bf5ead9445ddbec1524}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Liang},
+           giveni={L\bibinitperiod}}}%
+        {{hash=15906c3ab51cd0d52c498d48862a3c68}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Qingquan},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=dbe83fd8da75338203d4e8dd0e20be17}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Ming},
+           giveni={M\bibinitperiod}}}%
+        {{hash=fadaf9e06c83a70d39c30ad9dad17802}{%
+           family={Mao},
+           familyi={M\bibinitperiod},
+           given={Qingzhou},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=490c7a8d6199fbc87b6ea4dff87f8c54}{%
+           family={Nüchter},
+           familyi={N\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{3dbe3daf150d76ad768cd6fe17173b22}
+      \strng{fullhash}{4e88e30f94fbe3e72b4082e9cd3cf4a9}
+      \strng{authornamehash}{3dbe3daf150d76ad768cd6fe17173b22}
+      \strng{authorfullhash}{4e88e30f94fbe3e72b4082e9cd3cf4a9}
+      \field{sortinit}{Z}
+      \field{sortinithash}{fdda4caaa6b5fa63e0c081dcb159543a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper proposes a novel multiple vehicle-like target tracking method based on a Velodyne HDL64E light detection and ranging (LiDAR) system. The proposed method combines multiple hypothesis tracking (MHT) algorithm with dynamic point cloud registration (DPCR), which is able to solve the multiple vehicle-like target tracking in highly dynamic urban environments without any auxiliary information from GPS or IMU. Specifically, to track targets consistently, the DPCR is developed to calculate accurately the pose of the ego-vehicle for the transformation of raw measurements taken in the moving coordinate systems into a static absolute coordinate system; while in turn, MHT helps to improve the performance of DPCR by discriminating and removing the dynamic points from the scene. Furthermore, the proposed MHT method is also able to solve the occlusion problem existing in the point cloud. Experiments on sets of urban environments prove that the presented method is effective and robust, even in highly dynamic environments.}
+      \field{issn}{14746670}
+      \field{journaltitle}{IFAC Proceedings Volumes}
+      \field{month}{6}
+      \field{number}{10}
+      \field{title}{{Multiple Vehicle-like Target Tracking Based on the Velodyne LiDAR*}}
+      \field{volume}{46}
+      \field{year}{2013}
+      \field{pages}{126\bibrangedash 131}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.3182/20130626-3-AU-2035.00058
+      \endverb
+      \verb{url}
+      \verb http://linkinghub.elsevier.com/retrieve/pii/S1474667015349211
+      \endverb
+      \keyw{Dynamic Point Cloud Registration,Multi-Target Tracking,Multiple Hypothesis Tracking,Velodyne Lidar}
     \endentry
   \endsortlist
 \endrefsection

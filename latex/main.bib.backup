@@ -1,0 +1,127 @@
+% Encoding: UTF-8
+
+@Manual{man06,
+  author = {Forschungsgesellschaft f{\"u}r Stra{\ss}en- und Verkehrswesen. Arbeitsgruppe Stra{\ss}enentwurf},
+  title  = {Merkblatt für die Anlage von Kreisverkehren},
+  year   = {2006},
+}
+
+@book{rast06,
+  title={Richtlinien f{\"u}r die Anlage von Stadtstra{\ss}en: RASt 06},
+  author={Forschungsgesellschaft f{\"u}r Stra{\ss}en- und Verkehrswesen. Arbeitsgruppe Stra{\ss}enentwurf},
+  isbn={9783939715214},
+  series={FGSV (Series)},
+  year={2007},
+  shorthand = {RASt},
+  publisher={FGSV-Verlag}
+}
+
+@book{ral13,
+  title={Richtlinien f{\"u}r die Anlage von Landstrassen (RAL)},
+  author={Forschungsgesellschaft f{\"u}r Stra{\ss}en- und Verkehrswesen. Arbeitsgruppe Stra{\ss}enentwurf},
+  series={FGSV (Series)},
+  year={2013},
+  shorthand = {RAL},
+  publisher={FGSV-Verlag}
+}
+
+@article{navarro2010pedestrian,
+  title={Pedestrian detection and tracking using three-dimensional ladar data},
+  author={Navarro-Serment, Luis E and Mertz, Christoph and Hebert, Martial},
+  journal={The International Journal of Robotics Research},
+  year={2010},
+  publisher={Sage Publications}
+}
+
+@article{navarro2008ladar,
+  title={LADAR-based pedestrian detection and tracking},
+  author={Navarro-Serment, Luis E and Mertz, Christoph and Vandapel, Nicolas and Hebert, Martial},
+  journal={Robotics Institute},
+  pages={343},
+  year={2008}
+}
+
+@inproceedings{stowers2011quadrotor,
+  title={Quadrotor Helicopter Flight Control Using Hough Transform and Depth Map from a Microsoft Kinect Sensor.},
+  author={Stowers, John and Hayes, Michael P and Bainbridge-Smith, Andrew},
+  booktitle={MVA},
+  pages={352--356},
+  year={2011},
+  organization={Citeseer}
+}
+
+@inproceedings{rastelli2011autonomous,
+  title={Autonomous driving manoeuvres in urban road traffic environment: a study on roundabouts},
+  author={Rastelli, Joshu{\'e} P{\'e}rez and Milan{\'e}s, Vicente and De Pedro, Teresa and Vlacic, Ljubo},
+  booktitle={Proceedings of the 18th World Congress The International Federation of Automatic Control},
+  year={2011}
+}
+
+
+@article{Zhang,
+  abstract = {This paper proposes a novel multiple vehicle-like target tracking method based on a Velodyne HDL64E light detection and ranging (LiDAR) system. The proposed method combines multiple hypothesis tracking (MHT) algorithm with dynamic point cloud registration (DPCR), which is able to solve the multiple vehicle-like target tracking in highly dynamic urban environments without any auxiliary information from GPS or IMU. Specifically, to track targets consistently, the DPCR is developed to calculate accurately the pose of the ego-vehicle for the transformation of raw measurements taken in the moving coordinate systems into a static absolute coordinate system; while in turn, MHT helps to improve the performance of DPCR by discriminating and removing the dynamic points from the scene. Furthermore, the proposed MHT method is also able to solve the occlusion problem existing in the point cloud. Experiments on sets of urban environments prove that the presented method is effective and robust, even in highly dynamic environments.},
+  author = {Zhang, Liang and Li, Qingquan and Li, Ming and Mao, Qingzhou and N{\"{u}}chter, Andreas},
+  file = {:home/storm/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Zhang et al. - Unknown - Multiple Vehicle-like Target Tracking Based on the Velodyne LiDAR.pdf:pdf},
+  keywords = {Dynamic Point Cloud Registration,Multi-Target Tracking,Multiple Hypothesis Tracking,Velodyne Lidar},
+  title = {{Multiple Vehicle-like Target Tracking Based on the Velodyne LiDAR}}
+}
+
+@INPROCEEDINGS{5164280, 
+author={F. Moosmann and O. Pink and C. Stiller}, 
+booktitle={2009 IEEE Intelligent Vehicles Symposium}, 
+title={Segmentation of 3D lidar data in non-flat urban environments using a local convexity criterion}, 
+year={2009}, 
+pages={215-220}, 
+keywords={automated highways;graph theory;image segmentation;object detection;radar imaging;3D lidar data segmentation;3D lidar measurement;graph-based approach;local convexity criterion;local convexity measures;nonflat urban environment;object detection;unstructured offroad environment;Information geometry;Intelligent vehicles;Laser radar;Multidimensional signal processing;Object detection;Optimization methods;Roads;Sensor fusion;Signal processing algorithms;Vegetation mapping}, 
+doi={10.1109/IVS.2009.5164280}, 
+ISSN={1931-0587}, 
+month={6}
+}
+
+
+@article{Holmes2007,
+author = {Holmes, M and Gray, a and Isbell, C},
+journal = {Workshop on Efficient Machine {\ldots}},
+number = {1},
+pages = {2--3},
+title = {{Fast SVD for large-scale matrices}},
+volume = {1},
+year = {2007}
+}
+
+@online{LLSQ,
+  author = {Wikipedia},
+  title = {Linear least squares (mathematics)},
+  year = 2017,
+  url = {https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics)},
+  urldate = {2017-03-06}
+}
+
+@article{Himmelsbach2009,
+abstract = {This paper describes a LIDAR-based perception system for ground robot mobility, consisting of 3D object detection, classification and tracking. The presented system was demonstrated on-board our autonomous ground vehicle MuCAR-3, enabling it to safely navigate in urban traffic-like scenarios as well as in off-road convoy scenarios. The efficiency of our approach stems from the unique combination of 2D and 3D data processing techniques. Whereas fast segmentation of point clouds into objects is done in a 2 1/2D occupancy grid, classifying the objects is done on raw 3D point clouds. For fast object feature extraction, we advocate the use of statistics of local point cloud properties, captured by histograms over point features. In contrast to most existing work on 3D point cloud classification, where real-time operation is often impossible, this combination allows our system to perform in real-time at 0.1s frame-rate.},
+author = {Himmelsbach, M and Luettel, T and Wuensche, H.-J.},
+doi = {10.1109/IROS.2009.5354493},
+isbn = {978-1-4244-3803-7},
+journal = {2009 IEEE/RSJ International Conference on Intelligent Robots and Systems},
+pages = {994--1000},
+title = {{Real-time object classification in 3D point clouds using point feature histograms}},
+url = {http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=5354493},
+year = {2009}
+}
+
+@article{Li2016,
+abstract = {Convolutional network techniques have recently achieved great success in vision based detection tasks. This paper introduces the recent development of our research on transplanting the fully convolutional network technique to the detection tasks on 3D range scan data. Specifically, the scenario is set as the vehicle detection task from the range data of Velodyne 64E lidar. We proposes to present the data in a 2D point map and use a single 2D end-to-end fully convolutional network to predict the objectness confidence and the bounding boxes simultaneously. By carefully design the bounding box encoding, it is able to predict full 3D bounding boxes even using a 2D convolutional network. Experiments on the KITTI dataset shows the state-of-the-art performance of the proposed method.},
+archivePrefix = {arXiv},
+arxivId = {1608.07916},
+author = {Li, Bo},
+eprint = {1608.07916},
+journal = {Robotics Science and Systems},
+title = {{Vehicle Detection from 3D Lidar Using Fully Convolutional Network}},
+year = {2016}
+}
+
+
+
+
+
+@Comment{jabref-meta: databaseType:bibtex;}
