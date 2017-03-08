@@ -53,6 +53,7 @@
       \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{langid}{english}
       \field{title}{A density-based algorithm for discovering clusters in large spatial databases with noise}
       \field{year}{1996}
       \field{pages}{226\bibrangedash 231}
@@ -87,6 +88,7 @@
       \field{abstract}{This paper describes a LIDAR-based perception system for ground robot mobility, consisting of 3D object detection, classification and tracking. The presented system was demonstrated on-board our autonomous ground vehicle MuCAR-3, enabling it to safely navigate in urban traffic-like scenarios as well as in off-road convoy scenarios. The efficiency of our approach stems from the unique combination of 2D and 3D data processing techniques. Whereas fast segmentation of point clouds into objects is done in a 2 1/2D occupancy grid, classifying the objects is done on raw 3D point clouds. For fast object feature extraction, we advocate the use of statistics of local point cloud properties, captured by histograms over point features. In contrast to most existing work on 3D point cloud classification, where real-time operation is often impossible, this combination allows our system to perform in real-time at 0.1s frame-rate.}
       \field{isbn}{978-1-4244-3803-7}
       \field{journaltitle}{2009 IEEE/RSJ International Conference on Intelligent Robots and Systems}
+      \field{langid}{english}
       \field{title}{{Real-time object classification in 3D point clouds using point feature histograms}}
       \field{year}{2009}
       \field{pages}{994\bibrangedash 1000}
@@ -125,12 +127,43 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Workshop on Efficient Machine Learning}
+      \field{langid}{english}
       \field{number}{1}
       \field{title}{{Fast SVD for large-scale matrices}}
       \field{volume}{1}
       \field{year}{2007}
       \field{pages}{2\bibrangedash 3}
       \range{pages}{2}
+    \endentry
+    \entry{Kelly1994}{book}{}
+      \name{author}{1}{}{%
+        {{hash=d2904722ee9ec7753a1f84842ea03ebc}{%
+           family={Kelly},
+           familyi={K\bibinitperiod},
+           given={Alonzo},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Pittsburgh}%
+      }
+      \list{publisher}{1}{%
+        {Carnegie Mellon University}%
+      }
+      \strng{namehash}{d2904722ee9ec7753a1f84842ea03ebc}
+      \strng{fullhash}{d2904722ee9ec7753a1f84842ea03ebc}
+      \strng{authornamehash}{d2904722ee9ec7753a1f84842ea03ebc}
+      \strng{authorfullhash}{d2904722ee9ec7753a1f84842ea03ebc}
+      \field{sortinit}{K}
+      \field{sortinithash}{a7d5b3aec5a0890aae7baf85a209abfc}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The Kalman Filter has many applications in mobile robotics ranging from perception, to position estimation, to control. This report formulates a navigation Kalman Filter. That is, one which estimates the position of autonomous vehicles. The filter is developed according to the state space formulation of Kalman's original papers. The state space formulation is particularly appropriate for the problem of vehicle position estimation. This filter formulation is fairly general. This generality is possible because the problem has been addressed • in 3D • in state space, with an augmented state vector • asynchronously • with tensor calculus measurement models The formulation has wide ranging uses. Some of the applications include: • as the basis of a vehicle position estimation system, whether any or all of dead reckoning, triangulation, or terrain aids or other landmarks are used • as the dead reckoning element and overall integration element when INS or GPS is used • as the mechanism for map matching in mapping applications • as the identification element in adaptive control applications It can perform these functions individually or all at once. The filter is formulated for a general redundant asynchronous sensor suite. It provides a single place for the integration of every sensor on a autonomous vehicle, and the measuremnt models for most of them are included. All sensors provide indirect measurements of state and any number can be accommodated. The filter subsumes many applications of the Kalman filter to mobile robot navigation problems as special cases. It complements the RANGER vehicle controller which is the subject of another technical report that appears later in this series}
+      \field{booktitle}{Engineering}
+      \field{langid}{english}
+      \field{title}{{A 3D state space formulation of a navigation Kalman filter for autonomous vehicles}}
+      \field{year}{1994}
+      \field{pages}{95}
+      \range{pages}{1}
     \endentry
     \entry{Li2016}{inproceedings}{}
       \name{author}{3}{}{%
@@ -162,10 +195,11 @@
       \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{—Convolutional network techniques have recently achieved great success in vision based detection tasks. This paper introduces the recent development of our research on transplanting the fully convolutional network technique to the detection tasks on 3D range scan data. Specifically, the scenario is set as the vehicle detection task from the range data of Velodyne 64E lidar. We proposes to present the data in a 2D point map and use a single 2D end-to-end fully convolutional network to predict the objectness confidence and the bounding boxes simultaneously. By carefully design the bounding box encoding, it is able to predict full 3D bounding boxes even using a 2D convolutional network. Experiments on the KITTI dataset shows the state-of-the-art performance of the proposed method.}
+      \field{abstract}{Convolutional network techniques have recently achieved great success in vision based detection tasks. This paper introduces the recent development of our research on transplanting the fully convolutional network technique to the detection tasks on 3D range scan data. Specifically, the scenario is set as the vehicle detection task from the range data of Velodyne 64E lidar. We proposes to present the data in a 2D point map and use a single 2D end-to-end fully convolutional network to predict the objectness confidence and the bounding boxes simultaneously. By carefully design the bounding box encoding, it is able to predict full 3D bounding boxes even using a 2D convolutional network. Experiments on the KITTI dataset shows the state-of-the-art performance of the proposed method.}
       \field{booktitle}{Robotics: Science and Systems XII}
       \field{eprinttype}{arXiv}
       \field{isbn}{9780992374723}
+      \field{langid}{english}
       \field{title}{{Vehicle Detection from 3D Lidar Using Fully Convolutional Network}}
       \field{year}{2016}
       \verb{doi}
@@ -206,6 +240,7 @@
       \field{labeltitlesource}{title}
       \field{booktitle}{2009 IEEE Intelligent Vehicles Symposium}
       \field{issn}{1931-0587}
+      \field{langid}{english}
       \field{month}{6}
       \field{title}{Segmentation of 3D lidar data in non-flat urban environments using a local convexity criterion}
       \field{year}{2009}
@@ -234,6 +269,7 @@
       \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{langid}{ngerman}
       \field{title}{Merkblatt für die Anlage von Kreisverkehren}
       \field{year}{2006}
     \endentry
@@ -258,6 +294,7 @@
       \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{langid}{ngerman}
       \field{series}{FGSV (Series)}
       \field{shorthand}{RAL}
       \field{title}{Richtlinien für die Anlage von Landstrassen (RAL)}
@@ -285,6 +322,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{isbn}{9783939715214}
+      \field{langid}{ngerman}
       \field{series}{FGSV (Series)}
       \field{shorthand}{RASt}
       \field{title}{Richtlinien für die Anlage von Stadtstra{ß}en: RASt 06}
@@ -304,6 +342,7 @@
       \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{langid}{english}
       \field{title}{Linear least squares (mathematics)}
       \field{urlday}{6}
       \field{urlmonth}{3}
@@ -353,6 +392,7 @@
       \field{abstract}{This paper proposes a novel multiple vehicle-like target tracking method based on a Velodyne HDL64E light detection and ranging (LiDAR) system. The proposed method combines multiple hypothesis tracking (MHT) algorithm with dynamic point cloud registration (DPCR), which is able to solve the multiple vehicle-like target tracking in highly dynamic urban environments without any auxiliary information from GPS or IMU. Specifically, to track targets consistently, the DPCR is developed to calculate accurately the pose of the ego-vehicle for the transformation of raw measurements taken in the moving coordinate systems into a static absolute coordinate system; while in turn, MHT helps to improve the performance of DPCR by discriminating and removing the dynamic points from the scene. Furthermore, the proposed MHT method is also able to solve the occlusion problem existing in the point cloud. Experiments on sets of urban environments prove that the presented method is effective and robust, even in highly dynamic environments.}
       \field{issn}{14746670}
       \field{journaltitle}{IFAC Proceedings Volumes}
+      \field{langid}{english}
       \field{month}{6}
       \field{number}{10}
       \field{title}{{Multiple Vehicle-like Target Tracking Based on the Velodyne LiDAR*}}

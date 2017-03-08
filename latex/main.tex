@@ -21,6 +21,7 @@
 \usepackage[type=master]{wdok-title}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[ngerman,english]{babel}
 \usepackage{textcomp}
 \usepackage{mathptmx}
 \usepackage[scaled=0.9]{helvet}
@@ -29,12 +30,20 @@
 \usepackage{cleveref}
 \usepackage{siunitx}
 \usepackage{todonotes}
-\usepackage[style=numeric]{biblatex}
+
+\usepackage[bibencoding=auto,backend=biber,babel=other]{biblatex}
+\usepackage{csquotes}
+
+%\usepackage[style=numeric]{biblatex}
 \addbibresource{main.bib}
 \usepackage{mathtools}
 \usepackage{svg}
 \usepackage{tikz}
 \usepackage{tikz-uml}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+
+\DeclareMathOperator{\atantwo}{atan2}
 
 
 % Examples for the definition of convenience commands
@@ -93,7 +102,7 @@ Kapitel und Unterkapitel beginnen stets mit einer ganz kurzen Einleitung (in der
 Kurze, aussagekräftige Überschriften in einheitlichem Stil\\\\
 Beschreibung von Konzepten. Technische Details, wie z.B. Quellcode, umfangreiche Auflistungen, ergänzende Abbildungen usw. kommen in den Anhang.\\\\
 
-\section{Object Detection}
+\section{Objekt Detection}
 
 \subsection{Ground Removal}
 Um in einer PointCloud Ojekte zu erkennen ist es nötig, zu wissen, welche Messungen zu Boden und welche zu Objekten gehören. Es gibt viele Möglichkeiten dieses
@@ -103,7 +112,7 @@ Weiterhin erlaubt dies ausschließlich die Entfernung von Palanaren Grundfläche
 Entfernen der Bodenplatte auf basis eines Statistischer mittelwertes \cite{Zhang}.  Diese Methode benötigt allerdings auch eine Kalibireirung der Sensorabstandes zum Boden.
 Und die Bestimmung weiterer Schwellwerte, welche umgebungsabhäng sind. Die Votreile beider Methoden sind ihre gering nötige rechenleistung und laufzeit O(n).
 Bessere Methoden wie Gradientenbasierende explansions algrythmenm benötigen einen Startpunkt der als Bodenplatte identifiziert werden kann.
-Eine weitere Möglichkeit ist die Beschreibung von Objekten als Konvexe Objecte \cite{5164280}, die ebenfalls auf Basis der Gradienten beschrieben werden kann.
+Eine weitere Möglichkeit ist die Beschreibung von Objekten als Konvexe Objekte \cite{5164280}, die ebenfalls auf Basis der Gradienten beschrieben werden kann.
 Vorteil dieser Methode ist das keine Initiale Position für die Bodenplatte benötigt wird.
 
 Für unseren Anwendungsfall mit dem Velodyne VLP-16 besteht das Problem darin, dass die Auflösung des Sensor in der Höhe sehr gering ist. Abhängig von der Entfernung des 
@@ -345,20 +354,129 @@ und rechts in unserem Array. Effektiv müssen wir daher $5 \cdot 16 = 80$ werte 
 werden. Alle Messwerte die Zuvor als Grund Klassifiziert wurden, werden bei der Berchnung übersprungen, zusätzlich entfällt der Aufbau eines KD-Trees. 
 
 
-\subsection{Object Tracking}
+\subsection{Tracking}
 Das Tracking ist in zwei Abschnitte unterteilt. Dem Tracking der Cluster vom DBSCAN und dem Erstellen und Tracken von Hindernissen.
 
-\subsubsection{Tracking}
+\subsubsection{Object Tracking}
 Für das Tracking der Cluster nehmen wir an, dass sich Objekte von Zeitschritt zu Zeitschritt nur geringefügig bewegen, weiterhin
-ändert sich die Form der Cluster ebenfalls nur leicht. Im Initialen Schritt wird jeden Cluster eine aufsteigende ID zugerordnet.
+ändert sich die Form der Cluster ebenfalls nur leicht. Das ist wichtig, da die Position eine Clusters durch einen Mittelwertpunkt definiert ist.
+Das Tracking wird im R2 durchgeführt. Im Initialen Schritt wird jeden Cluster eine aufsteigende ID zugerordnet.
 In jedem weiteren Schritt wird jedem neuen Cluster die ID des alten Clusters zugeordnet welcher über die Zeit hinweg die geringste Entfernung aufweißt.
 Fur diese Entfernung gibt es eine großzügige obere Schranke von 3m, Cluster die nicht innerhalb in dieser Grenze sind erhalten eine neue ID.
 Das führt dazu, dass mehreren Cluster die selbe ID zugeordnet werden kann, das ist wichtig, da Objekte manchmal in mehrere Cluster zerfallen.
 
 \subsubsection{Object Tracking}
+Basis für das Objekt Tracking sind die zuvor gtrackten Cluster. Im Initialen Schritt werden aus allen Cluster mit der Selben IDs Objekte gebildet.
+In jeden weiteren Schritt werden Alle Cluster mit der zuvor gleichen ID zum updaten der Objekte genutzt. Aus Clustern mit neuen IDs werden neue Objekte gebildet.
+
+Der vorerst wichtigste Schritt beim Updatevorgang ist die berechnung der Bewegungsrichtung eines Objektes, da folgende Berechnungen auf dieser basieren.
+Bei der Berechnung der Bewegungsrichtung ist zu beachten, dass die Bewegung des eigenen Fahrzeuges herausgerechnet werden muss.
+Dazu werden die Positionsdaten des Applanix POS-LV genutzt. Da sowohl die Positionsdaten des Applanix Systems, als auch die Erkannte Postition des Fahrzeuges Fehlerbehaftet sind,
+wird die Bewegungrichtung nur bei einer minimalen Bewegung von 2m geupdatet.
+
+\begin{align*}
+\Delta x &= P_x(t) - P_x(t_{-2m}) + \Delta C_x\\
+\Delta y &= P_y(t) - P_y(t_{-2m}) + \Delta C_y\\
+\theta &= \atantwo(\Delta y,\Delta x)
+\end{align*}
+
+mit $P$ - Postition des Objekts, $C$ - Position des eigenen Fahrzeuges
+
+Das Ergebnis kann in \cref{obst_rot} betrachtet werden. Gut zu erkennen ist, dass die Bewegungsrichtung (Pfeil) nicht mit der Ausrichtung des Objekte (schwarz) übereinstimmt,
+die Boundingbox jedoch korrekt ausgerichtet ist. Wie diese Berechnung zustande kommt wird im folgenden geklärt.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Obstacle Movement}
+\includegraphics[width=0.5\textwidth]{bilder/obst_rot.png}
+\label{obst_rot}
+%\end{center}
+\end{figure}
+
+Basierend auf der Bewegungrichtung wird nun die Ausrichtung des Fahrzeiges berechnet. Dazu werden alle dem Objekt zugewiesenden Cluster zusammengefasst und um $-\theta$ gedreht.
+Danach wird das Objekt wird in 3 gleich große Segmente unterteilt (\cref{obst_devide}).
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Obstacle Cutting}
+\includegraphics[width=0.5\textwidth]{bilder/obst_devide.png}
+\label{obst_devide}
+%\end{center}
+\end{figure}
+
+Weiterhin wird bestimmt ob sich das Objekt oberhalb oder unterhalb der x-Achse befindet. Dies ist wichtig, da wir wissen müssen, welche seite des Objekts wir messen.
+Befindet sich das Objekt aso unterhalb der x-Achse wird im nächsten Schritt der y-Wert maximiert, befindet es sich oberhalb, wird er minimiert.
+Im folgenden gehen wir davon aus, dass sich das Objekt unter der x-Achse befindet. Deshalb maximieren wir nun im linken und rechten Segment des Geteilten
+Hindernises die y-Werte. Die Unterteilung in 3 Segmente ist nötig um zu verhindern, das bei perfekt wagerechte ausgerichteten Objekt beide Maxima in den selben Punkt laufen.
+Mit diesen Punkten $(\vec{R};\vec{L})$ wird nurn eine korrektur der Drehung des Objektes berechnet:
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{$\theta$ - Correction}
+\includegraphics[width=0.5\textwidth]{bilder/obst_devide_angle.png}
+\label{obst_correction}
+%\end{center}
+\end{figure}
+
+\begin{align*}
+\Delta x &= R_x - L_x\\
+\Delta y &= R_y - L_y\\
+\theta_{correction} &= \atantwo(\Delta y,\Delta x)
+\end{align*}
+
+Nach Anwendung der Korrektur wird die größe des Hindernises berechnet. Dazu werden die maximalen und minimalen x und y Werte herangezogen.
+Mit diesen Werten wird nun über die Zeit ein auf 0.5m gerundetes Histogram für die Länge und Breite des Hindernises aufgebaut.
+Anhand diesem wird dann der warscheinlichste Wert ausgewählt. Dadurch ändert sich die Größe des Hindernisses zu begin häufiger,
+bevor die Größe auf einen stabilen wert konvergiert.Da die größe des Objekts zu begin sehr klein sein kann, 
+gibt es für beide Werte einen unteren Grenzwert. Messerte für ein Beispielobjekt sind in \cref{obst_hist} zu sehen.
+\begin{figure}[!ht]
+  %\addcontentsline{lof}{figure}{LaTeX--Strukturelemente}
+%\begin{center}
+\caption{Object Size Histogram}
+\begin{tikzpicture}
+\begin{axis}[ybar interval, ymax=366,ymin=0, minor y tick num = 3,
+width=0.55\textwidth,
+height=0.6\textwidth]
+\addplot coordinates { (1.0, 29) (1.5, 58) (2.0, 366) (2.5, 35) (3.0, 3) (3.5, 1) };
+\end{axis}
+\begin{axis}[ybar interval, ymax=318,ymin=0, minor y tick num = 3,
+width=0.55\textwidth,
+height=0.6\textwidth,
+at={(0.50\textwidth,0)}]
+\addplot coordinates { (2.0, 7) (2.5, 6) (3.0, 9) (3.5, 2) (4.0, 64) (4.5, 84) (5.0, 318) (5.5, 3) (6.0, 2) (6.5, 2) };
+\end{axis}
+\node at (0.21\textwidth,0.5\textwidth) {width};
+\node at (0.7\textwidth,0.5\textwidth) {length};
+\end{tikzpicture}
+\label{obst_hist}
+%\end{center}
+\end{figure}
+
+Leicht zu sehen wird für das Object eine breite von 2m und eine Länge von 5m berechnet. Das Objektist in diesm Fall ein Volvo S60, welcher Außenmaße von ca. 1.9m und 4.6m hat,
+womit die Abweichungen sich korrekt innerhalb, der Rundung der Werte befinden. Für die Nachfolgende filterung der Messwerte mit Hilfe eines Kalman filters, wurd nun
+die Position des Fahrzeuges aus dem Mittelpunkt der Boundingbox bestimmt.
+
+Die für die Berechnung der Bewegungsrichtung genutzte Position ist jedoch eine andere, da die so eben berechnete Position zu diesem Zeitpunkt noch nicht zur verfügung steht und
+die Position kurz nach der Initialen erkennung durch die häufigen Größenändrungen sehr instabil ist. Deswegen wird als Position immer die maximale x-Koordinate der Cluster gesnutzt.
+Da $\theta$ im initialen Zeitschritt Null ist, entpricht dies der globalen Maximalen x-Koordinate des Clusters. Dies Führt dazu, das wir im Initialen Zeitschritt annhemen, dass sich das Objekt
+in die positive x-Richtung bewegt. Bei Objekten bei denen das nicht der Fall ist, führt das zu einem kurzzeitigen oszillieren der Orientierung, welche sich jedoch über die Zeit schnell stabilisiert.
+
+
+
+
+
 
 
 \subsection{Classification}
+
+Die Klassifizierung der Objekte finedt anhand ihrer Größe statt, es findet keine Klassifizierung nach bewegten und unbewegten Objeten Stadt.
+Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterien werden dabei unter anderem, die Größe der Cluster und ihre Geschwindigkeit genutzt.
+Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1x1m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
+Weiterhin wird andhand der Geschwindigekeit eine Plausibilitätstest durchgeführt. So darf eine Fußgänger eine Geschwindigekeit von 10km/h nicht überschreiten und die Maximalgeschwindigkeit dür einen 
+Radfahrer bertägt 30km/h. Da für Fahrzeuge keine sinnvolle geschwindigkeitsgrenze angenommen werden kann, wir an ihrer stelle die Änderung der Orientierung genutzt. Als Maximale Drehrate wird
+eine Messung von 0.3 rads/sec aus \cite{Kelly1994} angenommen. Da der Wert eine Obere Grenze darstellen soll nehmen wir einen etwas höheren  Wert von  0.3 rads/sec an.
+
+
 
 \subsection{State Estimation}
 
