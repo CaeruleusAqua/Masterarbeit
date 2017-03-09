@@ -67,7 +67,7 @@
 \begin{document}
 \maketitle
 
-\tableofcontents
+
 
 \chapter*{Eidesstattliche Erklärung}
 Ich erkläre hiermit an Eides statt, dass ich die vorliegende Arbeit selbständig und
@@ -82,11 +82,55 @@ Prüfungsamt vorgelegt und auch nicht veröffentlicht.
 $\overline{~~~~~~~~~\mbox{Julian-B. Scholle}~~~~~~~~~}$
 \end{flushright}
 
+
+\chapter*{Acknowledgements}
+Danken möchte ich außerdem besonders Associate professor Christian Berger und J. Prof Sebastian Zug, führ ihre Organisatorische und Fachliche Unterstützung während und besonders im Vorfeld dieser Abreit und
+dem ``Deutschen Akademischen Austauschdienst'' - DAAD für ihre finanzielle Unterstüzung während meines Aufenthaltes in Göteborg.
+Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, welche mich bei meiner Arbeit fachlich und moralisch untersützt haben.
+
+\tableofcontents
+
 \include{Introduction}
 \include{basics}
 
 \chapter{Methodology}
-Gefragt wird hier nach den Kriterien dafür, welche Methode für eine bestimmte Art der Anwendung geeignet ist, warum eine bestimmte Methode angewandt werden muss oder angewendet wird und keine andere. Verständnisfragen zum methodischen Weg werden hier geklärt. Die Methodologie ist demnach eine Metawissenschaft und somit eine Teildisziplin der Wissenschaftstheorie. Demgegenüber bezeichnet Methodik das Methodenwissen des Praktikers oder des Wissenschaftlers.
+% Gefragt wird hier nach den Kriterien dafür, welche Methode für eine bestimmte Art der Anwendung geeignet ist,
+% warum eine bestimmte Methode angewandt werden muss oder angewendet wird und keine andere.
+% Verständnisfragen zum methodischen Weg werden hier geklärt.
+% Die Methodologie ist demnach eine Metawissenschaft und somit eine Teildisziplin der Wissenschaftstheorie.
+% Demgegenüber bezeichnet Methodik das Methodenwissen des Praktikers oder des Wissenschaftlers.
+
+Im vorigen Kapitel haben wir uns die Arten von Kreisverkehren und derren Komponenten angesehen. Weiterhin haben wir die zur verfügung
+stehende Testplatform und ihre Sensorik begutachtet. Dabei haben wir festgestellt, das für die Erkennung von Objekten in andren
+Arbeiten häufig mehrere und bessere Sensoren kombiniert werden um ein Zuverlässiges erkennen von anderen Verkehrsteilnehmern zu gewährleisten.
+In der Research Questian eins haben wir festgehalten, das wir die verwendung eines günstigen VLP-16 Sensors in einem 
+Komplexen Verkehrszenario, die Verkehrsbeobachtung eines Kreisverkehrs evaluieren wollen.
+
+Dazu wird im folgenden ein Algorithms zum erkennen und Tracken von Objekten mit hilfe des Velodyne VLP-16 vorgeschlagen
+und implementiert. Die Schwierigkeit besteht dabei in der Verwendung eines Einzigen und im vergleich günstigen
+Umfeldsensors, welcher nicht als stand alone lösung für diesen Einsatzzweck entwickelt wurde.
+
+Dieser Sensor bietet in seiner aktuellen Anwendung in dem für diese Arbeit relevanten Bereich eine vergleichsweise
+geringe Auflösung. Daher schlagen viele in ähnlichen Projekten genutzte Gradienten basierende Algorythmen im Bereich 
+der Segmentierung häufig fehl. Aus diesem Grund wird für die Segmentierung eine Groundplane basierender Algorithms implementiert.
+
+Außerdem ist es Bauartbedingt in Kreisverkehren mit bebauten Mittelinseln und Mehrspurigen Kreisverkehren nötig
+Fahrzeuge über ihren Messhorizont hinaus zu verfolgen, um ein sicheres einfahren in den Kreisverkehr zu gerwährleisten.
+Zu diesem Zweck wird in Section -----TODO----- ein Tracking und State Estimation Algorithms entwickelt welches dies gewähreisten soll.
+
+Zur Evaluation dieser Algorythmen wurden mehrere Datensammlungen auf den nahe gelegenen schwedischen AstaZero \cref{astazero} Prüfgelände in Sandhult
+durchgeführt, für alle nicht dort durchgeführten Expirimente werden in einer dafür erstellten Simuation durchgeführt.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{AstaZero Proving Ground\\ \url{http://www.astazero.com/wp-content/uploads/2016/09/\%C3\%96versiktsskiss_mod.pdf} }
+\includegraphics[width=\textwidth]{bilder/AstaZero.pdf}
+\label{astazero}
+%\end{center}
+\end{figure}
+
+
+
 
 \section{Selection of Sensors}
 \section{Selection of Algorithms}
@@ -94,14 +138,6 @@ Gefragt wird hier nach den Kriterien dafür, welche Methode für eine bestimmte 
 
 
 \chapter{Research}
-Klare, logische Gliederung\\\\
-Möglichst ausgeglichene Kapitel (bezüglich Umfang und Zahl der Unterkapitel)\\\\
-Gesamte Arbeit enthält so wenig Redundanz wie möglich\\\\
-Ist auch innerhalb der einzelner Kapitel oder Abschnitte sinnvoll strukturiert\\\\
-Kapitel und Unterkapitel beginnen stets mit einer ganz kurzen Einleitung (in der Regel 1-3 Sätze, die erklären, was im Folgenden zu erwarten ist)\\\\
-Kurze, aussagekräftige Überschriften in einheitlichem Stil\\\\
-Beschreibung von Konzepten. Technische Details, wie z.B. Quellcode, umfangreiche Auflistungen, ergänzende Abbildungen usw. kommen in den Anhang.\\\\
-
 \section{Objekt Detection}
 
 \subsection{Ground Removal}
@@ -357,7 +393,7 @@ werden. Alle Messwerte die Zuvor als Grund Klassifiziert wurden, werden bei der 
 \subsection{Tracking}
 Das Tracking ist in zwei Abschnitte unterteilt. Dem Tracking der Cluster vom DBSCAN und dem Erstellen und Tracken von Hindernissen.
 
-\subsubsection{Object Tracking}
+\subsubsection{Cluster Tracking}
 Für das Tracking der Cluster nehmen wir an, dass sich Objekte von Zeitschritt zu Zeitschritt nur geringefügig bewegen, weiterhin
 ändert sich die Form der Cluster ebenfalls nur leicht. Das ist wichtig, da die Position eine Clusters durch einen Mittelwertpunkt definiert ist.
 Das Tracking wird im R2 durchgeführt. Im Initialen Schritt wird jeden Cluster eine aufsteigende ID zugerordnet.
@@ -458,11 +494,25 @@ die Position des Fahrzeuges aus dem Mittelpunkt der Boundingbox bestimmt.
 
 Die für die Berechnung der Bewegungsrichtung genutzte Position ist jedoch eine andere, da die so eben berechnete Position zu diesem Zeitpunkt noch nicht zur verfügung steht und
 die Position kurz nach der Initialen erkennung durch die häufigen Größenändrungen sehr instabil ist. Deswegen wird als Position immer die maximale x-Koordinate der Cluster gesnutzt.
+Diese Postition kann ebenfalls in \cref{obst_rot}, als grüner Punkt begutachtet werden.
 Da $\theta$ im initialen Zeitschritt Null ist, entpricht dies der globalen Maximalen x-Koordinate des Clusters. Dies Führt dazu, das wir im Initialen Zeitschritt annhemen, dass sich das Objekt
 in die positive x-Richtung bewegt. Bei Objekten bei denen das nicht der Fall ist, führt das zu einem kurzzeitigen oszillieren der Orientierung, welche sich jedoch über die Zeit schnell stabilisiert.
 
 
+Der eine oder ander möge sich wundern warum die Boundingbox so aufwendig berechnet wurde. Eine Einfache Art und weise eine Boundingbox für die Objekte zu berechnen wäre die berechnung
+der Minimum Boundingbox über die konvexe Hülle, so wie es in vielen Anderen Arbeiten gemacht wird \cite{Zhang,Himmelsbach2009}. Die Minimum Bounding box liefet jedoch unter umständen nicht das gewünschte
+ergebnis, zum einen hat die immer nur die größe der aktuellen Messung und zum anderen kann sie eine falsche Orientierung liefern, wie in \cref{min_box} zu sehen.
 
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Error with minimum Boundingbox \cite{Himmelsbach2009}}
+\includegraphics[width=0.7\textwidth]{bilder/min_bound.png}
+\label{min_box}
+%\end{center}
+\end{figure}
+
+Da die orientierung und Postition der Objekte jedoch als eingang für den nachfolgenden Kalmanfilter genutzt wird, welcher sehr sensible auf falsch Orientierungen reagiert, wurde eben jeder Algorithmus
+entwickelt.
 
 
 
@@ -473,11 +523,77 @@ Die Klassifizierung der Objekte finedt anhand ihrer Größe statt, es findet kei
 Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterien werden dabei unter anderem, die Größe der Cluster und ihre Geschwindigkeit genutzt.
 Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1x1m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
 Weiterhin wird andhand der Geschwindigekeit eine Plausibilitätstest durchgeführt. So darf eine Fußgänger eine Geschwindigekeit von 10km/h nicht überschreiten und die Maximalgeschwindigkeit dür einen 
-Radfahrer bertägt 30km/h. Da für Fahrzeuge keine sinnvolle geschwindigkeitsgrenze angenommen werden kann, wir an ihrer stelle die änderung der Orientierung genutzt
+Radfahrer bertägt 30km/h. Da für Fahrzeuge keine sinnvolle geschwindigkeitsgrenze angenommen werden kann, wir an ihrer stelle die Änderung der Orientierung genutzt. Als Maximale Drehrate wird
+eine Messung von 0.3 rads/sec aus \cite{Kelly1994} angenommen. Da der Wert eine Obere Grenze darstellen soll nehmen wir einen etwas höheren  Wert von  0.3 rads/sec an.
 
 
 
 \subsection{State Estimation}
+
+Nachfolgende des Trackings wird auf den Erkannten Objekten eine Zustandschätzung durchgeführt. Dies ist nötig, da Objekte während der Fahrt verdenkt werden können,
+sei es durch andere bewegte Objekte oder Gebaüde. Eine schätzung des Zustandes über den Erkennungshorizont hinaus erlaubt es uns eine Aussage über die Position von
+Objekten zu treffe, welche im Moment nicht sichtbar sind. Weiterin erlaubt es auf einfache Weise zeitweise nicht erkannte Objekte wiederzuerkennen, also dem Objekt
+die gleich ID zuzuweisen wie zuvor. 
+
+Aus dem zuvor durchgführten Tracking können wir die Aktuelle Position, Geschwindigekeit, Drehung und Drehgeschwindigkeit erhalten. 
+Für eine Zustandschätzung mit den für Fahrzeuge üblichen Bicycle Model fehlen und Angangen über den Radstand und Gewicht des Fahrzeues.
+Daher müssen wir uns auf ein relativ Einfaches ``Constant Turn Rate and Velocity'' Model beschränken. Dies erlaubt es uns allerdings das gleiche
+Model für alle Klassen von Objekten zu nutzten. Da dieses Model ebenfalls auf Fußgänger und Radfahre angewendet werden kann.
+
+\subsubsection{Constant Turn Rate and Velocity Model}
+Der Zustandvektor \cite{Schubert2008} des CTRV- Modells sieht wie folgt aus:
+\begin{align*}
+\vec{x}(t) &=
+\begin{bmatrix}
+x & y & \theta & v & \omega
+\end{bmatrix}^T\\
+x &\text{ - Y Axis}\\
+y &\text{ - X Axis}\\
+\theta &\text{ - Object Yaw Angle}\\
+v &\text{ - Object Velocity}\\
+\omega &\text{ - Yaw Rate}
+\end{align*}
+
+Die Dynamikmatrix erhalten wir durch eine nichtlinieare Zustandsübergang:
+
+\begin{align*}
+\vec{x}(t + T)=
+\begin{bmatrix}
+\frac{v}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta) + x(t) \\
+\frac{v}{\omega} (\cos(\theta)) - cos(T \omega + \theta) + y(t) \\
+\omega T + \theta\\
+v\\
+\omega
+\end{bmatrix} 
+\end{align*}
+
+% Da es sich beid er Dynamikmatrix um einen nichtlinearen Zustandsübergang handelt benötigen wir noch die Jacobi Matrix.
+% Die Matrix wure mit Sympy generiert, und auf Grund ihrer Größe eingekürzt.
+% 
+% 
+% \begin{align*}
+% J(\vec{x})=
+% \begin{bmatrix}
+% 1 & 0 & \frac{v}{\omega} (-\cos(\theta)) + \cos(T \omega + \theta)& \dots & \dots \\
+% %\frac{1}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)&
+% %\frac{Tv}{\omega} \cos(T \omega + \theta) - \frac{v}{\omega^2}(-\sin(\theta) + \sin(T\omega + \theta) 
+% 0 & 1 & \frac{v}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& \dots & \dots \\
+% 0 & 0 & 1 & 0 & T\\
+% 0 & 0 & 0 & 1 & 0\\
+% 0 & 0 & 0 & 0 & 1
+% \end{bmatrix} 
+% \end{align*}
+
+\subsubsection{Prediction}
+Befindet sich ein Objekt innerhalb der Rechihweite des Velodyne Sensors und wird im Darauffolgenden Zeitschritt nicht erkannt,
+wird der Prediktionsschritt des Kalman filter weiterhin ausgeführt. Dies geschieht solange die Unsicherheit der Position einen gewissen Schwellwert üerschreitet.
+Sobald das Clustertracking dann ein neues Objekt detektiert, dem keine Bisher bekannte ID zugewiesen werden kann, wird die Postion mit allen Onjekten in der Prediktionsphase
+abgeglichen. Befindet sich das neue Objekt nahe an der predizierten Position wird der Cluster dem Onjekt zugewiesen, und der Korrekturschritt des EKF durchgeführt.
+
+
+
+
+
 
 
 \section{Mapping}

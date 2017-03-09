@@ -7,23 +7,22 @@
 \BOOKMARK [2][-]{subsection.2.2.1}{Elements of a Roundabout}{section.2.2}% 7
 \BOOKMARK [2][-]{subsection.2.2.2}{Types of Roundabouts}{section.2.2}% 8
 \BOOKMARK [1][-]{section.2.3}{Middleware OpenDAVINCI}{chapter.2}% 9
-\BOOKMARK [1][-]{section.2.4}{Hardware Platform}{chapter.2}% 10
-\BOOKMARK [0][-]{chapter.3}{Methodology}{}% 11
-\BOOKMARK [1][-]{section.3.1}{Selection of Sensors}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.2}{Selection of Algorithms}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.3}{Simulation Enviroment}{chapter.3}% 14
-\BOOKMARK [0][-]{chapter.4}{Research}{}% 15
-\BOOKMARK [1][-]{section.4.1}{Objekt Detection}{chapter.4}% 16
-\BOOKMARK [2][-]{subsection.4.1.1}{Ground Removal}{section.4.1}% 17
-\BOOKMARK [2][-]{subsection.4.1.2}{Clustering}{section.4.1}% 18
-\BOOKMARK [2][-]{subsection.4.1.3}{Tracking}{section.4.1}% 19
-\BOOKMARK [2][-]{subsection.4.1.4}{Classification}{section.4.1}% 20
-\BOOKMARK [2][-]{subsection.4.1.5}{State Estimation}{section.4.1}% 21
-\BOOKMARK [1][-]{section.4.2}{Mapping}{chapter.4}% 22
-\BOOKMARK [2][-]{subsection.4.2.1}{OpenDAVINIC Map}{section.4.2}% 23
-\BOOKMARK [2][-]{subsection.4.2.2}{Simplification}{section.4.2}% 24
-\BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 25
-\BOOKMARK [1][-]{section.5.1}{Simuation}{chapter.5}% 26
-\BOOKMARK [1][-]{section.5.2}{Real Measurements}{chapter.5}% 27
-\BOOKMARK [0][-]{chapter.6}{Conclusions}{}% 28
-\BOOKMARK [0][-]{chapter.7}{Future Work}{}% 29
+\BOOKMARK [1][-]{section.2.4}{Test Platform}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.4.1}{Velodyne VLP-16 LiDAR}{section.2.4}% 11
+\BOOKMARK [2][-]{subsection.2.4.2}{Applanix POS LV}{section.2.4}% 12
+\BOOKMARK [0][-]{chapter.3}{Methodology}{}% 13
+\BOOKMARK [0][-]{chapter.4}{Research}{}% 14
+\BOOKMARK [1][-]{section.4.1}{Objekt Detection}{chapter.4}% 15
+\BOOKMARK [2][-]{subsection.4.1.1}{Ground Removal}{section.4.1}% 16
+\BOOKMARK [2][-]{subsection.4.1.2}{Clustering}{section.4.1}% 17
+\BOOKMARK [2][-]{subsection.4.1.3}{Tracking}{section.4.1}% 18
+\BOOKMARK [2][-]{subsection.4.1.4}{Classification}{section.4.1}% 19
+\BOOKMARK [2][-]{subsection.4.1.5}{State Estimation}{section.4.1}% 20
+\BOOKMARK [1][-]{section.4.2}{Mapping}{chapter.4}% 21
+\BOOKMARK [2][-]{subsection.4.2.1}{OpenDAVINIC Map}{section.4.2}% 22
+\BOOKMARK [2][-]{subsection.4.2.2}{Simplification}{section.4.2}% 23
+\BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 24
+\BOOKMARK [1][-]{section.5.1}{Simuation}{chapter.5}% 25
+\BOOKMARK [1][-]{section.5.2}{Real Measurements}{chapter.5}% 26
+\BOOKMARK [0][-]{chapter.6}{Conclusions}{}% 27
+\BOOKMARK [0][-]{chapter.7}{Future Work}{}% 28

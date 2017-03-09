@@ -19,6 +19,56 @@
 
 \refsection{0}
   \sortlist[entry]{nty/global/}
+    \entry{Berger2010}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=989e9c75cedce190a8efdde3ba9764ec}{%
+           family={Berger},
+           familyi={B\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{989e9c75cedce190a8efdde3ba9764ec}
+      \strng{fullhash}{989e9c75cedce190a8efdde3ba9764ec}
+      \strng{authornamehash}{989e9c75cedce190a8efdde3ba9764ec}
+      \strng{authorfullhash}{989e9c75cedce190a8efdde3ba9764ec}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In projects dealing with autonomous vehicles which are driving in different contexts like highways, urban environments, and rough areas, managing the software's quality for the entire data processing chain of sensor- and actuator-based autonomous systems is increasingly complex. One main reason is the early dependency on all sensor's raw data to setup the data processing chain and to identify subsystems. These sensors' data might be extensive, especially if laser scanners or color camera systems are continu- ously producing a vast number of raw data. Moreover, due to this dependency the sensors' setup including their respectively specified mounting positions and calibration information is also necessary to gather real input data from real surroundings' situations of the system. This is even more important before actually starting to integrate inde- pendently developed subsystems for carrying out tests for the entire data processing chain. To reduce this dependency and therefore to decouple tasks from the project's critical path, an approach is outlined in this thesis which was developed to support the software engineering for sensor- and actuator-based autonomous systems. This approach relies on customer's requirements and corresponding customer's acceptance criteria as well as the decoupling of the software engineering from the real hardware environment to allow appropriate system simulations. Based on the customer's requirements, formally specified scenarios using a domain specific language are derived which are used to provide surroundings and suitable situ- ations for a sensor- and actuator-based autonomous system. From these formally speci- fied surroundings, the required input data is derived for different layers of a sensor data processing system to generate actions within the system's context. This input data itself depends on a given sensor model to compute its specific raw data. Amongst others, on the example of laser scanners and camera systems, algorithms using modern graph- ical processing units are outlined to generate the required raw data even for complex situations. To realize the aforementioned aspects, a development environment is necessary consist- ing of tools for modeling and working with instances of a domain specific language. Furthermore, a software framework is required which provides easily usable and ma- ture solutions for common programming requirements like synchronization for concur- rent threads or communication in a high-level point of view. For relying on a consis- tent and homogeneous software framework for implementing the concepts, a highly portable and real-time-capable software framework for distributed applications was re- alized which was written entirely from scratch in strictly object-oriented C++. More- over, this software framework also integrates the formally modeled input data derived from the specified requirements and the sensors' models to allow unattended system simulations to support the acceptance tests for subsystems or an entire system. On the example of autonomous vehicles, the applicability of the approach and the soft- ware framework is demonstrated by implementing a vehicle navigation algorithm which uses a given digital map for finding the best route to a desired destination from an arbi- trarily chosen starting point. This algorithm was developed considering the test-first- principle and is continuously evaluated by unattended and automatic software tests which are executed on a continuous integration system. Its implementation as well as its evaluation make use of the aforementioned concepts and algorithms. Therefore, the vehicle's surroundings were formally modeled together with its necessary sensors using the provided development tools and environment for performing and evaluating unattended system runs before the algorithm was put into operation on the real vehicle.}
+      \field{booktitle}{Software Engineering}
+      \field{isbn}{9783832293789}
+      \field{langid}{english}
+      \field{title}{{Automating Acceptance Tests for Sensor- and Actuator-based Systems on the Example of Autonomous Vehicles}}
+      \field{type}{phdthesis}
+      \field{year}{2010}
+      \field{pages}{298}
+      \range{pages}{1}
+      \verb{url}
+      \verb http://www.christianberger.net/Ber10.pdf
+      \endverb
+      \keyw{EN,MINE,book,reviewed}
+    \endentry
+    \entry{manAP}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=be81b50142fab66d9b7b3f828b1ef8cd}{%
+           family={Corporation},
+           familyi={C\bibinitperiod},
+           given={Applanix},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{be81b50142fab66d9b7b3f828b1ef8cd}
+      \strng{fullhash}{be81b50142fab66d9b7b3f828b1ef8cd}
+      \strng{authornamehash}{be81b50142fab66d9b7b3f828b1ef8cd}
+      \strng{authorfullhash}{be81b50142fab66d9b7b3f828b1ef8cd}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{POSLV SPECIFICATIONS}
+      \field{year}{2015}
+    \endentry
     \entry{DBSCAN}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=2c062e64ed26aacc08a62155e7944f04}{%
@@ -89,7 +139,7 @@
       \field{isbn}{978-1-4244-3803-7}
       \field{journaltitle}{2009 IEEE/RSJ International Conference on Intelligent Robots and Systems}
       \field{langid}{english}
-      \field{title}{{Real-time object classification in 3D point clouds using point feature histograms}}
+      \field{title}{{LIDAR-based 3D Object Perception}}
       \field{year}{2009}
       \field{pages}{994\bibrangedash 1000}
       \range{pages}{7}
@@ -164,6 +214,45 @@
       \field{year}{1994}
       \field{pages}{95}
       \range{pages}{1}
+    \endentry
+    \entry{Kurose2013}{book}{}
+      \name{author}{2}{}{%
+        {{hash=eaa988056a027bb9eebaf02515594f87}{%
+           family={Kurose},
+           familyi={K\bibinitperiod},
+           given={James\bibnamedelima F.},
+           giveni={J\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=b5ebc55d7c1b670ae670eb965c824b69}{%
+           family={Ross},
+           familyi={R\bibinitperiod},
+           given={Keith\bibnamedelima W.},
+           giveni={K\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \strng{namehash}{8b15a4387b0307c036b07ba93a736932}
+      \strng{fullhash}{8b15a4387b0307c036b07ba93a736932}
+      \strng{authornamehash}{8b15a4387b0307c036b07ba93a736932}
+      \strng{authorfullhash}{8b15a4387b0307c036b07ba93a736932}
+      \field{sortinit}{K}
+      \field{sortinithash}{a7d5b3aec5a0890aae7baf85a209abfc}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Computer Networking continues with an early emphasis on application-layer paradigms and application programming interfaces (the top layer), encouraging a hands-on experience with protocols and networking concepts, before working down the protocol stack to more abstract layers. This book has become the dominant book for this course because of the authors' reputations, the precision of explanation, the quality of the art program, and the value of their own supplements. - See more at: http://www.pearsonhighered.com/educator/product/Computer-Networking-A-TopDown-Approach-6E/9780132856201.page{\#}sthash.WYZBzrpy.dpuf}
+      \field{booktitle}{Pearson}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{9780132856201}
+      \field{issn}{0889-5899}
+      \field{langid}{english}
+      \field{number}{5}
+      \field{title}{{Computer Networking A Top-Down Approach}}
+      \field{year}{2013}
+      \field{pages}{4}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1017/CBO9781107415324.004
+      \endverb
+      \verb{eprint}
+      \verb 8177588788
+      \endverb
     \endentry
     \entry{Li2016}{inproceedings}{}
       \name{author}{3}{}{%
@@ -250,6 +339,48 @@
       \verb 10.1109/IVS.2009.5164280
       \endverb
       \keyw{automated highways;graph theory;image segmentation;object detection;radar imaging;3D lidar data segmentation;3D lidar measurement;graph-based approach;local convexity criterion;local convexity measures;nonflat urban environment;object detection;unstructured offroad environment;Information geometry;Intelligent vehicles;Laser radar;Multidimensional signal processing;Object detection;Optimization methods;Roads;Sensor fusion;Signal processing algorithms;Vegetation mapping}
+    \endentry
+    \entry{Schubert2008}{article}{}
+      \name{author}{3}{}{%
+        {{hash=5bf46c6b676a12bb0a66eb4ef38bf0e5}{%
+           family={Schubert},
+           familyi={S\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod}}}%
+        {{hash=72c4f159cd071242093f07720df60d48}{%
+           family={Richter},
+           familyi={R\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+        {{hash=7b55bf5f23ca970093a99bf0f00c0a53}{%
+           family={Wanielik},
+           familyi={W\bibinitperiod},
+           given={Gerd},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{d9b1052c062f31fba7057f8abd5e410e}
+      \strng{fullhash}{d9b1052c062f31fba7057f8abd5e410e}
+      \strng{authornamehash}{d9b1052c062f31fba7057f8abd5e410e}
+      \strng{authorfullhash}{d9b1052c062f31fba7057f8abd5e410e}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The estimation of a vehicle's dynamic state is one of the most fundamental data fusion tasks for intelligent traffic applications. For that, motion models are applied in order to increase the accuracy and robustness of the estimation. This paper surveys numerous (especially curvilinear) models and compares their performance using a tracking tasks which includes the fusion of GPS and odometry data with an Unscented Kalman Filter. For evaluation purposes, a highly accurate reference trajectory has been recorded using an RTK-supported DGPS receiver. With this ground truth data, the performance of the models is evaluated in different scenarios and driving situations.}
+      \field{journaltitle}{Information Fusion, 2008 11th International Conference on}
+      \field{langid}{english}
+      \field{number}{1}
+      \field{title}{{Comparison and evaluation of advanced motion models for vehicle tracking}}
+      \field{year}{2008}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1109/ICIF.2008.4632283
+      \endverb
+      \verb{url}
+      \verb http://ieeexplore.ieee.org/xpls/abs%7B%5C_%7Dall.jsp?arnumber=4632283
+      \endverb
+      \keyw{motion models,ukf,vehicle tracking}
     \endentry
     \entry{man06}{manual}{}
       \name{author}{1}{}{%

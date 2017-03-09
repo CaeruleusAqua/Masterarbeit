@@ -157,6 +157,69 @@
     hyphenation={english}
 }
 
+@book{Kelly1994,
+  abstract = {The Kalman Filter has many applications in mobile robotics ranging from perception, to position estimation, to control. This report formulates a navigation Kalman Filter. That is, one which estimates the position of autonomous vehicles. The filter is developed according to the state space formulation of Kalman's original papers. The state space formulation is particularly appropriate for the problem of vehicle position estimation. This filter formulation is fairly general. This generality is possible because the problem has been addressed • in 3D • in state space, with an augmented state vector • asynchronously • with tensor calculus measurement models The formulation has wide ranging uses. Some of the applications include: • as the basis of a vehicle position estimation system, whether any or all of dead reckoning, triangulation, or terrain aids or other landmarks are used • as the dead reckoning element and overall integration element when INS or GPS is used • as the mechanism for map matching in mapping applications • as the identification element in adaptive control applications It can perform these functions individually or all at once. The filter is formulated for a general redundant asynchronous sensor suite. It provides a single place for the integration of every sensor on a autonomous vehicle, and the measuremnt models for most of them are included. All sensors provide indirect measurements of state and any number can be accommodated. The filter subsumes many applications of the Kalman filter to mobile robot navigation problems as special cases. It complements the RANGER vehicle controller which is the subject of another technical report that appears later in this series},
+  address = {Pittsburgh},
+  author = {Kelly, Alonzo},
+  booktitle = {Engineering},
+  pages = {95},
+  publisher = {Carnegie Mellon University},
+  title = {{A 3D state space formulation of a navigation Kalman filter for autonomous vehicles}},
+  year = {1994},
+  hyphenation={english}
+}
+
+@inproceedings{Broy2006,
+  abstract = {The amount of software in cars grows exponentially. Driving forces of this development are cheaper and more powerful hardware and the demand for innovations by new functions. The rapid increase of software and software based functionality brings various challenges (see [21], [23], [25], [26]) for the automotive industries, for their organization, key competencies, processes, methods, tools, models, product structures, division of work, logistics, maintenance, and long term strategies. From a software engineering perspective, the automotive industry is an ideal and fascinating application domain for advanced techniques. Although the automotive industry may adopt general results and solutions from the software engineering body of knowledge gained in other domains, the specific constraints and domain specific requirements in the automotive industry ask for individual solutions and bring various challenges for automotive software engineering. In cars we find literally all interesting problems and challenging issues of software and systems engineering. Copyright. 2006 ACM.},
+  address = {New York, New York, USA},
+  author = {Broy, Manfred},
+  booktitle = {Proceeding of the 28th international conference on Software engineering - ICSE '06},
+  doi = {10.1145/1134285.1134292},
+  isbn = {1595933751},
+  issn = {02705257},
+  keywords = {automotive software engineering,model driven development},
+  pages = {33},
+  publisher = {ACM Press},
+  title = {{Challenges in automotive software engineering}},
+  url = {http://portal.acm.org/citation.cfm?doid=1134285.1134292},
+  year = {2006},
+  hyphenation={english}
+}
+
+@phdthesis{Berger2010,
+  abstract = {In projects dealing with autonomous vehicles which are driving in different contexts like highways, urban environments, and rough areas, managing the software's quality for the entire data processing chain of sensor- and actuator-based autonomous systems is increasingly complex. One main reason is the early dependency on all sensor's raw data to setup the data processing chain and to identify subsystems. These sensors' data might be extensive, especially if laser scanners or color camera systems are continu- ously producing a vast number of raw data. Moreover, due to this dependency the sensors' setup including their respectively specified mounting positions and calibration information is also necessary to gather real input data from real surroundings' situations of the system. This is even more important before actually starting to integrate inde- pendently developed subsystems for carrying out tests for the entire data processing chain. To reduce this dependency and therefore to decouple tasks from the project's critical path, an approach is outlined in this thesis which was developed to support the software engineering for sensor- and actuator-based autonomous systems. This approach relies on customer's requirements and corresponding customer's acceptance criteria as well as the decoupling of the software engineering from the real hardware environment to allow appropriate system simulations. Based on the customer's requirements, formally specified scenarios using a domain specific language are derived which are used to provide surroundings and suitable situ- ations for a sensor- and actuator-based autonomous system. From these formally speci- fied surroundings, the required input data is derived for different layers of a sensor data processing system to generate actions within the system's context. This input data itself depends on a given sensor model to compute its specific raw data. Amongst others, on the example of laser scanners and camera systems, algorithms using modern graph- ical processing units are outlined to generate the required raw data even for complex situations. To realize the aforementioned aspects, a development environment is necessary consist- ing of tools for modeling and working with instances of a domain specific language. Furthermore, a software framework is required which provides easily usable and ma- ture solutions for common programming requirements like synchronization for concur- rent threads or communication in a high-level point of view. For relying on a consis- tent and homogeneous software framework for implementing the concepts, a highly portable and real-time-capable software framework for distributed applications was re- alized which was written entirely from scratch in strictly object-oriented C++. More- over, this software framework also integrates the formally modeled input data derived from the specified requirements and the sensors' models to allow unattended system simulations to support the acceptance tests for subsystems or an entire system. On the example of autonomous vehicles, the applicability of the approach and the soft- ware framework is demonstrated by implementing a vehicle navigation algorithm which uses a given digital map for finding the best route to a desired destination from an arbi- trarily chosen starting point. This algorithm was developed considering the test-first- principle and is continuously evaluated by unattended and automatic software tests which are executed on a continuous integration system. Its implementation as well as its evaluation make use of the aforementioned concepts and algorithms. Therefore, the vehicle's surroundings were formally modeled together with its necessary sensors using the provided development tools and environment for performing and evaluating unattended system runs before the algorithm was put into operation on the real vehicle.},
+  author = {Berger, Christian},
+  booktitle = {Software Engineering},
+  isbn = {9783832293789},
+  keywords = {EN,MINE,book,reviewed},
+  pages = {298},
+  title = {{Automating Acceptance Tests for Sensor- and Actuator-based Systems on the Example of Autonomous Vehicles}},
+  url = {http://www.christianberger.net/Ber10.pdf},
+  year = {2010},
+  hyphenation={english}
+}
+
+@book{Kurose2013,
+  abstract = {Computer Networking continues with an early emphasis on application-layer paradigms and application programming interfaces (the top layer), encouraging a hands-on experience with protocols and networking concepts, before working down the protocol stack to more abstract layers. This book has become the dominant book for this course because of the authors' reputations, the precision of explanation, the quality of the art program, and the value of their own supplements. - See more at: http://www.pearsonhighered.com/educator/product/Computer-Networking-A-TopDown-Approach-6E/9780132856201.page{\#}sthash.WYZBzrpy.dpuf},
+  archivePrefix = {arXiv},
+  arxivId = {8177588788},
+  author = {Kurose, James F. and Ross, Keith W.},
+  booktitle = {Pearson},
+  doi = {10.1017/CBO9781107415324.004},
+  eprint = {8177588788},
+  isbn = {9780132856201},
+  issn = {0889-5899},
+  number = {5},
+  pages = {4},
+  pmid = {8717009},
+  title = {{Computer Networking A Top-Down Approach}},
+  year = {2013},
+  hyphenation={english}
+}
+
+
+
+
 
 
 

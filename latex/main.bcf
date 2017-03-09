@@ -2165,16 +2165,24 @@
     <bcf:citekey order="21">man06</bcf:citekey>
     <bcf:citekey order="22">man06</bcf:citekey>
     <bcf:citekey order="23">man06</bcf:citekey>
-    <bcf:citekey order="24">Zhang</bcf:citekey>
-    <bcf:citekey order="25">5164280</bcf:citekey>
-    <bcf:citekey order="26">Holmes2007</bcf:citekey>
-    <bcf:citekey order="27">LLSQ</bcf:citekey>
-    <bcf:citekey order="28">LLSQ</bcf:citekey>
-    <bcf:citekey order="29">Zhang</bcf:citekey>
-    <bcf:citekey order="29">Himmelsbach2009</bcf:citekey>
-    <bcf:citekey order="29">Li2016</bcf:citekey>
-    <bcf:citekey order="30">DBSCAN</bcf:citekey>
-    <bcf:citekey order="31">Kelly1994</bcf:citekey>
+    <bcf:citekey order="24">Berger2010</bcf:citekey>
+    <bcf:citekey order="25">Kurose2013</bcf:citekey>
+    <bcf:citekey order="26">manAP</bcf:citekey>
+    <bcf:citekey order="27">Zhang</bcf:citekey>
+    <bcf:citekey order="28">5164280</bcf:citekey>
+    <bcf:citekey order="29">Holmes2007</bcf:citekey>
+    <bcf:citekey order="30">LLSQ</bcf:citekey>
+    <bcf:citekey order="31">LLSQ</bcf:citekey>
+    <bcf:citekey order="32">Zhang</bcf:citekey>
+    <bcf:citekey order="32">Himmelsbach2009</bcf:citekey>
+    <bcf:citekey order="32">Li2016</bcf:citekey>
+    <bcf:citekey order="33">DBSCAN</bcf:citekey>
+    <bcf:citekey order="34">Zhang</bcf:citekey>
+    <bcf:citekey order="34">Himmelsbach2009</bcf:citekey>
+    <bcf:citekey order="35">Himmelsbach2009</bcf:citekey>
+    <bcf:citekey order="36">Himmelsbach2009</bcf:citekey>
+    <bcf:citekey order="37">Kelly1994</bcf:citekey>
+    <bcf:citekey order="38">Schubert2008</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global/" type="entry" sortscheme="nty" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
