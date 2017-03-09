@@ -18,6 +18,7 @@ import struct
 
 from opendavinci.DVnode import DVnode
 import cv2
+from tools import WGS84Coordinate
 
 
 class CarLogic:
@@ -26,6 +27,7 @@ class CarLogic:
         self.port = port
         self.parser = Parser()
         self.parser.parseSCN("resources/Scenarios/simulation/scenario.scn")
+        self.trans = WGS84Coordinate(57.772840, 12.769964)
 
         # Parameters:
         self.time = time.time()
@@ -62,7 +64,7 @@ class CarLogic:
 
         self.cpc = None
 
-        self.node = DVnode(cid=211)
+        self.node = DVnode(cid=212)
         self.node.connect()
 
         self.connect()
@@ -99,51 +101,6 @@ class CarLogic:
         self.roundabout.update(self.car_handle)
         self.car.update(-1)
 
-        self.point_cloud += vrep.simxCallScriptFunction(self.clientID, 'velodyneVPL_16', vrep.sim_scripttype_childscript, 'getvel', [], [], [], bytearray(),
-                                                        vrepConst.simx_opmode_blocking)[2]
-        self.cloud_state += 1
-        if self.cloud_state == 2:
-
-            ## cloud is complete:
-            angle = np.round(np.array(self.point_cloud[0::3]) / math.pi * 180, 3)
-            layer_angle = (np.array(self.point_cloud[1::3]) / math.pi * 180 - 90).round().astype(np.int32)
-            ranges = (np.array(self.point_cloud[2::3]) * 1000 + 0.5).astype(np.uint16)
-
-            self.cpc = np.zeros((1803, 16), dtype=np.uint16)
-
-            old_angle = None
-            sample_index = 0
-            for index, value in enumerate(angle):
-                mapped_angle = int(value * 5 + 0.5) / 5.0
-                if mapped_angle != old_angle:
-                    sample_index += 1
-                ##print layer_angle[index]
-                self.cpc[180 + int(mapped_angle * 5)][(layer_angle[index]+15)/2] = ranges[index]
-                #z = round(float(ranges[index]) / 100.0 * math.sin(float(layer_angle[index]) / 180.0 * math.pi), 4)
-                #print "Angle: " + str(layer_angle[index]) + " : " + str(z)
-                old_angle = mapped_angle
-
-            print sample_index
-
-            shaped_cpc = self.cpc.reshape(1803 * 16)
-            msg = self.node.proto_dict[49]()
-            msg.distances = shaped_cpc.tobytes()
-            msg.startAzimuth = 215
-            msg.endAzimuth = -145
-            msg.entriesPerAzimuth = 16
-
-            container = self.node.proto_dict[0]()
-            container.dataType = 49
-            container.serializedData = msg.SerializeToString()
-            self.node.publish(container)
-            print "Bounds:"
-            print angle.min()
-            print angle.max()
-            # struct.pack('q', int_)
-
-            self.cloud_state = 0
-            self.point_cloud = []
-
         # estimate rotation Rate (z- axis)
         rot = self.getOrientation()
         if self.rot_buffer == None or rot == None:
@@ -166,6 +123,74 @@ class CarLogic:
 
                 r = l / (2 * math.sin(alpha / 2))
                 self.radius.append(r)
+
+        Grp1Data_msg = self.node.proto_dict[533]()
+        pos = self.car.getPosition() * 10
+        print "POS: ", pos
+        wgs84_pos = self.trans.transformToWGS84XY(pos[0], pos[1])
+        Grp1Data_msg.lat = wgs84_pos.getLatitude()
+        Grp1Data_msg.lon = wgs84_pos.getLongitude()
+
+        theta = self.getOrientation()
+        if theta is not None:
+
+            print "Theta: ", theta
+            theta = -theta / math.pi * 180
+
+            Grp1Data_msg.heading = float(theta)
+        else:
+            Grp1Data_msg.heading = 0
+
+        containerGrp1 = self.node.proto_dict[0]()
+        containerGrp1.dataType = 533
+        containerGrp1.serializedData = Grp1Data_msg.SerializeToString()
+
+        self.node.publish(containerGrp1)
+
+        self.point_cloud += vrep.simxCallScriptFunction(self.clientID, 'velodyneVPL_16', vrep.sim_scripttype_childscript, 'getvel', [], [], [], bytearray(),
+                                                        vrepConst.simx_opmode_blocking)[2]
+        self.cloud_state += 1
+        if self.cloud_state == 2:
+
+            ## cloud is complete:
+            angle = np.round(np.array(self.point_cloud[0::3]) / math.pi * 180, 3)
+            layer_angle = (np.array(self.point_cloud[1::3]) / math.pi * 180 - 90).round().astype(np.int32)
+            ranges = (np.array(self.point_cloud[2::3]) * 1000 + 0.5).astype(np.uint16)
+
+            self.cpc = np.zeros((1803, 16), dtype=np.uint16)
+
+            old_angle = None
+            sample_index = 0
+            for index, value in enumerate(angle):
+                if ((layer_angle[index] + 15) < 16):
+                    mapped_angle = int(value * 5 + 0.5) / 5.0
+                    if mapped_angle != old_angle:
+                        sample_index += 1
+                    self.cpc[int(mapped_angle * 5)][(layer_angle[index] + 15)] = ranges[index]
+                    old_angle = mapped_angle
+            print sample_index
+
+            shaped_cpc = self.cpc.reshape(1803 * 16)
+            msg = self.node.proto_dict[49]()
+            msg.distances = shaped_cpc.tobytes()
+            msg.startAzimuth = 0
+            msg.endAzimuth = 360
+            # msg.startAzimuth = 215
+            # msg.endAzimuth = -145
+            msg.entriesPerAzimuth = 16
+
+            container = self.node.proto_dict[0]()
+            container.dataType = 49
+            container.serializedData = msg.SerializeToString()
+            self.node.publish(container)
+
+            print "Bounds:"
+            print angle.min()
+            print angle.max()
+            # struct.pack('q', int_)
+
+            self.cloud_state = 0
+            self.point_cloud = []
 
     def getEnemysInRange(self, range):
         enemyInRange = list()
@@ -234,7 +259,7 @@ class CarLogic:
 
             vrep.simxWriteStringStream(self.clientID, "speed", vrep.simxPackFloats([self.speed]), vrep.simx_opmode_oneshot)
             vrep.simxSynchronousTrigger(self.clientID)
-            time.sleep(0.145)
+            time.sleep(0.0)
 
     def setSpeed(self):
         dv = self.accel * self.dt

@@ -6,27 +6,22 @@ from rdp import rdp
 
 from parser import Parser
 from parser.Objects import *
+import numpy as np
 from tools import WGS84Coordinate
 
 parser = Parser()
 
-(lat, lon) = pickle.load(open("gps_cw.p", "rb"))
-(lat2, lon2) = pickle.load(open("gps_ccw.p", "rb"))
+(lat, lon) = pickle.load(open("gps.p", "rb"))
 
 roundabout_lon = 12.7751720037  # np.mean(lon[low_bound:upp_bound])
 roundabout_lat = 57.772159681  # np.mean(lat[low_bound:upp_bound])
 
 trans = WGS84Coordinate(57.772840, 12.769964)
 
-points_cw = list()
-for i in xrange(len(lat)):
+points = list()
+for i in xrange(12050, len(lat) - 1600):
     # for i in xrange(len(lat)):
-    points_cw.append(trans.transformToCart(lat[i], lon[i]))
-
-points_ccw = list()
-for i in xrange(len(lat2)):
-    # for i in xrange(len(lat)):
-    points_ccw.append(trans.transformToCart(lat2[i], lon2[i]))
+    points.append(trans.transformToCart(lat[i], lon[i]))
 
 # points.append([56.7924,0.27242])
 
@@ -35,20 +30,26 @@ circle1 = plt.Circle((0, 0), 5, color='r')
 
 fig, ax = plt.subplots()
 
-# ax.add_artist(circle0)
-# ax.add_artist(circle1)
+#ax.add_artist(circle0)
+#ax.add_artist(circle1)
 
 fig.show()
 q = list()
 w = list()
 
-points_cw = rdp(points_cw, epsilon=0.1)
-points_ccw = rdp(points_ccw, epsilon=0.1)
+points = rdp(points, epsilon=0.1)
 
-# x,y = trans.transformToCart(roundabout_lat, roundabout_lon)
-# for deg in np.arange(0, 360, 2):
-#     w.append(np.cos(deg * trans.deg2rad) * 10 + y )
-#     q.append(np.sin(deg * trans.deg2rad) * 10 + x )
+for point in points:
+    q.append(point[0])
+    w.append(point[1])
+
+roundabout = []
+
+x,y = trans.transformToCart(roundabout_lat, roundabout_lon)
+for deg in np.arange(0, 360, 2):
+    w.append(np.cos(deg * trans.deg2rad) * 10 + y )
+    q.append(np.sin(deg * trans.deg2rad) * 10 + x )
+    roundabout.append([np.sin(deg * trans.deg2rad) * 10 + x , np.cos(deg * trans.deg2rad) * 10 + y ])
 
 # parser.parseSCN("resources/scenario.scn")
 
@@ -72,11 +73,13 @@ scenario.ground.heightimage.mppy = 0.153
 
 scenario.origin = [57.772840, 12.769964]
 scenario.addNewLayer("Groundfloor", 0.01)
-scenario.layer[0].addNewRoad("Rualroad")
-scenario.layer[0].roads[0].addNewLane(3, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
-scenario.layer[0].roads[0].lanes[0].pointmodel = points_cw
-scenario.layer[0].roads[0].addNewLane(3, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
-scenario.layer[0].roads[0].lanes[1].pointmodel = points_ccw
+scenario.layer[0].addNewRoad("driveway")
+scenario.layer[0].roads[0].addNewLane(6, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
+scenario.layer[0].roads[0].lanes[0].pointmodel = points
+
+scenario.layer[0].addNewRoad("roundabout")
+scenario.layer[0].roads[1].addNewLane(6, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
+scenario.layer[0].roads[1].lanes[0].pointmodel = roundabout
 parser.scenario = scenario
 print scenario.layer[0].name
 
@@ -97,8 +100,8 @@ for road in parser.scenario.layer[0].roads:
         x = list()
         y = list()
 
-parser.saveSCN("resources/Scenarios/scenario.scn")
+parser.saveSCN("resources/Scenarios/recording/scenario.scn")
 
-# plt.plot(q, w, 'ro')
+#plt.plot(q, w, 'ro')
 ax.set_aspect('equal', 'datalim')
 plt.show()

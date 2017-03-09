@@ -19,6 +19,7 @@
 # GLOBAL CONFIGURATION
 #
 global.car = file://data/Models/Car1.objx
+# global.scenario = file:///home/storm/workspace/Masterarbeit/code/vrep/resources/Scenarios/recording/scenario.scnx
 global.scenario = file:///home/storm/workspace/Masterarbeit/code/vrep/resources/Scenarios/simulation/simulation.scnx
 global.showGrid = 0
 
