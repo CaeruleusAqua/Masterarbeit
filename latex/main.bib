@@ -238,6 +238,49 @@
   hyphenation={english}
 }
 
+@phdthesis{Ram2007,
+  abstract = {Metrology systems take coordinate information directly from the surface of a manufactured part and generate millions of (X, Y, Z) data points. The inspection process often involves fitting analytic primitives such as sphere, cone, torus, cylinder and plane to these points which represent an object with the corresponding shape. Typically, a least squares fit of the parameters of the shape to the point set is performed. The least squares fit attempts to minimize the sum of the squares of the distances between the points and the primitive. The objective function however, cannot be solved in the closed form and numerical minimization techniques are required to obtain the solution. These techniques as applied to primitive fitting entail iteratively solving large systems of linear equations generally involving large floating point numbers until the solution has converged. The current problem in-process metrology faces is the large computational times for the analysis of these millions of streaming data points. This research addresses the bottleneck using the Graphical Processing Unit (GPU), primarily developed by the computer gaming industry, to optimize operations. The explosive growth in the programming capabilities and raw processing power of Graphical Processing Units has opened up new avenues for their use in non-graphic applications. The combination of large stream of data and the need for 3D vector operations make the primitive shape fit algorithms excellent candidates for processing via a GPU. The work presented in this research investigates the use of the parallel processing capabilities of the GPU in expediting specific computations involved in the fitting procedure. The least squares fit algorithms for the circle, sphere, cylinder, plane, cone and torus have been implemented on the GPU using NVIDIA‟s Compute Unified Device Architecture (CUDA). The implementations are benchmarked against those on a CPU which are carried out using C++. The Gauss Newton minimization algorithm is used to obtain the best fit parameters for each of the aforementioned primitives. The computation times for the two implementations are compared. It is demonstrated that the GPU is about 3-4 times faster than the CPU for a relatively simple geometry such as the circle while the factor scales to about 14 for a torus which is more complex.},
+  author = {mohan Ram, Meghashyam Panyam},
+  file = {:home/storm/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Panyam, Ram - Unknown - Least Squares Fitting of Analytic Primitives on a GPU.pdf:pdf},
+  pages = {103},
+  school = {Clemson University},
+  title = {{Least Squares Fitting of Analytic Primitives on a GPU}},
+  url = {http://tigerprints.clemson.edu/all{\_}theses},
+  year = {2007},
+  hyphenation={english}
+}
+
+@article{Nurunnabi2012,
+  abstract = {This paper investigates the problem of local surface reconstruction and best fitting for planar surfaces from unorganized 3D point cloud data. Least Squares (LS), its equivalent Principal Component Analysis (PCA) and RANSAC are the three most popular techniques for fitting planar surfaces to 3D data. LS and PCA are sensitive to outliers and do not give reliable and robust parameter estimation. The RANSAC algorithm is robust but it is not completely free from the effect of outliers and is slow for large datasets. In this paper, we propose a diagnostic-robust statistical algorithm that uses both diagnostics and robust approaches in combination for fitting planar surfaces in the presence of outliers. Recently introduced high breakdown and fast Minimum Covariance Determinant (MCD) based location and scatter estimates are used for robust distance to identify outliers and a MCD based robust PCA approach is used as an outlier resistant technique for plane fitting. The benefits of the new diagnostic-robust algorithm are demonstrated with artificial and real laser scanning point cloud datasets. Results show that the proposed method is significantly better and more efficient than the other three methods for planar surface fitting. This method also has great potential for robust local normal estimation and for other surface shape fitting applications},
+  author = {Nurunnabi, Abdul and Belton, David and West, Geoff},
+  doi = {10.5194/isprsannals-I-3-269-2012},
+  file = {:home/storm/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Nurunnabi, Belton, West - Unknown - DIAGNOSTIC-ROBUST STATISTICAL ANALYSIS FOR LOCAL SURFACE FITTING IN 3D POINT CLOUD DATA.pdf:pdf},
+  issn = {2194-9050},
+  journal = {ISPRS Annals of Photogrammetry, Remote Sensing and Spatial Information Sciences},
+  keywords = {3d modeling,feature extraction,geometric primitives,laser scanning,local normal estimation,photogrammetry,plane fitting,surface reconstruction},
+  month = {7},
+  number = {September},
+  pages = {269--274},
+  title = {{Diagnostic-Robust Statistical Analysis for Local Surface Fitting in 3D Point Cloud Data}},
+  url = {http://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/I-3/269/2012/isprsannals-I-3-269-2012.pdf http://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/I-3/269/2012/},
+  volume = {I-3},
+  year = {2012},
+  hyphenation={english}
+}
+
+@techreport{Soderkvist2009,
+  abstract = {This is some notes on how to use the singular value decomposition (SVD) for solving some fitting problems. The problems are considered in the PhD- course in data analysis at Lulea University of Technology.},
+  address = {Sweden},
+  author = {S{\"{o}}derkvist, Inge},
+  file = {:home/storm/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Ba - Unknown - Using SVD for some fitting problems.pdf:pdf},
+  institution = {Lulea University of Technology},
+  number = {2},
+  pages = {2--5},
+  title = {{Using SVD for some fitting problems}},
+  url = {https://www.ltu.se/cms{\_}fs/1.51590!/svd-fitting.pdf},
+  year = {2009},
+  hyphenation={english}
+}
 
 
 

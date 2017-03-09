@@ -340,6 +340,89 @@
       \endverb
       \keyw{automated highways;graph theory;image segmentation;object detection;radar imaging;3D lidar data segmentation;3D lidar measurement;graph-based approach;local convexity criterion;local convexity measures;nonflat urban environment;object detection;unstructured offroad environment;Information geometry;Intelligent vehicles;Laser radar;Multidimensional signal processing;Object detection;Optimization methods;Roads;Sensor fusion;Signal processing algorithms;Vegetation mapping}
     \endentry
+    \entry{Nurunnabi2012}{article}{}
+      \name{author}{3}{}{%
+        {{hash=1c3c22ded9d01c72b657ce3fe75cef16}{%
+           family={Nurunnabi},
+           familyi={N\bibinitperiod},
+           given={Abdul},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a63fddfab508c6aaf35ebe810b411629}{%
+           family={Belton},
+           familyi={B\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=90a62f76b4477758875da2daa1f66414}{%
+           family={West},
+           familyi={W\bibinitperiod},
+           given={Geoff},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{f1973cd955933db940f32e488365c44d}
+      \strng{fullhash}{f1973cd955933db940f32e488365c44d}
+      \strng{authornamehash}{f1973cd955933db940f32e488365c44d}
+      \strng{authorfullhash}{f1973cd955933db940f32e488365c44d}
+      \field{sortinit}{N}
+      \field{sortinithash}{925374ca63e7594de7fafdb83e64d41d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper investigates the problem of local surface reconstruction and best fitting for planar surfaces from unorganized 3D point cloud data. Least Squares (LS), its equivalent Principal Component Analysis (PCA) and RANSAC are the three most popular techniques for fitting planar surfaces to 3D data. LS and PCA are sensitive to outliers and do not give reliable and robust parameter estimation. The RANSAC algorithm is robust but it is not completely free from the effect of outliers and is slow for large datasets. In this paper, we propose a diagnostic-robust statistical algorithm that uses both diagnostics and robust approaches in combination for fitting planar surfaces in the presence of outliers. Recently introduced high breakdown and fast Minimum Covariance Determinant (MCD) based location and scatter estimates are used for robust distance to identify outliers and a MCD based robust PCA approach is used as an outlier resistant technique for plane fitting. The benefits of the new diagnostic-robust algorithm are demonstrated with artificial and real laser scanning point cloud datasets. Results show that the proposed method is significantly better and more efficient than the other three methods for planar surface fitting. This method also has great potential for robust local normal estimation and for other surface shape fitting applications}
+      \field{issn}{2194-9050}
+      \field{journaltitle}{ISPRS Annals of Photogrammetry, Remote Sensing and Spatial Information Sciences}
+      \field{langid}{english}
+      \field{month}{7}
+      \field{number}{September}
+      \field{title}{{Diagnostic-Robust Statistical Analysis for Local Surface Fitting in 3D Point Cloud Data}}
+      \field{volume}{I-3}
+      \field{year}{2012}
+      \field{pages}{269\bibrangedash 274}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.5194/isprsannals-I-3-269-2012
+      \endverb
+      \verb{file}
+      \verb :home/storm/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Nurunnabi, Belton, West - Unknown - DIAGNOSTIC-ROBUST STATISTICAL ANALYSIS FOR LOCAL SURFACE FITTING IN 3D POINT CLOUD DATA.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/I-3/269/2012/isprsannals-I-3-269-2012.pdf%20http://www.isprs-ann-photogramm-remote-sens-spatial-inf-sci.net/I-3/269/2012/
+      \endverb
+      \keyw{3d modeling,feature extraction,geometric primitives,laser scanning,local normal estimation,photogrammetry,plane fitting,surface reconstruction}
+    \endentry
+    \entry{Ram2007}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=ebab69c6c6b851c4c2b6430141878c07}{%
+           family={Ram},
+           familyi={R\bibinitperiod},
+           given={Meghashyam\bibnamedelima Panyam},
+           giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod},
+           prefix={mohan},
+           prefixi={m\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Clemson University}%
+      }
+      \strng{namehash}{ebab69c6c6b851c4c2b6430141878c07}
+      \strng{fullhash}{ebab69c6c6b851c4c2b6430141878c07}
+      \strng{authornamehash}{ebab69c6c6b851c4c2b6430141878c07}
+      \strng{authorfullhash}{ebab69c6c6b851c4c2b6430141878c07}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Metrology systems take coordinate information directly from the surface of a manufactured part and generate millions of (X, Y, Z) data points. The inspection process often involves fitting analytic primitives such as sphere, cone, torus, cylinder and plane to these points which represent an object with the corresponding shape. Typically, a least squares fit of the parameters of the shape to the point set is performed. The least squares fit attempts to minimize the sum of the squares of the distances between the points and the primitive. The objective function however, cannot be solved in the closed form and numerical minimization techniques are required to obtain the solution. These techniques as applied to primitive fitting entail iteratively solving large systems of linear equations generally involving large floating point numbers until the solution has converged. The current problem in-process metrology faces is the large computational times for the analysis of these millions of streaming data points. This research addresses the bottleneck using the Graphical Processing Unit (GPU), primarily developed by the computer gaming industry, to optimize operations. The explosive growth in the programming capabilities and raw processing power of Graphical Processing Units has opened up new avenues for their use in non-graphic applications. The combination of large stream of data and the need for 3D vector operations make the primitive shape fit algorithms excellent candidates for processing via a GPU. The work presented in this research investigates the use of the parallel processing capabilities of the GPU in expediting specific computations involved in the fitting procedure. The least squares fit algorithms for the circle, sphere, cylinder, plane, cone and torus have been implemented on the GPU using NVIDIA‟s Compute Unified Device Architecture (CUDA). The implementations are benchmarked against those on a CPU which are carried out using C++. The Gauss Newton minimization algorithm is used to obtain the best fit parameters for each of the aforementioned primitives. The computation times for the two implementations are compared. It is demonstrated that the GPU is about 3-4 times faster than the CPU for a relatively simple geometry such as the circle while the factor scales to about 14 for a torus which is more complex.}
+      \field{langid}{english}
+      \field{title}{{Least Squares Fitting of Analytic Primitives on a GPU}}
+      \field{type}{phdthesis}
+      \field{year}{2007}
+      \field{pages}{103}
+      \range{pages}{1}
+      \verb{file}
+      \verb :home/storm/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Panyam, Ram - Unknown - Least Squares Fitting of Analytic Primitives on a GPU.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://tigerprints.clemson.edu/all%7B%5C_%7Dtheses
+      \endverb
+    \endentry
     \entry{Schubert2008}{article}{}
       \name{author}{3}{}{%
         {{hash=5bf46c6b676a12bb0a66eb4ef38bf0e5}{%
@@ -381,6 +464,43 @@
       \verb http://ieeexplore.ieee.org/xpls/abs%7B%5C_%7Dall.jsp?arnumber=4632283
       \endverb
       \keyw{motion models,ukf,vehicle tracking}
+    \endentry
+    \entry{Soderkvist2009}{report}{}
+      \name{author}{1}{}{%
+        {{hash=4e4b9cdcf4a5999a924fa84c1cd60488}{%
+           family={Söderkvist},
+           familyi={S\bibinitperiod},
+           given={Inge},
+           giveni={I\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Lulea University of Technology}%
+      }
+      \list{location}{1}{%
+        {Sweden}%
+      }
+      \strng{namehash}{4e4b9cdcf4a5999a924fa84c1cd60488}
+      \strng{fullhash}{4e4b9cdcf4a5999a924fa84c1cd60488}
+      \strng{authornamehash}{4e4b9cdcf4a5999a924fa84c1cd60488}
+      \strng{authorfullhash}{4e4b9cdcf4a5999a924fa84c1cd60488}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This is some notes on how to use the singular value decomposition (SVD) for solving some fitting problems. The problems are considered in the PhD- course in data analysis at Lulea University of Technology.}
+      \field{langid}{english}
+      \field{number}{2}
+      \field{title}{{Using SVD for some fitting problems}}
+      \field{type}{techreport}
+      \field{year}{2009}
+      \field{pages}{2\bibrangedash 5}
+      \range{pages}{4}
+      \verb{file}
+      \verb :home/storm/.local/share/data/Mendeley Ltd./Mendeley Desktop/Downloaded/Ba - Unknown - Using SVD for some fitting problems.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb https://www.ltu.se/cms%7B%5C_%7Dfs/1.51590!/svd-fitting.pdf
+      \endverb
     \endentry
     \entry{man06}{manual}{}
       \name{author}{1}{}{%

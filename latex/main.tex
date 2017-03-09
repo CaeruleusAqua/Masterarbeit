@@ -1,4 +1,5 @@
 \PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{pdftex,dvipsnames}{xcolor}
 \documentclass[11pt,oneside,openright]{mpreport}
 \usepackage[type=master]{wdok-title}
 \usepackage[utf8]{inputenc}
@@ -11,8 +12,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{cleveref}
 \usepackage{siunitx}
-\usepackage{todonotes}
-
+\usepackage{listings}
 \usepackage[bibencoding=auto,backend=biber,babel=other]{biblatex}
 \usepackage{csquotes}
 
@@ -24,9 +24,17 @@
 \usepackage{tikz-uml}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.14}
+\usepackage{xargs}                      % Use more than one optional parameter in a new commands
+\usepackage{acronym}
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 
 \DeclareMathOperator{\atantwo}{atan2}
-
 
 % Examples for the definition of convenience commands
 \newcommand{\package}[1]{\texttt{#1}}
@@ -47,6 +55,7 @@
 
 
 \begin{document}
+
 \maketitle
 
 
@@ -70,6 +79,8 @@ Danken möchte ich außerdem besonders Associate professor Christian Berger und 
 dem ``Deutschen Akademischen Austauschdienst'' - DAAD für ihre finanzielle Unterstüzung während meines Aufenthaltes in Göteborg.
 Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, welche mich bei meiner Arbeit fachlich und moralisch untersützt haben.
 
+\include{shorts}
+
 \tableofcontents
 
 \include{Introduction}
@@ -82,9 +93,12 @@ Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, we
 % Die Methodologie ist demnach eine Metawissenschaft und somit eine Teildisziplin der Wissenschaftstheorie.
 % Demgegenüber bezeichnet Methodik das Methodenwissen des Praktikers oder des Wissenschaftlers.
 
-Im vorigen Kapitel haben wir uns die Arten von Kreisverkehren und derren Komponenten angesehen. Weiterhin haben wir die zur verfügung
+Im vorigen Kapitel haben wir uns die Arten von Kreisverkehren und derren Komponenten angesehen.
+\todo{kreisverkehre überabreiten}
+Weiterhin haben wir die zur verfügung
 stehende Testplatform und ihre Sensorik begutachtet. Dabei haben wir festgestellt, das für die Erkennung von Objekten in andren
 Arbeiten häufig mehrere und teurere Sensoren kombiniert werden um ein Zuverlässiges erkennen von anderen Verkehrsteilnehmern zu gewährleisten.
+\todo{beleg}
 In der Research Questian eins haben wir festgehalten, das wir die verwendung eines günstigen VLP-16 Sensors in einem 
 Komplexen Verkehrszenario, die Verkehrsbeobachtung eines Kreisverkehrs evaluieren wollen.
 
@@ -94,11 +108,11 @@ Umfeldsensors, welcher offensichtlich nicht als standalone Lösung für diesen E
 
 Dieser Sensor bietet in seiner aktuellen Anwendung in dem für diese Arbeit relevanten Bereich eine vergleichsweise
 geringe Auflösung. Daher schlagen viele in ähnlichen Projekten genutzte Gradienten basierende Algorythmen im Bereich 
-der Segmentierung häufig fehl. Aus diesem Grund wird für die Segmentierung eine Groundplane basierender Algorithms implementiert.
+der Segmentierung häufig fehl. \todo{beleg} Aus diesem Grund wird für die Segmentierung eine Groundplane basierender Algorithms implementiert.
 
 Außerdem ist es Bauartbedingt in Kreisverkehren mit bebauten Mittelinseln und Mehrspurigen Kreisverkehren nötig
 Fahrzeuge über ihren Messhorizont hinaus zu verfolgen, um ein sicheres einfahren in den Kreisverkehr zu gerwährleisten.
-Zu diesem Zweck wird in Section -----TODO----- ein Tracking und State Estimation Algorithms entwickelt welches dies gewähreisten soll.
+Zu diesem Zweck wird in Section \todo{section reference} ein Tracking und State Estimation Algorithms entwickelt welches dies gewähreisten soll.
 
 Zur Evaluation dieser Algorythmen wurden mehrere Datensammlungen auf den nahe gelegenen schwedischen AstaZero \cref{astazero} Prüfgelände in Sandhult
 durchgeführt, für alle nicht dort durchgeführten Expirimente werden in einer dafür erstellten Simuation durchgeführt. In dieser Simulation
@@ -125,6 +139,12 @@ Kollisionen notiert.
 
 
 \chapter{Research}
+% \todo[inline]{The original todo note withouth changed colours.\newline Here's another line.}
+% \unsure{Is this correct?}\unsure{I'm unsure about also!}
+% \change{Change this!}
+% \info{This can help me in chapter seven!}
+% \improvement{This really needs to be improved!\newline\newline What was I thinking?!}
+
 \section{Objekt Detection}
 
 \subsection{Ground Removal}
@@ -139,18 +159,31 @@ Eine weitere Möglichkeit ist die Beschreibung von Objekten als Konvexe Objekte 
 Vorteil dieser Methode ist das keine Initiale Position für die Bodenplatte benötigt wird.
 
 Für unseren Anwendungsfall mit dem Velodyne VLP-16 besteht das Problem darin, dass die Auflösung des Sensor in der Höhe sehr gering ist. Abhängig von der Entfernung des 
-Fahrzeuges innerhalb der benötigten Reichweite fallen nur zwei Lagen auf die Testfahrzeuge, wesshalb Gradientenbasierende Methoden hier zuverlässig versagen. Da die Gradienten zu klein sind und
+Fahrzeuges innerhalb der benötigten Reichweite fallen nur zwei Lagen auf die Testfahrzeuge, wesshalb Gradientenbasierende Methoden hier zuverlässig versagen. \todo{beleg} Da die Gradienten zu klein sind und
 die verkelinerung der nötigen Thresholds zu haufigen false Postitives führt. Die Methode des Statistischen Mittelwertes und die Methode auf basis der Z-Koordinate,
-leider am Fahrwerk des Volvo XC90 SUV. Die Höhe das Fahrzeuges ändert sich aunteranderem durch veränderung des Fahrprofiles (Sport/Eco, etc.) um mehrere Zentimeter.
-Auch leicht erhöhte geschwindigekiten im Kreisverkehr (ca 30 km/h) führen zu einer deutlichen Seitenneigung des Fahrzeuges. Darum wird nun eine weitere Methode vorgeschlagen.
+leiden am Fahrwerk des Volvo XC90 SUV. Die Höhe das Fahrzeuges ändert sich aunteranderem durch veränderung des Fahrprofiles (Sport/Eco, etc.) um mehrere Zentimeter.
+Auch leicht erhöhte Geschwindigekiten im Kreisverkehr (ca 30 km/h) führen zu einer deutlichen Seitenneigung des Fahrzeuges. Darum wird nun eine weitere Methode vorgeschlagen.
 Die Erkennung einer Grundfläche in den Messdaten. 
 
-Für die Erknnung des Bodens gehen wir von Folgenden Annahmen aus, die Straße lösst sich approximativ als Ebene im R3 darstellen. Weiterin ist die Grundfläche die niedrigste
-Fläche im Koordinatensystem. Daher wird im ersten schritt der in Polarkoordinaten vorliegende Datensatz in  in mehrere Tortenstück förmige Segmente geteilt.
-Innerhalb dieser Tortenstücke wird dann eine Suche nach den 10 Messungen mit dem niedrigsten Z Wert gesucht. Die Einteilung in Segmente ist desshalb nötig
-um zu verhindern, dass alle Messerte in ein einziges lokales Minima laufen. Aus diesem Vorgefilterten Messwerten werden nun für einen RANSAC drei zufällige,
-jedoch nich in benachbarten Segementen liegende Messwerte, herausgesucht. Aus diesm dei Punkten wird nun eine Ebene in der Hessischen Normalform gebildet
-,was eine effiziente Distanzberechnung zu anderen Punken erlaubt. Danach sammeln wir alle weiten Punkte aus unseren Minima, anahnd eines Distanzkriteriums.
+Für die Erkennung des Bodens gehen wir von Folgenden Annahmen aus, die Straße lösst sich approximativ als Ebene im R3 darstellen. Weiterin ist die Grundfläche die niedrigste
+Fläche im gesuchten Bereich. Daher wird im ersten schritt der in Polarkoordinaten vorliegende Datensatz in  in 30 Tortenstück förmige Segmente geteilt.
+Aus diesem Tortenstück werden dann jeweils vorne und hinten zwei Segmente [\cref{segments}] ausgewählt, welche nicht beachbart sind. Die Auswahl der Segmente folgt aus der Annhame,
+dass sich die Straße vor, bzw hinter dem Fahrzeug befindet. Zukünfitg könnte die Auswahl der Segmente auch mit hilfe des Fahrzeuglenkwinkes optimiert werden. Oder der Gültige Bereich
+von einer Lane Detection geliefert werden.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{LiDAR Segments}
+\includegraphics[width=\textwidth]{bilder/segments.png}
+\label{segments}
+%\end{center}
+\end{figure}
+
+\todo{beschreiben warum hinten messwerte fehlen, in TestPlatform Kapietel}
+Innerhalb dieser Tortenstücke wird dann eine Suche nach den 10 Messungen mit dem niedrigsten Z Wert gesucht. Die Suche beschränkt sich dabei auf die drei niedrigsten Lagen (-15,-13,-11 Grad),
+da alle höheren Lagen zu wit weg währen. Die Einteilung in Segmente ist desshalb nötig um zu verhindern, dass alle Messerte in ein einziges lokales Minima laufen.
+Aus diesem Vorgefilterten Messwerten werden nun für einen RANSAC drei zufällig herausgesucht.
+Aus diesm dei Punkten wird nun eine Ebene in der Hessischen Normalform gebildet ,was eine effiziente Distanzberechnung zu anderen Punken erlaubt. Danach sammeln wir alle weiten Punkte aus unseren Minima, anahnd eines Distanzkriteriums.
 Danach wird aus der Ebene und den neu Gesammelten Punkte durch einen Planefitting Algorithms [\cref{subssec:planefitting}] eine neue Ebene und derren Fehler berechnet.
 Der Fehler wird über die Summe der quadratischen Abstände aller Punkte zur Ebene berechnet.
 
@@ -158,13 +191,14 @@ Bevor wir die Ebene jedoch als eventueller Lösungskanidat hinzufügen wird gepr
 Dazu zählt, dass die Entfernung der Ebene zwischen 1.9m und 2.2m bewegen sollte, dies entspricht in etwa der Montagehöhe des Velodyne Sensors.
 
 Die Anzahl an Iterationen des RANSAC ist auf 50 Begrenzt. Nach dem Durchlauf des RANSAC werden alle Punkte in der Pointcloud anhand ihrer Distanz zur Ebene als
-Groundflache makiert. Als threshold wurde hier ein Wert von 0.5m genommen.
+Groundflache makiert. Als threshold wurde hier expirimentel ein optimaler Wert von 0.5m ermittelt.
 
 
 \subsubsection{Planefitting}
 \label{subssec:planefitting}
-Zum Planefitting einer be ne wird üblicherweise eine SVD (Singular Value Decomposition) genutzt. SVD hat eine Komplexität von $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007},da das Planefitting innehalb 
-des RANSAC's sehr häufig mit einer großen Anzahl an Punkten ausgefürht wird, führt das Ausführen des SVD innhalb des RANSAC zu einer sehr hohen laufzeit.
+Zum Planefitting einer be ne wird üblicherweise eine SVD (Singular Value Decomposition)  \cite{Nurunnabi2012,Ram2007,Soderkvist2009}.
+SVD hat eine Komplexität von $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, da das Planefitting innehalb 
+des RANSAC's sehr häufig mit einer großen Anzahl an Punkten ausgeführt wird, führt das Ausführen des SVD innhalb des RANSAC zu einer sehr hohen laufzeit.
 Deshalb wird an dieser Stelle ein ``Linear least Squares (LLSQ)'' Algorithus mit einigen optimierungen eingesetzt. Bei der verwendung des LLSQ gilt es zu beachten,
 dass nicht der abstand der Punkte zur eben optimiert wird, sondern der Abstand der Punkte zur Ebene entlang einer Achse (in unserem Fall der z Achse) siehe \cref{LLSQ_MIN}.
 Das kann zu Problemen führen, wenn die Punkte weit gestreut, also weit von der Optimalen Ebene entfert sind. Da wir unsere Punkte innhalb des RANSAC allerdings anhand eines 
@@ -505,14 +539,28 @@ entwickelt.
 
 
 \subsection{Classification}
-
+\todo{text zu listing anpssen}
+\todo{implementierung Plausibilitätstest}
 Die Klassifizierung der Objekte finedt anhand ihrer Größe statt, es findet keine Klassifizierung nach bewegten und unbewegten Objeten Stadt.
 Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterien werden dabei unter anderem, die Größe der Cluster und ihre Geschwindigkeit genutzt.
-Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1x1m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
+Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1.5x1.5m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
 Weiterhin wird andhand der Geschwindigekeit eine Plausibilitätstest durchgeführt. So darf eine Fußgänger eine Geschwindigekeit von 10km/h nicht überschreiten und die Maximalgeschwindigkeit dür einen 
 Radfahrer bertägt 30km/h. Da für Fahrzeuge keine sinnvolle geschwindigkeitsgrenze angenommen werden kann, wir an ihrer stelle die Änderung der Orientierung genutzt. Als Maximale Drehrate wird
 eine Messung von 0.3 rads/sec aus \cite{Kelly1994} angenommen. Da der Wert eine Obere Grenze darstellen soll nehmen wir einen etwas höheren  Wert von  0.3 rads/sec an.
 
+
+\begin{lstlisting}[language=Python]
+if length < 1.5 and width < 1.5:
+    type = pedestrian
+    
+elif length < 2 and width < 1.5:
+  type = cyclist
+  
+elif length < 10 and width < 4:
+    type = car;
+else:
+  type = undefined
+\end{lstlisting}
 
 
 \subsection{State Estimation}
