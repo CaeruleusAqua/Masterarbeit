@@ -53,6 +53,8 @@
 %\supervisor{Themensteller\\
 %  Betreuer}
 
+\pagenumbering{Roman}
+
 
 \begin{document}
 
@@ -82,6 +84,9 @@ Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, we
 \include{shorts}
 
 \tableofcontents
+\clearpage 
+
+\pagenumbering{arabic}
 
 \include{Introduction}
 \include{basics}
@@ -182,7 +187,7 @@ von einer Lane Detection geliefert werden.
 \todo{beschreiben warum hinten messwerte fehlen, in TestPlatform Kapietel}
 Innerhalb dieser Tortenstücke wird dann eine Suche nach den 10 Messungen mit dem niedrigsten Z Wert gesucht. Die Suche beschränkt sich dabei auf die drei niedrigsten Lagen (-15,-13,-11 Grad),
 da alle höheren Lagen zu wit weg währen. Die Einteilung in Segmente ist desshalb nötig um zu verhindern, dass alle Messerte in ein einziges lokales Minima laufen.
-Aus diesem Vorgefilterten Messwerten werden nun für einen RANSAC drei zufällig herausgesucht.
+Aus diesem Vorgefilterten Messwerten werden nun für einen \ac{RANSAC} drei zufällig herausgesucht.
 Aus diesm dei Punkten wird nun eine Ebene in der Hessischen Normalform gebildet ,was eine effiziente Distanzberechnung zu anderen Punken erlaubt. Danach sammeln wir alle weiten Punkte aus unseren Minima, anahnd eines Distanzkriteriums.
 Danach wird aus der Ebene und den neu Gesammelten Punkte durch einen Planefitting Algorithms [\cref{subssec:planefitting}] eine neue Ebene und derren Fehler berechnet.
 Der Fehler wird über die Summe der quadratischen Abstände aller Punkte zur Ebene berechnet.
@@ -190,18 +195,18 @@ Der Fehler wird über die Summe der quadratischen Abstände aller Punkte zur Ebe
 Bevor wir die Ebene jedoch als eventueller Lösungskanidat hinzufügen wird geprüft ob sich die Ebene innerhalb von einem plausiblen Parameterbereich befindet.
 Dazu zählt, dass die Entfernung der Ebene zwischen 1.9m und 2.2m bewegen sollte, dies entspricht in etwa der Montagehöhe des Velodyne Sensors.
 
-Die Anzahl an Iterationen des RANSAC ist auf 50 Begrenzt. Nach dem Durchlauf des RANSAC werden alle Punkte in der Pointcloud anhand ihrer Distanz zur Ebene als
+Die Anzahl an Iterationen des \ac{RANSAC} ist auf 50 Begrenzt. Nach dem Durchlauf des \ac{RANSAC} werden alle Punkte in der Pointcloud anhand ihrer Distanz zur Ebene als
 Groundflache makiert. Als threshold wurde hier expirimentel ein optimaler Wert von 0.5m ermittelt.
 
 
 \subsubsection{Planefitting}
 \label{subssec:planefitting}
-Zum Planefitting einer be ne wird üblicherweise eine SVD (Singular Value Decomposition)  \cite{Nurunnabi2012,Ram2007,Soderkvist2009}.
+Zum Planefitting einer be ne wird üblicherweise eine \ac{SVD}  \cite{Nurunnabi2012,Ram2007,Soderkvist2009}.
 SVD hat eine Komplexität von $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, da das Planefitting innehalb 
-des RANSAC's sehr häufig mit einer großen Anzahl an Punkten ausgeführt wird, führt das Ausführen des SVD innhalb des RANSAC zu einer sehr hohen laufzeit.
-Deshalb wird an dieser Stelle ein ``Linear least Squares (LLSQ)'' Algorithus mit einigen optimierungen eingesetzt. Bei der verwendung des LLSQ gilt es zu beachten,
+des \ac{RANSAC} sehr häufig mit einer großen Anzahl an Punkten ausgeführt wird, führt das Ausführen des \ac{SVD} innhalb des \ac{RANSAC} zu einer sehr hohen laufzeit.
+Deshalb wird an dieser Stelle ein \ac{LLSQ} Algorithus mit einigen optimierungen eingesetzt. Bei der verwendung des \ac{LLSQ} gilt es zu beachten,
 dass nicht der abstand der Punkte zur eben optimiert wird, sondern der Abstand der Punkte zur Ebene entlang einer Achse (in unserem Fall der z Achse) siehe \cref{LLSQ_MIN}.
-Das kann zu Problemen führen, wenn die Punkte weit gestreut, also weit von der Optimalen Ebene entfert sind. Da wir unsere Punkte innhalb des RANSAC allerdings anhand eines 
+Das kann zu Problemen führen, wenn die Punkte weit gestreut, also weit von der Optimalen Ebene entfert sind. Da wir unsere Punkte innhalb des \ac{RANSAC} allerdings anhand eines 
 Distanzkriteriums vorselektieren, stellt dies kein Problem dar.
 
 \begin{figure}[!ht]
@@ -351,7 +356,7 @@ b &= \frac{\sum x_i y_i \cdot \sum x_i z_i - \sum x_i x_i \cdot \sum y_i z_i }{D
 Dabei gibt es zu beachten, dass die Determinante nicht Null oder nahe Null sein darf.
 Da der winkel zwischen dem Fahrzeug und der Ebene jedoch immer nahe 90 Grad liegt, ist die Determinante typischweise sehr groß. 
 Sollte die Determinante doch nahe 0 (nicht gleich 0) sein, wird die Berechnung trotzudem durchgeführt, da dies auch zu einem 
-großen Fehler im Fitting führt. Dies ist an dieser Stelle erwünscht, da der RANSAC ungeültige Ebenen anhand des Fehlers ausssortiert.
+großen Fehler im Fitting führt. Dies ist an dieser Stelle erwünscht, da der \ac{RANSAC} ungeültige Ebenen anhand des Fehlers ausssortiert.
 Ist die Determinante extakt Null, wird die Berechnungstatdessen mit einem kleinen Wert für D fortgesetzt.
 
 Aus dem Normalenvektor $\vec{n}$ und dem Mittelwert-Punkt $\overline{P}$ können wir nun wieder die Hessische Normalenvektor bestimmen.
@@ -402,9 +407,10 @@ point : vector3f \\
 Diese wird wiedrrum in ein Statisches 2 Dimensionales Array Gespeichert: Points[2000][16]. Die Reihenfolge der Daten wird dabei beibehalten.
 Diese Datenstruktur stellt nun im weiteren verlauf unsere Pointcloud dar.
 
-Auf dieser Basis wird nun ein DBSCAN (Density-Based Spatial Clustering of Applications with Noise) \cite{DBSCAN} ausgeführt. Der DBSCAN Algorithms hat dabei folgende Vorteile.
+\todo{warum DBSCAN mit Noise!}
+Auf dieser Basis wird nun ein \ac{DBSCAN} \cite{DBSCAN} ausgeführt. Der \ac{DBSCAN} Algorithms hat dabei folgende Vorteile.
 Im Gegensatz beispielsweise zum K-Means-Algorithmus, muss nicht im vornherein bekannt sein, wie viele Cluster existieren. Der Algorithmus kann Cluster beliebiger Form 
-(z.B. nicht nur kugelförmige) erkennen. Das macht den DBSCAN damit für uns zu optimalen Kandidaten. DBSCAN selbst ist von linearer Komplexität.
+(z.B. nicht nur kugelförmige) erkennen. Das macht den \ac{DBSCAN} damit für uns zu optimalen Kandidaten. \ac{DBSCAN} selbst ist von linearer Komplexität.
 Die meiste Rechenzeit wird jedoch überlichweise durch die Nachbarschafts berechnung verursacht. Genau hier setzen wir an, anstatt der Bereichsanfrage über eine Baum-Struktur
 nutzten wir aus, dass Messungen in einer kleinen Nachbarschaft einen ähnlichen Azimuth Winkel haben. Dazu untersuchen wir für jeden Messwert jeweils zwei weitere Einträge nach links
 und rechts in unserem Array. Effektiv müssen wir daher $5 \cdot 16 = 80$ werte Überprüfen. Die Laufzeit der Bereichsanfrage kann deshalb in linearer Komplexität durchgeführt
@@ -412,7 +418,9 @@ werden. Alle Messwerte die Zuvor als Grund Klassifiziert wurden, werden bei der 
 
 
 \subsection{Tracking}
-Das Tracking ist in zwei Abschnitte unterteilt. Dem Tracking der Cluster vom DBSCAN und dem Erstellen und Tracken von Hindernissen.
+
+\todo{datenstrucktur Onjekte hinzufügen, weil positionen und attribute verwirrend}
+Das Tracking ist in zwei Abschnitte unterteilt. Dem Tracking der Cluster vom \ac{DBSCAN} und dem Erstellen und Tracken von Hindernissen.
 
 \subsubsection{Cluster Tracking}
 Für das Tracking der Cluster nehmen wir an, dass sich Objekte von Zeitschritt zu Zeitschritt nur geringefügig bewegen, weiterhin
@@ -535,32 +543,54 @@ ergebnis, zum einen hat die immer nur die größe der aktuellen Messung und zum 
 Da die orientierung und Postition der Objekte jedoch als eingang für den nachfolgenden Kalmanfilter genutzt wird, welcher sehr sensible auf falsch Orientierungen reagiert, wurde eben jeder Algorithmus
 entwickelt.
 
+\subsubsection{Object Confidence}
+\todo{implementierung Konfidence wert auf 1 setzen und entfernen, wenn wert unter 1, oder objekte auf basis ihrer Position entfernen}
+Um zu verhindern, dass kurzzeitig erkannte False Positives direckt als Objekt erkannt werden und damit die nachfolgende Logik beeinflusst, wird nun ein Confidence Wert eingeführt
+Bevor ein erkanntes Objekt als gültig erachtet wird, muss dieses einen gewissen Confidence Wert erreichen. Der Initiale Konfidence Wert eines Objektes ist Null. Der Konfidence wert
+wird um eins erhöht, wenn das Objekt in zwei aufeinader folgenden Zeitschritten getrackt werden kann und folgende bedingungen erfüllt: 
+
+\begin{itemize}
+\item Die breite des objkts muss kleiner seine als die länge des hindernisses zuzüglich 1.5m
+\item Die länge des Hindernises muss kleiner sein als 10m
+\item Die Breite des Hindernisses muss kliener sein als 4m
+\end{itemize}
+Ist eine dieser Bedingunggen nicht erfüllt, wird der Confidence Wert statdessen halbiert. Damit ein Objekt als gütig erachtet wird, muss es einen Confidence wert von 3 erreichen, sodass
+Ein Objekt erst nach mindestens 3 drei Iterationen erkannt werden kann.
 
 
 
 \subsection{Classification}
 \todo{text zu listing anpssen}
 \todo{implementierung Plausibilitätstest}
+\todo{filterung in code entfernen, weil größe bereits gefiltert wird}
 Die Klassifizierung der Objekte finedt anhand ihrer Größe statt, es findet keine Klassifizierung nach bewegten und unbewegten Objeten Stadt.
-Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterien werden dabei unter anderem, die Größe der Cluster und ihre Geschwindigkeit genutzt.
-Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1.5x1.5m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
+Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterium wird die Größe der Onjekte genutzt.
+Die Klassifizierung sieht wie folgt aus:
+\begin{description}
+\item[pedestrian:] length < 1.5 and width < 1.5
+\item[cyclist:] length < 2 and width < 1.5
+\item[car:] length < 10 and width < 4
+\item[undefined:] length >= 10 and width >= 4
+\end{description}
+
+% Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1.5x1.5m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
 Weiterhin wird andhand der Geschwindigekeit eine Plausibilitätstest durchgeführt. So darf eine Fußgänger eine Geschwindigekeit von 10km/h nicht überschreiten und die Maximalgeschwindigkeit dür einen 
 Radfahrer bertägt 30km/h. Da für Fahrzeuge keine sinnvolle geschwindigkeitsgrenze angenommen werden kann, wir an ihrer stelle die Änderung der Orientierung genutzt. Als Maximale Drehrate wird
 eine Messung von 0.3 rads/sec aus \cite{Kelly1994} angenommen. Da der Wert eine Obere Grenze darstellen soll nehmen wir einen etwas höheren  Wert von  0.3 rads/sec an.
 
 
-\begin{lstlisting}[language=Python]
-if length < 1.5 and width < 1.5:
-    type = pedestrian
-    
-elif length < 2 and width < 1.5:
-  type = cyclist
-  
-elif length < 10 and width < 4:
-    type = car;
-else:
-  type = undefined
-\end{lstlisting}
+% \begin{lstlisting}[language=Python]
+% if length < 1.5 and width < 1.5:
+%     type = pedestrian
+%     
+% elif length < 2 and width < 1.5:
+%   type = cyclist
+%   
+% elif length < 10 and width < 4:
+%     type = car;
+% else:
+%   type = undefined
+% \end{lstlisting}
 
 
 \subsection{State Estimation}
