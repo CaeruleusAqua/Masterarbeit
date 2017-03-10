@@ -31,14 +31,13 @@
 \contentsline {subsection}{\numberline {4.1.5}State Estimation}{19}{subsection.4.1.5}
 \contentsline {subsubsection}{Constant Turn Rate and Velocity Model}{19}{section*.43}
 \contentsline {subsubsection}{Prediction}{20}{section*.44}
-\contentsline {section}{\numberline {4.2}Mapping}{20}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}OpenDAVINIC Map}{20}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Simplification}{20}{subsection.4.2.2}
-\contentsline {chapter}{\numberline {5}Evaluation}{21}{chapter.5}
-\contentsline {section}{\numberline {5.1}Simuation}{21}{section.5.1}
-\contentsline {section}{\numberline {5.2}Real Measurements}{21}{section.5.2}
-\contentsline {chapter}{\numberline {6}Conclusions}{22}{chapter.6}
-\contentsline {chapter}{\numberline {7}Future Work}{23}{chapter.7}
+\contentsline {section}{\numberline {4.2}Simuation}{20}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Simuation Scenario}{20}{subsection.4.2.1}
+\contentsline {chapter}{\numberline {5}Evaluation}{22}{chapter.5}
+\contentsline {section}{\numberline {5.1}Simuation}{22}{section.5.1}
+\contentsline {section}{\numberline {5.2}Real Measurements}{22}{section.5.2}
+\contentsline {chapter}{\numberline {6}Conclusions}{23}{chapter.6}
+\contentsline {chapter}{\numberline {7}Future Work}{24}{chapter.7}
 \select@language {english}
 \select@language {english}
 \select@language {english}

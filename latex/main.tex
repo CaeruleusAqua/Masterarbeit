@@ -640,7 +640,7 @@ v\\
 % J(\vec{x})=
 % \begin{bmatrix}
 % 1 & 0 & \frac{v}{\omega} (-\cos(\theta)) + \cos(T \omega + \theta)& \dots & \dots \\
-% %\frac{1}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)&
+% %\frac{1}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& multi-body simulation
 % %\frac{Tv}{\omega} \cos(T \omega + \theta) - \frac{v}{\omega^2}(-\sin(\theta) + \sin(T\omega + \theta) 
 % 0 & 1 & \frac{v}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& \dots & \dots \\
 % 0 & 0 & 1 & 0 & T\\
@@ -657,13 +657,25 @@ abgeglichen. Befindet sich das neue Objekt nahe an der predizierten Position wir
 
 
 
+\section{Simuation}
+Die Simulationsumgebeung, welche verwendet wird ist VREP \footnote{\url{http://www.coppeliarobotics.com/}}. VREP wurde für verschiedenne Robottikanwendungen entwickelt.
+VREP erlaubt es innerhalb eines Graphischen beliebige \ac{MKS}, basierend auf diversen Physikengines zu konstruieren. Weiterhin verfügt VREP bereits über
+viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Simulation kann über ein RemoteAPI Interface mit nahezu jerder Programmiersprache kommunizieren.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{VREP}
+\includegraphics[width=\textwidth]{bilder/path.png}
+\label{vrep}
+%\end{center}
+\end{figure}
+
+\subsection{Simuation Scenario}
+Für Das Simalations Scenario wurde eine einfacher kleiner Kresiverkehr mit einem Außendurchmesser von 26m designt, da dieser aud grund seiner größe das interessanteste Objekt ist.
+Und im Innerstätischen Bereich jaufig anzutreffen ist. Zum testen der Onjektdetektion bietet dieser auf grund seiner bebaubaren mittelinsel gute möglichkeiten das Tracking zu testen.
+Weiterhin ist es aufgrund seiner Größe möglich den kompletten Kreisverkehr zu überblicken.
 
 
-
-
-\section{Mapping}
-\subsection{OpenDAVINIC Map}
-\subsection{Simplification}
 
 
 

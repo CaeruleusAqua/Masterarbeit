@@ -58,13 +58,14 @@ class CarLogic:
         self.old = list()
         self.new = list()
         self.radius = list()
+        self.sim_time=0
 
         self.point_cloud = []
         self.cloud_state = 0
 
         self.cpc = None
 
-        self.node = DVnode(cid=212)
+        self.node = DVnode(cid=211)
         self.node.connect()
 
         self.connect()
@@ -162,13 +163,14 @@ class CarLogic:
             old_angle = None
             sample_index = 0
             for index, value in enumerate(angle):
-                if ((layer_angle[index] + 15) < 16):
-                    mapped_angle = int(value * 5 + 0.5) / 5.0
-                    if mapped_angle != old_angle:
-                        sample_index += 1
-                    self.cpc[int(mapped_angle * 5)][(layer_angle[index] + 15)] = ranges[index]
-                    old_angle = mapped_angle
-            print sample_index
+                #if ((layer_angle[index] + 15) < 16):
+                mapped_angle = int(value * 5 + 0.5) / 5.0
+                if mapped_angle != old_angle:
+                    sample_index += 1
+                #print layer_angle[index]
+                self.cpc[int(mapped_angle * 5)][(layer_angle[index] + 15)/2] = ranges[index]
+                old_angle = mapped_angle
+            #print sample_index
 
             shaped_cpc = self.cpc.reshape(1803 * 16)
             msg = self.node.proto_dict[49]()
@@ -182,6 +184,14 @@ class CarLogic:
             container = self.node.proto_dict[0]()
             container.dataType = 49
             container.serializedData = msg.SerializeToString()
+            #container.sent = self.node.proto_dict[12]()
+            seconds = int(self.sim_time / 1000)
+            microseconds = int(self.sim_time * 1000 - seconds * 1000000)
+
+            print "seconds: " + str(seconds) + "  :  microseconds: " + str(microseconds)
+            container.sent.microseconds = microseconds
+            container.sent.seconds = seconds
+
             self.node.publish(container)
 
             print "Bounds:"
@@ -259,6 +269,7 @@ class CarLogic:
 
             vrep.simxWriteStringStream(self.clientID, "speed", vrep.simxPackFloats([self.speed]), vrep.simx_opmode_oneshot)
             vrep.simxSynchronousTrigger(self.clientID)
+            self.sim_time += 50
             time.sleep(0.0)
 
     def setSpeed(self):

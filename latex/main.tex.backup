@@ -418,6 +418,8 @@ werden. Alle Messwerte die Zuvor als Grund Klassifiziert wurden, werden bei der 
 
 
 \subsection{Tracking}
+
+\todo{datenstrucktur Onjekte hinzufügen, weil positionen und attribute verwirrend}
 Das Tracking ist in zwei Abschnitte unterteilt. Dem Tracking der Cluster vom \ac{DBSCAN} und dem Erstellen und Tracken von Hindernissen.
 
 \subsubsection{Cluster Tracking}
@@ -541,32 +543,54 @@ ergebnis, zum einen hat die immer nur die größe der aktuellen Messung und zum 
 Da die orientierung und Postition der Objekte jedoch als eingang für den nachfolgenden Kalmanfilter genutzt wird, welcher sehr sensible auf falsch Orientierungen reagiert, wurde eben jeder Algorithmus
 entwickelt.
 
+\subsubsection{Object Confidence}
+\todo{implementierung Konfidence wert auf 1 setzen und entfernen, wenn wert unter 1, oder objekte auf basis ihrer Position entfernen}
+Um zu verhindern, dass kurzzeitig erkannte False Positives direckt als Objekt erkannt werden und damit die nachfolgende Logik beeinflusst, wird nun ein Confidence Wert eingeführt
+Bevor ein erkanntes Objekt als gültig erachtet wird, muss dieses einen gewissen Confidence Wert erreichen. Der Initiale Konfidence Wert eines Objektes ist Null. Der Konfidence wert
+wird um eins erhöht, wenn das Objekt in zwei aufeinader folgenden Zeitschritten getrackt werden kann und folgende bedingungen erfüllt: 
+
+\begin{itemize}
+\item Die breite des objkts muss kleiner seine als die länge des hindernisses zuzüglich 1.5m
+\item Die länge des Hindernises muss kleiner sein als 10m
+\item Die Breite des Hindernisses muss kliener sein als 4m
+\end{itemize}
+Ist eine dieser Bedingunggen nicht erfüllt, wird der Confidence Wert statdessen halbiert. Damit ein Objekt als gütig erachtet wird, muss es einen Confidence wert von 3 erreichen, sodass
+Ein Objekt erst nach mindestens 3 drei Iterationen erkannt werden kann.
 
 
 
 \subsection{Classification}
 \todo{text zu listing anpssen}
 \todo{implementierung Plausibilitätstest}
+\todo{filterung in code entfernen, weil größe bereits gefiltert wird}
 Die Klassifizierung der Objekte finedt anhand ihrer Größe statt, es findet keine Klassifizierung nach bewegten und unbewegten Objeten Stadt.
-Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterien werden dabei unter anderem, die Größe der Cluster und ihre Geschwindigkeit genutzt.
-Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1.5x1.5m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
+Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterium wird die Größe der Onjekte genutzt.
+Die Klassifizierung sieht wie folgt aus:
+\begin{description}
+\item[pedestrian:] length < 1.5 and width < 1.5
+\item[cyclist:] length < 2 and width < 1.5
+\item[car:] length < 10 and width < 4
+\item[undefined:] length >= 10 and width >= 4
+\end{description}
+
+% Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1.5x1.5m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
 Weiterhin wird andhand der Geschwindigekeit eine Plausibilitätstest durchgeführt. So darf eine Fußgänger eine Geschwindigekeit von 10km/h nicht überschreiten und die Maximalgeschwindigkeit dür einen 
 Radfahrer bertägt 30km/h. Da für Fahrzeuge keine sinnvolle geschwindigkeitsgrenze angenommen werden kann, wir an ihrer stelle die Änderung der Orientierung genutzt. Als Maximale Drehrate wird
 eine Messung von 0.3 rads/sec aus \cite{Kelly1994} angenommen. Da der Wert eine Obere Grenze darstellen soll nehmen wir einen etwas höheren  Wert von  0.3 rads/sec an.
 
 
-\begin{lstlisting}[language=Python]
-if length < 1.5 and width < 1.5:
-    type = pedestrian
-    
-elif length < 2 and width < 1.5:
-  type = cyclist
-  
-elif length < 10 and width < 4:
-    type = car;
-else:
-  type = undefined
-\end{lstlisting}
+% \begin{lstlisting}[language=Python]
+% if length < 1.5 and width < 1.5:
+%     type = pedestrian
+%     
+% elif length < 2 and width < 1.5:
+%   type = cyclist
+%   
+% elif length < 10 and width < 4:
+%     type = car;
+% else:
+%   type = undefined
+% \end{lstlisting}
 
 
 \subsection{State Estimation}
@@ -616,7 +640,7 @@ v\\
 % J(\vec{x})=
 % \begin{bmatrix}
 % 1 & 0 & \frac{v}{\omega} (-\cos(\theta)) + \cos(T \omega + \theta)& \dots & \dots \\
-% %\frac{1}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)&
+% %\frac{1}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& multi-body simulation
 % %\frac{Tv}{\omega} \cos(T \omega + \theta) - \frac{v}{\omega^2}(-\sin(\theta) + \sin(T\omega + \theta) 
 % 0 & 1 & \frac{v}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& \dots & \dots \\
 % 0 & 0 & 1 & 0 & T\\
@@ -633,13 +657,23 @@ abgeglichen. Befindet sich das neue Objekt nahe an der predizierten Position wir
 
 
 
+\section{Simuation}
+Die Simulationsumgebeung, welche verwendet wird ist VREP \footnote{\url{http://www.coppeliarobotics.com/}}. VREP wurde für verschiedenne Robottikanwendungen entwickelt.
+VREP erlaubt es innerhalb eines Graphischen beliebige \ac{MKS}, basierend auf diversen Physikengines zu konstruieren. Weiterhin verfügt VREP bereits über
+viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Simulation kann über ein RemoteAPI Interface mit nahezu jerder Programmiersprache kommunizieren.
 
+\begin{figure}[!ht]
+%\begin{center}
+\caption{VREP}
+\includegraphics[width=\textwidth]{bilder/vrep.png}
+\label{vrep}
+%\end{center}
+\end{figure}
 
-
-
-\section{Mapping}
-\subsection{OpenDAVINIC Map}
-\subsection{Simplification}
+\subsection{Simuation Scenario}
+Für Das Simalations Scenario wurde eine einfacher kleiner Kresiverkehr mit einem Außendurchmesser von 26m designt, da dieser aud grund seiner größe das interessanteste Objekt ist.
+Und im Innerstätischen Bereich jaufig anzutreffen ist. Zum testen der Onjektdetektion bietet dieser auf grund seiner bebaubaren mittelinsel gute möglichkeiten das Tracking zu testen.
+Weiterhin ist es aufgrund seiner Größe möglich den kompletten Kreisverkehr zu überlicken.
 
 
 
