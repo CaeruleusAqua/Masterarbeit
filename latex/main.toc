@@ -3,41 +3,44 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}Research Question}{1}{section.1.2}
-\contentsline {chapter}{\numberline {2}Related Work}{2}{chapter.2}
-\contentsline {section}{\numberline {2.1}Autonomous Driving}{2}{section.2.1}
-\contentsline {section}{\numberline {2.2}Roundabouts in Law}{2}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Elements of a Roundabout}{2}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Types of Roundabouts}{3}{subsection.2.2.2}
-\contentsline {subsubsection}{Mini Roundabout}{3}{section*.6}
-\contentsline {subsubsection}{Small Roundabout}{4}{section*.8}
-\contentsline {subsubsection}{Two-lane Passable Roundabout}{4}{section*.10}
-\contentsline {subsubsection}{Large Roundabout}{5}{section*.12}
-\contentsline {section}{\numberline {2.3}Middleware OpenDAVINCI}{5}{section.2.3}
-\contentsline {section}{\numberline {2.4}Test Platform}{6}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Velodyne VLP-16 LiDAR}{6}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Applanix POS LV}{7}{subsection.2.4.2}
-\contentsline {chapter}{\numberline {3}Methodology}{8}{chapter.3}
-\contentsline {chapter}{\numberline {4}Research}{10}{chapter.4}
-\contentsline {section}{\numberline {4.1}Objekt Detection}{10}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Ground Removal}{10}{subsection.4.1.1}
-\contentsline {subsubsection}{Planefitting}{12}{section*.24}
-\contentsline {subsection}{\numberline {4.1.2}Clustering}{14}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Tracking}{15}{subsection.4.1.3}
-\contentsline {subsubsection}{Cluster Tracking}{15}{section*.31}
-\contentsline {subsubsection}{Object Tracking}{15}{section*.32}
-\contentsline {subsubsection}{Object Confidence}{18}{section*.38}
-\contentsline {subsection}{\numberline {4.1.4}Classification}{19}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}State Estimation}{19}{subsection.4.1.5}
-\contentsline {subsubsection}{Constant Turn Rate and Velocity Model}{19}{section*.43}
-\contentsline {subsubsection}{Prediction}{20}{section*.44}
-\contentsline {section}{\numberline {4.2}Simuation}{20}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Simuation Scenario}{20}{subsection.4.2.1}
-\contentsline {chapter}{\numberline {5}Evaluation}{22}{chapter.5}
-\contentsline {section}{\numberline {5.1}Simuation}{22}{section.5.1}
-\contentsline {section}{\numberline {5.2}Real Measurements}{22}{section.5.2}
-\contentsline {chapter}{\numberline {6}Conclusions}{23}{chapter.6}
-\contentsline {chapter}{\numberline {7}Future Work}{24}{chapter.7}
+\contentsline {section}{\numberline {1.2}Research Question}{2}{section.1.2}
+\contentsline {chapter}{\numberline {2}Related Work}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Autonomous Driving}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Roundabouts in Law}{3}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Elements of a Roundabout}{3}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Types of Roundabouts}{4}{subsection.2.2.2}
+\contentsline {subsubsection}{Mini Roundabout}{4}{section*.7}
+\contentsline {subsubsection}{Small Roundabout}{5}{section*.9}
+\contentsline {subsubsection}{Two-lane Passable Roundabout}{5}{section*.11}
+\contentsline {subsubsection}{Large Roundabout}{6}{section*.13}
+\contentsline {section}{\numberline {2.3}Middleware OpenDAVINCI}{6}{section.2.3}
+\contentsline {section}{\numberline {2.4}Test Platform}{7}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Velodyne VLP-16 LiDAR}{7}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Applanix POS LV}{8}{subsection.2.4.2}
+\contentsline {chapter}{\numberline {3}Methodology}{9}{chapter.3}
+\contentsline {chapter}{\numberline {4}Research}{11}{chapter.4}
+\contentsline {section}{\numberline {4.1}Objekt Detection}{11}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Ground Removal}{11}{subsection.4.1.1}
+\contentsline {subsubsection}{Planefitting}{13}{section*.27}
+\contentsline {subsection}{\numberline {4.1.2}Clustering}{15}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Tracking}{16}{subsection.4.1.3}
+\contentsline {subsubsection}{Cluster Tracking}{16}{section*.34}
+\contentsline {subsubsection}{Object Tracking}{16}{section*.35}
+\contentsline {subsubsection}{Object Confidence}{19}{section*.41}
+\contentsline {subsection}{\numberline {4.1.4}Classification}{20}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}State Estimation}{20}{subsection.4.1.5}
+\contentsline {subsubsection}{Constant Turn Rate and Velocity Model}{20}{section*.46}
+\contentsline {subsubsection}{Prediction}{21}{section*.47}
+\contentsline {section}{\numberline {4.2}Simuation}{21}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Simuation Scenario}{21}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Simulation Logic}{22}{subsection.4.2.2}
+\contentsline {subsubsection}{Sensor Connection}{22}{section*.50}
+\contentsline {subsubsection}{Mapping and Statemachine}{23}{section*.51}
+\contentsline {chapter}{\numberline {5}Evaluation}{24}{chapter.5}
+\contentsline {section}{\numberline {5.1}Simuation}{24}{section.5.1}
+\contentsline {section}{\numberline {5.2}Real Measurements}{24}{section.5.2}
+\contentsline {chapter}{\numberline {6}Conclusions}{25}{chapter.6}
+\contentsline {chapter}{\numberline {7}Future Work}{26}{chapter.7}
 \select@language {english}
 \select@language {english}
 \select@language {english}

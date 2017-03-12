@@ -665,7 +665,7 @@ viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Si
 \begin{figure}[!ht]
 %\begin{center}
 \caption{VREP}
-\includegraphics[width=\textwidth]{bilder/vrep.png}
+\includegraphics[width=\textwidth]{bilder/path.png}
 \label{vrep}
 %\end{center}
 \end{figure}
@@ -673,12 +673,78 @@ viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Si
 \subsection{Simuation Scenario}
 Für Das Simalations Scenario wurde eine einfacher kleiner Kresiverkehr mit einem Außendurchmesser von 26m designt, da dieser aud grund seiner größe das interessanteste Objekt ist.
 Und im Innerstätischen Bereich jaufig anzutreffen ist. Zum testen der Onjektdetektion bietet dieser auf grund seiner bebaubaren mittelinsel gute möglichkeiten das Tracking zu testen.
-Weiterhin ist es aufgrund seiner Größe möglich den kompletten Kreisverkehr zu überlicken.
+Weiterhin ist es aufgrund seiner Größe möglich den kompletten Kreisverkehr zu überblicken. Das Ganze Senarion wurde aufgrund von limitierungen in Vrep um den Faktor 10 herunterscaliert.
+
+Innhrhalb des Szenarosn bewegen sich innerhalb des Kreisverkehrs ein Fahrad, ein Fußgänder und ander 2 Fahrzeuge. Die Objekte bewegen sich dabei auf festgelegten Pfaden.
+Dei Geschwindigekeit aller Verkehrsteilnehmer ist dabei auf den Typ angepasst. Der Füßgänger bewegt sichn mit für füßgänger übliche 5km/h.
+Das Fahrrad mit 15km/h. Die beiden Autos bewegen sich mit Unterschiedlichen Greschwindigkeiten zwischen 25 und 35 Km/h. Um eine Kolision der Fahrzeuge zu vermeiden, sind beide 
+Fahrzeuge an der vorderseite mit Distanzsensoren ausgestattet. Sollte dieser Sensor ein Fahrzeug erkennen, geht das Fahrzeug in eine  Adaptive cruise control modus und
+passt sich dem vorderen Fahrzeug an. Das Adaptive cruise control ist dabei als einfacher proportional regler umgesetzt.
+
+Das autonome Fahrzeug bewegt sich dabei ebenfalls auf eine festen Pfad, dieser führt von rechts in den Kreisverkehr ein und verlässt den Kreisverkehr an der dritten ausfahrt.
+die Aufageb des Fahrzeues ist dabei sich sicher in den Kreisfehr einzusortieren und den Kreisverkehr sicher zu verlassen. Dabei Muss das Fahhzeug sowohl aud den Fußgänger, den Radfahrer
+und die Andren Fahrzeuge innerhalb des Kreisverkehres achten. Dazu ist das Fahrzeug mit einem virtuellen Velodyne VLP-16 ausgestattet.
+
+\subsection{Simulation Logic}
+
+Um das zuvor beschrieben Scenario durchzuführen musste eine Logik entwicklt werden, diese umfasst nicht nur die Statemachine zum durch fahren des Kreisverkehrs, sondern
+auch die Lokalisierung des Fahrzeuges in dem Scenario als auch die Anbinung aller Sensoren an die Objekt Erkennung. Da alle nachfolgenden Berchungen nur wenig resscourcen bentigen
+wurde die entsprechende Software in Pyhon entwickelt.
+
+\subsubsection{Sensor Connection}
+Die Objekt detection benoötigt als Sensor eingange die Daten des Velodyne VLP-16 und die Daten des Applanix POS-LV. Von den Applanix daten werden jecoch nur
+due Aktuelle Postion im WGS84 format benötigt und das aktuelle Heading. Da sich der Applanix Sensor in VREP nicht einfach nachbauen lässt,
+wird das Applanix system einfach aus den in Vrep auslesbaren Positions und Rotationsdaten generiert. Da die Position in VREP in Kartesischen Koordinaten
+angeben ist, werden dies über die in OpenDAVINCI enhaltene Transformation anhand einer Referenzkoordinate in WGS84 Koordinaten transformiert.
+
+Die Anbindung des Velodyne-VLP gestaltet sich schwieriger, da der Aufabau der Messdaten sich signifikant vom Originalvelodyne unterscheidet.
+Zwar werden die Daten ebenfalls in Polarkoordinaten ausgegeben, jedoch werden nur Messwerte ausgegen, wenn diese auf ein Onjekt treffen. Da ein Großteil des Scenarios leerer Raum ist
+weisen die Messdaten viele löcher auf, wesshalb diese in eine geeignete Form transformiert werden müsssen.
+
+Dabei ist zu beachten, das das Onjekttracking eine vollständige 360 Gram Messung erwartet, dazu muss zusätzlich gewartet werden, bis alle Nötigen Messdaten vorliegendn.
+Der virtualle Velodynle liefet eine Messrate von 10Hz, und ist dabei in 4 Segmente eingeteilt, welche nacheinander ausgelesen werden. Der zur simulation verwendete Zeitschritt
+beträgt 50ms, so dass wir 2 Segemente in einem Zeitschritt auslesen können. Solbald alle Daten gesammelt sind, werden diese zu einem geeigneten Messframe zusammengesetzt.
+
+Die glieferten Messdaten liegen als liste von Kugelkoordinaten vor (Radius $r$, Polarwinkel $\theta$, Azimutwinkel $\Phi$). Da die Azimut und Polarwinkel dabei nicht in Aquidistanzen Abständen
+vorliegen, jedoch eine sehr viel höhere Auflösung als der originale Sensor haben, werden die Messwerte auf die Originale auflösung von 0.2 bzw. 2 Grad heruntergerundet und die Messerte in ein
+Entsprechendes zweidimensionales Array fester größe eingetragen eingetragen. Sodass nicht erfasste bereiche den Wert Null erhalten.
+
+Nach dem alle Erforderlichen Messdaten gesammelt und umgewandelt wurden, werden diese über ein seperat  entwickeltes OpenDAVINCI-Python interface an die Objekterkennung gesendet.
+
+
+\subsubsection{Mapping and Statemachine}
+
+Laut RASt \cite{rast06} soll ein Kreisverkehr möglichst kreisförmig sein, der einfachheit halber nehmen wir ür die Simulation an, dass dieser ein perfekter kreis ist.
+Das heißt, dass Sowohl Straßen, Radwege und fußwege perfekt kreisförmig sind und duch einen Radius beschrieben werden können.
+
+
+
+
 
 
 
 
 \chapter{Evaluation}
+To address RQ1, a framework for continuous experimentation for the automotive domain
+was proposed. The framework adapts the concept used in the software-only domain [15,
+26]: Eklund and Bosch propose to expose the user to the experimental functionality,
+as practiced in the software domain [6]. While this approach is possible for non-safety-
+critical components, like for example infotainment systems, it is not promising for safety-
+relevant features. To challenge this aspect, and in answer to RQ3, we propose to run
+experimental software in isolation, without access to actors. Instead of exposing the user
+to experimental functionality, we expose the data, by processing it with experimental
+algorithms, in addition to the existing ones. While this is an important measure for
+safety, it cannot be the only one: RQ2 addresses the fact that the computing resources
+in cars are generally at a premium. This also indirectly affects safety, because in order to
+run a safe experiment, it must be ensured that the resources taken by the experimental
+software are actually available, and not drawn from safety-relevant modules. Different
+techniques to overcome limited resources are proposed in the framework. We also pro-
+pose offline experiments, in the style of [1]. These experiments can be conducted in a
+controlled environment, in order to assess the available resources, and therefore prepare
+for large-scale experiments in the field, as well as using the metrics provided by the
+framework also for conventional testing on a test track. With respect to the experiment
+architecture proposed by Fagerholm et al. [7], our proposed framework occupies the spot
+of an experimentation frontend.
 
 \section{Simuation}
 \section{Real Measurements}
