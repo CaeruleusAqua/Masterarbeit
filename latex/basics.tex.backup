@@ -1,4 +1,4 @@
-\chapter{Related Work}
+\chapter{Basic Knowledge}
 
 \section{Autonomous Driving}
 
@@ -164,6 +164,62 @@ Large Roundabouts with two or more lanes marked by markers on the circular path 
 if the nodal point design and traffic control are closely coordinated.
 
 
+\section{\acl{RANSAC}}
+
+Der \ac{RANSAC} \cite{Fischler1981} ist ein Algorithmus zur Schätzung eines Modells innerhalb einer Reihe von Messwerten mit Ausreißern und groben Fehlern. Wegen seiner Robustheit wird er vor allem bei der Auswertung automatischer Messungen vornehmlich im Bereich der Bildverarbeitung. 
+Hier unterstützt \ac{RANSAC} durch Berechnung einer um Ausreißer bereinigten Datenmenge, des sogenannten Consensus Sets, Ausgleichsverfahren wie die Methode der kleinsten Quadrate, die bei einer größeren Anzahl von Ausreißern meist versagen.
+
+Der \ac{RANSAC} benötogt mehr datenpunkte als für die eindeutige bestimmeung des Modells benötigt werden. Aus diesem Set von Datenpunkten werden dann zufällig soviele Datenpunkte ausgwählt, wie nötig sind um das Model eindeutig zu berstimmen.
+Aus den Restlichen Daten werden dann diejenigen ausgewählt, welche einen abstabnd haben der keliner ist als ein bestimmter Grenzwert. Diese Menge stellt nun das ``Consensus Set'' dar.  Enthält sie eine gewisse Mindestanzahl an Werten, wurde vermutlich ein gutes Modell gefunden, und der Consensus set wird gespeichert.
+Diese Schritte werden mehrmal wiederholt. Dann wird diejenige Teilmenge gewählt, welche die meisten Punkte enthält. Mit dieser Teilmenge werden mit einem der üblichen Ausgleichsverfahren die Modellparameter berechnet.
+Der \ac{RANSAC} hat also drei zu Bestimmende Parameter,m welche das ergebnis beeinflussen.
+
+\begin{figure}[!ht]
+\begin{center}
+\caption{\acs{RANSAC} \cite{Fischler1981}}
+\includegraphics[width=0.6\textwidth]{bilder/ransac.pdf}
+\label{platform}
+\end{center}
+\end{figure}
+
+
+\begin{itemize}
+ \item number of iterations
+ \item minimum size of the ``Consensus Set''
+ \item distance threshold value (eps)
+\end{itemize}
+
+Zu beachten ist, das der \ac{RANSAC} durch die zufällige Auswahl der Datenpunkte kein deterministischer algorythmus ist.
+
+
+\section{\acl{DBSCAN}}
+\ac{DBSCAN} \cite{DBSCAN} ist ein deterministischer Data-Mining-Algorithmus zur Clusteranalyse. Der Algorithmus basiert auf der Dichteverbundenheit, das heißt er bindet punkte basierend auf iher Enterferung zu Clustern
+\ac{DBSCAN} iterietert über alle  noch nicht beabreiteten Datenpunkte, jeder bearbeitete Datenpunkt wird als bearbeitet makiert. Für jeden dieser Pubnkte wird dann eine Berichsanfrage durchgeführt.
+Ist die größe der nachbarschaft keiner als ein bestimmter Grenzwert, wird der Punkt las Rausche makiert. Andernfalls Wird ein neuer Clusrer erstellt, indem für jeden Punkt in
+der nachbarschaft eine neue Bereichsanfrage durchgeführt wird, wird dieser Nicht als Rauschen klassifiziert, wird dieser zum Cluster hinzugefügt und als bearbeitet Makiert.
+Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbeitet makiert sind, also keine Weiteren punkte in der nachbarschaft erreichbar sind.
+
+\begin{figure}[!ht]
+\begin{center}
+\caption{\acs{DBSCAN} \cite{DBSCAN}}
+\includegraphics[width=0.6\textwidth]{bilder/dbscan.pdf}
+\label{platform}
+\end{center}
+\end{figure}
+
+
+
+Der \ac{DBSCAN} hat also zwei zu Bestimmende Parameter, welche das ergebnis beeinflussen.
+\begin{itemize}
+ \item maximum distance of the neighborhood points
+ \item minimum number of points required to form a dense region
+\end{itemize}
+
+
+
+
+
+
 \section{Middleware OpenDAVINCI}
 Autonome Software ist typischer weise ein verteiletes System, auf heutigen Fahrzeugen basiert dieses System auf ECUs und Bussystemen wie CAN,LIN.
 Verteilete Sysoftware vereinfacht es komplexe Komponenten innheralb des Systems zu integreieren. Im bereich des Autonomen Fahrens iust der Historische aufbau von Fahrzeugen
@@ -175,39 +231,6 @@ den Komponenten Ermöglicht \cite{Kurose2013}. Für die Kommunikation bietet Ope
 für die Anbindung der Software genutzt wird. Weiterhin bietet OpenDaVINCI viele weiter Funktionalitäten die das Handling von World Geodetic System 1984 (WGS84) Korridinaten an, welches für die Umwandlung
 von GPS koordinaten in lokale kartesische genutzt werden kann. Dazu ist die Angabe einer referenz GPS postion nötig, welche um den Berechnugsfehler klein zu halten,
 nicht zu weit entfernt sein sollte.
-
-
-\section{Test Platform}
-Die in dieser Abreit genutze Testplatform ist ein Volvo XC90 (2015) SUV. Dies Testpaltform ist mit vielen Sensoren zur Umfeldwarnehmung ausgestattet.
-Dazu zählen fünf Radar Sensoren, rund um das Fahrzeug. Wobei das Front Radar über eine Größere Reichweite verfügt. Sowie eine
-Stereo Kamera und ein Velodyne VLP-16 LiDAR. Die Anordnung der Sensoren kann \cref{platform} entnommen werden.
-
-
-\begin{figure}[!ht]
-%\begin{center}
-\caption{Test Platform}
-\includegraphics[width=\columnwidth]{sensors.pdf}
-\label{platform}
-%\end{center}
-\end{figure}
-
-
-Zusätlich zur Fahrzeuginternen Sensorik (Odometer, Interialsensorik) ist im Fahrzeug ein Applanix POS LV verbaut. Zu Zeitpunkt des Verfassens dieser Arbeit war es leider nicht möglich auf
-die Radarsensoren und die Stereokamera zuzugreifen. Daher werden im folgenden lediglich der Velodyne Lidar und das Applanix System genauer beschrieben.
-
-\subsection{Velodyne VLP-16 LiDAR}
-Der Velodyne VLP-16 ist ein 360 Grad 3D Laserscannermit einer Rotationsgeschwindigkeit von 5 bis 20 Umdrehungen pro Sekunde. Er bietet ein vertikales FOV von 30 Grad, bei 2 Grad Auflösung.
-Mit einer Reichweite von 100m kann er einen Umkreis von 200m Durchmesser abdecken. Weiterhin kann der VLP-16 mit dem Applanix POS LV syncronisiert werden, was eine jitterarme Zeimessung ermöglicht.
-Eine weiter Funktion des Velodyne Sensors, ist das er auf verschiedene Messimpulse reagieren kann. Durch die Auswertung des letzten Impulses statt des Stärksten Impulses ist es Möglich durch Transparent Objekte zu sehen.
-Das ermöglicht uns im späteren Verlauf die Breite des Fahrzeues zu ermitteln, da der Velodyne durch die Glasfenster des Fahrzeues blicken kann.
-Bei einer eingestellten Geschwindigkeit von 10Hz liefert der VLP-16 eine Auflösung von 0.2 Grad bei einer Abreichung von +-3cm. Der VLP-16 ist mittig auf dem Dach des XC90 moniert, um eine möglichst hohe Positionierung
-zu erreichen, die eine Rundumsicht umd Das Fahrzeug zu erreichen.
-
-\subsection{Applanix POS LV}
-Das POS LV ist ein kompaktes Positions- und Orientierungssystem. Es Offeriert stabile, zuverlässige und reproduzierbare Positionierungslösungen für landgestützte Fahrzeuganwendungen.
-Das POS LV liefert dabei eine Inertialsensork und Odometrie gestützte Positionsmessung mit einer Genauigkeit von bis zu 0.3m (bis zu 0.035m bei verwendung von der der RTK - Korrektur).
-Im weiteren Verlauf wird außerdem das vom POS LV gelieferte Heading genutzt, welches eine Genauigkeit von 0.2 Grad liefert. Auch nach ausfall des GPS-Signals kann das POS-LV durch sein
-Odeomerter und der Inertialsensork eine Position liefern. Diese wird jedoch über die Zeit schlechter, so das 60Sek nach Ausfall des GPS-Signals nich eine Genauigkeit von 2.51m erwartet werden kann.\cite{manAP}
 
 
 

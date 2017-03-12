@@ -109,6 +109,49 @@
       \field{pages}{226\bibrangedash 231}
       \range{pages}{6}
     \endentry
+    \entry{Fischler1981}{article}{}
+      \name{author}{2}{}{%
+        {{hash=9b8ae886cec28b4c3f4e3893d1c770f5}{%
+           family={Fischler},
+           familyi={F\bibinitperiod},
+           given={Martin\bibnamedelima a},
+           giveni={M\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+        {{hash=ddeab87708c913b6cccb377bfcb0af77}{%
+           family={Bolles},
+           familyi={B\bibinitperiod},
+           given={Robert\bibnamedelima C},
+           giveni={R\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{d3b90a89d0cbd74ee28a2bd8279be65b}
+      \strng{fullhash}{d3b90a89d0cbd74ee28a2bd8279be65b}
+      \strng{authornamehash}{d3b90a89d0cbd74ee28a2bd8279be65b}
+      \strng{authorfullhash}{d3b90a89d0cbd74ee28a2bd8279be65b}
+      \field{sortinit}{F}
+      \field{sortinithash}{c6a7d9913bbd7b20ea954441c0460b78}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A new paradigm, Random Sample Consensus (RANSAC), for fitting a model to experimental data is introduced. RANSAC is capable of interpreting/ smoothing data containing a significant percentage of gross errors, and is thus ideally suited for applications in automated image analysis where interpretation is based on the data provided by error-prone feature detectors. A major portion of this paper describes the application of RANSAC to the Location Determination Problem (LDP): Given an image depicting a set of landmarks with known locations, determine that point in space from which the image was obtained. In response to a RANSAC requirement, new results are derived on the minimum number of landmarks needed to obtain a solution, and algorithms are presented for computing these minimum-landmark solutions in closed form. These results provide the basis for an automatic system that can solve the LDP under difficult viewing and analysis conditions. Implementation details and computational examples are also presented.}
+      \field{isbn}{0934613338}
+      \field{issn}{0001-0782}
+      \field{journaltitle}{Communications of the ACM}
+      \field{langid}{english}
+      \field{number}{6}
+      \field{title}{{Random Sample Consensus: A Paradigm for Model Fitting with Applicatlons to Image Analysis and Automated Cartography}}
+      \field{volume}{24}
+      \field{year}{1981}
+      \field{pages}{381\bibrangedash 395}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1145/358669.358692
+      \endverb
+      \verb{file}
+      \verb :home/storm/workspace/Masterarbeit/documents/ransac.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1145/358669.358692
+      \endverb
+      \keyw{automated cartography,camera calibration,computer{\_}vision,epipolar,geometry,image matching,keypoints,location determination,match-rejection,model fitting,motion-estimation,multi-view,rpc,scene analysis,sift,stereo,structure{\_}from{\_}motion,tracking}
+    \endentry
     \entry{Himmelsbach2009}{article}{}
       \name{author}{3}{}{%
         {{hash=a7a8b9530523ae109d78af5f8e764e3e}{%
