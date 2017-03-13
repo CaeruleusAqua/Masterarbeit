@@ -216,6 +216,8 @@ Groundflache makiert. Als threshold wurde hier expirimentel ein optimaler Wert v
 
 \subsubsection{Planefitting}
 \label{subssec:planefitting}
+
+\todo{Macht das überhaut sinn? Laut ransac sollte das Planefitting nicht iterativ ausgeführt werden???? Fuck!}
 Zum Planefitting einer be ne wird üblicherweise eine \ac{SVD}  \cite{Nurunnabi2012,Ram2007,Soderkvist2009}.
 SVD hat eine Komplexität von $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, da das Planefitting innehalb 
 des \ac{RANSAC} sehr häufig mit einer großen Anzahl an Punkten ausgeführt wird, führt das Ausführen des \ac{SVD} innhalb des \ac{RANSAC} zu einer sehr hohen laufzeit.
@@ -727,16 +729,104 @@ Entsprechendes zweidimensionales Array fester größe eingetragen eingetragen. S
 Nach dem alle Erforderlichen Messdaten gesammelt und umgewandelt wurden, werden diese über ein seperat  entwickeltes OpenDAVINCI-Python interface an die Objekterkennung gesendet.
 
 
-\subsubsection{Mapping and Statemachine}
+\subsubsection{Mapping}
+Für das Maping wird das OpenDAVINCI interne Compressed Scenario Data Format (SCNX) \cite{Berger2010} genutzt. Diese erlaubt es Szenarien zu definieren, stationären und dynamischen Elemente, 
+zu beschreiben und zu kombinieren, um unterschiedliche Verkehrssituationen zu formulieren. Das SCNX format offeriert für die Modellierung von Straßen unter anderm
+die Klassen ROAD,LANE. Wobei eien ROAD dabei aus mehreren LANE's bestehen kann. eine Lane aus einer Menge an Pukten besteht, welche den Verlauf der lane beschreiben.
+Der Lane kann weiterhin als Attribut eine Fahrspurmakierung und eine Breite zugewiesen werden. Einzelne Lanes können unterinander Verbunden werden, was mit diesen Einfachen 
+Modellen ein Komplttes Straßennetz aufgebaut werden kann. Da OpenDAVINCI kein Pythoninterface für das Parsen der Scenariofiles zur verfügungs stellt, wurde ein eigenner Lexer für die 
+Verabreitung der Scenariofiles implementiert. Dabei wurde sich auf für die Simulation nötigen Klassen beschränkt. Daher lässt sich eine Lane sich dabei nur durch ein Punktmodell
+beschreiben, währen OpenDAVINCI zusätzlich weitere Modelle anbietet.
 
-Laut RASt \cite{rast06} soll ein Kreisverkehr möglichst kreisförmig sein, der einfachheit halber nehmen wir ür die Simulation an, dass dieser ein perfekter kreis ist.
-Das heißt, dass Sowohl Straßen, Radwege und fußwege perfekt kreisförmig sind und duch einen Radius beschrieben werden können.
+Weiterhin musste das in OpenDAVINCI enthaltene Modell erweitert werden, da OpenDAVINCI leider keine andern Arten von wegen unterstützt.
+Daher wurde die Klasse Lane um ein Typ attribut erweitert, was es ermöglicht diese Als Rad oder Fußweg zu deklarieren.
+Der Aufbau der erweiterten Pythonklassen kann in \cref{parer_objects} begutachtet werden.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Parser Objects}
+
+ \begin{tikzpicture} 
+  \umlclass{ROAD}{
+  roadid : int \\
+  roadname : string \\
+  lanes : lane[]}{}
+  \umlclass[x=6,y=0]{LANE}{
+  laneid : int \\
+  width : string \\
+  type : string \\
+  leftlanemarking : string\\
+  rightlanemarking : string\\
+  pointmodell : pointmodel
+  }{}
+  \umlclass[x=6,y=-4]{POINTMODEL}{
+  points : VERTEX2[]
+  }{}
+  \umlclass[x=0,y=-4]{VERTEX2}{
+  points : VERTEX2[]
+  }{}
+  \umlunicompo[mult=1..*]{ROAD}{LANE}
+  \umlunicompo{LANE}{POINTMODEL}
+  \umlunicompo[mult=2..*]{POINTMODEL}{VERTEX2}
+  \end{tikzpicture}
+\label{parer_objects}
+\end{figure}
+
+
+
+Für die Handbung des Kreisverkehres musste das Kartenformat jedoch no weiter erweitert werden. Laut RASt \cite{rast06} soll ein Kreisverkehr möglichst kreisförmig sein, 
+der einfachheit halber nehmen wir für die Simulation an, dass dieser ein perfekter Kreis ist. Das heißt, dass Sowohl Straßen, Radwege und fußwege perfekt kreisförmig sind und
+duch einen inneren und äußeren Radius beschrieben werden können. Daher wurde für die Berschreibung des Kreisverkehres eine Klasse Kreisverker hinzugefügt,
+welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren innere und äußere Radien enhält. Weriterhin wirden in ihm die verbindungen zu den Anschlusstraßen definiert.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Roundabout Class}
+ \begin{tikzpicture} 
+  \umlclass{ROUNDABOUT}{
+  roundaboutid : int \\
+  lanes : lane[]\\
+  junctions : tuple[]\\
+  lane\_radius : float[]\\
+  centrum :  VERTEX2
+  }{}
+  \end{tikzpicture}
+\label{roundabout_class}
+\end{figure}
+
+\subsubsection{Statemachine}
+
+\todo{suimulation mit sythetischen daten (aus vrep) und daten aus object tracking vergleiche}
+\todo{Annhame constant acceleartion model}
+Die Statemachine ist nach Gang of Four  \cite{lester2008gang} implemetiert. Dafür wurden X \todo{nummer anpassen} States Implementiert.
+Für alle Fahrzeugeigenen berechnungen wird ein Constant acceleartion modell angenommen. Zur bestimmung der Maximalen positiven und negativen Beschleunigung
+wurden mit dem realen Fahrzeug testfahrten aufgezeichnet, bei denen die maximalen subjekiv angenehmen Werte bestimmt wurden.
+\todo{plott acceleartion positiv/negativ, und auswertung}
+Vor jedem aufruf einenes States, werden alle von der Objekterkennung gelieferten Objekte abgeholt und auf die in der Karte festgehalten Fahrspuren gemappt.
+Weiterhin wird die zu erwartende Intersection position mit allen Spuren im Kreiverkehr bestimmt, dies ist nötig, da Das Fahrzeug nicht gerade in den Kreisverkehr einfährt
+und so die von der Karte glieferte Position stark verfälscht sein kann. Dazu werden aus der zu erwartenden Fahrzeugtrjektorie und dem Vereinfachtetn Kreisverkehrmodell
+die Schnittpunkte von Trajektorie und Fahrspuren berechnet.
 
 
 
 
+\paragraph{ToRoundabout - State}
+In diesem Zustand befindet sich das Fahhzeug, wenn es sich noch nicht im Kreisverkehr befindet. Bei jedem Aufruf wird für alle geliferten
+Hindernisse die sich in richtung der Intersection bewegen der Verbleibende weg berechnet.  Aus den verbelibenden Strecken der Hindernisse und 
+derren gesschwindigkeiten wird das zu erwartende Zeitfenseter berechnet, in dem das Hindernis die intersectionposition, abzüglich der Hindernisgröße erreicht. 
+Aus der maximalen beschleunigung und Geschwindikeit \todo{define max speed} des Fahrzeuges und der ebenfalls berechneten Entfernung zur intersectionposition wird hier
+ebenfalls ein Zeitfenster berechnet. Sollte dieses Zeitfenster kleiner sein als eines der Zeitfenster der Hindernisse zuzüglich eines Sicherheitsabstandes von zwei Sekunden, 
+fährt das Fahrzeug in den Kreisverkehr ein, und wechselt in den Zustand InRoundabout. Dafür wird die nötige beschleunigung soweit reduziert,
+das die bedingung noch erfüllt ist. Sollte diese Bedingung nicht zutreffen, geht das Fahrzeug in den Zustand Brake.
+
+\paragraph{Brake - State}
+In diesem Zustand wird die Entfernung des Fahrzeuges zum Schnittpunkt der Fahrzeugtrajktorie mit der äußersten Spur des Kreisverkehrs berechnet.
+Mit dieser Entfernung wird nun die nötige Negtive Beschleunigung berechnet, um das Fahhzeug bis vor diesem Punkt zum stehen zu bekommen, und an das Fahrzeug gesendet.
+Nach den das Fahrzeug zum stehen gebracht wurde wechselt dieses wieder in den ToRoundabout-State.
 
 
+\paragraph{InRoundabout - State}
+Wenn sich das Fahrzeug innerhalb des Kreisverkehres befindet, führ es ein Adaptive Cruise control (ACC) aus. 
 
 
 \chapter{Evaluation}

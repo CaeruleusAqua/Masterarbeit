@@ -297,6 +297,33 @@
       \verb 8177588788
       \endverb
     \endentry
+    \entry{lester2008gang}{book}{}
+      \name{author}{1}{}{%
+        {{hash=e025e259a73e4c320c139b14d06edf94}{%
+           family={Lester},
+           familyi={L\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Omnibus}%
+      }
+      \strng{namehash}{e025e259a73e4c320c139b14d06edf94}
+      \strng{fullhash}{e025e259a73e4c320c139b14d06edf94}
+      \strng{authornamehash}{e025e259a73e4c320c139b14d06edf94}
+      \strng{authorfullhash}{e025e259a73e4c320c139b14d06edf94}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781847722454}
+      \field{langid}{english}
+      \field{title}{Gang of Four}
+      \field{year}{2008}
+      \verb{url}
+      \verb https://books.google.de/books?id=9ApoM5GTpq0C
+      \endverb
+    \endentry
     \entry{Li2016}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=a9c8728e355996d027a7e56b60820a18}{%

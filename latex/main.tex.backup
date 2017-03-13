@@ -91,7 +91,22 @@ Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, we
 \include{Introduction}
 \include{basics}
 
+\chapter{State of the Art}
+
 \chapter{Methodology}
+
+
+
+Der eigentliche Kern der Arbeit. In diesen Kapiteln wird die Vorgehensweise methodisch
+erkl¨art. Oft werden fur Teilprobleme separate Kapitel angefertigt. Oft sind diese ¨
+Methodik-Kapitel aber auch logisch getrennt. Beispielsweise Kapitel fur ¨ Problemanalyse,
+Verfahrensauswahl, Umsetzung und Implementierung. Hinweis: Denken Sie daran:
+Diese Kapitel sind der Kern der Arbeit!! Sie sollten hier insbesondere klar herausstellen,
+was vorhandene Vorarbeiten sind und was im Rahmen dieser Arbeit entwickelt
+und umgesetzt wurde, also was Eigenanteil und was Fremdanteil ist
+
+
+\todo{siehe jens BA, dashier ist zu kurz}
 % Gefragt wird hier nach den Kriterien dafür, welche Methode für eine bestimmte Art der Anwendung geeignet ist,
 % warum eine bestimmte Methode angewandt werden muss oder angewendet wird und keine andere.
 % Verständnisfragen zum methodischen Weg werden hier geklärt.
@@ -712,39 +727,109 @@ Entsprechendes zweidimensionales Array fester größe eingetragen eingetragen. S
 Nach dem alle Erforderlichen Messdaten gesammelt und umgewandelt wurden, werden diese über ein seperat  entwickeltes OpenDAVINCI-Python interface an die Objekterkennung gesendet.
 
 
-\subsubsection{Mapping and Statemachine}
+\subsubsection{Mapping}
+Für das Maping wird das OpenDAVINCI interne Compressed Scenario Data Format (SCNX) \cite{Berger2010} genutzt. Diese erlaubt es Szenarien zu definieren, stationären und dynamischen Elemente, 
+zu beschreiben und zu kombinieren, um unterschiedliche Verkehrssituationen zu formulieren. Das SCNX format offeriert für die Modellierung von Straßen unter anderm
+die Klassen ROAD,LANE. Wobei eien ROAD dabei aus mehreren LANE's bestehen kann. eine Lane aus einer Menge an Pukten besteht, welche den Verlauf der lane beschreiben.
+Der Lane kann weiterhin als Attribut eine Fahrspurmakierung und eine Breite zugewiesen werden. Einzelne Lanes können unterinander Verbunden werden, was mit diesen Einfachen 
+Modellen ein Komplttes Straßennetz aufgebaut werden kann. Da OpenDAVINCI kein Pythoninterface für das Parsen der Scenariofiles zur verfügungs stellt, wurde ein eigenner Lexer für die 
+Verabreitung der Scenariofiles implementiert. Dabei wurde sich auf für die Simulation nötigen Klassen beschränkt. Daher lässt sich eine Lane sich dabei nur durch ein Punktmodell
+beschreiben, währen OpenDAVINCI zusätzlich weitere Modelle anbietet.
 
-Laut RASt \cite{rast06} soll ein Kreisverkehr möglichst kreisförmig sein, der einfachheit halber nehmen wir ür die Simulation an, dass dieser ein perfekter kreis ist.
-Das heißt, dass Sowohl Straßen, Radwege und fußwege perfekt kreisförmig sind und duch einen Radius beschrieben werden können.
+Weiterhin musste das in OpenDAVINCI enthaltene Modell erweitert werden, da OpenDAVINCI leider keine andern Arten von wegen unterstützt.
+Daher wurde die Klasse Lane um ein Typ attribut erweitert, was es ermöglicht diese Als Rad oder Fußweg zu deklarieren.
+Der Aufbau der erweiterten Pythonklassen kann in \cref{parer_objects} begutachtet werden.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Parser Objects}
+
+ \begin{tikzpicture} 
+  \umlclass{ROAD}{
+  roadid : int \\
+  roadname : string \\
+  lanes : lane[]}{}
+  \umlclass[x=6,y=0]{LANE}{
+  laneid : int \\
+  width : string \\
+  type : string \\
+  leftlanemarking : string\\
+  rightlanemarking : string\\
+  pointmodell : pointmodel
+  }{}
+  \umlclass[x=6,y=-4]{POINTMODEL}{
+  points : VERTEX2[]
+  }{}
+  \umlclass[x=0,y=-4]{VERTEX2}{
+  points : VERTEX2[]
+  }{}
+  \umlunicompo[mult=1..*]{ROAD}{LANE}
+  \umlunicompo{LANE}{POINTMODEL}
+  \umlunicompo[mult=2..*]{POINTMODEL}{VERTEX2}
+  \end{tikzpicture}
+\label{parer_objects}
+\end{figure}
+
+
+
+Für die Handbung des Kreisverkehres musste das Kartenformat jedoch no weiter erweitert werden. Laut RASt \cite{rast06} soll ein Kreisverkehr möglichst kreisförmig sein, 
+der einfachheit halber nehmen wir für die Simulation an, dass dieser ein perfekter Kreis ist. Das heißt, dass Sowohl Straßen, Radwege und fußwege perfekt kreisförmig sind und
+duch einen inneren und äußeren Radius beschrieben werden können. Daher wurde für die Berschreibung des Kreisverkehres eine Klasse Kreisverker hinzugefügt,
+welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren innere und äußere Radien enhält. Weriterhin wirden in ihm die verbindungen zu den Anschlusstraßen definiert.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Roundabout Class}
+ \begin{tikzpicture} 
+  \umlclass{ROUNDABOUT}{
+  roundaboutid : int \\
+  lanes : lane[]\\
+  junctions : tuple[]\\
+  lane\_radius : float[]\\
+  centrum :  VERTEX2
+  }{}
+  \end{tikzpicture}
+\label{roundabout_class}
+\end{figure}
+
+\subsubsection{Statemachine}
+
+\todo{suimulation mit sythetischen daten (aus vrep) und daten aus object tracking vergleiche}
+\todo{Annhame constant acceleartion model}
+Die Statemachine ist nach Gang of Four  \cite{lester2008gang} implemetiert. Dafür wurden X \todo{nummer anpassen} States Implementiert.
+Für alle Fahrzeugeigenen berechnungen wird ein Constant acceleartion modell angenommen. Zur bestimmung der Maximalen positiven und negativen Beschleunigung
+wurden mit dem realen Fahrzeug testfahrten aufgezeichnet, bei denen die maximalen subjekiv angenehmen Werte bestimmt wurden.
+\todo{plott acceleartion positiv/negativ, und auswertung}
+Vor jedem aufruf einenes States, werden alle von der Objekterkennung gelieferten Objekte abgeholt und auf die in der Karte festgehalten Fahrspuren gemappt.
+Weiterhin wird die zu erwartende Intersection position mit allen Spuren im Kreiverkehr bestimmt, dies ist nötig, da Das Fahrzeug nicht gerade in den Kreisverkehr einfährt
+und so die von der Karte glieferte Position stark verfälscht sein kann. Dazu werden aus der zu erwartenden Fahrzeugtrjektorie und dem Vereinfachtetn Kreisverkehrmodell
+die Schnittpunkte von Trajektorie und Fahrspuren berechnet.
 
 
 
 
+\paragraph{ToRoundabout - State}
+In diesem Zustand befindet sich das Fahhzeug, wenn es sich noch nicht im Kreisverkehr befindet. Bei jedem Aufruf wird für alle geliferten
+Hindernisse die sich in richtung der Intersection bewegen der Verbleibende weg berechnet.  Aus den verbelibenden Strecken der Hindernisse und 
+derren gesschwindigkeiten wird das zu erwartende Zeitfenseter berechnet, in dem das Hindernis die intersectionposition, abzüglich der Hindernisgröße erreicht. 
+Aus der maximalen beschleunigung und Geschwindikeit \todo{define max speed} des Fahrzeuges und der ebenfalls berechneten Entfernung zur intersectionposition wird hier
+ebenfalls ein Zeitfenster berechnet. Sollte dieses Zeitfenster kleiner sein als eines der Zeitfenster der Hindernisse zuzüglich eines Sicherheitsabstandes von zwei Sekunden, 
+fährt das Fahrzeug in den Kreisverkehr ein, und wechselt in den Zustand InRoundabout. Dafür wird die nötige beschleunigung soweit reduziert,
+das die bedingung noch erfüllt ist. Sollte diese Bedingung nicht zutreffen, geht das Fahrzeug in den Zustand Brake.
+
+\paragraph{Brake - State}
+In diesem Zustand wird die Entfernung des Fahrzeuges zum Schnittpunkt der Fahrzeugtrajktorie mit der äußersten Spur des Kreisverkehrs berechnet.
+Mit dieser Entfernung wird nun die nötige Negtive Beschleunigung berechnet, um das Fahhzeug bis vor diesem Punkt zum stehen zu bekommen, und an das Fahrzeug gesendet.
+Nach den das Fahrzeug zum stehen gebracht wurde wechselt dieses wieder in den ToRoundabout-State.
 
 
+\paragraph{InRoundabout - State}
+Wenn sich das Fahrzeug innerhalb des Kreisverkehres berechnet
 
 
 \chapter{Evaluation}
-To address RQ1, a framework for continuous experimentation for the automotive domain
-was proposed. The framework adapts the concept used in the software-only domain [15,
-26]: Eklund and Bosch propose to expose the user to the experimental functionality,
-as practiced in the software domain [6]. While this approach is possible for non-safety-
-critical components, like for example infotainment systems, it is not promising for safety-
-relevant features. To challenge this aspect, and in answer to RQ3, we propose to run
-experimental software in isolation, without access to actors. Instead of exposing the user
-to experimental functionality, we expose the data, by processing it with experimental
-algorithms, in addition to the existing ones. While this is an important measure for
-safety, it cannot be the only one: RQ2 addresses the fact that the computing resources
-in cars are generally at a premium. This also indirectly affects safety, because in order to
-run a safe experiment, it must be ensured that the resources taken by the experimental
-software are actually available, and not drawn from safety-relevant modules. Different
-techniques to overcome limited resources are proposed in the framework. We also pro-
-pose offline experiments, in the style of [1]. These experiments can be conducted in a
-controlled environment, in order to assess the available resources, and therefore prepare
-for large-scale experiments in the field, as well as using the metrics provided by the
-framework also for conventional testing on a test track. With respect to the experiment
-architecture proposed by Fagerholm et al. [7], our proposed framework occupies the spot
-of an experimentation frontend.
+
+
 
 \section{Simuation}
 \section{Real Measurements}
