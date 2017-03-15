@@ -19,6 +19,114 @@
 
 \refsection{0}
   \sortlist[entry]{nty/global/}
+    \entry{Atreya2007}{article}{}
+      \name{author}{18}{}{%
+        {{hash=489e75cb31ec9c416c0ce6beb366c2f1}{%
+           family={Atreya},
+           familyi={A\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+        {{hash=256e9347e5e4ad862eed0d1c97ff28be}{%
+           family={Cattle},
+           familyi={C\bibinitperiod},
+           given={B},
+           giveni={B\bibinitperiod}}}%
+        {{hash=bf7b3a8dc1b3fe488c10f2f529ea18ce}{%
+           family={Momen},
+           familyi={M\bibinitperiod},
+           given={S},
+           giveni={S\bibinitperiod}}}%
+        {{hash=cc0d868c106df09643980f8c84a09240}{%
+           family={Collins},
+           familyi={C\bibinitperiod},
+           given={B},
+           giveni={B\bibinitperiod}}}%
+        {{hash=8fd4acfd8f9ffe3abfc325f5ba282797}{%
+           family={Downey},
+           familyi={D\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+        {{hash=648af1beae0ca376962e03eef11266a7}{%
+           family={Franken},
+           familyi={F\bibinitperiod},
+           given={G},
+           giveni={G\bibinitperiod}}}%
+        {{hash=bb97c0c0e6aad2910b3a97c7a25a8aa7}{%
+           family={Glassand},
+           familyi={G\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ac7fe3cfe5d72736a759a362915568f1}{%
+           family={Glass},
+           familyi={G\bibinitperiod},
+           given={Z},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=aee426abfec2dc714157baef5a6d0a5e}{%
+           family={Herbach},
+           familyi={H\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5bb038f615a48fad5a7ee7a7f7a16ff1}{%
+           family={Saxe},
+           familyi={S\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+        {{hash=f9b833398ed33aeb3d205ff3ecab310d}{%
+           family={Ashwash},
+           familyi={A\bibinitperiod},
+           given={I},
+           giveni={I\bibinitperiod}}}%
+        {{hash=a903ff26b4863815b6d40cfa334edf3d}{%
+           family={Baldassano},
+           familyi={B\bibinitperiod},
+           given={C},
+           giveni={C\bibinitperiod}}}%
+        {{hash=3662e2c1408fa0eab7728483af139f01}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={W},
+           giveni={W\bibinitperiod}}}%
+        {{hash=8817f593d57f0b85c89d387b73c238ec}{%
+           family={Javed},
+           familyi={J\bibinitperiod},
+           given={U},
+           giveni={U\bibinitperiod}}}%
+        {{hash=d4c2283cb7afe3493d29cc136400ec55}{%
+           family={Mayer},
+           familyi={M\bibinitperiod},
+           given={J},
+           giveni={J\bibinitperiod}}}%
+        {{hash=131f861159f5948e04a521f80f1be24b}{%
+           family={Benjamin},
+           familyi={B\bibinitperiod},
+           given={D},
+           giveni={D\bibinitperiod}}}%
+        {{hash=54afe37c94a960bbc9694c53978e22b1}{%
+           family={Gorman},
+           familyi={G\bibinitperiod},
+           given={L},
+           giveni={L\bibinitperiod}}}%
+        {{hash=fedcedec0f4c3a906efce023fbd96214}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={D},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{a541345316ab69049eb75c89c4698726}
+      \strng{fullhash}{86af1f802d7836071b4e644630fa2fa3}
+      \strng{authornamehash}{a541345316ab69049eb75c89c4698726}
+      \strng{authorfullhash}{86af1f802d7836071b4e644630fa2fa3}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{{DARPA Urban Challenge -- Virginia Tech Technical Paper}}
+      \field{year}{2007}
+      \verb{file}
+      \verb :home/storm/darpa/Victor{\_}Tango.pdf:pdf
+      \endverb
+    \endentry
     \entry{Berger2010}{thesis}{}
       \name{author}{1}{}{%
         {{hash=989e9c75cedce190a8efdde3ba9764ec}{%
@@ -48,6 +156,92 @@
       \verb http://www.christianberger.net/Ber10.pdf
       \endverb
       \keyw{EN,MINE,book,reviewed}
+    \endentry
+    \entry{Bondzio2012}{report}{}
+      \name{author}{1}{}{%
+        {{hash=ba1469b0a05447375f0936221dd38317}{%
+           family={Bondzio},
+           familyi={B\bibinitperiod},
+           given={Lothar},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Gesamtverband der Deutschen Versicherungswirtschaft e. V.}%
+      }
+      \list{location}{1}{%
+        {Berlin}%
+      }
+      \strng{namehash}{ba1469b0a05447375f0936221dd38317}
+      \strng{fullhash}{ba1469b0a05447375f0936221dd38317}
+      \strng{authornamehash}{ba1469b0a05447375f0936221dd38317}
+      \strng{authorfullhash}{ba1469b0a05447375f0936221dd38317}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9783939163466}
+      \field{langid}{ngerman}
+      \field{title}{{Verkehrssicherheit innerörtlicher Kreisverkehre}}
+      \field{type}{techreport}
+      \field{year}{2012}
+      \keyw{Dipl.-Ing. Heiko Vo{ß},Dipl.-Ing. Jörg Ortlepp,Dr.-Ing. Lothar Bondzio,Dr.-Ing. Roland Weinert}
+    \endentry
+    \entry{Campbell2007}{article}{}
+      \name{author}{2}{}{%
+        {{hash=c4701acf13c432947a46cebca88b2223}{%
+           family={Campbell},
+           familyi={C\bibinitperiod},
+           given={M},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b3820dfffe3fbb9b2757199936abe20b}{%
+           family={Garcia},
+           familyi={G\bibinitperiod},
+           given={E},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{be6afa3a685649a69b72815710e26ae7}
+      \strng{fullhash}{be6afa3a685649a69b72815710e26ae7}
+      \strng{authornamehash}{be6afa3a685649a69b72815710e26ae7}
+      \strng{authorfullhash}{be6afa3a685649a69b72815710e26ae7}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Executive Summary Team Cornell's 2007 DARPA Urban Challenge blends the team and technologies of a largely successful 2005 DARPA Grand Challenge with internationally recognized experts in probabilistic analysis, GPS, control systems and artificial intelligence to develop a vehicle capable of executing autonomous urban operations. Key state of the art technologies developed and integrated in Team Cornell's entry include: 1) reliable, high performance vehicle automation using brake, steering, transmission and throttle control; 2) tightly coupled vehicle position and attitude estimation with time synchronized antennas, square root information filtering, and integrity monitoring; 3) an integrated sensor suite of laser range finders, cameras, and radars to monitor the environment; 4) a novel probabilistic approach which fuses the many sensors in order to track moving vehicles relative to Cornell's vehicle; 5) a unique scene estimation algorithm, which condenses local probabilistic information to produce a lane-specific estimates of the environment used by all levels of planning; and 6) a hierarchical planning algorithm, with operational, tactical, and behavioral layers to achieve smooth local control despite switching between an expandable set of road behaviors and higher level mission goals. This document gives an overview of these key technologies, along with a sample of the experimental results.}
+      \field{journaltitle}{DARPA Urban Chall. {\ldots}}
+      \field{langid}{english}
+      \field{title}{{Team Cornell: technical review of the DARPA urban challenge vehicle}}
+      \field{year}{2007}
+      \field{pages}{1\bibrangedash 25}
+      \range{pages}{25}
+      \verb{url}
+      \verb http://archive.darpa.mil/grandchallenge/TechPapers/Team%7B%5C_%7DCornell.pdf
+      \endverb
+    \endentry
+    \entry{Corp2005}{article}{}
+      \name{author}{1}{}{%
+        {{hash=27b3cb07c4392e14a221685121b2be3c}{%
+           family={Corp},
+           familyi={C\bibinitperiod},
+           given={Oshkosh\bibnamedelima Truck},
+           giveni={O\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \strng{namehash}{27b3cb07c4392e14a221685121b2be3c}
+      \strng{fullhash}{27b3cb07c4392e14a221685121b2be3c}
+      \strng{authornamehash}{27b3cb07c4392e14a221685121b2be3c}
+      \strng{authorfullhash}{27b3cb07c4392e14a221685121b2be3c}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{{Team Terramax Darpa Grand Challenge 2005}}
+      \field{year}{2005}
+      \field{pages}{1\bibrangedash 14}
+      \range{pages}{14}
+      \verb{file}
+      \verb :home/storm/darpa/TeamTerraMax.pdf:pdf
+      \endverb
     \endentry
     \entry{manAP}{manual}{}
       \name{author}{1}{}{%
@@ -371,6 +565,161 @@
       \verb http://www.roboticsproceedings.org/rss12/p42.pdf
       \endverb
     \endentry
+    \entry{Montemerlo2009}{article}{}
+      \name{author}{25}{}{%
+        {{hash=67d13fe110c028d272a9291dff505b23}{%
+           family={Montemerlo},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=71032b96293644b22a224465ee4a4de5}{%
+           family={Becker},
+           familyi={B\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a00b35985cb7bfa1eed1e583a708055a}{%
+           family={Bhat},
+           familyi={B\bibinitperiod},
+           given={Suhrid},
+           giveni={S\bibinitperiod}}}%
+        {{hash=6a635409df22c204b68d994c1929762b}{%
+           family={Dahlkamp},
+           familyi={D\bibinitperiod},
+           given={Hendrik},
+           giveni={H\bibinitperiod}}}%
+        {{hash=65e8d6cda2636f6f35dc4a17e63649d4}{%
+           family={Dolgov},
+           familyi={D\bibinitperiod},
+           given={Dmitri},
+           giveni={D\bibinitperiod}}}%
+        {{hash=fb49a26b4e90cfcad2b8f4f5d780fce3}{%
+           family={Ettinger},
+           familyi={E\bibinitperiod},
+           given={Scott},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b87dffa311fa694fb509a2535cbdc408}{%
+           family={Haehnel},
+           familyi={H\bibinitperiod},
+           given={Dirk},
+           giveni={D\bibinitperiod}}}%
+        {{hash=02ec72b82a9678717bf60d754a858320}{%
+           family={Hilden},
+           familyi={H\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod}}}%
+        {{hash=55c67a682f2197f7a50f469f20d39f0f}{%
+           family={Hoffmann},
+           familyi={H\bibinitperiod},
+           given={Gabe},
+           giveni={G\bibinitperiod}}}%
+        {{hash=d4638ad1394b5949087410f0bc1ceb1d}{%
+           family={Huhnke},
+           familyi={H\bibinitperiod},
+           given={Burkhard},
+           giveni={B\bibinitperiod}}}%
+        {{hash=71b4a58af6e391313fd166669a67e956}{%
+           family={Johnston},
+           familyi={J\bibinitperiod},
+           given={Doug},
+           giveni={D\bibinitperiod}}}%
+        {{hash=2cc3ba597281604d6c59f6d9eadb2b02}{%
+           family={Klumpp},
+           familyi={K\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c5a49bc7f7cf8aa1353e5919922c4186}{%
+           family={Langer},
+           familyi={L\bibinitperiod},
+           given={Dirk},
+           giveni={D\bibinitperiod}}}%
+        {{hash=fbae793df399ba4378a3302421570659}{%
+           family={Levandowski},
+           familyi={L\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+        {{hash=926db68449a2d0b1f2baca8fbcc55683}{%
+           family={Levinson},
+           familyi={L\bibinitperiod},
+           given={Jesse},
+           giveni={J\bibinitperiod}}}%
+        {{hash=69a2746fcc91b6a27c97b001ac7969ea}{%
+           family={Marcil},
+           familyi={M\bibinitperiod},
+           given={Julien},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e8abd1d37e0da3fa3026f176c8491bad}{%
+           family={Orenstein},
+           familyi={O\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=197671395beddb41da5582c899bd8cdb}{%
+           family={Paefgen},
+           familyi={P\bibinitperiod},
+           given={Johannes},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d6db6c45c8e249835acfe608ac9b6566}{%
+           family={Penny},
+           familyi={P\bibinitperiod},
+           given={Isaac},
+           giveni={I\bibinitperiod}}}%
+        {{hash=16b57048a07eca6d94188c7e09f4b394}{%
+           family={Petrovskaya},
+           familyi={P\bibinitperiod},
+           given={Anna},
+           giveni={A\bibinitperiod}}}%
+        {{hash=16ccc81d0c45d0b388b16d255a1e06be}{%
+           family={Pflueger},
+           familyi={P\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8113d8a95473074cee2213943a3acd6f}{%
+           family={Stanek},
+           familyi={S\bibinitperiod},
+           given={Ganymed},
+           giveni={G\bibinitperiod}}}%
+        {{hash=01630f34351c5fa7ba1dbc0ef043bbd2}{%
+           family={Stavens},
+           familyi={S\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=8602c1b90cdd2357e8690985469586ff}{%
+           family={Vogt},
+           familyi={V\bibinitperiod},
+           given={Antone},
+           giveni={A\bibinitperiod}}}%
+        {{hash=5112ea130eadef0764fce0145b8b9f91}{%
+           family={Thrun},
+           familyi={T\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{32904a01ce0b153c1a44c969ee5fa6bd}
+      \strng{fullhash}{479e6497ce426034f80817b01388e3e3}
+      \strng{authornamehash}{32904a01ce0b153c1a44c969ee5fa6bd}
+      \strng{authorfullhash}{479e6497ce426034f80817b01388e3e3}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This article presents the architecture of Junior, a robotic vehicle capable of navi- gating urban environments autonomously. In doing so, the vehicle is able to select its own routes, perceive and interact with other traffic, and execute various urban driving skills including lane changes, U-turns, parking, and merging into moving traffic. The vehicle successfully finished and won second place in the DARPA Ur- ban Challenge, a robot competition organized by the U.S. Government.}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{9783642039904}
+      \field{issn}{16107438}
+      \field{journaltitle}{Springer Tracts in Advanced Robotics}
+      \field{langid}{english}
+      \field{number}{October 2005}
+      \field{title}{{Junior: The stanford entry in the urban challenge}}
+      \field{volume}{56}
+      \field{year}{2009}
+      \field{pages}{91\bibrangedash 123}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.1007/978-3-642-03991-1_3
+      \endverb
+      \verb{eprint}
+      \verb 10.1.1.91.5767
+      \endverb
+    \endentry
     \entry{5164280}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=7e3192ab108854267f5bc24b89006f81}{%
@@ -617,7 +966,6 @@
       \field{labeltitlesource}{title}
       \field{langid}{ngerman}
       \field{series}{FGSV (Series)}
-      \field{shorthand}{RAL}
       \field{title}{Richtlinien für die Anlage von Landstrassen (RAL)}
       \field{year}{2013}
     \endentry
@@ -645,9 +993,219 @@
       \field{isbn}{9783939715214}
       \field{langid}{ngerman}
       \field{series}{FGSV (Series)}
-      \field{shorthand}{RASt}
       \field{title}{Richtlinien für die Anlage von Stadtstra{ß}en: RASt 06}
       \field{year}{2007}
+    \endentry
+    \entry{Urmson2007}{article}{}
+      \name{author}{32}{}{%
+        {{hash=f01bb8163da32709b2107d2c680e4d0a}{%
+           family={Urmson},
+           familyi={U\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod}}}%
+        {{hash=d97f56981fb8bdd8f5d77f60277d2cc4}{%
+           family={Anhalt},
+           familyi={A\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=38610ccae1022ef3d44e21ed38f0f94e}{%
+           family={Bagnell},
+           familyi={B\bibinitperiod},
+           given={Drew},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d79d9c7b902800353664f52143361765}{%
+           family={Baker},
+           familyi={B\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=9b6422b845eecc5791e6ff0cc44d2fbe}{%
+           family={Bittner},
+           familyi={B\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ea1393f6cf9bcbc1103e8795c0d0117b}{%
+           family={Dolan},
+           familyi={D\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=082440518c37d323ce3f1f4bd875746f}{%
+           family={Duggins},
+           familyi={D\bibinitperiod},
+           given={Dave},
+           giveni={D\bibinitperiod}}}%
+        {{hash=35f3ca374463c429652940b9722efa08}{%
+           family={Ferguson},
+           familyi={F\bibinitperiod},
+           given={Dave},
+           giveni={D\bibinitperiod}}}%
+        {{hash=1a52fdd817cbfac15035db21ed225b71}{%
+           family={Galatali},
+           familyi={G\bibinitperiod},
+           given={Tugrul},
+           giveni={T\bibinitperiod}}}%
+        {{hash=50a6fb39b09265a6592ef6a27749504c}{%
+           family={Geyer},
+           familyi={G\bibinitperiod},
+           given={Chris},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b80bfeeb9aa2ce5508b78bb345c199cc}{%
+           family={Gittleman},
+           familyi={G\bibinitperiod},
+           given={Michele},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b709ef702d8b87348194e5944f7edd1f}{%
+           family={Harbaugh},
+           familyi={H\bibinitperiod},
+           given={Sam},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c4c76fca369ecb436d9729820e745123}{%
+           family={Hebert},
+           familyi={H\bibinitperiod},
+           given={Martial},
+           giveni={M\bibinitperiod}}}%
+        {{hash=29b9e07beac4f10131184af164167132}{%
+           family={Howard},
+           familyi={H\bibinitperiod},
+           given={Tom},
+           giveni={T\bibinitperiod}}}%
+        {{hash=d2904722ee9ec7753a1f84842ea03ebc}{%
+           family={Kelly},
+           familyi={K\bibinitperiod},
+           given={Alonzo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8834a42f162525712cc576eb3f4cfd73}{%
+           family={Kohanbash},
+           familyi={K\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=b003e939dc38c729a7019f5b8403fa44}{%
+           family={Likhachev},
+           familyi={L\bibinitperiod},
+           given={Maxim},
+           giveni={M\bibinitperiod}}}%
+        {{hash=373d07184ee7e953a7164cedbcd8849e}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Nick},
+           giveni={N\bibinitperiod}}}%
+        {{hash=75d58aecf0c65ad56c9fe625be0e57d6}{%
+           family={Peterson},
+           familyi={P\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=44a7dda2aaf21df570f0dad4ade87c1e}{%
+           family={Rajkumar},
+           familyi={R\bibinitperiod},
+           given={Raj},
+           giveni={R\bibinitperiod}}}%
+        {{hash=376ca98ade8ddd7b0b8acc91f8a54479}{%
+           family={Rybski},
+           familyi={R\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=73cfada5847dfb437ce32112b1ab70c3}{%
+           family={Salesky},
+           familyi={S\bibinitperiod},
+           given={Bryan},
+           giveni={B\bibinitperiod}}}%
+        {{hash=ad26bf16eeaee427e8e36bea35587822}{%
+           family={Scherer},
+           familyi={S\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+        {{hash=410c9367c03bf22d86096e659082985d}{%
+           family={Woo-seo},
+           familyi={W\bibinithyphendelim s\bibinitperiod},
+           given={Young},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=3f853a8266754228a123c433dba4d246}{%
+           family={Simmons},
+           familyi={S\bibinitperiod},
+           given={Reid},
+           giveni={R\bibinitperiod}}}%
+        {{hash=495200d014eb282f882493a67e925f57}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Sanjiv},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a293a6b102dd0a2762bb4f583b89b641}{%
+           family={Snider},
+           familyi={S\bibinitperiod},
+           given={Jarrod},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fae108ef6fb7a7688220f8edc7e66254}{%
+           family={Stentz},
+           familyi={S\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+        {{hash=034c8c8a3a0999c713a406655bdeb39c}{%
+           family={Whittaker},
+           familyi={W\bibinitperiod},
+           given={William\bibnamedelima Red},
+           giveni={W\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=7fb8ba8ff136c579eeeef74c2a2fd525}{%
+           family={Ziglar},
+           familyi={Z\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+        {{hash=f54b676cb849e2c9b444ac1d3a11612d}{%
+           family={Struble},
+           familyi={S\bibinitperiod},
+           given={Joshua},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5efe73c0ef8f0e873d520c4ea41f807e}{%
+           family={Taylor},
+           familyi={T\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{490411937b291b2f271353654dbc1d89}
+      \strng{fullhash}{62fc0bebd1b986ba0e2d49a245deb586}
+      \strng{authornamehash}{490411937b291b2f271353654dbc1d89}
+      \strng{authorfullhash}{62fc0bebd1b986ba0e2d49a245deb586}
+      \field{sortinit}{U}
+      \field{sortinithash}{8145509bd2718876fc77d31fd2cde117}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The Urban Challenge represents a technological leap beyond the previous Grand Challenges. The challenge encompasses three primary behaviors: driving on roads, handling intersections and maneuvering in zones. In implementing urban driving we have decomposed the problem into five components. Mission Planning determines an efficient route through an urban network of roads. A behavioral layer executes the route through the environment, adapting to local traffic and exceptional situations as necessary. A motion planning layer safeguards the robot by considering the feasible trajectories available, and selecting the best option. Perception combines data from lidar, radar and vision systems to estimate the location of other vehicles, static obstacles and the shape of the road. Finally, the robot is a mechatronic system engineered to provide the power, sensing and mobility necessary to navigate an urban course. Rigorous component and system testing evaluates progress using standardized tests. Observations from these experiments shape the design of subsequent development spirals and enable the rapid detection and correction of bugs. The system described in the paper exhibits a majority of the basic navigation and traffic skills required for the Urban Challenge. From these building blocks more advanced capabilities will quickly develop.}
+      \field{issn}{15564967}
+      \field{journaltitle}{Defense}
+      \field{langid}{english}
+      \field{number}{4}
+      \field{title}{{Tartan Racing: A Multi-Modal Approach to the DARPA Urban Challenge}}
+      \field{volume}{94}
+      \field{year}{2007}
+      \field{pages}{386\bibrangedash 387}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1002/rob.20251
+      \endverb
+      \verb{file}
+      \verb :home/storm/darpa/Tartan{\_}Racing.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.107.8722%7B%5C&%7Drep=rep1%7B%5C&%7Dtype=pdf
+      \endverb
+    \endentry
+    \entry{manVEL}{manual}{}
+      \name{author}{1}{}{%
+        {{hash=6fb580b4ff7d4c20d018efd88a6014c7}{%
+           family={Velodyne\bibnamedelima Acoustics},
+           familyi={V\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Inc.},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{6fb580b4ff7d4c20d018efd88a6014c7}
+      \strng{fullhash}{6fb580b4ff7d4c20d018efd88a6014c7}
+      \strng{authornamehash}{6fb580b4ff7d4c20d018efd88a6014c7}
+      \strng{authorfullhash}{6fb580b4ff7d4c20d018efd88a6014c7}
+      \field{sortinit}{V}
+      \field{sortinithash}{d18f5ce25ce0b5ca7f924e3f6c04870e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{title}{Velodyne LiDAR Puck (VLP-16) Manual}
+      \field{year}{2015}
     \endentry
     \entry{LLSQ}{online}{}
       \name{author}{1}{}{%

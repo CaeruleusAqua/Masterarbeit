@@ -26,6 +26,7 @@
 \pgfplotsset{compat=1.14}
 \usepackage{xargs}                      % Use more than one optional parameter in a new commands
 \usepackage{acronym}
+\usepackage{tabularx}
 
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
@@ -92,6 +93,32 @@ Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, we
 \include{basics}
 
 \chapter{State of the Art}
+Auch wenn Autonomes Fahren ein aaktuelles Forschungsthema ist, gibt es bisher keine mit bekannten veröffentlichungen welche sich explizit mit Kreisverkehren beschäftigen.
+Um trotzdem einen Verleich zur Sensoraustattung und Verkehrsbeobachtung zu haben werden an dieser Stelle einige Paper der \acs{DARPA} Urban Challenge herangezogen.
+Die DARPA Urban Challenge ist ein Rennen zwischen autonomen Fahrzeugen, welches im Jahre 2007 von der \ac{DARPA} ausgetragen wurde. 
+Das Rennen fand in bebautem Gebiet einer verlassenen Kaserne des ehemaligen Air Force-Stützpunktes George Air Force Base statt, die Karte kann ist in \cref{darpa_map} zu sehen.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{\acs{DARPA} Urban Challenge Map \footnote{\url{http://rsta.royalsocietypublishing.org/content/368/1928/4649}}}
+\includegraphics[width=\textwidth]{bilder/darpa_map_bw.png}
+\label{darpa_map}
+%\end{center}
+\end{figure}
+
+Die Fahrbahnen waren teilweise durch Linien markiert, teilweise durch Betonwände begrenzt. Alle selbstfahrenden Autos befanden sich gleichzeitig auf der Strecke. 
+Auf ein-, zwei- und vierspurigen Straßen mussten Kreisverkehr, 4-Wege-Kreuzungen mit Stoppschildern, blockierte Fahrbahnen und Einfädelsituationen erfolgreich bewältigt werden.
+ 
+Bei der Auswertung  möchte ich mich vorallem auf die Finalteams des Wettbewerbes beschränken. Ausgewertet werden dabei welcher Typ Sensoren und welche Anzahl die Teams verwendet haben.
+
+\begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
+\hline \textbf{Team} & \textbf{2D Lidar} & \textbf{3D Lidar (low res)} & \textbf{3D Lidar (high res)} & \textbf{Radar} & \textbf{Camera}\\\hline
+Cornell \cite{Campbell2007} & 6 & 0 & 0 & 3 & 4 \\\hline
+TerraMax \cite{Corp2005} & 3 & 1 (4) & 0 & 0 & 3  \\\hline
+Stanford Racing Team \cite{Montemerlo2009} & 7 & 0 & 1 (64) & 3 & 1 \\\hline
+Tartan Racing \cite{Urmson2007} & 3 & 0 & 1 (64) & 2 & 1  \\\hline
+Victor Tango \cite{Atreya2007} & 1 & 1 (4) & 0 & 2 & 1  \\\hline
+\end{tabularx}
 
 \chapter{Methodology}
 
@@ -153,17 +180,117 @@ Kollisionen notiert.
 %\end{center}
 \end{figure}
 
-% \section{Selection of Sensors}
-% \section{Selection of Algorithms}
-% \section{Simulation Enviroment}
+
+\chapter{Sensor Analysis}
+Wie bereits diskutiert wird sich die auswahl der Senoren auf das Applanix POS-LV und den Velodyne VLP-16 beschränken. Da der Velodyne für die 
+erkennung anderer Verkehrsteilnehmer der wichtigste sensor ist, wird nun untersucht, in wie fern der Sensor für die Ekennung geeignet ist.
+
+\section{Theoretical Analysis}
+
+Unter \cref{types_of_roundabouts} haben wir vier verschieden Typen von Kresiverkehren festehalten. Um die den Praktischen nutzetn des Velodyne VLP-16
+zu bewerten wird nun Analysiert, in wie fern dieser in der lage ist diese Zu überblicken. Dazu sehen wir uns im folgenden die Größenverhältnisse  an.
+
+\begin{tabularx}{\textwidth}{|X|X|X|}
+\hline \textbf{Roundabout Type} & \textbf{min Size} & \textbf{max Size} \\\hline
+Mini Roundabout& 13m & 22m \\\hline
+Small Roundabout& 26m  & 40m \\\hline
+Two-lane Passable Roundabout& 40m & - \\\hline
+Large Roundabout& >40m &  - \\\hline
+\end{tabularx}
+
+Um nun ein Vergleich zum Velodyne VLP-16 zeihen zu können, sehen wir uns den sichtbereich des Sensors von der seite an.
+Der Sensor liefert uns 16 Messungen im selben Azimuthwinkel, im Abstand von 2 Grad. Da für die Ausertung, und leider auch für die Erkennung, die Winkel größer als 0 Grad 
+nicht relevant sind sehen wir uns nur die acht winkel im bereich von -1 bis -15 Grad an. 
+
+Bei der auswertung gehen wir davon aus, das wir versuchen einen Kleinwagen mit einer länge von 4 Metern und 1.5 Metern höhe zu erkennen. Dabei gehen wir von dem Idealfall aus, das sich das Fahrzeug
+auf uns zu bewegt. Weiterhin gehen wir von einer Befestigungshöhe des Sensors von 2.1 Metern aus, da dies letztendlich die montagehöhte des Sensors uf dem Testfahrzeug darstellt.
+
+\paragraph{Range 0-25m}
+Für den Bereich von 0m bis 25m sehen wir in \cref{velodyne_range_25}, dass wir im schlimmsten fall noch eine Messung vom Sensor erhalten. Befindet sich das Fahrzeug sehr nache am 
+Sensor erhalten wir sogar einen Großteil der zur verfügung stehenden Auflösung, wobei dabei sich nahe dahnter befindliche flache Fahrzeuge verdeckt werden können. 
+Daher sehen wir, das der Mini Roundabout mit dem Sensr geut abgedeckt werden kann, wir uns jedoch gendanken über verdeckte hindernisse machen müssen.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Velodyne VLP-16 - Range 0-25m}
+\includegraphics[width=\textwidth]{bilder/range_25.png}
+\label{velodyne_range_25}
+%\end{center}
+\end{figure}
+
+\paragraph{Range 25-50m}
+Für den Bereich von 25m bis 50m sehen wir in \cref{velodyne_range_50}, dass wir im grunde nur noch zwei Messungen erhalten können. Für unseren angenommenen Kleinwagen mit einer Höhe von 1.5 Metern
+ehalten wir jedoch keinen Totereich. Jedoch erhalten wir für die meißten messungen nur einen Messpunkt und somit eine sehr niedrige Auflösung. Daher ist die Erkennung von Fahrzeugen
+in einerm kleinen Kreisverkehr bereits eine herausforderung für die Segmentierung der Fahrzeuge
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Velodyne VLP-16 - Range 25-50m}
+\includegraphics[width=\textwidth]{bilder/range_50.png}
+\label{velodyne_range_50}
+%\end{center}
+\end{figure}
+
+\paragraph{Range >50m}
+Für den Bereich größer als 50m sehen wir in \cref{velodyne_range_75}, dass die Auflösung im verleich zu näheren Objekten gleich bleibt. Jedoch steigt hier die Warscheinlichkeit, dass
+fahrzeuge bereits im voherigen bereich verdeckt wurden.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Velodyne VLP-16 - Range 50-75m}
+\includegraphics[width=\textwidth]{bilder/range_75.png}
+\label{velodyne_range_75}
+%\end{center}
+\end{figure}
 
 
-\chapter{Research}
-% \todo[inline]{The original todo note withouth changed colours.\newline Here's another line.}
-% \unsure{Is this correct?}\unsure{I'm unsure about also!}
-% \change{Change this!}
-% \info{This can help me in chapter seven!}
-% \improvement{This really needs to be improved!\newline\newline What was I thinking?!}
+
+Wie wir sehen  können wir den Bereich bis 25 Metern gut abdecken und somit den Mini Roundabout komplett beobachten, für Größere Kreisverkehre ist der Sensor nur bedingt geeigent.
+wesshalb wir für alle folgenden Betrachtungen nur Minikreisverkehre oder kleinere kleine Kreisverkehre betrachten werden. Für alle anderen Kreisverkehre, währe zu
+evaluieren, ob es überhaupt nötig ist, alle Fahrzeuge im Kreisverkehr zu beobachten, da die Strecke von Einfahrt zu Einfahrt entsprechend größer wird.
+Eventuell ist es so möglich den Kreisverkher als einfache Vorfahrtsituation zu betreachten.
+
+\section{Practical Analysis}
+Da wir uns nun bereits die Theoretischen überlegungen angesehen haben sehen wir uns die praktischen Messungen des Sensors an. 
+Dazu können wir in \cref{velodyne_hidden} eine Messung auf dem Testkreisveker auf AstaZero in der Vogelperspektive sehen.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Velodyne VLP-16 - Hidden Layers}
+\includegraphics[width=\textwidth]{bilder/velodyne_back.png}
+\label{velodyne_hidden}
+%\end{center}
+\end{figure}
+
+Dort ist zu erkennen, dass die Messungen im vorderne und vorallem im hinteren Bereich Lücken aufweisen. Dies ließ sich bei der Montage des Velodyne leider nicht verhindern,
+da die Haltevorrischtung des Sensors keine weitere Höhenverstellung vorsieht und am Testfahrzeug keine invasiven Änderungen vorgenommen werden sollten.
+Daher musste für die Montage ein kompromiss geschlossen werden, entweder messungen im vorderen Bereich zu verlieren ider im Hinteren. Die Fahlenden Messungen werden
+vom Fahrzeugdach verdeckt. Die Kleineren lücken im vorderen Bereich stammen von der GPS Antenne des Aplanix Systems und ließ sich leider auch nicht verhindern.
+
+Da die Beocbachtung des Hinteren Bereiches für die Kreisverkehrbeobachtung nicht wichtig ist sind die Fehlenden Messungen im Hinteren Bereich jedoch zu vernachlässsigen.
+Da wir im vorderen Nahebereich des Sensors die höchste Auflösung haben fallen die fehlenden Messungen im im Frontbereich auch nicht ins gewicht, denn diese befinden sich 
+nur im ersten Messlayer.
+
+
+Weiterhin in \cref{velodyne_hidden} zu sehen ist es weiteres Testfahrzeug (rote box). An diesem ist zu erkennen, das wir auch im eigentlich verdeckten hinteren Bereich des Fahrzeuges
+Messungen erhalten. Dies ist dadurch zu erklären, dass der Sensor über mehrere Return Modes verfügt, die es Ihm erlaubt durch Transparente Objekte zu sehen. Dies kann in \cref{vel_trans}
+gesehen werden
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Velodyne VLP-16 - Return Modes \cite{manVEL}}
+\includegraphics[width=\textwidth]{bilder/velodyne_trans.png}
+\label{vel_trans}
+%\end{center}
+\end{figure}
+
+Der Sensor kann dabei so konfiguriert werde, dass er beide Messungen (Strongest Return und Last Return) zurückliefert. Da die zu beobachten Fahrzeuge nicht vollständig transparent
+sind und so immer auch ausreichend messungen im vorderen Bereich liefern , ferner um die Datenrate klein zu halten wurde dir VLP-16 so konfiguriert, dass
+er nur den Last Return liefert.
+
+
+
+
 
 \section{Objekt Detection}
 
@@ -203,6 +330,7 @@ von einer Lane Detection geliefert werden.
 Innerhalb dieser Tortenstücke wird dann eine Suche nach den 10 Messungen mit dem niedrigsten Z Wert gesucht. Die Suche beschränkt sich dabei auf die drei niedrigsten Lagen (-15,-13,-11 Grad),
 da alle höheren Lagen zu wit weg währen. Die Einteilung in Segmente ist desshalb nötig um zu verhindern, dass alle Messerte in ein einziges lokales Minima laufen.
 Aus diesem Vorgefilterten Messwerten werden nun für einen \ac{RANSAC} drei zufällig herausgesucht.
+\todo{welcher threthold wurde gewählt, und warum?}
 Aus diesm dei Punkten wird nun eine Ebene in der Hessischen Normalform gebildet ,was eine effiziente Distanzberechnung zu anderen Punken erlaubt. Danach sammeln wir alle weiten Punkte aus unseren Minima, anahnd eines Distanzkriteriums.
 Danach wird aus der Ebene und den neu Gesammelten Punkte durch einen Planefitting Algorithms [\cref{subssec:planefitting}] eine neue Ebene und derren Fehler berechnet.
 Der Fehler wird über die Summe der quadratischen Abstände aller Punkte zur Ebene berechnet.
@@ -540,7 +668,7 @@ die Position des Fahrzeuges aus dem Mittelpunkt der Boundingbox bestimmt.
 
 Die für die Berechnung der Bewegungsrichtung genutzte Position ist jedoch eine andere, da die so eben berechnete Position zu diesem Zeitpunkt noch nicht zur verfügung steht und
 die Position kurz nach der Initialen erkennung durch die häufigen Größenändrungen sehr instabil ist. Deswegen wird als Position immer die maximale x-Koordinate der Cluster gesnutzt.
-Diese Postition kann ebenfalls in \cref{obst_rot}, als grüner Punkt begutachtet werden.
+Diese Postition kann ebenfalls in \cref{obst_rot}, als kleiner grüner Kreis begutachtet werden.
 Da $\theta$ im initialen Zeitschritt Null ist, entpricht dies der globalen Maximalen x-Koordinate des Clusters. Dies Führt dazu, das wir im Initialen Zeitschritt annhemen, dass sich das Objekt
 in die positive x-Richtung bewegt. Bei Objekten bei denen das nicht der Fall ist, führt das zu einem kurzzeitigen oszillieren der Orientierung, welche sich jedoch über die Zeit schnell stabilisiert.
 
@@ -593,7 +721,8 @@ Die Klassifizierung sieht wie folgt aus:
 % Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1.5x1.5m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
 Weiterhin wird andhand der Geschwindigekeit eine Plausibilitätstest durchgeführt. So darf eine Fußgänger eine Geschwindigekeit von 10km/h nicht überschreiten und die Maximalgeschwindigkeit dür einen 
 Radfahrer bertägt 30km/h. Da für Fahrzeuge keine sinnvolle geschwindigkeitsgrenze angenommen werden kann, wir an ihrer stelle die Änderung der Orientierung genutzt. Als Maximale Drehrate wird
-eine Messung von 0.3 rads/sec aus \cite{Kelly1994} angenommen. Da der Wert eine Obere Grenze darstellen soll nehmen wir einen etwas höheren  Wert von  0.3 rads/sec an.
+eine Messung von 0.3 rads/sec aus \cite{Kelly1994} angenommen. Da der Wert eine Obere Grenze darstellen soll nehmen wir einen etwas höheren  Wert von  0.3 rads/sec an. Wird einer dieser Werte überschritten,
+wird der Confidence ebenfalls halbiert.
 
 
 % \begin{lstlisting}[language=Python]
@@ -688,7 +817,9 @@ viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Si
 \end{figure}
 
 \subsection{Simuation Scenario}
-Für Das Simalations Scenario wurde eine einfacher kleiner Kresiverkehr mit einem Außendurchmesser von 26m designt, da dieser aud grund seiner größe das interessanteste Objekt ist.
+
+\todo{referenzen zu ``roundabout in law'' mit formelsymbolen und so}
+Für Das Simalations Scenario wurde eine einfacher kleiner Kresiverkehr mit einem Außendurchmesser von 26m designt, da dieser auf grund seiner größe das interessanteste Objekt ist.
 Und im Innerstätischen Bereich jaufig anzutreffen ist. Zum testen der Onjektdetektion bietet dieser auf grund seiner bebaubaren mittelinsel gute möglichkeiten das Tracking zu testen.
 Weiterhin ist es aufgrund seiner Größe möglich den kompletten Kreisverkehr zu überblicken. Das Ganze Senarion wurde aufgrund von limitierungen in Vrep um den Faktor 10 herunterscaliert.
 
@@ -807,7 +938,8 @@ Weiterhin wird die zu erwartende Intersection position mit allen Spuren im Kreiv
 und so die von der Karte glieferte Position stark verfälscht sein kann. Dazu werden aus der zu erwartenden Fahrzeugtrjektorie und dem Vereinfachtetn Kreisverkehrmodell
 die Schnittpunkte von Trajektorie und Fahrspuren berechnet.
 
-
+\paragraph{Start - State}
+Das Fahrzeug befindet sich solange im Start State, bis es einen Abstand von 20m zur außeren Lane des Kreisverkehres erreicht, danach wird in den ToRoundabout-State gewechselt
 
 
 \paragraph{ToRoundabout - State}
@@ -826,7 +958,15 @@ Nach den das Fahrzeug zum stehen gebracht wurde wechselt dieses wieder in den To
 
 
 \paragraph{InRoundabout - State}
-Wenn sich das Fahrzeug innerhalb des Kreisverkehres befindet, führ es ein Adaptive Cruise control (ACC) aus. 
+Wenn sich das Fahrzeug innerhalb des Kreisverkehres befindet, führ es ein \ac{ACC} aus. Das heißt das Fahrzeug fährt mit konstanter geschwindigkeit, bis es
+auf ein hindernis trifft. Sobald es auf ein Hindernis getroffen ist, wird die Geschwindigkeit proportional zum abstand des Hindernisses reduziert, sodass sich ein Sicherheisabstand
+einstellt. Zusätzlich wird bei jedem aufruf das Zeitfenster bechnet, welches das Fahrzeug benötigt um  die Zielausfahrt zu erreichen. \todo{was ist die Zielausfart (welche koordinate)}
+
+
+
+Sollte sich das Fahrzeug der Zielausfahrt auf 10m nähren, wird in des Zustand ExitRoundabout gewechselt \todo{wo wird zielausfahrt definiert}
+
+
 
 
 \chapter{Evaluation}

@@ -1,8 +1,44 @@
 \chapter{Basic Knowledge}
 
-\section{Autonomous Driving}
+\section{Roundabouts}
+\todo{referenz}
+Kreisverkehre erfreuen sich in Deutschland an steigender belibetheit. Wie in \cref{conflict_roundabout} zu sehen  Aufgund ihrer kleineren anzhal an Konflikktpunkten (8) im gegensatz zu kreuzungen (32)  tragen
+sie stark zur sicherheit im Straßenverkehr bei. 
 
-\section{Roundabouts in Law}
+\begin{figure}[!ht]
+  %\addcontentsline{lof}{figure}{LaTeX--Strukturelemente}
+%\begin{center}
+\caption{Roundabout Conflict Points \cite{man06}}
+ \includegraphics[width=\textwidth]{bilder/conflict.png}
+\label{conflict_roundabout}
+%\end{center}
+\end{figure}
+
+So lag im Jahre 2009 bei einer Untersuchung \cite{Bondzio2012}, von 54426 Unfällen im Innenstadtbereich, die Anzahl der Unfälle in Kreisverkehren bei nur 1150 (2.1\%) [\cref{unfall_roundabout}]
+Leider gibt es diesbezüglich im Rahmen des autonomen fahrens nur wenige Veröffentlichungen.
+%\definecolor{myblue}{HTML}{92dcec}
+
+\begin{figure}[!ht]
+  %\addcontentsline{lof}{figure}{LaTeX--Strukturelemente}
+%\begin{center}
+\caption{Accidents in City Limits \cite{Bondzio2012}}
+\begin{tikzpicture}
+  \begin{axis}[
+    xbar,xmax=65, width=0.7\textwidth, height=5cm, enlarge y limits=0.5, xlabel={accidents (in \%)},
+    symbolic y coords={roandabout,road,intersection with signposts,intersection with traffic light}, ytick=data,
+    nodes near coords, nodes near coords align={horizontal}, ]
+    \addplot coordinates {(2.1,roandabout) (54.8,road) (36.9,intersection with signposts) (22.4 ,intersection with traffic light)};
+  \end{axis}
+\end{tikzpicture}
+\label{unfall_roundabout}
+%\end{center}
+\end{figure}
+
+Auch wenn Kreisverkehre für den Menschlichen Fahrer scheinbar eine Erleichterung darstellen, ist es nötig die Herausforderungen in hinblick aufbaudas Autonome Fahren zu Untersuchen.
+Dazu gibt es im Folgenden eine übersicht der Rechtlichen aspekte in Deustschland.
+
+
+\subsection{Roundabouts in Law}
 % In Deutschland gibt es kein Gesetzt was den genauen Konstuktion von Kreisverkehren vorschreibt.
 % Stattdessen werden die Elemente der Landstraßen und Stadtstraßen in Richtlinien für die Anlage von Landstraßen (RAL) bzw.
 % den Richtlinien für die Anlage von Stadtstraßen (RASt) behandelt. Diese Richtlinien sind auch für die
@@ -11,8 +47,8 @@
 % wirtschaftlichen Kriterien und raumordnerischen oder städtebaulichen Vorgaben. Die Richtlinien regeln auch grundlegend die entwurfstechnische und betriebliche Ausbildung von Kreisverkehren.
 %
 In Germany, there is no law stipulating the exact construction of roundabouts.
-Instead, the elements of the rural roads and city streets are dealt with in Directives for the Design of rural roads \cite{ral13}
-and the Directives for the Design of Urban Roads \cite{rast06}. These guidelines are also relevant to the choice of a convenient junction type when linking roads.
+Instead, the elements of the rural roads and city streets are dealt with in ``Directives for the Design of rural roads'' \cite{ral13}
+and the ``Directives for the Design of Urban Roads''  \cite{rast06}. These guidelines are also relevant to the choice of a convenient junction type when linking roads.
 The considerations discussed there are based on traffic variables, area-related characteristics, economic criteria and spatial planning or urban planning requirements. 
 The guidelines also regulate the basic design and operational formation of roundabouts.
 The  Directives for the Design of Urban Roads \cite{rast06} are relevant for this dispute. Since the access the RASt ist limited, most of the information is coming from
@@ -174,11 +210,12 @@ Aus den Restlichen Daten werden dann diejenigen ausgewählt, welche einen abstab
 Diese Schritte werden mehrmal wiederholt. Dann wird diejenige Teilmenge gewählt, welche die meisten Punkte enthält. Mit dieser Teilmenge werden mit einem der üblichen Ausgleichsverfahren die Modellparameter berechnet.
 Der \ac{RANSAC} hat also drei zu Bestimmende Parameter,m welche das ergebnis beeinflussen.
 
+\todo{missing refernce to pics in dbscan and ransac}
 \begin{figure}[!ht]
 \begin{center}
 \caption{\acs{RANSAC} \cite{Fischler1981}}
 \includegraphics[width=0.6\textwidth]{bilder/ransac.pdf}
-\label{platform}
+\label{ransac}
 \end{center}
 \end{figure}
 
@@ -203,7 +240,7 @@ Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbei
 \begin{center}
 \caption{\acs{DBSCAN} \cite{DBSCAN}}
 \includegraphics[width=0.6\textwidth]{bilder/dbscan.pdf}
-\label{platform}
+\label{dbscan}
 \end{center}
 \end{figure}
 

@@ -20,7 +20,6 @@
   isbn={9783939715214},
   series={FGSV (Series)},
   year={2007},
-  shorthand = {RASt},
   publisher={FGSV-Verlag},
   hyphenation={ngerman}
 }
@@ -30,7 +29,6 @@
   author={Forschungsgesellschaft f{\"u}r Stra{\ss}en- und Verkehrswesen. Arbeitsgruppe Stra{\ss}enentwurf},
   series={FGSV (Series)},
   year={2013},
-  shorthand = {RAL},
   publisher={FGSV-Verlag},
   hyphenation={ngerman}
 }
@@ -281,6 +279,108 @@
   year = {2009},
   hyphenation={english}
 }
+
+@article{Fischler1981,
+  abstract = {A new paradigm, Random Sample Consensus (RANSAC), for fitting a model to experimental data is introduced. RANSAC is capable of interpreting/ smoothing data containing a significant percentage of gross errors, and is thus ideally suited for applications in automated image analysis where interpretation is based on the data provided by error-prone feature detectors. A major portion of this paper describes the application of RANSAC to the Location Determination Problem (LDP): Given an image depicting a set of landmarks with known locations, determine that point in space from which the image was obtained. In response to a RANSAC requirement, new results are derived on the minimum number of landmarks needed to obtain a solution, and algorithms are presented for computing these minimum-landmark solutions in closed form. These results provide the basis for an automatic system that can solve the LDP under difficult viewing and analysis conditions. Implementation details and computational examples are also presented.},
+  author = {Fischler, Martin a and Bolles, Robert C},
+  doi = {10.1145/358669.358692},
+  file = {:home/storm/workspace/Masterarbeit/documents/ransac.pdf:pdf},
+  isbn = {0934613338},
+  issn = {0001-0782},
+  journal = {Communications of the ACM},
+  keywords = {automated cartography,camera calibration,computer{\_}vision,epipolar,geometry,image matching,keypoints,location determination,match-rejection,model fitting,motion-estimation,multi-view,rpc,scene analysis,sift,stereo,structure{\_}from{\_}motion,tracking},
+  number = {6},
+  pages = {381 -- 395},
+  title = {{Random Sample Consensus: A Paradigm for Model Fitting with Applicatlons to Image Analysis and Automated Cartography}},
+  url = {http://dx.doi.org/10.1145/358669.358692},
+  volume = {24},
+  year = {1981},
+  hyphenation={english}
+}
+
+@book{lester2008gang,
+  title={Gang of Four},
+  author={Lester, P.},
+  isbn={9781847722454},
+  url={https://books.google.de/books?id=9ApoM5GTpq0C},
+  year={2008},
+  publisher={Omnibus},
+  hyphenation={english}
+}
+@techreport{Bondzio2012,
+  address = {Berlin},
+  author = {Bondzio, Lothar},
+  institution = {Gesamtverband der Deutschen Versicherungswirtschaft e. V.},
+  isbn = {9783939163466},
+  keywords = {Dipl.-Ing. Heiko Vo{\ss},Dipl.-Ing. J{\"{o}}rg Ortlepp,Dr.-Ing. Lothar Bondzio,Dr.-Ing. Roland Weinert},
+  title = {{Verkehrssicherheit inner{\"{o}}rtlicher Kreisverkehre}},
+  year = {2012},
+  hyphenation={ngerman}
+}
+
+@article{Campbell2007,
+  abstract = {Executive Summary Team Cornell's 2007 DARPA Urban Challenge blends the team and technologies of a largely successful 2005 DARPA Grand Challenge with internationally recognized experts in probabilistic analysis, GPS, control systems and artificial intelligence to develop a vehicle capable of executing autonomous urban operations. Key state of the art technologies developed and integrated in Team Cornell's entry include: 1) reliable, high performance vehicle automation using brake, steering, transmission and throttle control; 2) tightly coupled vehicle position and attitude estimation with time synchronized antennas, square root information filtering, and integrity monitoring; 3) an integrated sensor suite of laser range finders, cameras, and radars to monitor the environment; 4) a novel probabilistic approach which fuses the many sensors in order to track moving vehicles relative to Cornell's vehicle; 5) a unique scene estimation algorithm, which condenses local probabilistic information to produce a lane-specific estimates of the environment used by all levels of planning; and 6) a hierarchical planning algorithm, with operational, tactical, and behavioral layers to achieve smooth local control despite switching between an expandable set of road behaviors and higher level mission goals. This document gives an overview of these key technologies, along with a sample of the experimental results.},
+  author = {Campbell, M and Garcia, E},
+  journal = {DARPA Urban Chall. {\ldots}},
+  pages = {1--25},
+  title = {{Team Cornell: technical review of the DARPA urban challenge vehicle}},
+  url = {http://archive.darpa.mil/grandchallenge/TechPapers/Team{\_}Cornell.pdf},
+  year = {2007},
+  hyphenation={english}
+}
+
+@article{Corp2005,
+  author = {Corp, Oshkosh Truck},
+  file = {:home/storm/darpa/TeamTerraMax.pdf:pdf},
+  pages = {1--14},
+  title = {{Team Terramax Darpa Grand Challenge 2005}},
+  year = {2005},
+  hyphenation={english}
+}
+
+@article{Montemerlo2009,
+  abstract = {This article presents the architecture of Junior, a robotic vehicle capable of navi- gating urban environments autonomously. In doing so, the vehicle is able to select its own routes, perceive and interact with other traffic, and execute various urban driving skills including lane changes, U-turns, parking, and merging into moving traffic. The vehicle successfully finished and won second place in the DARPA Ur- ban Challenge, a robot competition organized by the U.S. Government.},
+  archivePrefix = {arXiv},
+  arxivId = {10.1.1.91.5767},
+  author = {Montemerlo, Michael and Becker, Jan and Bhat, Suhrid and Dahlkamp, Hendrik and Dolgov, Dmitri and Ettinger, Scott and Haehnel, Dirk and Hilden, Tim and Hoffmann, Gabe and Huhnke, Burkhard and Johnston, Doug and Klumpp, Stefan and Langer, Dirk and Levandowski, Anthony and Levinson, Jesse and Marcil, Julien and Orenstein, David and Paefgen, Johannes and Penny, Isaac and Petrovskaya, Anna and Pflueger, Mike and Stanek, Ganymed and Stavens, David and Vogt, Antone and Thrun, Sebastian},
+  doi = {10.1007/978-3-642-03991-1_3},
+  eprint = {10.1.1.91.5767},
+  isbn = {9783642039904},
+  issn = {16107438},
+  journal = {Springer Tracts in Advanced Robotics},
+  number = {October 2005},
+  pages = {91--123},
+  pmid = {22164016},
+  title = {{Junior: The stanford entry in the urban challenge}},
+  volume = {56},
+  year = {2009},
+  hyphenation={english}
+}
+
+@article{Urmson2007,
+  abstract = {The Urban Challenge represents a technological leap beyond the previous Grand Challenges. The challenge encompasses three primary behaviors: driving on roads, handling intersections and maneuvering in zones. In implementing urban driving we have decomposed the problem into five components. Mission Planning determines an efficient route through an urban network of roads. A behavioral layer executes the route through the environment, adapting to local traffic and exceptional situations as necessary. A motion planning layer safeguards the robot by considering the feasible trajectories available, and selecting the best option. Perception combines data from lidar, radar and vision systems to estimate the location of other vehicles, static obstacles and the shape of the road. Finally, the robot is a mechatronic system engineered to provide the power, sensing and mobility necessary to navigate an urban course. Rigorous component and system testing evaluates progress using standardized tests. Observations from these experiments shape the design of subsequent development spirals and enable the rapid detection and correction of bugs. The system described in the paper exhibits a majority of the basic navigation and traffic skills required for the Urban Challenge. From these building blocks more advanced capabilities will quickly develop.},
+  author = {Urmson, Chris and Anhalt, Joshua and Bagnell, Drew and Baker, Christopher and Bittner, Robert and Dolan, John and Duggins, Dave and Ferguson, Dave and Galatali, Tugrul and Geyer, Chris and Gittleman, Michele and Harbaugh, Sam and Hebert, Martial and Howard, Tom and Kelly, Alonzo and Kohanbash, David and Likhachev, Maxim and Miller, Nick and Peterson, Kevin and Rajkumar, Raj and Rybski, Paul and Salesky, Bryan and Scherer, Sebastian and Woo-seo, Young and Simmons, Reid and Singh, Sanjiv and Snider, Jarrod and Stentz, Anthony and Whittaker, William Red and Ziglar, Jason and Struble, Joshua and Taylor, Michael},
+  doi = {10.1002/rob.20251},
+  file = {:home/storm/darpa/Tartan{\_}Racing.pdf:pdf},
+  issn = {15564967},
+  journal = {Defense},
+  number = {4},
+  pages = {386--387},
+  title = {{Tartan Racing: A Multi-Modal Approach to the DARPA Urban Challenge}},
+  url = {http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.107.8722{\&}rep=rep1{\&}type=pdf},
+  volume = {94},
+  year = {2007},
+  hyphenation={english}
+}
+
+@article{Atreya2007,
+  author = {Atreya, A and Cattle, B and Momen, S and Collins, B and Downey, A and Franken, G and Glassand, J and Glass, Z and Herbach, J and Saxe, A and Ashwash, I and Baldassano, C and Hu, W and Javed, U and Mayer, J and Benjamin, D and Gorman, L and Yu, D},
+  file = {:home/storm/darpa/Victor{\_}Tango.pdf:pdf},
+  title = {{DARPA Urban Challenge -- Virginia Tech Technical Paper}},
+  year = {2007},
+  hyphenation={english}
+}
+
 
 
 
