@@ -186,6 +186,90 @@
       \field{year}{2012}
       \keyw{Dipl.-Ing. Heiko Vo{ß},Dipl.-Ing. Jörg Ortlepp,Dr.-Ing. Lothar Bondzio,Dr.-Ing. Roland Weinert}
     \endentry
+    \entry{Broy2006}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=74476573aa159749eafc4a3c16c957b4}{%
+           family={Broy},
+           familyi={B\bibinitperiod},
+           given={Manfred},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, New York, USA}%
+      }
+      \list{publisher}{1}{%
+        {ACM Press}%
+      }
+      \strng{namehash}{74476573aa159749eafc4a3c16c957b4}
+      \strng{fullhash}{74476573aa159749eafc4a3c16c957b4}
+      \strng{authornamehash}{74476573aa159749eafc4a3c16c957b4}
+      \strng{authorfullhash}{74476573aa159749eafc4a3c16c957b4}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The amount of software in cars grows exponentially. Driving forces of this development are cheaper and more powerful hardware and the demand for innovations by new functions. The rapid increase of software and software based functionality brings various challenges (see [21], [23], [25], [26]) for the automotive industries, for their organization, key competencies, processes, methods, tools, models, product structures, division of work, logistics, maintenance, and long term strategies. From a software engineering perspective, the automotive industry is an ideal and fascinating application domain for advanced techniques. Although the automotive industry may adopt general results and solutions from the software engineering body of knowledge gained in other domains, the specific constraints and domain specific requirements in the automotive industry ask for individual solutions and bring various challenges for automotive software engineering. In cars we find literally all interesting problems and challenging issues of software and systems engineering. Copyright. 2006 ACM.}
+      \field{booktitle}{Proceeding of the 28th international conference on Software engineering - ICSE '06}
+      \field{isbn}{1595933751}
+      \field{issn}{02705257}
+      \field{langid}{english}
+      \field{title}{{Challenges in automotive software engineering}}
+      \field{year}{2006}
+      \field{pages}{33}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1145/1134285.1134292
+      \endverb
+      \verb{url}
+      \verb http://portal.acm.org/citation.cfm?doid=1134285.1134292
+      \endverb
+      \keyw{automotive software engineering,model driven development}
+    \endentry
+    \entry{Buehler2010}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=ef680d21db3be3bc2537bae0ed526f09}{%
+           family={Buehler},
+           familyi={B\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d47d863a1acccd5a844654fe056c867b}{%
+           family={Iagnemma},
+           familyi={I\bibinitperiod},
+           given={Karl},
+           giveni={K\bibinitperiod}}}%
+        {{hash=495200d014eb282f882493a67e925f57}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Sanjiv},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{1a40bded7fef9c5b47fab6bd6d544cde}
+      \strng{fullhash}{1a40bded7fef9c5b47fab6bd6d544cde}
+      \strng{authornamehash}{1a40bded7fef9c5b47fab6bd6d544cde}
+      \strng{authorfullhash}{1a40bded7fef9c5b47fab6bd6d544cde}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This volume, edited by Martin Buehler, Karl Iagnemma and Sanjiv Singh, presents a unique and comprehensive collection of the scientific results obtained by finalist teams that participated in the DARPA Urban Challenge in November 2007, in the mock city environment of the George Air Force base in Victorville, California. This book is the companion of a previous volume by the same editors which was devoted to the Grand Challenge, which took place in the Nevada desert during October 2005, and was the second in the series of autonomous vehicle races sponsored by DARPA. The Urban Challenge demonstrated how cutting-edge perception, control, and motion planning techniques can allow intelligent autonomous vehicles not only to travel significant distances in off-road terrain, but also to operate in urban scenarios. Beyond the value for future military applications--which motivated DARPA to sponsor the race-- the expected impact in the commercial sector for automotive manufacturers is equally, if not more, important: autonomous sensing and control constitute key technologies for vehicles of the future, and might help save thousands of lives that are now lost in traffic accidents.}
+      \field{booktitle}{The DARPA Urban Challenge}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{3642039901}
+      \field{issn}{1610-7438}
+      \field{langid}{english}
+      \field{title}{{The DARPA Urban Challenge}}
+      \field{volume}{49}
+      \field{year}{2010}
+      \field{pages}{626}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1007/978-3-642-03991-1
+      \endverb
+      \verb{eprint}
+      \verb arXiv:1011.1669v3
+      \endverb
+      \keyw{DARPA,DARPA Urban challenge,LIDAR,autonomousonomous,vehicle}
+    \endentry
     \entry{Campbell2007}{article}{}
       \name{author}{2}{}{%
         {{hash=c4701acf13c432947a46cebca88b2223}{%

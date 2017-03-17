@@ -261,11 +261,11 @@ Der \ac{DBSCAN} hat also zwei zu Bestimmende Parameter, welche das ergebnis beei
 \section{Middleware OpenDAVINCI}
 Autonome Software ist typischer weise ein verteiletes System, auf heutigen Fahrzeugen basiert dieses System auf ECUs und Bussystemen wie CAN,LIN.
 Verteilete Sysoftware vereinfacht es komplexe Komponenten innheralb des Systems zu integreieren. Im bereich des Autonomen Fahrens iust der Historische aufbau von Fahrzeugen
-mit ECU'S und can jedoch nicht optimal. Um die vielen benötigekten Komponenten zu handhaben, ist es von vorteil Komponenten auch innerhalb eines ECU's bzw einer Recheneinheit
+mit ECU'S und can jedoch nicht optimal \cite{Broy2006}. Um die vielen benötigekten Komponenten zu handhaben, ist es von vorteil Komponenten auch innerhalb eines ECU's bzw einer Recheneinheit
 zu entkoppeln. Für diesen Zweck gibt es beireits mehrer middelwares die unteranderm die Kommunikation innerhalb der Komponenten handhaben und abstrahieren.
 m Rahmen des Copplar Projekets, wird hier die OpenDaVINCI middleware genutzt. OpenDaVINCI ist eine echtzeitfähige laufzeitumgebeung konzipiert für Autonome Fahrzeuge.
 OpenDaVINCI basiert auf Hesperia \cite{Berger2010}. Die Kommunikation zwischen den Komponenten basiert in OpenDaVINCI UDP Multicast, welches eine Echtzeitfähige Kommunikation zwischen
-den Komponenten  \cite{Kurose2013} und über Recheneinheiten hinweg Ermöglicht. Für die Kommunikation bietet OpenDaVINCI Time-triggered sender und Data-triggered receiver an, von welchem in folgenden der Data-triggered receiver
+den Komponenten  und über Recheneinheiten hinweg Ermöglicht \cite{Kurose2013}. Für die Kommunikation bietet OpenDaVINCI Time-triggered sender und Data-triggered receiver an, von welchem in folgenden der Data-triggered receiver
 für die Anbindung der Software genutzt wird. Weiterhin bietet OpenDaVINCI viele weiter Funktionalitäten die das Handling von World Geodetic System 1984 (WGS84) Korridinaten an, welches für die Umwandlung
 von GPS koordinaten in lokale kartesische genutzt werden kann. Dazu ist die Angabe einer referenz GPS postion nötig, welche um den Berechnugsfehler klein zu halten,
 nicht zu weit entfernt sein sollte.

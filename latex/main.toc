@@ -4,18 +4,18 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Ausgangssituation}{1}{section.1.1}
 \contentsline {subsection}{\numberline {1.1.1}Test Platform}{1}{subsection.1.1.1}
-\contentsline {subsubsection}{Velodyne VLP-16 LiDAR}{2}{section*.7}
-\contentsline {subsubsection}{Applanix POS LV}{3}{section*.9}
+\contentsline {subsubsection}{Velodyne VLP-16 LiDAR}{2}{section*.8}
+\contentsline {subsubsection}{Applanix POS LV}{3}{section*.10}
 \contentsline {section}{\numberline {1.2}Zielsetzung}{3}{section.1.2}
 \contentsline {chapter}{\numberline {2}Basic Knowledge}{4}{chapter.2}
 \contentsline {section}{\numberline {2.1}Roundabouts}{4}{section.2.1}
 \contentsline {subsection}{\numberline {2.1.1}Roundabouts in Law}{5}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Elements of a Roundabout}{5}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}Types of Roundabouts}{6}{subsection.2.1.3}
-\contentsline {subsubsection}{Mini Roundabout}{6}{section*.14}
-\contentsline {subsubsection}{Small Roundabout}{7}{section*.16}
-\contentsline {subsubsection}{Two-lane Passable Roundabout}{7}{section*.18}
-\contentsline {subsubsection}{Large Roundabout}{8}{section*.20}
+\contentsline {subsubsection}{Mini Roundabout}{6}{section*.15}
+\contentsline {subsubsection}{Small Roundabout}{7}{section*.17}
+\contentsline {subsubsection}{Two-lane Passable Roundabout}{7}{section*.19}
+\contentsline {subsubsection}{Large Roundabout}{8}{section*.21}
 \contentsline {section}{\numberline {2.2}\acl {RANSAC}}{8}{section.2.2}
 \contentsline {section}{\numberline {2.3}\acl {DBSCAN}}{9}{section.2.3}
 \contentsline {section}{\numberline {2.4}Middleware OpenDAVINCI}{9}{section.2.4}
@@ -27,38 +27,42 @@
 \contentsline {paragraph}{Range 25-50m}{16}{section*.37}
 \contentsline {paragraph}{Range >50m}{16}{section*.39}
 \contentsline {section}{\numberline {5.2}Practical Analysis}{16}{section.5.2}
-\contentsline {section}{\numberline {5.3}Objekt Detection}{18}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Ground Removal}{18}{subsection.5.3.1}
-\contentsline {subsubsection}{Planefitting}{19}{section*.47}
-\contentsline {subsection}{\numberline {5.3.2}Clustering}{21}{subsection.5.3.2}
-\contentsline {subsection}{\numberline {5.3.3}Tracking}{23}{subsection.5.3.3}
-\contentsline {subsubsection}{Cluster Tracking}{23}{section*.54}
-\contentsline {subsubsection}{Object Tracking}{23}{section*.55}
-\contentsline {subsubsection}{Object Confidence}{25}{section*.61}
-\contentsline {subsection}{\numberline {5.3.4}Classification}{26}{subsection.5.3.4}
-\contentsline {subsection}{\numberline {5.3.5}State Estimation}{27}{subsection.5.3.5}
-\contentsline {subsubsection}{Constant Turn Rate and Velocity Model}{27}{section*.66}
-\contentsline {subsubsection}{Prediction}{27}{section*.67}
-\contentsline {section}{\numberline {5.4}Simuation}{28}{section.5.4}
-\contentsline {subsection}{\numberline {5.4.1}Simuation Scenario}{28}{subsection.5.4.1}
-\contentsline {subsection}{\numberline {5.4.2}Simulation Logic}{29}{subsection.5.4.2}
-\contentsline {subsubsection}{Sensor Connection}{29}{section*.71}
-\contentsline {subsubsection}{Mapping}{30}{section*.72}
-\contentsline {subsubsection}{Statemachine}{31}{section*.75}
-\contentsline {paragraph}{Start - State}{31}{section*.80}
-\contentsline {paragraph}{ToRoundabout - State}{31}{section*.81}
-\contentsline {paragraph}{Brake - State}{31}{section*.83}
-\contentsline {paragraph}{InRoundabout - State}{32}{section*.84}
-\contentsline {chapter}{\numberline {6}Evaluation}{33}{chapter.6}
-\contentsline {section}{\numberline {6.1}Simuation}{33}{section.6.1}
-\contentsline {section}{\numberline {6.2}Real Measurements}{33}{section.6.2}
-\contentsline {chapter}{\numberline {7}Conclusions}{34}{chapter.7}
-\contentsline {chapter}{\numberline {8}Future Work}{35}{chapter.8}
+\contentsline {chapter}{\numberline {6}Objekt Detection}{18}{chapter.6}
+\contentsline {section}{\numberline {6.1}Ground Removal}{18}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Planefitting}{20}{subsection.6.1.1}
+\contentsline {section}{\numberline {6.2}Clustering}{22}{section.6.2}
+\contentsline {section}{\numberline {6.3}Tracking}{23}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Cluster Tracking}{23}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Object Tracking}{24}{subsection.6.3.2}
+\contentsline {subsection}{\numberline {6.3.3}Object Confidence}{27}{subsection.6.3.3}
+\contentsline {section}{\numberline {6.4}Classification}{27}{section.6.4}
+\contentsline {section}{\numberline {6.5}State Estimation}{27}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}Constant Turn Rate and Velocity Model}{28}{subsection.6.5.1}
+\contentsline {subsection}{\numberline {6.5.2}Prediction}{28}{subsection.6.5.2}
+\contentsline {chapter}{\numberline {7}Simuation}{29}{chapter.7}
+\contentsline {section}{\numberline {7.1}Simuation Scenario}{29}{section.7.1}
+\contentsline {section}{\numberline {7.2}Simulation Logic}{30}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Sensor Connection}{30}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Mapping}{31}{subsection.7.2.2}
+\contentsline {subsection}{\numberline {7.2.3}Statemachine}{32}{subsection.7.2.3}
+\contentsline {paragraph}{Start - State}{32}{section*.74}
+\contentsline {paragraph}{ToRoundabout - State}{32}{section*.75}
+\contentsline {paragraph}{Brake - State}{32}{section*.77}
+\contentsline {paragraph}{InRoundabout - State}{33}{section*.78}
+\contentsline {chapter}{\numberline {8}Evaluation}{34}{chapter.8}
+\contentsline {section}{\numberline {8.1}Simuation}{34}{section.8.1}
+\contentsline {section}{\numberline {8.2}Real Measurements}{34}{section.8.2}
+\contentsline {chapter}{\numberline {9}Conclusions}{35}{chapter.9}
+\contentsline {chapter}{\numberline {10}Future Work}{36}{chapter.10}
 \select@language {english}
 \select@language {english}
 \select@language {english}
 \select@language {english}
 \select@language {ngerman}
+\select@language {english}
+\select@language {english}
+\select@language {english}
+\select@language {english}
 \select@language {english}
 \select@language {english}
 \select@language {english}

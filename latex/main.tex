@@ -15,7 +15,7 @@
 \usepackage{listings}
 \usepackage[bibencoding=auto,backend=biber,babel=other]{biblatex}
 \usepackage{csquotes}
-
+\usepackage{amssymb}
 %\usepackage[style=numeric]{biblatex}
 \addbibresource{main.bib}
 \usepackage{mathtools}
@@ -78,9 +78,13 @@ $\overline{~~~~~~~~~\mbox{Julian-B. Scholle}~~~~~~~~~}$
 
 
 \chapter*{Acknowledgements}
-Danken möchte ich außerdem besonders Associate professor Christian Berger und J. Prof Sebastian Zug, führ ihre Organisatorische und Fachliche Unterstützung während und besonders im Vorfeld dieser Abreit und
-dem ``Deutschen Akademischen Austauschdienst'' - DAAD für ihre finanzielle Unterstüzung während meines Aufenthaltes in Göteborg.
-Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, welche mich bei meiner Arbeit fachlich und moralisch untersützt haben.
+% Danken möchte ich außerdem besonders Associate professor Christian Berger und J. Prof Sebastian Zug, führ ihre Organisatorische und Fachliche Unterstützung während und besonders im Vorfeld dieser Arbeit und
+% dem ``Deutschen Akademischen Austauschdienst'' - DAAD für ihre finanzielle Unterstüzung während meines Aufenthaltes in Göteborg.
+% Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, welche mich bei meiner Arbeit fachlich und moralisch untersützt haben.
+
+I would especially like to thank Associate professor Christian Berger and J. Prof Sebastian Zug for their organizational and technical support during and especially in the run-up to this work and
+The ``Deutschen Akademischen Austauschdienst'' - DAAD for their financial support during my stay in Gothenburg.
+I would also like to thank all the other colleagues from Gothenburg, who have supported me professionally and morally.
 
 \include{shorts}
 
@@ -95,12 +99,13 @@ Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, we
 \chapter{State of the Art}
 Auch wenn Autonomes Fahren ein aaktuelles Forschungsthema ist, gibt es bisher keine mit bekannten veröffentlichungen welche sich explizit mit Kreisverkehren beschäftigen.
 Um trotzdem einen Verleich zur Sensoraustattung und Verkehrsbeobachtung zu haben werden an dieser Stelle einige Paper der \acs{DARPA} Urban Challenge herangezogen.
-Die DARPA Urban Challenge ist ein Rennen zwischen autonomen Fahrzeugen, welches im Jahre 2007 von der \ac{DARPA} ausgetragen wurde. 
-Das Rennen fand in bebautem Gebiet einer verlassenen Kaserne des ehemaligen Air Force-Stützpunktes George Air Force Base statt, die Karte kann ist in \cref{darpa_map} zu sehen.
+Die DARPA Urban Challenge ist ein Rennen zwischen autonomen Fahrzeugen, welches im Jahre 2007 von der \ac{DARPA} ausgetragen wurde. \cite{Buehler2010} Das Rennen fand in bebautem Gebiet
+einer verlassenen Kaserne des ehemaligen Air Force-Stützpunktes George Air Force Base statt, die Karte kann ist in \cref{darpa_map} zu sehen.
 
 \begin{figure}[!ht]
 %\begin{center}
-\caption{\acs{DARPA} Urban Challenge Map \footnote{\url{http://rsta.royalsocietypublishing.org/content/368/1928/4649}}}
+\caption{ \acs{DARPA} Urban Challenge Map }
+\footnote{\url{http://rsta.royalsocietypublishing.org/content/368/1928/4649}}
 \includegraphics[width=\textwidth]{bilder/darpa_map_bw.png}
 \label{darpa_map}
 %\end{center}
@@ -123,54 +128,76 @@ Victor Tango \cite{Atreya2007} & 1 & 1 (4) & 0 & 2 & 1  \\\hline
 \chapter{Methodology}
 
 
-
-Der eigentliche Kern der Arbeit. In diesen Kapiteln wird die Vorgehensweise methodisch
-erkl¨art. Oft werden fur Teilprobleme separate Kapitel angefertigt. Oft sind diese ¨
-Methodik-Kapitel aber auch logisch getrennt. Beispielsweise Kapitel fur ¨ Problemanalyse,
-Verfahrensauswahl, Umsetzung und Implementierung. Hinweis: Denken Sie daran:
-Diese Kapitel sind der Kern der Arbeit!! Sie sollten hier insbesondere klar herausstellen,
-was vorhandene Vorarbeiten sind und was im Rahmen dieser Arbeit entwickelt
-und umgesetzt wurde, also was Eigenanteil und was Fremdanteil ist
-
-
 \todo{siehe jens BA, dashier ist zu kurz}
+% Der eigentliche Kern der Arbeit. In diesen Kapiteln wird die Vorgehensweise methodisch
+% erklärt. Oft werden fur Teilprobleme separate Kapitel angefertigt. Oft sind diese ¨
+% Methodik-Kapitel aber auch logisch getrennt. Beispielsweise Kapitel fur ¨ Problemanalyse,
+% Verfahrensauswahl, Umsetzung und Implementierung. Hinweis: Denken Sie daran:
+% Diese Kapitel sind der Kern der Arbeit!! Sie sollten hier insbesondere klar herausstellen,
+% was vorhandene Vorarbeiten sind und was im Rahmen dieser Arbeit entwickelt
+% und umgesetzt wurde, also was Eigenanteil und was Fremdanteil ist
+
 % Gefragt wird hier nach den Kriterien dafür, welche Methode für eine bestimmte Art der Anwendung geeignet ist,
 % warum eine bestimmte Methode angewandt werden muss oder angewendet wird und keine andere.
 % Verständnisfragen zum methodischen Weg werden hier geklärt.
 % Die Methodologie ist demnach eine Metawissenschaft und somit eine Teildisziplin der Wissenschaftstheorie.
 % Demgegenüber bezeichnet Methodik das Methodenwissen des Praktikers oder des Wissenschaftlers.
 
-Im vorigen Kapitel haben wir uns die Arten von Kreisverkehren und derren Komponenten angesehen.
-\todo{kreisverkehre überabreiten}
-Weiterhin haben wir die zur verfügung
-stehende Testplatform und ihre Sensorik begutachtet. Dabei haben wir festgestellt, das für die Erkennung von Objekten in andren
-Arbeiten häufig mehrere und teurere Sensoren kombiniert werden um ein Zuverlässiges erkennen von anderen Verkehrsteilnehmern zu gewährleisten.
+% Im vorigen Kapitel haben wir uns die Arten von Kreisverkehren und derren Komponenten angesehen.
+% Weiterhin haben wir die zur verfügung stehende Testplatform und ihre Sensorik begutachtet. Dabei haben wir festgestellt, das für die Erkennung von Objekten in andren
+% Arbeiten häufig mehrere und teurere Sensoren kombiniert werden um ein Zuverlässiges erkennen von anderen Verkehrsteilnehmern zu gewährleisten.
+
+In the previous chapter we looked at the types of roundabouts and their components. We also reviewed the available test platform and its sensor technology.
+We have found that the detection of objects in other projects often combines several and more expensive sensors in order to ensure a reliable detection of other traffic users.
+
 \todo{beleg}
 In der Research Questian eins haben wir festgehalten, das wir die verwendung eines günstigen VLP-16 Sensors in einem 
 Komplexen Verkehrszenario, die Verkehrsbeobachtung eines Kreisverkehrs evaluieren wollen.
 
-Dazu wird im folgenden ein Algorithms zum erkennen und Tracken von Objekten mit hilfe des Velodyne VLP-16 vorgeschlagen
-und implementiert. Die Schwierigkeit besteht dabei in der Verwendung eines Einzigen und im vergleich günstigen
-Umfeldsensors, welcher offensichtlich nicht als standalone Lösung für diesen Einsatzzweck entwickelt wurde.
+% Dazu wird im folgenden ein Algorithms zum erkennen und Tracken von Objekten mit hilfe des Velodyne VLP-16 vorgeschlagen
+% und implementiert. Die Schwierigkeit besteht dabei in der Verwendung eines Einzigen und im vergleich günstigen
+% Umfeldsensors, welcher offensichtlich nicht als standalone Lösung für diesen Einsatzzweck entwickelt wurde.
 
-Dieser Sensor bietet in seiner aktuellen Anwendung in dem für diese Arbeit relevanten Bereich eine vergleichsweise
-geringe Auflösung. Daher schlagen viele in ähnlichen Projekten genutzte Gradienten basierende Algorythmen im Bereich 
-der Segmentierung häufig fehl. \todo{beleg} Aus diesem Grund wird für die Segmentierung eine Groundplane basierender Algorithms implementiert.
+For this purpose, an algorithm for recognizing and tracking objects with the help of the Velodyne VLP-16 is proposed and implemented. 
+The difficulty lies in the use of a single and in a comparatively low priced environmental sensor, which obviously has not been developed as a standalone solution for this purpose.
 
-Außerdem ist es Bauartbedingt in Kreisverkehren mit bebauten Mittelinseln und Mehrspurigen Kreisverkehren nötig
-Fahrzeuge über ihren Messhorizont hinaus zu verfolgen, um ein sicheres einfahren in den Kreisverkehr zu gerwährleisten.
-Zu diesem Zweck wird in Section \todo{section reference} ein Tracking und State Estimation Algorithms entwickelt welches dies gewähreisten soll.
+% Dieser Sensor bietet in seiner aktuellen Anwendung in dem für diese Arbeit relevanten Bereich eine vergleichsweise
+% geringe Auflösung. Daher schlagen viele in ähnlichen Projekten genutzte Gradienten basierende Algorythmen im Bereich 
+% der Segmentierung häufig fehl. \todo{beleg} Aus diesem Grund wird für die Segmentierung eine Groundplane basierender Algorithms implementiert.
 
-Zur Evaluation dieser Algorythmen wurden mehrere Datensammlungen auf den nahe gelegenen schwedischen AstaZero \cref{astazero} Prüfgelände in Sandhult
-durchgeführt, für alle nicht dort durchgeführten Expirimente werden in einer dafür erstellten Simuation durchgeführt. In dieser Simulation
-wird ein Innerstätischer Kreiverkehr mit Fuß un Radweg nachgebaut, welche der Kreisverkehr auf AstaZero nicht bieten kann.
+In its current application, this sensor offers a comparatively low resolution in the area wich is relevant for this work.
+Therefore, with many gradient-based algorythms used in similar projects Segmentation will often fail.
+\todo{beleg} For this reason, a ground plane based algorithm is implemented for the segmentation.
 
-Die Evaluierung findet dabei von Hand anhand der grafisch aufbereiteten Messdaten statt. Dabei wird besonders auf False-Negativ
-und False Positiv erkannte Hindernisse eingegangen. Grobe Außreißer bei der Position oder Orientierung dr Objekte werden ebenfalls verkmerkt.
+% Außerdem ist es Bauartbedingt in Kreisverkehren mit bebauten Mittelinseln und Mehrspurigen Kreisverkehren nötig
+% Fahrzeuge über ihren Messhorizont hinaus zu verfolgen, um ein sicheres einfahren in den Kreisverkehr zu gerwährleisten.
+% Zu diesem Zweck wird in Section \todo{section reference} ein Tracking und State Estimation Algorithms entwickelt welches dies gewähreisten soll.
 
-Zur Evaluation der Handbarkeit des Kreisverkehrs wird außerdem eine Statemachine Implementiert welche das Fahrzeug Sicher und Unfallfrei
-durch den Kreiverker bewegen soll. Dazu wird die Simulation über einen längeren Zeitraum beobachtet, und die Anzahl der eventuellen
-Kollisionen notiert.
+In addition, it is necessary to follow vehicles beyond their measuring horizon in roundabouts with built-up central islands and multi-lane roundabouts, 
+in order to ensure a safe entry into the roundabout.
+For this purpose, a tracking and state estimation algorithm is developed in section \todo{section reference}, which should grant that.
+
+% Zur Evaluation dieser Algorythmen wurden mehrere Datensammlungen auf den nahe gelegenen schwedischen AstaZero Prüfgelände in Sandhult [\cref{astazero}]
+% durchgeführt, für alle nicht dort durchgeführten Expirimente werden in einer dafür erstellten Simuation durchgeführt. In dieser Simulation
+% wird ein Innerstätischer Kreiverkehr mit Fuß un Radweg nachgebaut, welche der Kreisverkehr auf AstaZero nicht bieten kann.
+
+In order to evaluate these algorythms, were collected several data collections at the Swedish AstaZero test area nearby Sandhult [\cref{astazero}]
+For all expiriments not carried out there, are carried out in a simulation made for this purpose. In this simulation a roundabout in a urban area 
+with pavement and bikeway is designed, which the roundabout on AstaZero can not offer.
+
+% Die Evaluierung findet dabei von Hand anhand der grafisch aufbereiteten Messdaten statt. Dabei wird besonders auf False-Negativ
+% und False Positiv erkannte Hindernisse eingegangen. Grobe Außreißer bei der Position oder Orientierung dr Objekte werden ebenfalls verkmerkt.
+
+The evaluation is carried out manually by using of the graphically prepared measurement data. 
+While the evaluation especially False-Negative and False-Positive detected obstacles will be discussed.
+Coarse outliers in the position or orientation of objects are also noted.
+
+% Zur Evaluation der Handbarkeit des Kreisverkehrs wird außerdem eine Statemachine Implementiert welche das Fahrzeug Sicher und Unfallfrei
+% durch den Kreiverker bewegen soll. Dazu wird die Simulation über einen längeren Zeitraum beobachtet, und die Anzahl der eventuellen
+% Kollisionen notiert.
+
+In order to evaluate the operability of the roundabout, a statemachine is implemented which is intended to move the vehicle safely and accident-free through the roundabout.
+For this purpose, the simulation is monitored over a longer period of time, and the number of possible collisions is noted.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -182,13 +209,19 @@ Kollisionen notiert.
 
 
 \chapter{Sensor Analysis}
-Wie bereits diskutiert wird sich die auswahl der Senoren auf das Applanix POS-LV und den Velodyne VLP-16 beschränken. Da der Velodyne für die 
-erkennung anderer Verkehrsteilnehmer der wichtigste sensor ist, wird nun untersucht, in wie fern der Sensor für die Ekennung geeignet ist.
+% Wie bereits diskutiert wird sich die auswahl der Senoren auf das Applanix POS-LV und den Velodyne VLP-16 beschränken. Da der Velodyne für die 
+% erkennung anderer Verkehrsteilnehmer der wichtigste sensor ist, wird nun untersucht, in wie fern der Sensor für die Ekennung geeignet ist.
+
+As already discussed, the selection of senors will be limited to the Applanix POS-LV and the Velodyne VLP-16. Since the Velodyne is the more
+important sensor for the recognition of other traffic users, it is now investigated how far the sensor is suitable for the detection.
 
 \section{Theoretical Analysis}
+% Unter \cref{types_of_roundabouts} haben wir vier verschieden Typen von Kresiverkehren festehalten. Um die den Praktischen nutzetn des Velodyne VLP-16
+% zu bewerten wird nun Analysiert, in wie fern dieser in der lage ist diese Zu überblicken. Dazu sehen wir uns im folgenden die Größenverhältnisse  an.
 
-Unter \cref{types_of_roundabouts} haben wir vier verschieden Typen von Kresiverkehren festehalten. Um die den Praktischen nutzetn des Velodyne VLP-16
-zu bewerten wird nun Analysiert, in wie fern dieser in der lage ist diese Zu überblicken. Dazu sehen wir uns im folgenden die Größenverhältnisse  an.
+Under \cref{types_of_roundabouts} we have established four different types of roundabouts. In order to evaluate the practical use of the Velodyne VLP-16 is now analyzed,
+how far the Velodyne is able to overlook the situation. For this purpose we will look at the size ratios.
+
 
 \begin{tabularx}{\textwidth}{|X|X|X|}
 \hline \textbf{Roundabout Type} & \textbf{min Size} & \textbf{max Size} \\\hline
@@ -198,17 +231,28 @@ Two-lane Passable Roundabout& 40m & - \\\hline
 Large Roundabout& >40m &  - \\\hline
 \end{tabularx}
 
-Um nun ein Vergleich zum Velodyne VLP-16 zeihen zu können, sehen wir uns den sichtbereich des Sensors von der seite an.
-Der Sensor liefert uns 16 Messungen im selben Azimuthwinkel, im Abstand von 2 Grad. Da für die Ausertung, und leider auch für die Erkennung, die Winkel größer als 0 Grad 
-nicht relevant sind sehen wir uns nur die acht winkel im bereich von -1 bis -15 Grad an. 
+% Um nun ein Vergleich zum Velodyne VLP-16 zeihen zu können, sehen wir uns den sichtbereich des Sensors von der seite an.
+% Der Sensor liefert uns 16 Messungen im selben Azimuthwinkel, im Abstand von 2 Grad. Da für die Ausertung, und leider auch für die Erkennung, die Winkel größer als 0 Grad 
+% nicht relevant sind sehen wir uns nur die acht winkel im bereich von -1 bis -15 Grad an. 
 
-Bei der auswertung gehen wir davon aus, das wir versuchen einen Kleinwagen mit einer länge von 4 Metern und 1.5 Metern höhe zu erkennen. Dabei gehen wir von dem Idealfall aus, das sich das Fahrzeug
-auf uns zu bewegt. Weiterhin gehen wir von einer Befestigungshöhe des Sensors von 2.1 Metern aus, da dies letztendlich die montagehöhte des Sensors uf dem Testfahrzeug darstellt.
+For a comparison to the Velodyne VLP-16, we will look at the visual range of the sensor in the 2D side view. The sensor provides 16 measurements at the same azimuth angle,
+at a distance of 2 degrees. Since for the evaluation, and unfortunately also for the recognition, the angles greater than 0 degrees are not relevant,
+we only see the eight angles in the range of -1 to -15 degrees.
+
+% Bei der auswertung gehen wir davon aus, das wir versuchen einen Kleinwagen mit einer länge von 4 Metern und 1.5 Metern höhe zu erkennen. Dabei gehen wir von dem Idealfall aus, das sich das Fahrzeug
+% auf uns zu bewegt. Weiterhin gehen wir von einer Befestigungshöhe des Sensors von 2.1 Metern aus, da dies letztendlich die montagehöhte des Sensors uf dem Testfahrzeug darstellt.
+
+In the evaluation we assume that we try to recognize a small car with a length of 4 meters and 1.5 meters height. In doing so, we start from the ideal situation that the vehicle drives to us.
+Furthermore, we assume a mounting height of the sensor of 2.1 meters as this is finaly the mounting height of the sensor on the test vehicle.
 
 \paragraph{Range 0-25m}
-Für den Bereich von 0m bis 25m sehen wir in \cref{velodyne_range_25}, dass wir im schlimmsten fall noch eine Messung vom Sensor erhalten. Befindet sich das Fahrzeug sehr nache am 
-Sensor erhalten wir sogar einen Großteil der zur verfügung stehenden Auflösung, wobei dabei sich nahe dahnter befindliche flache Fahrzeuge verdeckt werden können. 
-Daher sehen wir, das der Mini Roundabout mit dem Sensr geut abgedeckt werden kann, wir uns jedoch gendanken über verdeckte hindernisse machen müssen.
+% Für den Bereich von 0m bis 25m sehen wir in \cref{velodyne_range_25}, dass wir im schlimmsten fall noch eine Messung vom Sensor erhalten. Befindet sich das Fahrzeug sehr nache am 
+% Sensor erhalten wir sogar einen Großteil der zur verfügung stehenden Auflösung, wobei dabei sich nahe dahnter befindliche flache Fahrzeuge verdeckt werden können. 
+% Daher sehen wir, das der Mini Roundabout mit dem Sensr geut abgedeckt werden kann, wir uns jedoch gendanken über verdeckte hindernisse machen müssen.
+
+For the range from 0m to 25m, we see in \cref{velodyne_range_25} that in the worst case we still get at least one measurement from the sensor. Is the vehicle very much at the
+Sensor, we get even a large part of the available resolution, whereby close to behind lying flat vehicles can be hidden. Therefore, we can see 
+that the mini roundabout can be covered with the sensor, but we have to think about hidden obstacles.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -219,9 +263,13 @@ Daher sehen wir, das der Mini Roundabout mit dem Sensr geut abgedeckt werden kan
 \end{figure}
 
 \paragraph{Range 25-50m}
-Für den Bereich von 25m bis 50m sehen wir in \cref{velodyne_range_50}, dass wir im grunde nur noch zwei Messungen erhalten können. Für unseren angenommenen Kleinwagen mit einer Höhe von 1.5 Metern
-ehalten wir jedoch keinen Totereich. Jedoch erhalten wir für die meißten messungen nur einen Messpunkt und somit eine sehr niedrige Auflösung. Daher ist die Erkennung von Fahrzeugen
-in einerm kleinen Kreisverkehr bereits eine herausforderung für die Segmentierung der Fahrzeuge
+% Für den Bereich von 25m bis 50m sehen wir in \cref{velodyne_range_50}, dass wir im grunde nur noch zwei Messungen erhalten können. Für unseren angenommenen Kleinwagen mit einer Höhe von 1.5 Metern
+% ehalten wir jedoch keinen Totereich. Jedoch erhalten wir für die meißten messungen nur einen Messpunkt und somit eine sehr niedrige Auflösung. Daher ist die Erkennung von Fahrzeugen
+% in einerm kleinen Kreisverkehr bereits eine herausforderung für die Segmentierung der Fahrzeuge
+
+For the range of 25m to 50m we see in \cref{velodyne_range_50} that we can only get two measurements. For our assumed small car with a height of 1.5 meters,
+however, we do not keep a dead zone. However, for most measurements, we get only one measurement point and thus a very low resolution.
+Therefore the detection of vehicles in a small roundabout is already a challenge for the segmentation of the vehicles
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -232,8 +280,11 @@ in einerm kleinen Kreisverkehr bereits eine herausforderung für die Segmentieru
 \end{figure}
 
 \paragraph{Range >50m}
-Für den Bereich größer als 50m sehen wir in \cref{velodyne_range_75}, dass die Auflösung im verleich zu näheren Objekten gleich bleibt. Jedoch steigt hier die Warscheinlichkeit, dass
-fahrzeuge bereits im voherigen bereich verdeckt wurden.
+% Für den Bereich größer als 50m sehen wir in \cref{velodyne_range_75}, dass die Auflösung im verleich zu näheren Objekten gleich bleibt. Jedoch steigt hier die Warscheinlichkeit, dass
+% fahrzeuge bereits im voherigen bereich verdeckt wurden.
+
+For the area greater than 50m, we see in \cref{velodyne_range_75} that the resolution remains the same in the same way as for closer objects.
+However, there is a higher likelihood that vehicles have already been hidden in the previous area.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -245,14 +296,22 @@ fahrzeuge bereits im voherigen bereich verdeckt wurden.
 
 
 
-Wie wir sehen  können wir den Bereich bis 25 Metern gut abdecken und somit den Mini Roundabout komplett beobachten, für Größere Kreisverkehre ist der Sensor nur bedingt geeigent.
-wesshalb wir für alle folgenden Betrachtungen nur Minikreisverkehre oder kleinere kleine Kreisverkehre betrachten werden. Für alle anderen Kreisverkehre, währe zu
-evaluieren, ob es überhaupt nötig ist, alle Fahrzeuge im Kreisverkehr zu beobachten, da die Strecke von Einfahrt zu Einfahrt entsprechend größer wird.
-Eventuell ist es so möglich den Kreisverkher als einfache Vorfahrtsituation zu betreachten.
+% Wie wir sehen  können wir den Bereich bis 25 Metern gut abdecken und somit den Mini Roundabout komplett beobachten, für Größere Kreisverkehre ist der Sensor nur bedingt geeigent.
+% wesshalb wir für alle folgenden Betrachtungen nur Minikreisverkehre oder kleinere kleine Kreisverkehre betrachten werden. Für alle anderen Kreisverkehre, währe zu
+% evaluieren, ob es überhaupt nötig ist, alle Fahrzeuge im Kreisverkehr zu beobachten, da die Strecke von Einfahrt zu Einfahrt entsprechend größer wird.
+% Eventuell ist es so möglich den Kreisverkher als einfache Vorfahrtsituation zu betreachten.
+
+As we can see, we can excellent cover the area up to 25 meters and thus observe the mini roundabout completely, for larger circular traffic the sensor is only conditionally suitable. 
+For all the following considerations, we shall consider only miniature circuits or smaller small roundabouts. 
+For all other roundabouts, evaluate whether it is at all necessary to observe all the vehicles in the roundabout as the distance from driveway to driveway increases accordingly.
+It is possible to consider the roundabout as a simple yield sign situation.
 
 \section{Practical Analysis}
-Da wir uns nun bereits die Theoretischen überlegungen angesehen haben sehen wir uns die praktischen Messungen des Sensors an. 
-Dazu können wir in \cref{velodyne_hidden} eine Messung auf dem Testkreisveker auf AstaZero in der Vogelperspektive sehen.
+% Da wir uns nun bereits die Theoretischen überlegungen angesehen haben sehen wir uns die praktischen Messungen des Sensors an. 
+% Dazu können wir in \cref{velodyne_hidden} eine Messung auf dem Testkreisveker auf AstaZero in der Vogelperspektive sehen.
+
+Since we have already looked at the theoretical considerations, we look at the practical measurements of the sensor.
+To do this, we can see a measurement on the test roundabout on AstaZero in the bird's eye view in \cref{velodyne_hidden}.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -262,19 +321,30 @@ Dazu können wir in \cref{velodyne_hidden} eine Messung auf dem Testkreisveker a
 %\end{center}
 \end{figure}
 
-Dort ist zu erkennen, dass die Messungen im vorderne und vorallem im hinteren Bereich Lücken aufweisen. Dies ließ sich bei der Montage des Velodyne leider nicht verhindern,
-da die Haltevorrischtung des Sensors keine weitere Höhenverstellung vorsieht und am Testfahrzeug keine invasiven Änderungen vorgenommen werden sollten.
-Daher musste für die Montage ein kompromiss geschlossen werden, entweder messungen im vorderen Bereich zu verlieren ider im Hinteren. Die Fahlenden Messungen werden
-vom Fahrzeugdach verdeckt. Die Kleineren lücken im vorderen Bereich stammen von der GPS Antenne des Aplanix Systems und ließ sich leider auch nicht verhindern.
+% Dort ist zu erkennen, dass die Messungen im vorderne und vorallem im hinteren Bereich Lücken aufweisen. Dies ließ sich bei der Montage des Velodyne leider nicht verhindern,
+% da die Haltevorrischtung des Sensors keine weitere Höhenverstellung vorsieht und am Testfahrzeug keine invasiven Änderungen vorgenommen werden sollten.
+% Daher musste für die Montage ein kompromiss geschlossen werden, entweder messungen im vorderen Bereich zu verlieren ider im Hinteren. Die Fahlenden Messungen werden
+% vom Fahrzeugdach verdeckt. Die Kleineren lücken im vorderen Bereich stammen von der GPS Antenne des Aplanix Systems und ließ sich leider auch nicht verhindern.
 
-Da die Beocbachtung des Hinteren Bereiches für die Kreisverkehrbeobachtung nicht wichtig ist sind die Fehlenden Messungen im Hinteren Bereich jedoch zu vernachlässsigen.
-Da wir im vorderen Nahebereich des Sensors die höchste Auflösung haben fallen die fehlenden Messungen im im Frontbereich auch nicht ins gewicht, denn diese befinden sich 
-nur im ersten Messlayer.
+It can be seen here that the measurements in the front and especially in the rear region have gaps. Unfortunately, this was not prevented during installation of the Velodyne since 
+the holding pre-treatment of the sensor does not provide a further height adjustment and no invasive changes should be made to the test vehicle. 
+Therefore, a compromise had to be concluded for the assembly, either to lose measurements in the front area, or to lose in the rear.
+The missing measurements are obscured by the vehicle roof. The smaller gaps in the front area come from the GPS antenna of the Applanix system and unfortunately could not be prevented.
+
+% Da die Beocbachtung des Hinteren Bereiches für die Kreisverkehrbeobachtung nicht wichtig ist sind die Fehlenden Messungen im Hinteren Bereich jedoch zu vernachlässsigen.
+% Da wir im vorderen Nahebereich des Sensors die höchste Auflösung haben fallen die fehlenden Messungen im im Frontbereich auch nicht ins gewicht, denn diese befinden sich 
+% nur im ersten Messlayer.
+
+Since the monitoring of the rear area is not important for the roundabout observation, the missing measurements in the rear area are negligible. Since we have the highest
+resolution in the front sensor range of the sensor, the missing measurements in the front range are also not important, because these are only in the first measurement layer.
 
 
-Weiterhin in \cref{velodyne_hidden} zu sehen ist es weiteres Testfahrzeug (rote box). An diesem ist zu erkennen, das wir auch im eigentlich verdeckten hinteren Bereich des Fahrzeuges
-Messungen erhalten. Dies ist dadurch zu erklären, dass der Sensor über mehrere Return Modes verfügt, die es Ihm erlaubt durch Transparente Objekte zu sehen. Dies kann in \cref{vel_trans}
-gesehen werden
+% Weiterhin in \cref{velodyne_hidden} zu sehen ist es weiteres Testfahrzeug (rote box). An diesem ist zu erkennen, das wir auch im eigentlich verdeckten hinteren Bereich des Fahrzeuges
+% Messungen erhalten. Dies ist dadurch zu erklären, dass der Sensor über mehrere Return Modes verfügt, die es Ihm erlaubt durch Transparente Objekte zu sehen. Dies kann in \cref{vel_trans}
+% gesehen werden
+
+Further in \cref{velodyne_hidden} to see it is another test vehicle (red box). It can be seen from this that we also get measurements in the rear of the vehicle, which is actually hidden.
+This is explained by the fact that the sensor has several return modes, which allows it to see through transparent objects. This can be seen in the example in \cref{vel_trans}
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -284,39 +354,80 @@ gesehen werden
 %\end{center}
 \end{figure}
 
-Der Sensor kann dabei so konfiguriert werde, dass er beide Messungen (Strongest Return und Last Return) zurückliefert. Da die zu beobachten Fahrzeuge nicht vollständig transparent
-sind und so immer auch ausreichend messungen im vorderen Bereich liefern , ferner um die Datenrate klein zu halten wurde dir VLP-16 so konfiguriert, dass
-er nur den Last Return liefert.
+% Der Sensor kann dabei so konfiguriert werde, dass er beide Messungen (Strongest Return und Last Return) zurückliefert. Da die zu beobachten Fahrzeuge nicht vollständig transparent
+% sind und so immer auch ausreichend messungen im vorderen Bereich liefern , ferner um die Datenrate klein zu halten wurde dir VLP-16 so konfiguriert, dass
+% er nur den Last Return liefert.
+
+The sensor can be configured to return both measurements (Strongest Return and Last Return). Since the vehicles to be observed are not completely transparent and thus 
+always provide sufficient measurements in the front area, in addition to keeping the data rate small, VLP-16 was configured to provide only the Last Return.
 
 
 
+\chapter{Objekt Detection}
+% Im folgenden Kapietel beschägtgigen wir uns mit der Erkennung von Verkehrsteilnehmern mit Hilfe des Velodyne VLP-16. Wir beginnen bit der Segementierung, das heißt
+% wir im ersten Schritt alle Messwerte, welche keine Potentiellen Verkehrsteilnehmern darstellen und Fassen die Übrigen Messwerte mit hilfe ines Clustering Algorithmuses zu Objekten zusammen.
+% Im nächsten Schriit werden die Objekte abstahiert und getrackt, das heißt, wir versuchen einen Zusammenhang der Objekte zwischen verschiedenen Zeitschritten herzustellen.
+% Dies ist nötig, um zeitabhängige größen wie die Geschwindigkeit und Drehrate der erkannten Objekte zu bestimmen. Im letzten Schritt werden die Objekten anhand der Zuvor bestimmten Parameter
+% in Typen classifiziert. 
+
+In the following chapter, we will present the Velodyne VLP-16 with the recognition of traffic users. We begin with the segmentation,
+that is, in the first step all measured values which do not represent potential traffic are removed. 
+In the next step, the remaining measured values are combined with the aid of a clustering algorithm. 
+In the third step the objects are abstracted and tracked, that is, we try to establish a relationship between the objects between different time steps.
+This is necessary to determine time-dependent variables such as the speed and rotation rate of the detected objects.
+In the last step, the objects are classified into types using the predetermined parameters.
 
 
-\section{Objekt Detection}
 
-\subsection{Ground Removal}
-Um in einer PointCloud Ojekte zu erkennen ist es nötig, zu wissen, welche Messungen zu Boden und welche zu Objekten gehören. Es gibt viele Möglichkeiten dieses
-zu erreichen. Die Naivste Methode ist das entfernen, der Bodenplatte anhand ihrer Z-Koordinate. Diese Mehode hat allerdings viele Nachteile, zum einen muss
-der LIDAR Sensor exakt gerade auf em Fahrzeug angebracht werden, zum anderen muss das Fahrzeug ein sehr steifes Fahrwerk haben, um eventuelle Neigungen des Sensors zu verhindern.
-Weiterhin erlaubt dies ausschließlich die Entfernung von Palanaren Grundflächen, alo flache nicht hügelige Untergründe. Eine weitere Verbreitete Methode ist das 
-Entfernen der Bodenplatte auf basis eines Statistischer mittelwertes \cite{Zhang}.  Diese Methode benötigt allerdings auch eine Kalibireirung der Sensorabstandes zum Boden.
-Und die Bestimmung weiterer Schwellwerte, welche umgebungsabhäng sind. Die Votreile beider Methoden sind ihre gering nötige rechenleistung und laufzeit O(n).
-Bessere Methoden wie Gradientenbasierende explansions algrythmenm benötigen einen Startpunkt der als Bodenplatte identifiziert werden kann.
-Eine weitere Möglichkeit ist die Beschreibung von Objekten als Konvexe Objekte \cite{5164280}, die ebenfalls auf Basis der Gradienten beschrieben werden kann.
-Vorteil dieser Methode ist das keine Initiale Position für die Bodenplatte benötigt wird.
+\section{Ground Removal}
+% Um in einer PointCloud Ojekte zu erkennen ist es nötig, zu wissen, welche Messungen zu Boden und welche zu Objekten gehören. Es gibt viele Möglichkeiten dieses
+% zu erreichen. Die Naivste Methode ist das entfernen, der Bodenplatte anhand ihrer Z-Koordinate. Diese Mehode hat allerdings viele Nachteile, zum einen muss
+% der LIDAR Sensor exakt gerade auf em Fahrzeug angebracht werden, zum anderen muss das Fahrzeug ein sehr steifes Fahrwerk haben, um eventuelle Neigungen des Sensors zu verhindern.
+% Weiterhin erlaubt dies ausschließlich die Entfernung von Palanaren Grundflächen, alo flache nicht hügelige Untergründe. Eine weitere Verbreitete Methode ist das 
+% Entfernen der Bodenplatte auf basis eines Statistischer mittelwertes \cite{Zhang}.  Diese Methode benötigt allerdings auch eine Kalibireirung der Sensorabstandes zum Boden.
+% Und die Bestimmung weiterer Schwellwerte, welche umgebungsabhäng sind. Die Votreile beider Methoden sind ihre gering nötige rechenleistung und laufzeit O(n).
+% Bessere Methoden wie Gradientenbasierende explansions algrythmenm benötigen einen Startpunkt der als Bodenplatte identifiziert werden kann.
+% Eine weitere Möglichkeit ist die Beschreibung von Objekten als Konvexe Objekte \cite{5164280}, die ebenfalls auf Basis der Gradienten beschrieben werden kann.
+% Vorteil dieser Methode ist das keine Initiale Position für die Bodenplatte benötigt wird.
 
-Für unseren Anwendungsfall mit dem Velodyne VLP-16 besteht das Problem darin, dass die Auflösung des Sensor in der Höhe sehr gering ist. Abhängig von der Entfernung des 
-Fahrzeuges innerhalb der benötigten Reichweite fallen nur zwei Lagen auf die Testfahrzeuge, wesshalb Gradientenbasierende Methoden hier zuverlässig versagen. \todo{beleg} Da die Gradienten zu klein sind und
-die verkelinerung der nötigen Thresholds zu haufigen false Postitives führt. Die Methode des Statistischen Mittelwertes und die Methode auf basis der Z-Koordinate,
-leiden am Fahrwerk des Volvo XC90 SUV. Die Höhe das Fahrzeuges ändert sich aunteranderem durch veränderung des Fahrprofiles (Sport/Eco, etc.) um mehrere Zentimeter.
-Auch leicht erhöhte Geschwindigekiten im Kreisverkehr (ca 30 km/h) führen zu einer deutlichen Seitenneigung des Fahrzeuges. Darum wird nun eine weitere Methode vorgeschlagen.
-Die Erkennung einer Grundfläche in den Messdaten. 
+In order to recognize objects in a PointCloud, it is necessary to know which measurements belong to the ground and which belong to objects.
+There are many ways to achieve this. The most naive method is to remove the bottom plate by its Z coordinate.
+However, this method has many drawbacks, on the one hand, the LIDAR sensor has to be mounted exactly straight on a vehicle, 
+on the other hand the vehicle must have a very stiff chassis in order to prevent a possible tilt of the sensor. 
+Furthermore, this only allows the removal of palanar surfaces, alo flat non-hilly grounds. 
+Another common method is the removal of the base plate on the basis of a statistical mean value \cite{Zhang}.
+However, this method also requires a calibration of the sensor distance to the ground. 
+And the determination of further threshold values ​​which are dependent on the environment.
+The advantages of both methods are their low computational performance and runtime $\mathcal{O}(n)$.
+Better methods such as gradient-based explansions algrythmenm need a starting point that can be identified as a bottom plate.
+A further possibility is the description of objects as convex objects \cite{5164280}, which can also be described on the basis of the gradients.
+The advantage of this method is that no initial position is required for the floor plate, but this is very processing power intensive.
+% 
+% Für unseren Anwendungsfall mit dem Velodyne VLP-16 besteht das Problem darin, dass die Auflösung des Sensor in der Höhe sehr gering ist. Abhängig von der Entfernung des 
+% Fahrzeuges innerhalb der benötigten Reichweite fallen nur zwei Lagen auf die Testfahrzeuge, wesshalb Gradientenbasierende Methoden hier zuverlässig versagen. \todo{beleg} Da die Gradienten zu klein sind und
+% die verkelinerung der nötigen Thresholds zu haufigen false Postitives führt. Die Methode des Statistischen Mittelwertes und die Methode auf basis der Z-Koordinate,
+% leiden am Fahrwerk des Volvo XC90 SUV. Die Höhe das Fahrzeuges ändert sich aunteranderem durch veränderung des Fahrprofiles (Sport/Eco, etc.) um mehrere Zentimeter.
+% Auch leicht erhöhte Geschwindigekiten im Kreisverkehr (ca 30 km/h) führen zu einer deutlichen Seitenneigung des Fahrzeuges. Darum wird nun eine weitere Methode vorgeschlagen.
+% Die Erkennung einer Grundfläche in den Messdaten. 
 
-Für die Erkennung des Bodens gehen wir von Folgenden Annahmen aus, die Straße lösst sich approximativ als Ebene im R3 darstellen. Weiterin ist die Grundfläche die niedrigste
-Fläche im gesuchten Bereich. Daher wird im ersten schritt der in Polarkoordinaten vorliegende Datensatz in  in 30 Tortenstück förmige Segmente geteilt.
-Aus diesem Tortenstück werden dann jeweils vorne und hinten zwei Segmente [\cref{segments}] ausgewählt, welche nicht beachbart sind. Die Auswahl der Segmente folgt aus der Annhame,
-dass sich die Straße vor, bzw hinter dem Fahrzeug befindet. Zukünfitg könnte die Auswahl der Segmente auch mit hilfe des Fahrzeuglenkwinkes optimiert werden. Oder der Gültige Bereich
-von einer Lane Detection geliefert werden.
+For our application with the Velodyne VLP-16, the problem is that the resolution of the sensor is very low in height.
+Depending on the distance of the vehicle within the required range, only two layers fall on the test vehicles, which means that gradient-based methods fail reliably,
+\todo{beleg} beacuse the gradients are too small and the depletion of the necessary thresholds leads to frequent false positives. 
+The method of the statistical mean and the method based on the Z coordinate, suffer from the chassis of the Volvo XC90 SUV. 
+The height of the vehicle varies by several centimeters by changing the driving profile (Sport / Eco, etc.). Even slightly increased speed in the roundabout (about 30 km/h)
+lead to a clear lateral inclination of the vehicle. Therefore, another method is proposed. The detection of a base area in the measurement data.
+
+% Für die Erkennung des Bodens gehen wir von Folgenden Annahmen aus, die Straße lösst sich approximativ als Ebene im R3 darstellen. Weiterin ist die Grundfläche die niedrigste
+% Fläche im gesuchten Bereich. Daher wird im ersten schritt der in Polarkoordinaten vorliegende Datensatz in  in 30 Tortenstück förmige Segmente geteilt.
+% Aus diesem Tortenstück werden dann jeweils vorne und hinten zwei Segmente [\cref{segments}] ausgewählt, welche nicht beachbart sind. Die Auswahl der Segmente folgt aus der Annhame,
+% dass sich die Straße vor, bzw hinter dem Fahrzeug befindet. Zukünfitg könnte die Auswahl der Segmente auch mit hilfe des Fahrzeuglenkwinkes optimiert werden. Oder der Gültige Bereich
+% von einer Lane Detection geliefert werden.
+
+For the recognition of the ground floor we assume the following assumptions: the road can be presented approximately as a plane in $\mathbb{R}^3$.
+Further, the ground floor is the lowest area in the searched area. Therefore, in the first step, the data set in polar coordinates is divided into segments segmentated into 30 of cake piece formed pieces.
+From this pieces, two segments [\cref{segments}] are then selected in front and rear, which are not neighbored. The selection of the segments follows from the assumption
+that the road is in front or behind the vehicle. In future, the selection of the segments could also be optimized with the help of the vehicle steering angle,
+or the valid range can be provided by a lane detection.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -326,33 +437,58 @@ von einer Lane Detection geliefert werden.
 %\end{center}
 \end{figure}
 
-\todo{beschreiben warum hinten messwerte fehlen, in TestPlatform Kapietel}
-Innerhalb dieser Tortenstücke wird dann eine Suche nach den 10 Messungen mit dem niedrigsten Z Wert gesucht. Die Suche beschränkt sich dabei auf die drei niedrigsten Lagen (-15,-13,-11 Grad),
-da alle höheren Lagen zu wit weg währen. Die Einteilung in Segmente ist desshalb nötig um zu verhindern, dass alle Messerte in ein einziges lokales Minima laufen.
-Aus diesem Vorgefilterten Messwerten werden nun für einen \ac{RANSAC} drei zufällig herausgesucht.
+% Innerhalb dieser Tortenstücke wird dann eine Suche nach den 10 Messungen mit dem niedrigsten Z Wert gesucht. Die Suche beschränkt sich dabei auf die drei niedrigsten Lagen (-15,-13,-11 Grad),
+% da alle höheren Lagen zu wit weg währen. Die Einteilung in Segmente ist desshalb nötig um zu verhindern, dass alle Messerte in ein einziges lokales Minima laufen.
+% Aus diesem Vorgefilterten Messwerten werden nun für einen \ac{RANSAC} drei zufällig herausgesucht.
+%\todo{welcher threthold wurde gewählt, und warum?}
+% Aus diesm dei Punkten wird nun eine Ebene in der Hessischen Normalform gebildet ,was eine effiziente Distanzberechnung zu anderen Punken erlaubt. Danach sammeln wir alle weiten Punkte aus unseren Minima, anahnd eines Distanzkriteriums.
+% Danach wird aus der Ebene und den neu Gesammelten Punkte durch einen Planefitting Algorithms [\cref{subssec:planefitting}] eine neue Ebene und derren Fehler berechnet.
+% Der Fehler wird über die Summe der quadratischen Abstände aller Punkte zur Ebene berechnet.
+
+% Bevor wir die Ebene jedoch als eventueller Lösungskanidat hinzufügen wird geprüft ob sich die Ebene innerhalb von einem plausiblen Parameterbereich befindet.
+% Dazu zählt, dass die Entfernung der Ebene zwischen 1.9m und 2.2m bewegen sollte, dies entspricht in etwa der Montagehöhe des Velodyne Sensors.
+
+% Die Anzahl an Iterationen des \ac{RANSAC} ist auf 50 Begrenzt. Nach dem Durchlauf des \ac{RANSAC} werden alle Punkte in der Pointcloud anhand ihrer Distanz zur Ebene als
+% Groundflache makiert. Als threshold wurde hier expirimentel ein optimaler Wert von 0.5m ermittelt.
+
+Within these segments a search for the 10 measurements with the lowest Z value is made. The search is limited to the three lowest layers (-15, -13 and -11 degrees),
+since the measurements of all higher layers are too far away. The division into segments is therefore necessary in order to prevent all measured values running into a single local minima. 
+
+
+From this pre-filtered readings three are now randomly selected for a \ac{RANSAC}, wich will run iteratively.
+
+From these three points a plane is now formed in the Hesse normal form, which allows an efficient distance calculation to other points.
+After that, we collect all other points from our set of minima, using a distance criterion. 
 \todo{welcher threthold wurde gewählt, und warum?}
-Aus diesm dei Punkten wird nun eine Ebene in der Hessischen Normalform gebildet ,was eine effiziente Distanzberechnung zu anderen Punken erlaubt. Danach sammeln wir alle weiten Punkte aus unseren Minima, anahnd eines Distanzkriteriums.
-Danach wird aus der Ebene und den neu Gesammelten Punkte durch einen Planefitting Algorithms [\cref{subssec:planefitting}] eine neue Ebene und derren Fehler berechnet.
-Der Fehler wird über die Summe der quadratischen Abstände aller Punkte zur Ebene berechnet.
+If can find more than 10 other points in our minima set, a new plane and their error is calculated from the plane and the new Collected Points by a Planefitting Algorithms [\cref{subssec:planefitting}].
+The error is calculated over the sum of the squared distances of all points to the plane.
 
-Bevor wir die Ebene jedoch als eventueller Lösungskanidat hinzufügen wird geprüft ob sich die Ebene innerhalb von einem plausiblen Parameterbereich befindet.
-Dazu zählt, dass die Entfernung der Ebene zwischen 1.9m und 2.2m bewegen sollte, dies entspricht in etwa der Montagehöhe des Velodyne Sensors.
+However, before we add the plane as a possible solution candidate, it is checked whether the layer is within a plausible parameter range.
+This means that the distance of the plane should move between 1.9m and 2.2m, which corresponds approximately to the mounting height of the Velodyne sensor.
 
-Die Anzahl an Iterationen des \ac{RANSAC} ist auf 50 Begrenzt. Nach dem Durchlauf des \ac{RANSAC} werden alle Punkte in der Pointcloud anhand ihrer Distanz zur Ebene als
-Groundflache makiert. Als threshold wurde hier expirimentel ein optimaler Wert von 0.5m ermittelt.
+The number of iterations of the \ac{RANSAC} is limited to 50. After the run of the \ac{RANSAC}, the plane with the lowest error is taken and all points in the
+pointcloud are marked by their distance to the plane as ground. As distance threshold, an optimum value of 0.5 m was determined experimentally.
 
 
-\subsubsection{Planefitting}
+\subsection{Planefitting}
 \label{subssec:planefitting}
 
+
+% Zum Planefitting einer be ne wird üblicherweise eine \ac{SVD}  \cite{Nurunnabi2012,Ram2007,Soderkvist2009}.
+% SVD hat eine Komplexität von $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, da das Planefitting innehalb 
+% des \ac{RANSAC} sehr häufig mit einer großen Anzahl an Punkten ausgeführt wird, führt das Ausführen des \ac{SVD} innhalb des \ac{RANSAC} zu einer sehr hohen laufzeit.
+% Deshalb wird an dieser Stelle ein \ac{LLSQ} Algorithus mit einigen optimierungen eingesetzt. Bei der verwendung des \ac{LLSQ} gilt es zu beachten,
+% dass nicht der abstand der Punkte zur eben optimiert wird, sondern der Abstand der Punkte zur Ebene entlang einer Achse (in unserem Fall der z Achse) siehe \cref{LLSQ_MIN}.
+% Das kann zu Problemen führen, wenn die Punkte weit gestreut, also weit von der Optimalen Ebene entfert sind. Da wir unsere Punkte innhalb des \ac{RANSAC} allerdings anhand eines 
+% Distanzkriteriums vorselektieren, stellt dies kein Problem dar.
+
 \todo{Macht das überhaut sinn? Laut ransac sollte das Planefitting nicht iterativ ausgeführt werden???? Fuck!}
-Zum Planefitting einer be ne wird üblicherweise eine \ac{SVD}  \cite{Nurunnabi2012,Ram2007,Soderkvist2009}.
-SVD hat eine Komplexität von $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, da das Planefitting innehalb 
-des \ac{RANSAC} sehr häufig mit einer großen Anzahl an Punkten ausgeführt wird, führt das Ausführen des \ac{SVD} innhalb des \ac{RANSAC} zu einer sehr hohen laufzeit.
-Deshalb wird an dieser Stelle ein \ac{LLSQ} Algorithus mit einigen optimierungen eingesetzt. Bei der verwendung des \ac{LLSQ} gilt es zu beachten,
-dass nicht der abstand der Punkte zur eben optimiert wird, sondern der Abstand der Punkte zur Ebene entlang einer Achse (in unserem Fall der z Achse) siehe \cref{LLSQ_MIN}.
-Das kann zu Problemen führen, wenn die Punkte weit gestreut, also weit von der Optimalen Ebene entfert sind. Da wir unsere Punkte innhalb des \ac{RANSAC} allerdings anhand eines 
-Distanzkriteriums vorselektieren, stellt dies kein Problem dar.
+For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. SVD has a complexity of $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, since the planefitting inside
+of the \ac{RANSAC} is very often called with a large number of points, running to the \ac{SVD} within the \ac{RANSAC} causes a very high running time.
+For this reason, a \ac{LLSQ} algorithm with some optimization is used here.
+When using the \ac{LLSQ}, it is important to note that the \ac{LLSQ} is not optimizing the distance of the points to the plane but the distance of the points the along an axis (in our case the z axis),
+see \cref{LLSQ_MIN}. This can lead to problems, if the points are scattered far apart from the optimal plane. However, since we are using our preselected points from our the \ac{RANSAC}
+distance criterion, this poses no problem.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -362,10 +498,15 @@ Distanzkriteriums vorselektieren, stellt dies kein Problem dar.
 %\end{center}
 \end{figure}
 
-Die Darstellung einer Ebene in Koordinatenform sieht wie folgt aus: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Da wir eine Ebene im R3 betrachten, ist dieses Gleichungsystem überbestimmt.
-Da wir unsere Ebene in Richtung der Z-Achse optimieren wollen setzten wir Parameter c auf 1 und können unser Gleichungssystem nun einfach nach z auflösen: $a\vec{x} + b\vec{y} + d = -\vec{z}$.
-Die Vektoren $\vec{x},\vec{y},\vec{z}$ stellen dabei die zu fittenden Punkte dar.
-In Matrixschreibweise:
+% Die Darstellung einer Ebene in Koordinatenform sieht wie folgt aus: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Da wir eine Ebene im R3 betrachten, ist dieses Gleichungsystem überbestimmt.
+% Da wir unsere Ebene in Richtung der Z-Achse optimieren wollen setzten wir Parameter c auf 1 und können unser Gleichungssystem nun einfach nach z auflösen: $a\vec{x} + b\vec{y} + d = -\vec{z}$.
+% Die Vektoren $\vec{x},\vec{y},\vec{z}$ stellen dabei die zu fittenden Punkte dar.
+% In Matrixschreibweise:
+
+The representation of a plane in coordinate form is as follows: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Since we consider a plane in $\mathbb{R}^3$, this system of equations is overdetermined.
+Since we want to optimize our plane in the direction of the Z-axis, we set parameter c to 1 and can now simply solve our equation system by z: $a\vec{x} + b\vec{y} + d = -\vec{z}$.
+The vectors $\vec{x},\vec{y},\vec{z}$ represent the points to be taped.
+In matrix notation:
 
 \begin{align*}
 X \vec{\beta} &= \vec{z}\\
@@ -389,13 +530,15 @@ d
 \end{bmatrix} 
 \end{align*}
 
-Dieses Sytem hat üblicherweise keine Lösung, unser eigentliches Ziel ist jeoch auch nicht extakte lösungen für $\vec\beta$ zu finden sondern eine gute näherung $\hat{\beta}$ dafür:
+%Dieses Sytem hat üblicherweise keine Lösung, unser eigentliches Ziel ist jeoch auch nicht extakte lösungen für $\vec\beta$ zu finden sondern eine gute näherung $\hat{\beta}$ dafür:
+This system usually doesn't have a solution, but our real goal isn't finding an extact solution for $\vec\beta$, we want to find a good approximation $\hat{\beta}$ for this:
 
 \begin{align*}
 \hat{\beta} = \min{(|| \vec{z} - X\vec{\beta} ||^2)}
 \end{align*}
 
-Das können wir tun indem wir unsere Gleichung mit der Transponierten unserer Punktmatrix $X$ mulltiplizieren:
+We can do this by multiplying our equation by the transpose of our point matrix $X$:
+
 \begin{align*}
 (X^TX) \hat{\beta} &= X^T \vec{z}\\
 \begin{bmatrix}
@@ -427,10 +570,14 @@ y_0 & y_1 & \dots & y_n \\
 -z_n 
 \end{bmatrix} 
 \end{align*}
+% 
+% Dieses Gleichungssystem könne man nun mit der Berechnung der Inverse von $(X^TX)$ auflösen. Da die Berechnung von Inversematritzen mit $\mathcal{O}(n^3)$ ebenfalls aufwändig ist,
+% nun ein weiterer Trick um rechenleistung zu sparen.
+% Nach dem Multiplizieren der Transponierten erhalten wir:
 
-Dieses Gleichungssystem könne man nun mit der Berechnung der Inverse von $(X^TX)$ auflösen. Da die Berechnung von Inversematritzen mit $\mathcal{O}(n^3)$ ebenfalls aufwändig ist,
-nun ein weiterer Trick um rechenleistung zu sparen.
-Nach dem Multiplizieren der Transponierten erhalten wir:
+This equation system can now be solved with the inverse of $(X^TX)$. Since the calculation of inverse matrices with $\mathcal{O}(n^3)$ is also expensive, now another trick to save computing power.
+After multiplying with the transpose we get:
+
 \begin{align*}
 \begin{bmatrix}
 \sum x_i x_i & \sum x_i y_i & \sum x_i \\
@@ -450,8 +597,10 @@ d
 \end{bmatrix} 
 \end{align*}
 
-Gut zu sehen sind hier die Summen in den Randbereichen der Matrix X und dem Vektor $\vec{z}$. Diese können wir auf Null setzten, wenn wir alle Punkte relativ zum Mittelwert-Punkt
-aller Punkte definieren, also $P_i = P_i - \overline{P}$. Nun erhalten wir:
+% Gut zu sehen sind hier die Summen in den Randbereichen der Matrix X und dem Vektor $\vec{z}$. Diese können wir auf Null setzten, wenn wir alle Punkte relativ zum Mittelwert-Punkt
+% aller Punkte definieren, also $P_i = P_i - \overline{P}$. Nun erhalten wir:
+The sums in the boundary areas of the matrix X and the vector $\vec{z}$ are good to see. We can set this to zero if we define all points relative to the mean point of all points,
+ie $P_i = P_i - \overline{P}$. Now we get:
 
 \begin{align*}
 \begin{bmatrix}
@@ -472,8 +621,9 @@ d
 \end{bmatrix} 
 \end{align*}
 
-Nun können wir d ebenfalls auf Null setzten, denn wenn alle unsere Punkte relativ zum Mittelwert-Punkt sind, dann läuft auch unsere Ebene immer durch diesen Punkt. Daher können wir 
-nun eine komplette Dimension streichen:
+% Nun können wir d ebenfalls auf Null setzten, denn wenn alle unsere Punkte relativ zum Mittelwert-Punkt sind, dann läuft auch unsere Ebene immer durch diesen Punkt. Daher können wir 
+% nun eine komplette Dimension streichen:
+Now we can also set d to zero, because if all our points are relative to the mean point, then our plane always runs through this point. Therefore we now can get rid of a complete dimension:
 
 \begin{align*}
 \begin{bmatrix}
@@ -491,33 +641,50 @@ b
 \end{bmatrix} 
 \end{align*}
 
-Das Gleichungssystem können wir nun einfach mit der Cramer's rule lösen
+The equation system can now be solved with the Cramer's rule
 \begin{align*}
 D &= \sum x_i x_i \cdot \sum y_i y_i - \sum x_i y_i \cdot \sum x_i y_i \\
 a &= \frac{\sum y_i z_i \cdot \sum x_i y_i - \sum x_i z_i \cdot \sum y_i y_i }{D}\\
 b &= \frac{\sum x_i y_i \cdot \sum x_i z_i - \sum x_i x_i \cdot \sum y_i z_i }{D}\\
 \vec{n} &= [a, b, 1]^T
 \end{align*}
-Dabei gibt es zu beachten, dass die Determinante nicht Null oder nahe Null sein darf.
-Da der winkel zwischen dem Fahrzeug und der Ebene jedoch immer nahe 90 Grad liegt, ist die Determinante typischweise sehr groß. 
-Sollte die Determinante doch nahe 0 (nicht gleich 0) sein, wird die Berechnung trotzudem durchgeführt, da dies auch zu einem 
-großen Fehler im Fitting führt. Dies ist an dieser Stelle erwünscht, da der \ac{RANSAC} ungeültige Ebenen anhand des Fehlers ausssortiert.
-Ist die Determinante extakt Null, wird die Berechnungstatdessen mit einem kleinen Wert für D fortgesetzt.
+% Dabei gibt es zu beachten, dass die Determinante nicht Null oder nahe Null sein darf.
+% Da der winkel zwischen dem Fahrzeug und der Ebene jedoch immer nahe 90 Grad liegt, ist die Determinante typischweise sehr groß. 
+% Sollte die Determinante doch nahe 0 (nicht gleich 0) sein, wird die Berechnung trotzudem durchgeführt, da dies auch zu einem 
+% großen Fehler im Fitting führt. Dies ist an dieser Stelle erwünscht, da der \ac{RANSAC} ungeültige Ebenen anhand des Fehlers ausssortiert.
+% Ist die Determinante extakt Null, wird die Berechnungstatdessen mit einem kleinen Wert für D fortgesetzt.
 
-Aus dem Normalenvektor $\vec{n}$ und dem Mittelwert-Punkt $\overline{P}$ können wir nun wieder die Hessische Normalenvektor bestimmen.
+It should be noted that the determinant can not be zero or near zero. However, since the angle between the vehicle and the plane is always close to 90 degrees,
+the determinant is typically very large. If the determinant is nevertheless close to zero (not equal to zero), the calculation is carried out in spite of the fact that
+this also leads to a large error in the fitting. This is desirable at this point since the \ac{RANSAC} sorts out invalid layers based on the error.
+If the determinant is extinct zero, the calculation is continued with a small value for D.
 
-Letztendlich haben wir so den Algorithms von $\mathcal{O}(m^2n) $ auf $\mathcal{O}(n) $ runterbrechen können.
+% Aus dem Normalenvektor $\vec{n}$ und dem Mittelwert-Punkt $\overline{P}$ können wir nun wieder die Hessische Normalenvektor bestimmen.
+% 
+% Letztendlich haben wir so den Algorithms von $\mathcal{O}(m^2n)$ auf $\mathcal{O}(n) $ runterbrechen können.
 
-\subsection{Clustering}
-In aktuellen Abreiten mit 3D-LIDAR Daten werden de Daten haufig als erstes in eine Heightmap projeziert \cite{Zhang,Himmelsbach2009,Li2016}.
-Danach werden direckt benachbarte Messungen mit ähnlichen Messwerten zusammengefasst. Alternativ werden die Messungen auch anhand eines Distanzkritterums 
-zusammengefasst. Erstere Methode hate den Nachteil, dass einzelne Ausreißer dazu führen, das das Objekt in mehrer Cluster zerfällt.
-Letztere wird meißt mit einem KD-Tree oder einer ähnlichen Datenstrucktur kombiniert, welche typischerweise hohe Kosten für die Erstellung verursachen.
-Da der Baum nach jeder 360 Grad messung neu Aufgebaut werden muss ist das Problematisch
+From the normal vector $\vec{n}$ and the mean point $\overline{P}$, we can again determine the Hessian normal vector.
 
-Hier wird eine Methode vorgeschlagen welche die Vorteile beider Methoden kombiniert. Dauzu ist es nötig zu wissen, wie die Daten von der OpenDAVINCI 
-Middleware geliefert werden. Das OpenDAVINCI auf der Übertragung der Daten mit UDP Multicast setzt, werden die Daten in einer Kompakten form übertragen, welche in einen einzigen
-UDP Frame passt.\\
+In the end, we have been able to break down the algorithm from $\mathcal{O}(m^2n)$ to $\mathcal{O}(n)$.
+
+\section{Clustering}
+% In aktuellen Arbeiten mit 3D-LIDAR Daten werden de Daten haufig als erstes in eine Heightmap projeziert \cite{Zhang,Himmelsbach2009,Li2016}.
+% Danach werden direckt benachbarte Messungen mit ähnlichen Messwerten zusammengefasst. Alternativ werden die Messungen auch anhand eines Distanzkritterums 
+% zusammengefasst. Erstere Methode hate den Nachteil, dass einzelne Ausreißer dazu führen, das das Objekt in mehrer Cluster zerfällt.
+% Letztere wird meißt mit einem KD-Tree oder einer ähnlichen Datenstrucktur kombiniert, welche typischerweise hohe Kosten für die Erstellung verursachen.
+% Da der Baum nach jeder 360 Grad messung neu Aufgebaut werden muss ist das Problematisch
+In current work with 3D-LIDAR data, the data is often first projected into a heightmap. Then directly adjacent measurements are combined with similar measured values.
+Alternatively, the measurements are also summarized by means of a distance criterion. 
+The former method has the disadvantage that individual outliers cause the object to disintegrate in several clusters.
+The latter is usually combined with a KD tree or a similar data structure, which typically entails high costs for the creation.
+Since the tree has to be rebuilt after each 360 degree measurement is the problem
+
+% Hier wird eine Methode vorgeschlagen welche die Vorteile beider Methoden kombiniert. Dauzu ist es nötig zu wissen, wie die Daten von der OpenDAVINCI 
+% Middleware geliefert werden. Das OpenDAVINCI auf der Übertragung der Daten mit UDP Multicast setzt, werden die Daten in einer Kompakten form übertragen, welche in einen einzigen
+% UDP Frame passt.\\
+Here a method is suggested which combines the advantages of both methods. It is therefore necessary to know how the data from the OpenDAVINCI
+Middleware is delivered. Because the OpenDAVINCI Middleware relies on the transmission of the data with UDP Multicast, the data is transferred in a 
+compact form that fits into a single UDP frame.\\
 \begin{center}
 \begin{tikzpicture} 
 \umlclass{CompactPointCloud}{
@@ -529,11 +696,17 @@ distances : byte[]}
 \dots}
 \end{tikzpicture}
 \end{center}
-Dabei wird von einer konstanten Drehrate des Sensors ausgegangen, was in einer äquidistanten der Messwerte resultiert. Die Anzahl der Messungen pro Azimuth
-wird in entriesPerAzimuth festgehalten und entspricht für den Velodyne VLP16 16. Um nun an die Eigentlichen Messwerte zu kommen müssen jeweils zwei distance Werte zu
-einem Unsigned 16Bit Integer umgewandelt werden, welcher dann die Messung in cm enthält. Jeweils 16 dieser Werte ergeben dann einen Messframe in dem der Polarwinkel
-auf einen Bereich zwischen -15 und +15 abgebildtet werden muss. Nachdem die sphärische Daten wiederhergestellt wurden, werden diese In Kartesische umgewandelt und
-in eine Punkt Datenstruktur gespeichert. 
+% Dabei wird von einer konstanten Drehrate des Sensors ausgegangen, was in einer äquidistanten der Messwerte resultiert. Die Anzahl der Messungen pro Azimuth
+% wird in entriesPerAzimuth festgehalten und entspricht für den Velodyne VLP16 16. Um nun an die Eigentlichen Messwerte zu kommen müssen jeweils zwei distance Werte zu
+% einem Unsigned 16Bit Integer umgewandelt werden, welcher dann die Messung in cm enthält. Jeweils 16 dieser Werte ergeben dann einen Messframe in dem der Polarwinkel
+% auf einen Bereich zwischen -15 und +15 abgebildtet werden muss. Nachdem die sphärische Daten jedes Messpunktes widerhergestellt wurden, werden diese In Kartesische umgewandelt und
+% in eine Punkt Datenstruktur gespeichert. 
+In this case, we asume a constant rotational rate of the sensor output, which results in an equidistant distance of the measured values. The number of measurements per azimuth is recorded in 
+entriesPerAzimuth and corresponds to the Velodyne VLP-16. In order to arrive at the actual measured values, two distance values must be merged and converted to an unsigned 16-bit integer,
+which then contains the measurement in cm. In each case, 16 of these values result in a measuring frame in which the polar angle must be mapped to a range between -15 and +15 degrees.
+After the spherical data of each measurement point have been reconstructed, they are converted into Cartesian coordinates and stored in a point data structure.
+
+\todo{iterativen ablauf des ganzen Algorythmusses klar machen}
 
 \begin{center}
 \begin{tikzpicture} 
@@ -549,40 +722,92 @@ point : vector3f \\
 \end{tikzpicture}
 \end{center}
 
-Diese wird wiedrrum in ein Statisches 2 Dimensionales Array Gespeichert: Points[2000][16]. Die Reihenfolge der Daten wird dabei beibehalten.
-Diese Datenstruktur stellt nun im weiteren verlauf unsere Pointcloud dar.
+% Diese wird wiedrrum in ein Statisches 2 Dimensionales Array Gespeichert: Points[2000][16]. Die Reihenfolge der Daten wird dabei beibehalten, um einen effizenten Zugriff auf die Werte
+% auf basis ihres azimuth winkels zu ermoglichen. Diese Datenstruktur stellt nun die Basis für den Nachfolgenden Clustering alorythmus dar.
+This is stored asdrrum in a static two-dimensional array: Points [2000] [16]. The order of the data is keeped thereby to allow efficient access to 
+the values based on their azimuth angle. This data structure now provides the base for the subsequent clustering alorythm.
 
-\todo{warum DBSCAN mit Noise!}
-Auf dieser Basis wird nun ein \ac{DBSCAN} \cite{DBSCAN} ausgeführt. Der \ac{DBSCAN} Algorithms hat dabei folgende Vorteile.
-Im Gegensatz beispielsweise zum K-Means-Algorithmus, muss nicht im vornherein bekannt sein, wie viele Cluster existieren. Der Algorithmus kann Cluster beliebiger Form 
-(z.B. nicht nur kugelförmige) erkennen. Das macht den \ac{DBSCAN} damit für uns zu optimalen Kandidaten. \ac{DBSCAN} selbst ist von linearer Komplexität.
-Die meiste Rechenzeit wird jedoch überlichweise durch die Nachbarschafts berechnung verursacht. Genau hier setzen wir an, anstatt der Bereichsanfrage über eine Baum-Struktur
-nutzten wir aus, dass Messungen in einer kleinen Nachbarschaft einen ähnlichen Azimuth Winkel haben. Dazu untersuchen wir für jeden Messwert jeweils zwei weitere Einträge nach links
-und rechts in unserem Array. Effektiv müssen wir daher $5 \cdot 16 = 80$ werte Überprüfen. Die Laufzeit der Bereichsanfrage kann deshalb in linearer Komplexität durchgeführt
-werden. Alle Messwerte die Zuvor als Grund Klassifiziert wurden, werden bei der Berchnung übersprungen, zusätzlich entfällt der Aufbau eines KD-Trees. 
+% Auf dieser Basis wird nun ein \ac{DBSCAN} \cite{DBSCAN} ausgeführt. Der \ac{DBSCAN} Algorithms hat dabei folgende Vorteile.
+% Im Gegensatz beispielsweise zum K-Means-Algorithmus, muss nicht im vornherein bekannt sein, wie viele Cluster existieren. Der Algorithmus kann Cluster beliebiger Form 
+% (z.B. nicht nur kugelförmige) erkennen. Weiterhin kan \ac{DBSCAN} mit rauschen umgehen und als dieses erkenne. Das macht den \ac{DBSCAN} damit für uns zu optimalen Kandidaten,
+% da unsere Objeke von vielfältiger form sein können und der Sensor innhalb einees realen Scenations messfehler haben kann, welche sich als Noise auswirken. 
+% Idelaerweise ist \ac{DBSCAN} selbst von linearer Komplexität.
+% Die meiste Rechenzeit wird jedoch überlichweise durch die Nachbarschafts berechnung verursacht. Genau hier setzen wir an, anstatt der Bereichsanfrage über eine Baum-Struktur
+% nutzten wir aus, dass Messungen in einer kleinen Nachbarschaft einen ähnlichen Azimuth Winkel haben. Dazu untersuchen wir für jeden Messwert jeweils zwei weitere Einträge nach links
+% und rechts in unserem Array. Effektiv müssen wir daher $5 \cdot 16 = 80$ werte Überprüfen. Die Laufzeit der Bereichsanfrage kann deshalb ebenfalls in linearer Komplexität durchgeführt
+% werden. Alle Messwerte die Zuvor als Grund Klassifiziert wurden, werden bei der Berchnung übersprungen, zusätzlich entfällt der Aufbau eines KD-Trees, was uns einen wiiteren laufzeit vorteil
+% verpasst. Alle Zusammenhänenden Messerte werden vom Algorithms als liste von Refernzen auf das Urspungsarray gespeichert, um unnötiges kopieren zu vermeiden.
+
+On this basis, a \ac{DBSCAN} \cite{DBSCAN} is now executed. The \ac{DBSCAN} algorithm has the following advantages. In contrast to the K-Means algorithm,
+for example, it is not necessary to know how many clusters exist. The algorithm can recognize clusters of any shape (e.g., not only spherical).
+Furthermore, \ac{DBSCAN} can deal with noise and recognize as this. This makes the \ac{DBSCAN} optimal candidates for us, because our objects can be have any shape and 
+measurement from the sensor can have errors within a real scenario, which can be asumed as noise effect. 
+In fact, \ac{DBSCAN} is itself of linear complexity. However, most computing times are caused by the neighborhood calculation.
+But instead of the range request via a tree structure, we here profit from the behavior, that measurements in a small neighborhood have a similar azimuth angle.
+For this purpose, we examine two additional entries for each measured value to the left and right in our array. 
+Therefore, we need to check $5 \cdot 16 = 80$ values. The runtime of the range request can therefore also be performed in linear complexity.
+All measured values ​​previously classified as ground are skipped during the calculation. In addition, the construction of a KD-tree is omitted, which aslo leaves us a run-time advantage.
+All clusters are stored by the algorithm as a list of references to the original array to avoid unnecessary copying.
 
 
-\subsection{Tracking}
+\section{Tracking}
+% Die Aufgabe des Trackings ist es nun einen Zusammenhang der Messwerte über die Zeit herzustellen. Dabei ist das Tracking in zwei Abschnitte unterteilt.
+% Dem Tracking der Cluster vom \ac{DBSCAN} und dem Erstellen und Tracken von Hindernissen.
+The task of tracking is to establish a relationship between the measured values over time. The tracking is divided into two sections.
+Tracking of the clusters from the \ac{DBSCAN} and the creation and tracking of the objects.
 
 \todo{datenstrucktur Onjekte hinzufügen, weil positionen und attribute verwirrend}
-Das Tracking ist in zwei Abschnitte unterteilt. Dem Tracking der Cluster vom \ac{DBSCAN} und dem Erstellen und Tracken von Hindernissen.
 
-\subsubsection{Cluster Tracking}
-Für das Tracking der Cluster nehmen wir an, dass sich Objekte von Zeitschritt zu Zeitschritt nur geringefügig bewegen, weiterhin
-ändert sich die Form der Cluster ebenfalls nur leicht. Das ist wichtig, da die Position eine Clusters durch einen Mittelwertpunkt definiert ist.
-Das Tracking wird im R2 durchgeführt. Im Initialen Schritt wird jeden Cluster eine aufsteigende ID zugerordnet.
-In jedem weiteren Schritt wird jedem neuen Cluster die ID des alten Clusters zugeordnet welcher über die Zeit hinweg die geringste Entfernung aufweißt.
-Fur diese Entfernung gibt es eine großzügige obere Schranke von 3m, Cluster die nicht innerhalb in dieser Grenze sind erhalten eine neue ID.
-Das führt dazu, dass mehreren Cluster die selbe ID zugeordnet werden kann, das ist wichtig, da Objekte manchmal in mehrere Cluster zerfallen.
 
-\subsubsection{Object Tracking}
-Basis für das Objekt Tracking sind die zuvor gtrackten Cluster. Im Initialen Schritt werden aus allen Cluster mit der Selben IDs Objekte gebildet.
-In jeden weiteren Schritt werden Alle Cluster mit der zuvor gleichen ID zum updaten der Objekte genutzt. Aus Clustern mit neuen IDs werden neue Objekte gebildet.
+\subsection{Cluster Tracking}
+% Für das Tracking der Cluster nehmen wir an, dass sich Objekte von Zeitschritt zu Zeitschritt nur geringefügig bewegen, weiterhin
+% ändert sich die Form der Cluster ebenfalls nur leicht. Das ist wichtig, da die Position eine Clusters durch einen Mittelwertpunkt definiert ist.
+% Das Tracking wird im $\mathbb{R}^2$ durchgeführt. Im Initialen Schritt wird jeden Cluster eine aufsteigende ID zugerordnet.
+% In jedem weiteren Schritt wird jedem neuen Cluster die ID des alten Clusters zugeordnet welcher über die Zeit hinweg die geringste Entfernung aufweißt.
+% Fur diese Entfernung gibt es eine großzügige obere Schranke von 3m, welche expirimentel ermittelt wurde, Cluster die nicht innerhalb in dieser Grenze sind erhalten eine neue ID.
+% Das führt dazu, dass mehreren Cluster die selbe ID zugeordnet werden kann, das ist wichtig, da Objekte manchmal in mehrere Cluster zerfallen.
+For cluster tracking, we assume that objects move only slowly from time step to time step, and the shape of the cluster also changes only slightly. 
+This is important because the position of a cluster is defined by a mean value point. Tracking is performed in $\mathbb{R}^2$. 
+In the initial step, an ascending ID is assigned to each cluster.
+In each further step, each new cluster is assigned the ID of the old cluster, which has the smallest distance over time.
+For this distance, there is a generous upper bound of 3m, which was determined expirimentel, clusters that are not within this boundary are given a new ID.
+This results in the fact that multiple clusters can be assigned the same ID, which is important because objects sometimes break down into multiple clusters.
+
+\subsection{Object Tracking}
+% Basis für das Objekt Tracking sind die zuvor gtrackten Cluster. Im Initialen Schritt werden aus allen Cluster mit der Selben IDs Objekte gebildet.
+% Welche abgesehen von den Messerten weitere Parameter zur beschreibung des Objekts Enthalten. Dazu gehören Werte wie die potentielle Größe und Postition des Objektes als Rechteck,
+% die Geschwindikteit des Objektes und seine Richtung, die ID und Typ des Objektes und seine Confidence. Die ID ergibt sich dabei aus der ID des initialen genutzten Clusters
+The basis for the object tracking are the previously tracked clusters. In the initial step, objects are created from all clusters with the same IDs.
+Which apart from the measured values contain further parameters for the description of the object. This includes values such as the potential size and 
+position of the object as a rectangle, the speed of the object and its direction, the ID and type of the object, and its confidence. The ID is derived from the ID of the initial used cluster
+
+% \begin{center}
+% \begin{tikzpicture} 
+% \umlclass{Onject}{
+% cluster : List<points> \\
+% latestTimestamp : TimeStamp \\
+% confidence : int\\
+% visited : bool \\
+% isGround : bool \\
+% point : vector3f \\
+% }
+% {getAzimuth : float\\
+% \dots}
+% \end{tikzpicture}
+% \end{center}
+
+%In jeden weiteren Schritt werden Alle Cluster mit der zuvor gleichen ID zum updaten der Objekte genutzt. Aus Clustern mit neuen IDs werden neue Objekte gebildet.
 
 Der vorerst wichtigste Schritt beim Updatevorgang ist die berechnung der Bewegungsrichtung eines Objektes, da folgende Berechnungen auf dieser basieren.
 Bei der Berechnung der Bewegungsrichtung ist zu beachten, dass die Bewegung des eigenen Fahrzeuges herausgerechnet werden muss.
 Dazu werden die Positionsdaten des Applanix POS-LV genutzt. Da sowohl die Positionsdaten des Applanix Systems, als auch die Erkannte Postition des Fahrzeuges Fehlerbehaftet sind,
-wird die Bewegungrichtung nur bei einer minimalen Bewegung von 2m geupdatet.
+wird die Bewegungrichtung nur ab einer minimalen Bewegung von 2m geupdatet.
+
+In each further step, all clusters with the previously identical ID are used to update the objects. New objects are created from clusters with new IDs.
+
+The first important step in the update process is the calculation of the movement direction of an object, because the following calculations are based on this.
+When calculating the direction of movement, it must be noted that the movement of our own vehicle must be separated out. The position data of the Applanix POS-LV are used for this purpose.
+Since both the position data of the Applanix system and the detected position of the vehicle have errors, the direction of movement is updated only with a minimum movement of 2m.
 
 \begin{align*}
 \Delta x &= P_x(t) - P_x(t_{-2m}) + \Delta C_x\\
@@ -590,10 +815,13 @@ wird die Bewegungrichtung nur bei einer minimalen Bewegung von 2m geupdatet.
 \theta &= \atantwo(\Delta y,\Delta x)
 \end{align*}
 
-mit $P$ - Postition des Objekts, $C$ - Position des eigenen Fahrzeuges
+with $P$ - position of the object, $C$ - position of our own vehicle
 
-Das Ergebnis kann in \cref{obst_rot} betrachtet werden. Gut zu erkennen ist, dass die Bewegungsrichtung (Pfeil) nicht mit der Ausrichtung des Objekte (schwarz) übereinstimmt,
-die Boundingbox jedoch korrekt ausgerichtet ist. Wie diese Berechnung zustande kommt wird im folgenden geklärt.
+% Das Ergebnis kann in \cref{obst_rot} betrachtet werden. Gut zu erkennen ist, dass die Bewegungsrichtung (Pfeil) nicht mit der Ausrichtung des Objekte (schwarz) übereinstimmt,
+% die Boundingbox jedoch korrekt ausgerichtet ist. Wie diese Berechnung zustande kommt wird im folgenden geklärt.
+
+The result can be viewed in \cref{obst_rot}. It is easy to see that the direction of movement (arrow) does not conform with the orientation of the object (black), 
+but the bounding box is correctly oriented. How this calculation comes from is clarified in the following.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -603,8 +831,11 @@ die Boundingbox jedoch korrekt ausgerichtet ist. Wie diese Berechnung zustande k
 %\end{center}
 \end{figure}
 
-Basierend auf der Bewegungrichtung wird nun die Ausrichtung des Fahrzeiges berechnet. Dazu werden alle dem Objekt zugewiesenden Cluster zusammengefasst und um $-\theta$ gedreht.
-Danach wird das Objekt wird in 3 gleich große Segmente unterteilt (\cref{obst_devide}).
+% Basierend auf der Bewegungrichtung wird nun die Ausrichtung des Fahrzeiges berechnet. Dazu werden alle dem Objekt zugewiesenden Cluster zusammengefasst und um $-\theta$ gedreht.
+% Danach wird das Objekt wird in 3 gleich große Segmente unterteilt (\cref{obst_devide}).
+
+Based on the direction of movement, the alignment of the vehicle is now calculated. To do this, all clusters assigned to the object are grouped together and rotated by $-\theta$.
+Then the object is divided into 3 equal segments (\cref{obst_devide}).
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -614,11 +845,17 @@ Danach wird das Objekt wird in 3 gleich große Segmente unterteilt (\cref{obst_d
 %\end{center}
 \end{figure}
 
-Weiterhin wird bestimmt ob sich das Objekt oberhalb oder unterhalb der x-Achse befindet. Dies ist wichtig, da wir wissen müssen, welche seite des Objekts wir messen.
-Befindet sich das Objekt aso unterhalb der x-Achse wird im nächsten Schritt der y-Wert maximiert, befindet es sich oberhalb, wird er minimiert.
-Im folgenden gehen wir davon aus, dass sich das Objekt unter der x-Achse befindet. Deshalb maximieren wir nun im linken und rechten Segment des Geteilten
-Hindernises die y-Werte. Die Unterteilung in 3 Segmente ist nötig um zu verhindern, das bei perfekt wagerechte ausgerichteten Objekt beide Maxima in den selben Punkt laufen.
-Mit diesen Punkten $(\vec{R};\vec{L})$ wird nurn eine korrektur der Drehung des Objektes berechnet:
+% Weiterhin wird bestimmt ob sich das Objekt oberhalb oder unterhalb der x-Achse befindet. Dies ist wichtig, da wir wissen müssen, welche seite des Objekts wir messen.
+% Befindet sich das Objekt aso unterhalb der x-Achse wird im nächsten Schritt der y-Wert maximiert, befindet es sich oberhalb, wird er minimiert.
+% Im folgenden gehen wir davon aus, dass sich das Objekt unter der x-Achse befindet. Deshalb maximieren wir nun im linken und rechten Segment des Geteilten
+% Hindernises die y-Werte. Die Unterteilung in 3 Segmente ist nötig um zu verhindern, das beide Maxima in den selben Punkt laufen und der Abstand bdier Punkte nciht zu klein wird,
+% was eine größe ungenauigkeit verusachen würde. Mit diesen Punkten $(\vec{R};\vec{L})$ wird nurn eine korrektur der Drehung des Objektes berechnet:
+
+It is also determined whether the object is above or below the x-axis. This is important because we need to know which side of the object we are measuring.
+If the object is below the x-axis, then the y-value is maximized in the next step; if it is above, it is minimized.
+In the following, we assume that the object is under the x-axis. Therefore we maximize the y-values in the left and right segment of the divided obstacle.
+The division into 3 segments is necessary to prevent the two maxima from running into the same point and the distance of the points doesn't become too small, 
+which would cause a great inaccuracy. With these points $(\vec{R};\vec{L})$ a correction of the rotation of the object is now calculated:
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -634,11 +871,16 @@ Mit diesen Punkten $(\vec{R};\vec{L})$ wird nurn eine korrektur der Drehung des 
 \theta_{correction} &= \atantwo(\Delta y,\Delta x)
 \end{align*}
 
-Nach Anwendung der Korrektur wird die größe des Hindernises berechnet. Dazu werden die maximalen und minimalen x und y Werte herangezogen.
-Mit diesen Werten wird nun über die Zeit ein auf 0.5m gerundetes Histogram für die Länge und Breite des Hindernises aufgebaut.
-Anhand diesem wird dann der warscheinlichste Wert ausgewählt. Dadurch ändert sich die Größe des Hindernisses zu begin häufiger,
-bevor die Größe auf einen stabilen wert konvergiert.Da die größe des Objekts zu begin sehr klein sein kann, 
-gibt es für beide Werte einen unteren Grenzwert. Messerte für ein Beispielobjekt sind in \cref{obst_hist} zu sehen.
+% Nach Anwendung der Korrektur wird die größe des Hindernises berechnet. Dazu werden die maximalen und minimalen x und y Werte des erneut um $\theta_{correction}$ gedrehten Onjektes herangezogen.
+% Mit diesen Werten wird nun über die Zeit ein auf 0.5m gerundetes Histogram für die Länge und Breite des Hindernises aufgebaut.
+% Anhand diesem wird dann der warscheinlichste Wert ausgewählt. Dadurch ändert sich die Größe des Hindernisses zu begin häufiger,
+% bevor die Größe auf einen stabilen wert konvergiert.Da die größe des Objekts zu begin sehr klein sein kann, 
+% gibt es für beide Werte einen unteren Grenzwert von 0.9m . Messerte für ein Beispielobjekt sind in \cref{obst_hist} zu sehen.
+
+After applying the correction, the size of the obstacle is calculated. For this purpose, the maximum and minimum x and y values of
+rotated objects are used. With these values, a histogram for the length and width of the obstacle, rounded to 0.5 m, is now established over time. 
+The most probable value is then selected. This causes the size of the obstacle to change more often before the size converges to a stable value.
+Since the size of the object can begin to be very small, there is a lower limit of 0.9m for both values. Measured values for a sample object can be seen in \cref{obst_hist}.
 \begin{figure}[!ht]
   %\addcontentsline{lof}{figure}{LaTeX--Strukturelemente}
 %\begin{center}
@@ -662,20 +904,34 @@ at={(0.50\textwidth,0)}]
 %\end{center}
 \end{figure}
 
-Leicht zu sehen wird für das Object eine breite von 2m und eine Länge von 5m berechnet. Das Objektist in diesm Fall ein Volvo S60, welcher Außenmaße von ca. 1.9m und 4.6m hat,
-womit die Abweichungen sich korrekt innerhalb, der Rundung der Werte befinden. Für die Nachfolgende filterung der Messwerte mit Hilfe eines Kalman filters, wurd nun
-die Position des Fahrzeuges aus dem Mittelpunkt der Boundingbox bestimmt.
+% Leicht zu sehen wird für das Object eine breite von 2m und eine Länge von 5m berechnet. Das Objektist in diesm Fall ein Volvo S60, welcher Außenmaße von ca. 1.9m und 4.6m hat,
+% womit die Abweichungen sich korrekt innerhalb, der Rundung der Werte befinden. Für die Nachfolgende filterung der Messwerte mit Hilfe eines Kalman filters, wurd nun
+% die Position des Fahrzeuges aus dem Mittelpunkt der Boundingbox bestimmt.
 
-Die für die Berechnung der Bewegungsrichtung genutzte Position ist jedoch eine andere, da die so eben berechnete Position zu diesem Zeitpunkt noch nicht zur verfügung steht und
-die Position kurz nach der Initialen erkennung durch die häufigen Größenändrungen sehr instabil ist. Deswegen wird als Position immer die maximale x-Koordinate der Cluster gesnutzt.
-Diese Postition kann ebenfalls in \cref{obst_rot}, als kleiner grüner Kreis begutachtet werden.
-Da $\theta$ im initialen Zeitschritt Null ist, entpricht dies der globalen Maximalen x-Koordinate des Clusters. Dies Führt dazu, das wir im Initialen Zeitschritt annhemen, dass sich das Objekt
-in die positive x-Richtung bewegt. Bei Objekten bei denen das nicht der Fall ist, führt das zu einem kurzzeitigen oszillieren der Orientierung, welche sich jedoch über die Zeit schnell stabilisiert.
+Easy to see, a width of 2m and a length of 5m is calculated for the object. In this case the object is a Volvo S60, which has outer dimensions of approximately
+1.9m and 4.6m, whereby the deviations are correctly within, the rounding of the values. For the subsequent filtering of the measured values with the help of an extended Kalman filter, 
+the position of the vehicle from the center of the bounding box is now determined, using the mean value of the four corner points
 
+% Die für die Berechnung der Bewegungsrichtung genutzte Position ist jedoch eine andere, da die so eben berechnete Position zu diesem Zeitpunkt noch nicht zur verfügung steht und
+% die Position kurz nach der Initialen erkennung durch die häufigen Größenändrungen sehr instabil ist. Deswegen wird als Position immer die maximale x-Koordinate der Cluster gesnutzt.
+% Diese Postition kann ebenfalls in \cref{obst_rot}, als kleiner grüner Kreis begutachtet werden.
+% Da $\theta$ im initialen Zeitschritt Null ist, entpricht dies der globalen Maximalen x-Koordinate des Clusters. Dies Führt dazu, das wir im Initialen Zeitschritt annhemen, dass sich das Objekt
+% in die positive x-Richtung bewegt. Bei Objekten bei denen das nicht der Fall ist, führt das zu einem kurzzeitigen oszillieren der Orientierung, welche sich jedoch über die Zeit schnell stabilisiert.
 
-Der eine oder ander möge sich wundern warum die Boundingbox so aufwendig berechnet wurde. Eine Einfache Art und weise eine Boundingbox für die Objekte zu berechnen wäre die berechnung
-der Minimum Boundingbox über die konvexe Hülle, so wie es in vielen Anderen Arbeiten gemacht wird \cite{Zhang,Himmelsbach2009}. Die Minimum Bounding box liefet jedoch unter umständen nicht das gewünschte
-ergebnis, zum einen hat die immer nur die größe der aktuellen Messung und zum anderen kann sie eine falsche Orientierung liefern, wie in \cref{min_box} zu sehen.
+However, the position used for the calculation of the direction of movement is different, since the so calculated position is not yet available at this t
+ime and the position is very unstable shortly after the initial recognition due to the frequent dimensional changes. Therefore, the maximum x coordinate
+of the rotated clusters is always used as the position. This position can also be examined in \cref{obst_rot}, as a small green circle. Since $\theta$ in the initial time step is zero, 
+this corresponds to the global maximum x-coordinate of the cluster. This leads to the assumption that the object moves in the positive x direction in the initial time step. 
+For objects where this is not the case, this leads to a short-term oscillation of the orientation, which however quickly stabilizes over time.
+
+% Der eine oder ander möge sich wundern warum die Boundingbox so aufwendig berechnet wurde. Eine Einfache Art und weise eine Boundingbox für die Objekte zu berechnen wäre die berechnung
+% der Minimum Boundingbox über die konvexe Hülle, so wie es in vielen Anderen Arbeiten gemacht wird \cite{Zhang,Himmelsbach2009}. Die Minimum Bounding box liefet jedoch unter umständen nicht das gewünschte
+% ergebnis, zum einen hat man die immer nur die größe der aktuellen Messung und zum anderen kann sie eine falsche Orientierung liefern, wie in \cref{min_box} zu sehen.
+
+One thing or another may be wondering why the Boundingbox was calculated so elaborately. A simple way to calculate a bounding box for the
+objects would be the calculation of the minimum bounding box over the convex hull, as it is done in many other works \cite{Zhang, Himmelsbach2009}.
+The minimum Bounding box, however, under certain circumstances does not provide the desired result, on the one hand you have only the size of the current measurement and on the 
+other hand it can provide a wrong orientation as seen in \cref{min_box}.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -685,32 +941,45 @@ ergebnis, zum einen hat die immer nur die größe der aktuellen Messung und zum 
 %\end{center}
 \end{figure}
 
-Da die orientierung und Postition der Objekte jedoch als eingang für den nachfolgenden Kalmanfilter genutzt wird, welcher sehr sensible auf falsch Orientierungen reagiert, wurde eben jeder Algorithmus
-entwickelt.
+% Da die orientierung und Postition der Objekte jedoch als eingang für den nachfolgenden Kalmanfilter genutzt wird, welcher sehr sensible auf falsch Orientierungen reagiert, wurde eben jeder Algorithmus
+% entwickelt.
 
-\subsubsection{Object Confidence}
+However, since the orientation and position of the objects are used as input for the subsequent Kalman filter, which reacts very sensitively to false orientations, the algorithm was developed.
+
+\subsection{Object Confidence}
 \todo{implementierung Konfidence wert auf 1 setzen und entfernen, wenn wert unter 1, oder objekte auf basis ihrer Position entfernen}
-Um zu verhindern, dass kurzzeitig erkannte False Positives direckt als Objekt erkannt werden und damit die nachfolgende Logik beeinflusst, wird nun ein Confidence Wert eingeführt
-Bevor ein erkanntes Objekt als gültig erachtet wird, muss dieses einen gewissen Confidence Wert erreichen. Der Initiale Konfidence Wert eines Objektes ist Null. Der Konfidence wert
-wird um eins erhöht, wenn das Objekt in zwei aufeinader folgenden Zeitschritten getrackt werden kann und folgende bedingungen erfüllt: 
+% Um zu verhindern, dass kurzzeitig erkannte False Positives direckt als Objekt erkannt werden und damit die nachfolgende Logik beeinflusst, wird nun ein Confidence Wert eingeführt
+% Bevor ein erkanntes Objekt als gültig erachtet wird, muss dieses einen gewissen Confidence Wert erreichen. Der Initiale Konfidence Wert eines Objektes ist Null. Der Konfidence wert
+% wird um eins erhöht, wenn das Objekt in zwei aufeinader folgenden Zeitschritten getrackt werden kann und folgende bedingungen erfüllt: 
 
+In order to prevent the detection of false positives immediately recognized as an object and thus to influence the subsequent logic, a confidence value is now introduced. 
+Before a recognized object is considered to be valid, this must achieve a certain confidence value. The initial confidence value of an object is zero. 
+The confidence value is increased by one if the object can be tracked in two consecutive time steps and satisfies the following conditions:
+
+
+\todo{wie ergibt sich höhe und breite! (aus der orientierung.... erklären)}
 \begin{itemize}
-\item Die breite des objkts muss kleiner seine als die länge des hindernisses zuzüglich 1.5m
-\item Die länge des Hindernises muss kleiner sein als 10m
-\item Die Breite des Hindernisses muss kliener sein als 4m
+\item The width of the object must be less than the length of the obstacle plus 1.5m
+\item The length of the obstacle must be less than 10m
+\item The width of the obstacle must be less than 4m
 \end{itemize}
-Ist eine dieser Bedingunggen nicht erfüllt, wird der Confidence Wert statdessen halbiert. Damit ein Objekt als gütig erachtet wird, muss es einen Confidence wert von 3 erreichen, sodass
-Ein Objekt erst nach mindestens 3 drei Iterationen erkannt werden kann.
+% Ist eine dieser Bedingunggen nicht erfüllt, wird der Confidence Wert statdessen halbiert. Damit ein Objekt als gütig erachtet wird, muss es einen Confidence wert von 3 erreichen, sodass
+% Ein Objekt erst nach mindestens 3 drei Iterationen erkannt werden kann.
+If one of these constraints is not met, the Confidence value is halved. For an object to be considered kind, it must reach a confidence value of 3 so that an object can only be 
+recognized after at least 3 three iterations. This value was empirically determined and represents a tradeoff between fast detection and filtering.
 
 
-
-\subsection{Classification}
+\section{Classification}
 \todo{text zu listing anpssen}
 \todo{implementierung Plausibilitätstest}
 \todo{filterung in code entfernen, weil größe bereits gefiltert wird}
-Die Klassifizierung der Objekte finedt anhand ihrer Größe statt, es findet keine Klassifizierung nach bewegten und unbewegten Objeten Stadt.
-Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterium wird die Größe der Onjekte genutzt.
-Die Klassifizierung sieht wie folgt aus:
+
+% Nun wird eine  Klassifizierung der Objekte anhand ihrer Größe vorgenommen, es findet keine Klassifizierung nach bewegten und unbewegten Objeten Stadt.
+% Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterium wird die Größe der Onjekte genutzt.
+% Die Klassifizierung sieht wie folgt aus:
+Now a classification of the objects is made by their size, there is no classification according to moved and immobile objects.
+Only pedestrians, cyclists, vehicles, and others are differentiated. The size of the objects is used as a classification criterion.
+The classification is as follows:
 \begin{description}
 \item[pedestrian:] length < 1.5 and width < 1.5
 \item[cyclist:] length < 2 and width < 1.5
@@ -719,10 +988,15 @@ Die Klassifizierung sieht wie folgt aus:
 \end{description}
 
 % Objekte die eine Größe von 2x1.5m überschreiten werden dabei als Fahrzeug Klassifiziert, Objekte die kleiner als 1.5x1.5m sind werden als Fußgänger klassifiziert. Alles dazwischen wird als Radfahrer klassifizierfiziert.
-Weiterhin wird andhand der Geschwindigekeit eine Plausibilitätstest durchgeführt. So darf eine Fußgänger eine Geschwindigekeit von 10km/h nicht überschreiten und die Maximalgeschwindigkeit dür einen 
-Radfahrer bertägt 30km/h. Da für Fahrzeuge keine sinnvolle geschwindigkeitsgrenze angenommen werden kann, wir an ihrer stelle die Änderung der Orientierung genutzt. Als Maximale Drehrate wird
-eine Messung von 0.3 rads/sec aus \cite{Kelly1994} angenommen. Da der Wert eine Obere Grenze darstellen soll nehmen wir einen etwas höheren  Wert von  0.3 rads/sec an. Wird einer dieser Werte überschritten,
-wird der Confidence ebenfalls halbiert.
+% Weiterhin wird andhand der Geschwindigekeit eine Plausibilitätstest durchgeführt. So darf eine Fußgänger eine Geschwindigekeit von 10km/h nicht überschreiten und die Maximalgeschwindigkeit dür einen 
+% Radfahrer bertägt 30km/h. Da für Fahrzeuge keine sinnvolle geschwindigkeitsgrenze angenommen werden kann, wir an ihrer stelle die Änderung der Orientierung genutzt. Als Maximale Drehrate wird
+% eine Messung von 0.3 rads/sec aus \cite{Kelly1994} angenommen. Da der Wert eine Obere Grenze darstellen soll nehmen wir einen etwas höheren  Wert von  0.3 rads/sec an. Wird einer dieser Werte überschritten,
+% wird der Confidence ebenfalls halbiert.
+
+Furthermore, a plausibility test is carried out using the speed. Thus, a pedestrian must not exceed a speed of 10km/h and the maximum speed for a cyclist is 30km/h.
+Since no sensible speed limit can be assumed for vehicles, we use the change of orientation in their place.
+The maximum rotation rate is assumed to be 0.3 rads/sec from \cite{Kelly1994}. Since the value is an upper limit, we assume a slightly higher value of 0.4 rads/sec.
+If one of these values is exceeded, the confidence is also halved.
 
 
 % \begin{lstlisting}[language=Python]
@@ -739,20 +1013,29 @@ wird der Confidence ebenfalls halbiert.
 % \end{lstlisting}
 
 
-\subsection{State Estimation}
+\section{State Estimation}
 
-Nachfolgende des Trackings wird auf den Erkannten Objekten eine Zustandschätzung durchgeführt. Dies ist nötig, da Objekte während der Fahrt verdenkt werden können,
-sei es durch andere bewegte Objekte oder Gebaüde. Eine schätzung des Zustandes über den Erkennungshorizont hinaus erlaubt es uns eine Aussage über die Position von
-Objekten zu treffe, welche im Moment nicht sichtbar sind. Weiterin erlaubt es auf einfache Weise zeitweise nicht erkannte Objekte wiederzuerkennen, also dem Objekt
-die gleich ID zuzuweisen wie zuvor. 
+% Nachfolgende des Trackings wird auf den Erkannten Objekten eine Zustandschätzung durchgeführt. Dies ist nötig, da Objekte während der Fahrt verdenkt werden können,
+% sei es durch andere bewegte Objekte oder Gebaüde. Eine schätzung des Zustandes über den Erkennungshorizont hinaus erlaubt es uns eine Aussage über die Position von
+% Objekten zu treffe, welche im Moment nicht sichtbar sind. Weiterin erlaubt es auf einfache Weise zeitweise nicht erkannte Objekte wiederzuerkennen, also dem Objekt
+% die gleich ID zuzuweisen wie zuvor. 
+Following the tracking, a state estimation is performed on the detected objects. This is necessary because objects can be hidden during the movement,
+be it by other moving objects or buildings. An estimation of the state beyond the recognition horizon allows us to make a statement about the position of 
+objects which are not visible at the moment. Furthermore, it allows you to easily rerecognize objects that have not been recognized at a time, ie to assign the same ID to the object as before.
 
-Aus dem zuvor durchgführten Tracking können wir die Aktuelle Position, Geschwindigekeit, Drehung und Drehgeschwindigkeit erhalten. 
-Für eine Zustandschätzung mit den für Fahrzeuge üblichen Bicycle Model fehlen und Angangen über den Radstand und Gewicht des Fahrzeues.
-Daher müssen wir uns auf ein relativ Einfaches ``Constant Turn Rate and Velocity'' Model beschränken. Dies erlaubt es uns allerdings das gleiche
-Model für alle Klassen von Objekten zu nutzten. Da dieses Model ebenfalls auf Fußgänger und Radfahre angewendet werden kann.
+\todo{kalman nicht nur für Prediction auch für filterung}
 
-\subsubsection{Constant Turn Rate and Velocity Model}
-Der Zustandvektor \cite{Schubert2008} des CTRV- Modells sieht wie folgt aus:
+% Aus dem zuvor durchgführten Tracking können wir die Aktuelle Position, Geschwindigekeit, Drehung und Drehgeschwindigkeit erhalten. 
+% Für eine Zustandschätzung mit den für Fahrzeuge üblichen Bicycle Model fehlen \todo{reference} und Angangen über den Radstand und Gewicht des Fahrzeues.
+% Daher müssen wir uns auf ein relativ Einfaches ``Constant Turn Rate and Velocity'' Model beschränken. Dies erlaubt es uns allerdings das gleiche
+% Model für alle Klassen von Objekten zu nutzten. Da dieses Model ebenfalls auf Fußgänger und Radfahre angewendet werden kann.
+
+From the previous tracking, we can get the current position, speed, rotation and rotation speed. For an estimation of the state with the for vehicle common the bicycle model \todo{reference}, 
+we miss the wheelbase and the weight of the vehicle. Therefore, we must limit ourselves to a relatively simple ``Constant Turn Rate and Velocity'' model.
+This allows us to use the same model for all classes of objects. Because this model can also be used on pedestrians and cyclists.
+
+\subsection{Constant Turn Rate and Velocity Model}
+The state vector \cite{Schubert2008} of the CTRV model looks as follows:
 \begin{align*}
 \vec{x}(t) &=
 \begin{bmatrix}
@@ -765,7 +1048,7 @@ v &\text{ - Object Velocity}\\
 \omega &\text{ - Yaw Rate}
 \end{align*}
 
-Die Dynamikmatrix erhalten wir durch eine nichtlinieare Zustandsübergang:
+The dynamic matrix is obtained by a non-linear state transition:
 
 \begin{align*}
 \vec{x}(t + T)=
@@ -795,18 +1078,27 @@ v\\
 % \end{bmatrix} 
 % \end{align*}
 
-\subsubsection{Prediction}
-Befindet sich ein Objekt innerhalb der Rechihweite des Velodyne Sensors und wird im Darauffolgenden Zeitschritt nicht erkannt,
-wird der Prediktionsschritt des Kalman filter weiterhin ausgeführt. Dies geschieht solange die Unsicherheit der Position einen gewissen Schwellwert üerschreitet.
-Sobald das Clustertracking dann ein neues Objekt detektiert, dem keine Bisher bekannte ID zugewiesen werden kann, wird die Postion mit allen Onjekten in der Prediktionsphase
-abgeglichen. Befindet sich das neue Objekt nahe an der predizierten Position wird der Cluster dem Onjekt zugewiesen, und der Korrekturschritt des EKF durchgeführt.
+\subsection{Prediction}
+% Befindet sich ein Objekt innerhalb der Rechihweite des Velodyne Sensors und wird im Darauffolgenden Zeitschritt nicht erkannt,
+% wird der Prediktionsschritt des Kalman filter weiterhin ausgeführt. Dies geschieht solange die Unsicherheit der Position einen gewissen \todo{konkretisieren schwellwert} Schwellwert üerschreitet.
+% Sollte eine dieser Bedingungen nicht zutreffen, wird das Objekt aus der Liste der bekannten Objekte entfernt. Sobald das Clustertracking dann ein neues Objekt detektiert,
+% dem keine Bisher bekannte ID zugewiesen werden kann, wird die Postion mit allen Onjekten in der Prediktionsphase
+% abgeglichen. Befindet sich das neue Objekt nahe an der predizierten Position wird der Cluster dem Onjekt zugewiesen, und der Korrekturschritt des EKF durchgeführt.
 
+an object is within the range of the Velodyne sensor and is not detected in the subsequent time step, the prediction step of the Kalman filter is still executed.
+This is done as long as the uncertainty of the position passes a certain \ todo {threshold threshold} threshold. If one of these conditions does not apply,
+the object is removed from the list of known objects. As soon as the clustertracking detects a new object which can not be assigned a previously known ID, 
+the position is matched with all objects in the prediction phase. If the new object is close to the predicted position, the cluster is assigned to the object
+and the correction step of the EKF is performed.
 
+\chapter{Simuation}
+% Die Simulationsumgebeung, welche verwendet wird ist VREP \footnote{\url{http://www.coppeliarobotics.com/}}. VREP wurde für verschiedenne Robottikanwendungen entwickelt.
+% VREP erlaubt es innerhalb eines Graphischen beliebige \ac{MKS}, basierend auf diversen Physikengines zu konstruieren. Weiterhin verfügt VREP bereits über
+% viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Simulation kann über ein RemoteAPI Interface mit nahezu jerder Programmiersprache kommunizieren.
 
-\section{Simuation}
-Die Simulationsumgebeung, welche verwendet wird ist VREP \footnote{\url{http://www.coppeliarobotics.com/}}. VREP wurde für verschiedenne Robottikanwendungen entwickelt.
-VREP erlaubt es innerhalb eines Graphischen beliebige \ac{MKS}, basierend auf diversen Physikengines zu konstruieren. Weiterhin verfügt VREP bereits über
-viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Simulation kann über ein RemoteAPI Interface mit nahezu jerder Programmiersprache kommunizieren.
+The simulation environment being used is VREP \footnote{\url{http://www.coppeliarobotics.com/}}. VREP has been developed for various robotic applications.
+VREP allows you to construct any \ac{MKS} based on various physicsgines within a graphic editor. Furthermore, VREP already has many ready-to-use sensor models, such as
+the Velodyne VLP-16. The whole simulation can communicate via a RemoteAPI interface with nearly every programming language.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -816,62 +1108,108 @@ viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Si
 %\end{center}
 \end{figure}
 
-\subsection{Simuation Scenario}
+\section{Simuation Scenario}
 
 \todo{referenzen zu ``roundabout in law'' mit formelsymbolen und so}
-Für Das Simalations Scenario wurde eine einfacher kleiner Kresiverkehr mit einem Außendurchmesser von 26m designt, da dieser auf grund seiner größe das interessanteste Objekt ist.
-Und im Innerstätischen Bereich jaufig anzutreffen ist. Zum testen der Onjektdetektion bietet dieser auf grund seiner bebaubaren mittelinsel gute möglichkeiten das Tracking zu testen.
-Weiterhin ist es aufgrund seiner Größe möglich den kompletten Kreisverkehr zu überblicken. Das Ganze Senarion wurde aufgrund von limitierungen in Vrep um den Faktor 10 herunterscaliert.
+% Für Das Simalations Scenario wurde eine einfacher kleiner Kresiverkehr mit einem Außendurchmesser von 26m und ein Minikreisverkehr designt, da dies auf grund seiner größe 
+% in Kombination mit dem VLP-16, welcher in diesem Bereich noch eine akzeptable auflösung verfügt, das interessanteste Objekt darstellen.
+% Und im Innerstätischen Bereich auf grund ihrer größe haufig anzutreffen sind. Zum testen der Onjektdetektion bietet der Kleine Kreisverkehr auf Grund seiner bebaubaren
+% mittelinsel gute möglichkeiten das Tracking zu testen. Weiterhin ist es aufgrund seiner Größe möglich den kompletten Kreisverkehr zu überblicken.
+% Das Ganze Senarion wurde aufgrund von limitierungen in Vrep um den Faktor 10 herunterscaliert.
 
-Innhrhalb des Szenarosn bewegen sich innerhalb des Kreisverkehrs ein Fahrad, ein Fußgänder und ander 2 Fahrzeuge. Die Objekte bewegen sich dabei auf festgelegten Pfaden.
-Dei Geschwindigekeit aller Verkehrsteilnehmer ist dabei auf den Typ angepasst. Der Füßgänger bewegt sichn mit für füßgänger übliche 5km/h.
-Das Fahrrad mit 15km/h. Die beiden Autos bewegen sich mit Unterschiedlichen Greschwindigkeiten zwischen 25 und 35 Km/h. Um eine Kolision der Fahrzeuge zu vermeiden, sind beide 
-Fahrzeuge an der vorderseite mit Distanzsensoren ausgestattet. Sollte dieser Sensor ein Fahrzeug erkennen, geht das Fahrzeug in eine  Adaptive cruise control modus und
-passt sich dem vorderen Fahrzeug an. Das Adaptive cruise control ist dabei als einfacher proportional regler umgesetzt.
+For the simulation scenario, a simple small roundabout with an outside diameter of 26m and a miniature circuit was designed,
+as this is the most interesting object due to its size in combination with the VLP-16, which still has an acceptable resolution in this area.
+And in urban areas due to their size, they are frequent. To test the object detection, the small roundabout offers good possibilities to test the tracking due to its buildable roundabout island.
+\todo{bebaubare mittelinsel in smal roundabout ergenzen (im ersten Kapietel)}
+Furthermore, due to its size, it is possible to survey the entire roundabout. The whole scenario was down-scaled by a factor of 10 due to limitations in Vrep.
 
-Das autonome Fahrzeug bewegt sich dabei ebenfalls auf eine festen Pfad, dieser führt von rechts in den Kreisverkehr ein und verlässt den Kreisverkehr an der dritten ausfahrt.
-die Aufageb des Fahrzeues ist dabei sich sicher in den Kreisfehr einzusortieren und den Kreisverkehr sicher zu verlassen. Dabei Muss das Fahhzeug sowohl aud den Fußgänger, den Radfahrer
-und die Andren Fahrzeuge innerhalb des Kreisverkehres achten. Dazu ist das Fahrzeug mit einem virtuellen Velodyne VLP-16 ausgestattet.
+% Innhrhalb des Szenarosn bewegen sich innerhalb des Kreisverkehrs ein Fahrad, ein Fußgänder und ander 2 Fahrzeuge. Die Objekte bewegen sich dabei auf festgelegten Pfaden.
+% Dei Geschwindigekeit aller Verkehrsteilnehmer ist dabei auf den Typ angepasst. Der Füßgänger bewegt sichn mit für füßgänger übliche 5km/h.
+% Das Fahrrad mit 15km/h. Die beiden Autos bewegen sich mit Unterschiedlichen Greschwindigkeiten zwischen 25 und 35 Km/h. Um eine Kolision der Fahrzeuge zu vermeiden, sind beide 
+% Fahrzeuge an der vorderseite mit Distanzsensoren ausgestattet. Sollte dieser Sensor ein Fahrzeug erkennen, geht das Fahrzeug in eine  Adaptive Cruise Control modus und
+% passt sich dem vorderen Fahrzeug an. Das Adaptive Cruise Control ist dabei als einfacher proportional regler umgesetzt.
 
-\subsection{Simulation Logic}
+Inside the scenario there is a bicycle, a pedestrian and two other vehicles driving around the roundabout. The objects are moving on fixed paths.
+The speed of all traffic is adapted to the type. The pedestrian moves with the 5km/h usually asumed for pedestrians.
+The bike with 15km/h. The two cars move at different speeds between 25 and 35 km/h. In order to avoid a collision of the vehicles,
+both vehicles are equipped with distance sensors at the front. If this sensor detects a vehicle, the vehicle enters an Adaptive Cruise Control mode and adapts to the front vehicle.
+The Adaptive Cruise Control is implemented as a simple proportional controller.
 
-Um das zuvor beschrieben Scenario durchzuführen musste eine Logik entwicklt werden, diese umfasst nicht nur die Statemachine zum durch fahren des Kreisverkehrs, sondern
-auch die Lokalisierung des Fahrzeuges in dem Scenario als auch die Anbinung aller Sensoren an die Objekt Erkennung. Da alle nachfolgenden Berchungen nur wenig resscourcen bentigen
-wurde die entsprechende Software in Pyhon entwickelt.
+% Das autonome Fahrzeug bewegt sich dabei ebenfalls auf eine festen Pfad, dieser führt von rechts in den Kreisverkehr ein und verlässt den Kreisverkehr an der dritten ausfahrt.
+% die Aufgabe des Fahrzeues ist dabei sich sicher in den Kreisfehr einzusortieren und den Kreisverkehr sicher zu verlassen. Dabei Muss das Fahhzeug sowohl aud den Fußgänger, den Radfahrer
+% und die Andren Fahrzeuge innerhalb des Kreisverkehres achten. Dazu ist das Fahrzeug mit einem virtuellen Velodyne VLP-16 ausgestattet.
 
-\subsubsection{Sensor Connection}
-Die Objekt detection benoötigt als Sensor eingange die Daten des Velodyne VLP-16 und die Daten des Applanix POS-LV. Von den Applanix daten werden jecoch nur
-due Aktuelle Postion im WGS84 format benötigt und das aktuelle Heading. Da sich der Applanix Sensor in VREP nicht einfach nachbauen lässt,
-wird das Applanix system einfach aus den in Vrep auslesbaren Positions und Rotationsdaten generiert. Da die Position in VREP in Kartesischen Koordinaten
-angeben ist, werden dies über die in OpenDAVINCI enhaltene Transformation anhand einer Referenzkoordinate in WGS84 Koordinaten transformiert.
+The autonomous vehicle also moves along a fixed path, which leads from the right into the roundabout and leaves the roundabout at the third exit. 
+The task of the vehicle is to safely enter the roundabout and safely leave the roundabout. In doing so, the vehicle must pay attention both to the pedestrian,
+the cyclist and the other vehicles within the roundabout. For this, the vehicle is equipped with a virtual Velodyne VLP-16.
 
-Die Anbindung des Velodyne-VLP gestaltet sich schwieriger, da der Aufabau der Messdaten sich signifikant vom Originalvelodyne unterscheidet.
-Zwar werden die Daten ebenfalls in Polarkoordinaten ausgegeben, jedoch werden nur Messwerte ausgegen, wenn diese auf ein Onjekt treffen. Da ein Großteil des Scenarios leerer Raum ist
-weisen die Messdaten viele löcher auf, wesshalb diese in eine geeignete Form transformiert werden müsssen.
+\section{Simulation Logic}
 
-Dabei ist zu beachten, das das Onjekttracking eine vollständige 360 Gram Messung erwartet, dazu muss zusätzlich gewartet werden, bis alle Nötigen Messdaten vorliegendn.
-Der virtualle Velodynle liefet eine Messrate von 10Hz, und ist dabei in 4 Segmente eingeteilt, welche nacheinander ausgelesen werden. Der zur simulation verwendete Zeitschritt
-beträgt 50ms, so dass wir 2 Segemente in einem Zeitschritt auslesen können. Solbald alle Daten gesammelt sind, werden diese zu einem geeigneten Messframe zusammengesetzt.
+% Um das zuvor beschrieben Scenario durchzuführen musste eine Logik entwicklt werden, diese umfasst nicht nur die Statemachine zum durch fahren des Kreisverkehrs, sondern
+% auch die Lokalisierung des Fahrzeuges in dem Scenario als auch die Anbinung aller Sensoren an die Objekt Erkennung. Da alle nachfolgenden Berchungen nur wenig resscourcen bentigen
+% wurde die entsprechende Software in Pyhon entwickelt.
 
-Die glieferten Messdaten liegen als liste von Kugelkoordinaten vor (Radius $r$, Polarwinkel $\theta$, Azimutwinkel $\Phi$). Da die Azimut und Polarwinkel dabei nicht in Aquidistanzen Abständen
-vorliegen, jedoch eine sehr viel höhere Auflösung als der originale Sensor haben, werden die Messwerte auf die Originale auflösung von 0.2 bzw. 2 Grad heruntergerundet und die Messerte in ein
-Entsprechendes zweidimensionales Array fester größe eingetragen eingetragen. Sodass nicht erfasste bereiche den Wert Null erhalten.
+In order to carry out the previously described scenario, a logic had to be developed, which includes not only the statemachine for passing through the roundabout,
+but also the localization of the vehicle in the scenario as well as the connection of all sensors to the object detection.
+Since all subsequent calculations require little resources, the corresponding software was developed in Python.
 
-Nach dem alle Erforderlichen Messdaten gesammelt und umgewandelt wurden, werden diese über ein seperat  entwickeltes OpenDAVINCI-Python interface an die Objekterkennung gesendet.
+\subsection{Sensor Connection}
+% Die Objekt detection benoötigt als Sensor eingange die Daten des Velodyne VLP-16 und die Daten des Applanix POS-LV. Von den Applanix daten werden jecoch nur
+% due Aktuelle Postion im WGS84 format benötigt und das aktuelle Heading. Da sich der Applanix Sensor in VREP nicht einfach nachbauen lässt,
+% wird das Applanix system einfach aus den in Vrep auslesbaren Positions und Rotationsdaten generiert. Da die Position in VREP in Kartesischen Koordinaten
+% angeben ist, werden dies über die in OpenDAVINCI enhaltene Transformation anhand einer Referenzkoordinate in WGS84 Koordinaten transformiert.
+The object detection requires the data of the Velodyne VLP-16 and the data of the Applanix POS-LV as sensor input.
+However, only the current position in the WGS84 format and the current heading are required by the Applanix data.
+Since the Applanix sensor can not be easily reconstructed in VREP, the Applanix system is simply generated from the position and rotation data readable in Vrep.
+Since the position in VREP is specified in Cartesian coordinates, they are transformed via the transformation contained in OpenDAVINCI, using a reference coordinate in WGS84 format.
 
+% Die Anbindung des Velodyne VLP-16 gestaltet sich schwieriger, da der Aufabau der Messdaten sich signifikant vom Originalvelodyne unterscheidet.
+% Zwar werden die Daten ebenfalls in Polarkoordinaten ausgegeben, jedoch werden nur Messwerte ausgegen, wenn diese auf ein Onjekt treffen. Da ein Großteil des Scenarios leerer Raum ist
+% weisen die Messdaten viele löcher auf, wesshalb diese in eine geeignete Form transformiert werden müsssen.
+The connection of the Velodyne VLP-16 is more difficult because the structure of the measured data differs significantly from the original Velodyne.
+Although the data is also output in polar coordinates, only measured values are output when they hit an object. Since a large part of the scenario is empty space,
+the measurement data have many holes on them, so they must be transformed into a suitable form.
 
-\subsubsection{Mapping}
-Für das Maping wird das OpenDAVINCI interne Compressed Scenario Data Format (SCNX) \cite{Berger2010} genutzt. Diese erlaubt es Szenarien zu definieren, stationären und dynamischen Elemente, 
-zu beschreiben und zu kombinieren, um unterschiedliche Verkehrssituationen zu formulieren. Das SCNX format offeriert für die Modellierung von Straßen unter anderm
-die Klassen ROAD,LANE. Wobei eien ROAD dabei aus mehreren LANE's bestehen kann. eine Lane aus einer Menge an Pukten besteht, welche den Verlauf der lane beschreiben.
-Der Lane kann weiterhin als Attribut eine Fahrspurmakierung und eine Breite zugewiesen werden. Einzelne Lanes können unterinander Verbunden werden, was mit diesen Einfachen 
-Modellen ein Komplttes Straßennetz aufgebaut werden kann. Da OpenDAVINCI kein Pythoninterface für das Parsen der Scenariofiles zur verfügungs stellt, wurde ein eigenner Lexer für die 
-Verabreitung der Scenariofiles implementiert. Dabei wurde sich auf für die Simulation nötigen Klassen beschränkt. Daher lässt sich eine Lane sich dabei nur durch ein Punktmodell
-beschreiben, währen OpenDAVINCI zusätzlich weitere Modelle anbietet.
+% Dabei ist zu beachten, das das Onjekttracking eine vollständige 360 Gram Messung erwartet, dazu muss zusätzlich gewartet werden, bis alle Nötigen Messdaten vorliegendn.
+% Der virtualle Velodynle liefet eine Messrate von 10Hz, und ist dabei in 4 Segmente eingeteilt, welche nacheinander ausgelesen werden. Der zur simulation verwendete Zeitschritt
+% beträgt 50ms, so dass wir 2 Segemente in einem Zeitschritt auslesen können. Solbald alle Daten gesammelt sind, werden diese zu einem geeigneten Messframe zusammengesetzt.
+It is important to note that object tracking requires a complete 360 degree measurement. To do this, you must wait until all necessary measurement data are available.
+The virtualle Velodynle runs a measuring rate of 10Hz, and is divided into 4 segments, which are read one after the other. 
+The time step used for the simulation is 50 ms, so that we can read out 2 segments in one step. Once all data are collected, they are assembled into a suitable measuring frame.
 
-Weiterhin musste das in OpenDAVINCI enthaltene Modell erweitert werden, da OpenDAVINCI leider keine andern Arten von wegen unterstützt.
-Daher wurde die Klasse Lane um ein Typ attribut erweitert, was es ermöglicht diese Als Rad oder Fußweg zu deklarieren.
-Der Aufbau der erweiterten Pythonklassen kann in \cref{parer_objects} begutachtet werden.
+% Die glieferten Messdaten liegen als liste von Kugelkoordinaten vor (Radius $r$, Polarwinkel $\theta$, Azimutwinkel $\Phi$). Da die Azimut und Polarwinkel dabei nicht in Aquidistanzen Abständen
+% vorliegen, jedoch eine sehr viel höhere Auflösung als der originale Sensor haben, werden die Messwerte auf die Originale auflösung von 0.2 bzw. 2 Grad heruntergerundet und die Messerte in ein
+% Entsprechendes zweidimensionales Array fester größe eingetragen eingetragen. Sodass nicht erfasste bereiche den Wert Null erhalten.
+
+The measured data are provided as a list of spherical coordinates (radius $r$, polar angle $\theta $, azimuth angle $\Phi$).
+Since the azimuth and polar angles are not at equidistant intervals but have a much higher resolution than the original sensor,
+the measured values are rounded down to the original resolution of 0.2 or 2 degrees and the measured values are entered into a corresponding two-dimensional fixed-size array.
+Thus, areas that are not detected have the value zero.
+
+% Nach dem alle Erforderlichen Messdaten gesammelt und umgewandelt wurden, werden diese über ein extra entwickeltes OpenDAVINCI-Python interface an die Objekterkennung gesendet.
+After all necessary measurement data have been collected and converted, they are sent to the object recognition via a specially developed OpenDAVINCI-Python interface.
+
+\subsection{Mapping}
+% Für das Maping wird das OpenDAVINCI interne Compressed Scenario Data Format (SCNX) \cite{Berger2010} genutzt. Diese erlaubt es Szenarien zu definieren, stationären und dynamischen Elemente, 
+% zu beschreiben und zu kombinieren, um unterschiedliche Verkehrssituationen zu formulieren. Das SCNX format offeriert für die Modellierung von Straßen unter anderm
+% die Klassen ROAD,LANE. Wobei eien ROAD dabei aus mehreren LANE's bestehen kann. eine Lane aus einer Menge an Pukten besteht, welche den Verlauf der lane beschreiben.
+% Der Lane kann weiterhin als Attribut eine Fahrspurmakierung und eine Breite zugewiesen werden. Einzelne Lanes können unterinander Verbunden werden, was mit diesen Einfachen 
+% Modellen ein Komplttes Straßennetz aufgebaut werden kann. Da OpenDAVINCI kein Pythoninterface für das Parsen der Scenariofiles zur verfügungs stellt, wurde ein eigenner Lexer für die 
+% VerArbeitung der Scenariofiles implementiert. Dabei wurde sich auf für die Simulation nötigen Klassen beschränkt. Daher lässt sich eine Lane sich dabei nur durch ein Punktmodell
+% beschreiben, währen OpenDAVINCI zusätzlich weitere Modelle anbietet.
+The OpenDAVINCI internal Compressed Scenario Data Format (SCNX) \cite{Berger2010} is used for mapping. This allows scenarios to be defined by describing and combining stationary and dynamic elements
+to formulate different traffic situations. The SCNX format offers, among other things, the classes ROAD, LANE for the modeling of roads. One ROAD can consist of several LANE's.
+A lane consists of a set of points which describe the course of the lane. The lane can still be assigned as an attribute lane mark and a width. 
+Individual lanes can be connected to each other. What makes it possible to build a complicated road network with these simple models. 
+Since OpenDAVINCI does not provide a Python interface for parsing the Scenariofiles, a special Lexer was implemented for the processing of the Scenariofiles. 
+At the same time, only the classes required for the simulation are implemented. Therefore, a lane can only be described by a point model, while OpenDAVINCI offers additional models.
+
+% Weiterhin musste das in OpenDAVINCI enthaltene Modell erweitert werden, da OpenDAVINCI leider keine andern Arten von wegen unterstützt.
+% Daher wurde die Klasse Lane um ein Typ attribut erweitert, was es ermöglicht diese Als Rad oder Fußweg zu deklarieren.
+% Der Aufbau der erweiterten Pythonklassen kann in \cref{parer_objects} begutachtet werden.
+Furthermore, the model included in OpenDAVINCI had to be extended, since OpenDAVINCI unfortunately does not support other types of paths.
+Therefore, the class lane has been extended by one type attribute, which makes it possible to declare this as a bicycle or footpath.
+The structure of the extended Python classes can be examined in \cref{parer_objects}.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -904,11 +1242,16 @@ Der Aufbau der erweiterten Pythonklassen kann in \cref{parer_objects} begutachte
 \end{figure}
 
 
+% 
+% Für die Handbung des Kreisverkehres musste das Kartenformat jedoch no weiter erweitert werden. Laut RASt \cite{rast06} soll ein Kreisverkehr möglichst kreisförmig sein, 
+% der einfachheit halber nehmen wir für die Simulation an, dass dieser ein perfekter Kreis ist. Das heißt, dass Sowohl Straßen, Radwege und fußwege perfekt kreisförmig sind und
+% duch einen inneren und äußeren Radius beschrieben werden können. Daher wurde für die Berschreibung des Kreisverkehres eine Klasse Kreisverker hinzugefügt,
+% welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren innere und äußere Radien enhält. Weriterhin wirden in ihm die verbindungen zu den Anschlusstraßen definiert.
 
-Für die Handbung des Kreisverkehres musste das Kartenformat jedoch no weiter erweitert werden. Laut RASt \cite{rast06} soll ein Kreisverkehr möglichst kreisförmig sein, 
-der einfachheit halber nehmen wir für die Simulation an, dass dieser ein perfekter Kreis ist. Das heißt, dass Sowohl Straßen, Radwege und fußwege perfekt kreisförmig sind und
-duch einen inneren und äußeren Radius beschrieben werden können. Daher wurde für die Berschreibung des Kreisverkehres eine Klasse Kreisverker hinzugefügt,
-welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren innere und äußere Radien enhält. Weriterhin wirden in ihm die verbindungen zu den Anschlusstraßen definiert.
+For the handling of the roundabout, however, the map format had to be further extended. According to RASt \ cite {rast06}, a roundabout should be as circular as possible, 
+for the sake of simplicity, we assume that the roundabout in simulation is a perfect circle. This means that both roads,
+cycle paths and footpaths are perfectly circular and can be described by an inner and outer radius. For this reason, a class circle was added to the description of the roundabout,
+which contains the center point of the roundabout, references to all lanes, and inner and outer radii. Furthermore, the connections to the connecting lines are defined therein.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -925,7 +1268,7 @@ welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren 
 \label{roundabout_class}
 \end{figure}
 
-\subsubsection{Statemachine}
+\subsection{Statemachine}
 
 \todo{suimulation mit sythetischen daten (aus vrep) und daten aus object tracking vergleiche}
 \todo{Annhame constant acceleartion model}
