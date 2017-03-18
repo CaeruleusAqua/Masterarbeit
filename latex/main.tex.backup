@@ -904,6 +904,7 @@ at={(0.50\textwidth,0)}]
 %\end{center}
 \end{figure}
 
+\todo{skalierung angleichen, achsenbeschriftung}
 % Leicht zu sehen wird für das Object eine breite von 2m und eine Länge von 5m berechnet. Das Objektist in diesm Fall ein Volvo S60, welcher Außenmaße von ca. 1.9m und 4.6m hat,
 % womit die Abweichungen sich korrekt innerhalb, der Rundung der Werte befinden. Für die Nachfolgende filterung der Messwerte mit Hilfe eines Kalman filters, wurd nun
 % die Position des Fahrzeuges aus dem Mittelpunkt der Boundingbox bestimmt.
@@ -1168,12 +1169,12 @@ Since the position in VREP is specified in Cartesian coordinates, they are trans
 % weisen die Messdaten viele löcher auf, wesshalb diese in eine geeignete Form transformiert werden müsssen.
 The connection of the Velodyne VLP-16 is more difficult because the structure of the measured data differs significantly from the original Velodyne.
 Although the data is also output in polar coordinates, only measured values are output when they hit an object. Since a large part of the scenario is empty space,
-the measurement data have many holes on them, so they must be transformed into a suitable form.
+the measurement data have many holes on them. But the object detection needs continuous measurements, so they must be transformed into a suitable form.
 
 % Dabei ist zu beachten, das das Onjekttracking eine vollständige 360 Gram Messung erwartet, dazu muss zusätzlich gewartet werden, bis alle Nötigen Messdaten vorliegendn.
 % Der virtualle Velodynle liefet eine Messrate von 10Hz, und ist dabei in 4 Segmente eingeteilt, welche nacheinander ausgelesen werden. Der zur simulation verwendete Zeitschritt
 % beträgt 50ms, so dass wir 2 Segemente in einem Zeitschritt auslesen können. Solbald alle Daten gesammelt sind, werden diese zu einem geeigneten Messframe zusammengesetzt.
-It is important to note that object tracking requires a complete 360 degree measurement. To do this, you must wait until all necessary measurement data are available.
+It is important to note that object detection requires a complete 360 degree measurement. To do this, you must wait until all necessary measurement data are available.
 The virtualle Velodynle runs a measuring rate of 10Hz, and is divided into 4 segments, which are read one after the other. 
 The time step used for the simulation is 50 ms, so that we can read out 2 segments in one step. Once all data are collected, they are assembled into a suitable measuring frame.
 
@@ -1183,7 +1184,7 @@ The time step used for the simulation is 50 ms, so that we can read out 2 segmen
 
 The measured data are provided as a list of spherical coordinates (radius $r$, polar angle $\theta $, azimuth angle $\Phi$).
 Since the azimuth and polar angles are not at equidistant intervals but have a much higher resolution than the original sensor,
-the measured values are rounded down to the original resolution of 0.2 or 2 degrees and the measured values are entered into a corresponding two-dimensional fixed-size array.
+the measured values are rounded down to the original resolution of 0.2 and 2 degrees and the measured values are entered into a corresponding two-dimensional fixed-size array.
 Thus, areas that are not detected have the value zero.
 
 % Nach dem alle Erforderlichen Messdaten gesammelt und umgewandelt wurden, werden diese über ein extra entwickeltes OpenDAVINCI-Python interface an die Objekterkennung gesendet.
@@ -1198,11 +1199,11 @@ After all necessary measurement data have been collected and converted, they are
 % VerArbeitung der Scenariofiles implementiert. Dabei wurde sich auf für die Simulation nötigen Klassen beschränkt. Daher lässt sich eine Lane sich dabei nur durch ein Punktmodell
 % beschreiben, währen OpenDAVINCI zusätzlich weitere Modelle anbietet.
 The OpenDAVINCI internal Compressed Scenario Data Format (SCNX) \cite{Berger2010} is used for mapping. This allows scenarios to be defined by describing and combining stationary and dynamic elements
-to formulate different traffic situations. The SCNX format offers, among other things, the classes ROAD, LANE for the modeling of roads. One ROAD can consist of several LANE's.
-A lane consists of a set of points which describe the course of the lane. The lane can still be assigned as an attribute lane mark and a width. 
+to formulate different traffic situations. The SCNX format offers, among other things, the classes ROAD, LANE for the modeling of roads. One ROAD can consist of several LANEs.
+A lane consists of a set of points which describe the course of the lane. The lane can be assigned with the attributes lane mark and width. 
 Individual lanes can be connected to each other. What makes it possible to build a complicated road network with these simple models. 
 Since OpenDAVINCI does not provide a Python interface for parsing the Scenariofiles, a special Lexer was implemented for the processing of the Scenariofiles. 
-At the same time, only the classes required for the simulation are implemented. Therefore, a lane can only be described by a point model, while OpenDAVINCI offers additional models.
+At thise time, only the classes required for the simulation are implemented. Therefore, a lane can only be described by a point model, while OpenDAVINCI offers additional models.
 
 % Weiterhin musste das in OpenDAVINCI enthaltene Modell erweitert werden, da OpenDAVINCI leider keine andern Arten von wegen unterstützt.
 % Daher wurde die Klasse Lane um ein Typ attribut erweitert, was es ermöglicht diese Als Rad oder Fußweg zu deklarieren.
@@ -1242,11 +1243,16 @@ The structure of the extended Python classes can be examined in \cref{parer_obje
 \end{figure}
 
 
+% 
+% Für die Handbung des Kreisverkehres musste das Kartenformat jedoch no weiter erweitert werden. Laut RASt \cite{rast06} soll ein Kreisverkehr möglichst kreisförmig sein, 
+% der einfachheit halber nehmen wir für die Simulation an, dass dieser ein perfekter Kreis ist. Das heißt, dass Sowohl Straßen, Radwege und fußwege perfekt kreisförmig sind und
+% duch einen inneren und äußeren Radius beschrieben werden können. Daher wurde für die Berschreibung des Kreisverkehres eine Klasse Kreisverker hinzugefügt,
+% welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren innere und äußere Radien enhält. Weriterhin wirden in ihm die verbindungen zu den Anschlusstraßen definiert.
 
-Für die Handbung des Kreisverkehres musste das Kartenformat jedoch no weiter erweitert werden. Laut RASt \cite{rast06} soll ein Kreisverkehr möglichst kreisförmig sein, 
-der einfachheit halber nehmen wir für die Simulation an, dass dieser ein perfekter Kreis ist. Das heißt, dass Sowohl Straßen, Radwege und fußwege perfekt kreisförmig sind und
-duch einen inneren und äußeren Radius beschrieben werden können. Daher wurde für die Berschreibung des Kreisverkehres eine Klasse Kreisverker hinzugefügt,
-welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren innere und äußere Radien enhält. Weriterhin wirden in ihm die verbindungen zu den Anschlusstraßen definiert.
+For the handling of the roundabout, however, the map format had to be further extended. According to RASt \ cite {rast06}, a roundabout should be as circular as possible, 
+for the sake of simplicity, we assume that the roundabout in simulation is a perfect circle. This means that both roads,
+cycle paths and footpaths are perfectly circular and can be described by an inner and outer radius. For this reason, a class circle was added to the description of the roundabout,
+which contains the center point of the roundabout, references to all lanes, and inner and outer radii. Furthermore, the connections to the connecting lines are defined therein.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -1256,7 +1262,8 @@ welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren 
   roundaboutid : int \\
   lanes : lane[]\\
   junctions : tuple[]\\
-  lane\_radius : float[]\\
+  inner\_lane\_radius : float[]\\
+  outer\_lane\_radius : float[]\\
   centrum :  VERTEX2
   }{}
   \end{tikzpicture}
@@ -1267,17 +1274,31 @@ welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren 
 
 \todo{suimulation mit sythetischen daten (aus vrep) und daten aus object tracking vergleiche}
 \todo{Annhame constant acceleartion model}
-Die Statemachine ist nach Gang of Four  \cite{lester2008gang} implemetiert. Dafür wurden X \todo{nummer anpassen} States Implementiert.
-Für alle Fahrzeugeigenen berechnungen wird ein Constant acceleartion modell angenommen. Zur bestimmung der Maximalen positiven und negativen Beschleunigung
-wurden mit dem realen Fahrzeug testfahrten aufgezeichnet, bei denen die maximalen subjekiv angenehmen Werte bestimmt wurden.
+% 
+% Die Statemachine ist nach Gang of Four  \cite{lester2008gang} implemetiert. Dafür wurden X \todo{nummer anpassen} States Implementiert.
+% Für alle Fahrzeugeigenen berechnungen wird ein Constant acceleartion modell angenommen. Zur bestimmung der Maximalen positiven und negativen Beschleunigung
+% wurden mit dem realen Fahrzeug testfahrten aufgezeichnet, bei denen die maximalen subjekiv angenehmen Werte bestimmt wurden.
+The statemachine is implemented according to Gang of Four \ cite {lester2008gang}. For this, X States were implemented. \todo{nummer anpassen}
+A constant acceleartion model is assumed for all vehicle computations. In order to determine the maximum positive and negative acceleration, 
+test runs with the real vehicle  were recorded and the maximum subjectively pleasant values being determined.
+
 \todo{plott acceleartion positiv/negativ, und auswertung}
-Vor jedem aufruf einenes States, werden alle von der Objekterkennung gelieferten Objekte abgeholt und auf die in der Karte festgehalten Fahrspuren gemappt.
-Weiterhin wird die zu erwartende Intersection position mit allen Spuren im Kreiverkehr bestimmt, dies ist nötig, da Das Fahrzeug nicht gerade in den Kreisverkehr einfährt
-und so die von der Karte glieferte Position stark verfälscht sein kann. Dazu werden aus der zu erwartenden Fahrzeugtrjektorie und dem Vereinfachtetn Kreisverkehrmodell
-die Schnittpunkte von Trajektorie und Fahrspuren berechnet.
+
+% Vor jedem aufruf einenes States, werden alle von der Objekterkennung gelieferten Objekte abgeholt und auf die in der Karte festgehalten Fahrspuren gemappt.
+% Weiterhin wird die zu erwartende Intersection position mit allen Spuren im Kreiverkehr bestimmt, dies ist nötig, da Das Fahrzeug nicht gerade in den Kreisverkehr einfährt
+% und so die von der Karte glieferte Position stark verfälscht sein kann. Dazu werden aus der zu erwartenden Fahrzeugtrjektorie und dem Vereinfachtetn Kreisverkehrmodell
+% die Schnittpunkte von Trajektorie und Fahrspuren berechnet.
+
+Before each call of a state, all objects delivered by the object detection are picked up and mapped to the lanes held in the map.
+Objects that were not on a track or path are rejected.
+Furthermore, the expected intersection points of your own vehicle with all paths in the roundabout is calculated. 
+\todo{bild mit intersection position}
+This is necessary because the vehicle is not driving straight into the roundabout and the position in the Map can be slightly corrupted. For this purpose,
+the intersection points of trajectory and lanes are calculated from the expected vehicle trajectory and the simplified roundabout model.
 
 \paragraph{Start - State}
-Das Fahrzeug befindet sich solange im Start State, bis es einen Abstand von 20m zur außeren Lane des Kreisverkehres erreicht, danach wird in den ToRoundabout-State gewechselt
+% Das Fahrzeug befindet sich solange im Start State, bis es einen Abstand von 20m zur außeren Lane des Kreisverkehres erreicht, danach wird in den ToRoundabout-State gewechselt
+The vehicle is in the start state until it reaches a distance of 20 m to the outside lane of the roundabout, afterwards the state is changed to the ToRoundabout state.
 
 
 \paragraph{ToRoundabout - State}
@@ -1288,6 +1309,14 @@ Aus der maximalen beschleunigung und Geschwindikeit \todo{define max speed} des 
 ebenfalls ein Zeitfenster berechnet. Sollte dieses Zeitfenster kleiner sein als eines der Zeitfenster der Hindernisse zuzüglich eines Sicherheitsabstandes von zwei Sekunden, 
 fährt das Fahrzeug in den Kreisverkehr ein, und wechselt in den Zustand InRoundabout. Dafür wird die nötige beschleunigung soweit reduziert,
 das die bedingung noch erfüllt ist. Sollte diese Bedingung nicht zutreffen, geht das Fahrzeug in den Zustand Brake.
+
+We are in this State, if the vehicle is not yet located in the roundabout. At each call, the remaining distance,
+of all obstacles wich are moving in the direction of the intersection, to the intersection point is calculated. The estimated time window is calculated from the
+intersection point distance of the obstacles and their relative speed, in which the obstacle reaches the intersection position, minus the obstacle size.
+A time window is also calculated from the maximum acceleration and speed \ todo {define max speed} of the vehicle and the calculated distance to the intersection position.
+If this time window is smaller than one of the time frames of the obstacles plus a safety interval of two seconds, the vehicle enters the roundabout and changes to the InRoundabout state.
+Therefore, the necessary acceleration is reduced to such an extent,
+The condition is still fulfilled. If this condition does not apply, the vehicle enters the Brake state.
 
 \paragraph{Brake - State}
 In diesem Zustand wird die Entfernung des Fahrzeuges zum Schnittpunkt der Fahrzeugtrajktorie mit der äußersten Spur des Kreisverkehrs berechnet.

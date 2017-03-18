@@ -1,8 +1,10 @@
 \chapter{Basic Knowledge}
 
 \section{Roundabouts}
-Kreisverkehre erfreuen sich in Deutschland an steigender belibetheit. \todo{referenz} Wie in \cref{conflict_roundabout} zu sehen  haben sie eine kleinere Anzhahl an Konflikktpunkten (8)
-im gegensatz zu kreuzungen (32) und  tragen daher stark zur sicherheit im Straßenverkehr bei, was die Unfallrate Reduziert
+% Kreisverkehre erfreuen sich in Deutschland an steigender belibetheit. \todo{referenz} Wie in \cref{conflict_roundabout} zu sehen  haben sie eine kleinere Anzhahl an Konflikktpunkten (8)
+% im gegensatz zu kreuzungen (32) und  tragen daher stark zur sicherheit im Straßenverkehr bei, was die Unfallrate Reduziert
+Roundabouts are growing in popularity in Germany. \todo{reference} As seen in \cref{conflict_roundabout}, they have a smaller number of points of conflict (8)
+as opposed to crossroads (32), thus contributing greatly to road safety, which reduces the rate of accidents.
 
 \begin{figure}[!ht]
   %\addcontentsline{lof}{figure}{LaTeX--Strukturelemente}
@@ -13,11 +15,20 @@ im gegensatz zu kreuzungen (32) und  tragen daher stark zur sicherheit im Straß
 %\end{center}
 \end{figure}
 
-So lag im Jahre 2009 bei einer Untersuchung \cite{Bondzio2012}, von 54426 Unfällen im Innenstadtbereich, die Anzahl der Unfälle in Kreisverkehren bei nur 1150 (2.1\%) [\cref{unfall_roundabout}].
-Weiterhin erlauben es Kreisverkehre auch Knotenpunkte mit mehr als 4 Straßen zu konstuieren, was ihnen einen weiteren Vorteil verschafft.
-Leider gibt es diesbezüglich im Rahmen des autonomen fahrens nur wenige Veröffentlichungen.
+% So lag im Jahre 2009 bei einer Untersuchung \cite{Bondzio2012}, von 54426 Unfällen im Innenstadtbereich, die Anzahl der Unfälle in Kreisverkehren bei nur 1150 (2.1\%) [\cref{unfall_roundabout}].
+% Weiterhin erlauben es Kreisverkehre auch Knotenpunkte mit mehr als 4 Straßen zu konstuieren, was ihnen einen weiteren Vorteil verschafft.
+% Leider gibt es diesbezüglich im Rahmen des autonomen fahrens keine dem autor bekannten Veröffentlichungen.
+
+439/5000
+For example, in 2009 a survey of 54426 accidents in the inner city area was made. The number of accidents in roundabouts was 1150 (2.1 \%) \cite {Bondzio2012}.
+You can see the statistics in \cref{accident_roundabout}.
+Furthermore, circular traffic also allows nodes to be constituted with more than 4 roads, which gives them a further advantage.
+Unfortunately, there are no publications known to the author in the context of autonomous driving and roundabouts.
+
 %\definecolor{myblue}{HTML}{92dcec}
 
+
+\todo{wieviele Kreisverkehre und Kreuzungen wurden verglichen?}
 \begin{figure}[!ht]
   %\addcontentsline{lof}{figure}{LaTeX--Strukturelemente}
 %\begin{center}
@@ -34,8 +45,10 @@ Leider gibt es diesbezüglich im Rahmen des autonomen fahrens nur wenige Veröff
 %\end{center}
 \end{figure}
 
-Auch wenn Kreisverkehre für den Menschlichen Fahrer scheinbar eine Erleichterung darstellen, ist es nötig die Herausforderungen in hinblick aufbaudas Autonome Fahren zu Untersuchen.
-Dazu gibt es im Folgenden eine übersicht der Rechtlichen aspekte in Deustschland.
+% Auch wenn Kreisverkehre für den Menschlichen Fahrer scheinbar eine Erleichterung darstellen, ist es nötig die Herausforderungen in hinblick aufbaudas Autonome Fahren zu Untersuchen.
+% Dazu gibt es im Folgenden eine übersicht der Rechtlichen aspekte in Deustschland.
+Even if roundabouts for the human driver seem to be a relief, it is necessary to investigate the challenges in regard to autonomous driving.
+In the following, we present an overview of the legal aspects in Germany.
 
 
 \subsection{Roundabouts in Law}
@@ -203,13 +216,26 @@ if the nodal point design and traffic control are closely coordinated.
 
 \section{\acl{RANSAC}}
 
-Der \ac{RANSAC} \cite{Fischler1981} ist ein Algorithmus zur Schätzung eines Modells innerhalb einer Reihe von Messwerten mit Ausreißern und groben Fehlern. Wegen seiner Robustheit wird er vor allem bei der Auswertung automatischer Messungen vornehmlich im Bereich der Bildverarbeitung. 
-Hier unterstützt \ac{RANSAC} durch Berechnung einer um Ausreißer bereinigten Datenmenge, des sogenannten Consensus Sets, Ausgleichsverfahren wie die Methode der kleinsten Quadrate, die bei einer größeren Anzahl von Ausreißern meist versagen.
+% Der \ac{RANSAC} \cite{Fischler1981} ist ein Algorithmus zur Schätzung eines Modells innerhalb einer Reihe von Messwerten mit Ausreißern und groben Fehlern. Wegen seiner Robustheit wird er vor allem bei der Auswertung automatischer Messungen vornehmlich im Bereich der Bildverarbeitung. 
+% Hier unterstützt \ac{RANSAC} durch Berechnung einer um Ausreißer bereinigten Datenmenge, des sogenannten Consensus Sets, Ausgleichsverfahren wie die Methode der kleinsten Quadrate, die bei einer größeren Anzahl von Ausreißern meist versagen.
+The \ac{RANSAC} \cite{Fischler1981} is an algorithm for estimating a model within a series of readings with outliers and rough errors. Due to its robustness, 
+it is mainly used in the evaluation of automatic measurements primarily in the field of image processing. 
+In this case, \ac{RANSAC} is supporting traditional compensation methods such as the least squares method, which usually fail with a larger number of outliers,
+by calculating an outliers free data set, the so-called consensus set. 
 
-Der \ac{RANSAC} benötogt mehr datenpunkte als für die eindeutige bestimmeung des Modells benötigt werden. Aus diesem Set von Datenpunkten werden dann zufällig soviele Datenpunkte ausgwählt, wie nötig sind um das Model eindeutig zu berstimmen.
-Aus den Restlichen Daten werden dann diejenigen ausgewählt, welche einen abstabnd haben der keliner ist als ein bestimmter Grenzwert. Diese Menge stellt nun das ``Consensus Set'' dar.  Enthält sie eine gewisse Mindestanzahl an Werten, wurde vermutlich ein gutes Modell gefunden, und der Consensus set wird gespeichert.
-Diese Schritte werden mehrmal wiederholt. Dann wird diejenige Teilmenge gewählt, welche die meisten Punkte enthält. Mit dieser Teilmenge werden mit einem der üblichen Ausgleichsverfahren die Modellparameter berechnet.
-Der \ac{RANSAC} hat also drei zu Bestimmende Parameter,m welche das ergebnis beeinflussen.
+% Der \ac{RANSAC} benötogt mehr datenpunkte als für die eindeutige bestimmeung des Modells benötigt werden.
+%  Aus diesem Set von Datenpunkten werden dann zufällig soviele Datenpunkte ausgwählt, wie nötig sind um das Model eindeutig zu berstimmen.
+% Aus den Restlichen Daten werden dann diejenigen ausgewählt, welche einen abstabnd haben der keliner ist als ein bestimmter Grenzwert. Diese Menge stellt nun das ``Consensus Set'' dar.  Enthält sie eine gewisse Mindestanzahl an Werten, wurde vermutlich ein gutes Modell gefunden, und der Consensus set wird gespeichert.
+% Diese Schritte werden mehrmal wiederholt. Dann wird diejenige Teilmenge gewählt, welche die meisten Punkte enthält. Mit dieser Teilmenge werden mit einem der üblichen Ausgleichsverfahren die Modellparameter berechnet.
+% Der \ac{RANSAC} hat also drei zu Bestimmende Parameter,m welche das ergebnis beeinflussen.
+
+The \ac{RANSAC} requires more data points than is required for the unambiguous determination of the model. 
+From this set of data points randomly as many data points are selected, as necessary to the model unambiguously. 
+From the remaining data, those which have a spacing which is smaller than a certain limit value are then selected.
+This set now represents the ``consensus set''. If it contains a certain minimum number of values, a good model was probably found and the consensus set is stored.
+These steps are repeated several times. Then the subset that contains the most points is selected. Using this subset, 
+the model parameters are calculated using one of the usual compensation methods. The \ac{RANSAC} therefore has three parameters to determine, which influence the result.
+
 
 \todo{missing refernce to pics in dbscan and ransac}
 \begin{figure}[!ht]
@@ -227,15 +253,22 @@ Der \ac{RANSAC} hat also drei zu Bestimmende Parameter,m welche das ergebnis bee
  \item distance threshold value (eps)
 \end{itemize}
 
-Zu beachten ist, das der \ac{RANSAC} durch die zufällige Auswahl der Datenpunkte kein deterministischer algorythmus ist.
-
+% Zu beachten ist, das der \ac{RANSAC} durch die zufällige Auswahl der Datenpunkte kein deterministischer algorythmus ist.
+Note that the \ac{RANSAC} is not a deterministic algorythm, beacuse of the random selection of the data points.
 
 \section{\acl{DBSCAN}}
-\ac{DBSCAN} \cite{DBSCAN} ist ein deterministischer Data-Mining-Algorithmus zur Clusteranalyse. Der Algorithmus basiert auf der Dichteverbundenheit, das heißt er bindet punkte basierend auf iher Enterferung zu Clustern
-\ac{DBSCAN} iterietert über alle  noch nicht beabreiteten Datenpunkte, jeder bearbeitete Datenpunkt wird als bearbeitet makiert. Für jeden dieser Pubnkte wird dann eine Berichsanfrage durchgeführt.
-Ist die größe der nachbarschaft keiner als ein bestimmter Grenzwert, wird der Punkt las Rausche makiert. Andernfalls Wird ein neuer Clusrer erstellt, indem für jeden Punkt in
-der nachbarschaft eine neue Bereichsanfrage durchgeführt wird, wird dieser Nicht als Rauschen klassifiziert, wird dieser zum Cluster hinzugefügt und als bearbeitet Makiert.
-Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbeitet makiert sind, also keine Weiteren punkte in der nachbarschaft erreichbar sind.
+% \ac{DBSCAN} \cite{DBSCAN} ist ein deterministischer Data-Mining-Algorithmus zur Clusteranalyse. Der Algorithmus basiert auf der Dichteverbundenheit, das heißt er bindet punkte basierend auf iher Enterferung zu Clustern
+% \ac{DBSCAN} iterietert über alle  noch nicht beabreiteten Datenpunkte, jeder bearbeitete Datenpunkt wird als bearbeitet makiert. Für jeden dieser Pubnkte wird dann eine Berichsanfrage durchgeführt.
+% Ist die größe der nachbarschaft keiner als ein bestimmter Grenzwert, wird der Punkt las Rausche makiert. 
+ %Andernfalls Wird ein neuer Clusrer erstellt, indem für jeden Punkt in
+% der nachbarschaft eine neue Bereichsanfrage durchgeführt wird, wird dieser Nicht als Rauschen klassifiziert, wird dieser zum Cluster hinzugefügt und als bearbeitet Makiert.
+% Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbeitet makiert sind, also keine Weiteren punkte in der nachbarschaft erreichbar sind.
+
+\ac {DBSCAN} \cite{DBSCAN} is a deterministic data mining algorithm for cluster analysis. The algorithm is based on density connectivity,
+that means, it binds points based on its distance to clusters, \ac {DBSCAN}, iterates over all data points that have not yet been processed, 
+each processed data point is marked as processed. A range query request is then made for each of these points. If the size of the returned neighborhood is lower then a certain limit,
+the point is marked as noise. Otherwise, a new clusrer is created by performing a new range request for each point in the neighborhood, if the point is not classified as noise,
+the Point is added to the cluster and marked as processed. This is repeated until all the points in the cluster are marked as processed, so no further points can be reached in the neighborhood.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -247,7 +280,7 @@ Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbei
 
 
 
-Der \ac{DBSCAN} hat also zwei zu Bestimmende Parameter, welche das ergebnis beeinflussen.
+The \ac {DBSCAN} therefore has two parameters to determine, which influence the result.
 \begin{itemize}
  \item maximum distance of the neighborhood points
  \item minimum number of points required to form a dense region
@@ -259,16 +292,28 @@ Der \ac{DBSCAN} hat also zwei zu Bestimmende Parameter, welche das ergebnis beei
 
 
 \section{Middleware OpenDAVINCI}
-Autonome Software ist typischer weise ein verteiletes System, auf heutigen Fahrzeugen basiert dieses System auf ECUs und Bussystemen wie CAN,LIN.
-Verteilete Sysoftware vereinfacht es komplexe Komponenten innheralb des Systems zu integreieren. Im bereich des Autonomen Fahrens iust der Historische aufbau von Fahrzeugen
-mit ECU'S und can jedoch nicht optimal \cite{Broy2006}. Um die vielen benötigekten Komponenten zu handhaben, ist es von vorteil Komponenten auch innerhalb eines ECU's bzw einer Recheneinheit
-zu entkoppeln. Für diesen Zweck gibt es beireits mehrer middelwares die unteranderm die Kommunikation innerhalb der Komponenten handhaben und abstrahieren.
-m Rahmen des Copplar Projekets, wird hier die OpenDaVINCI middleware genutzt. OpenDaVINCI ist eine echtzeitfähige laufzeitumgebeung konzipiert für Autonome Fahrzeuge.
-OpenDaVINCI basiert auf Hesperia \cite{Berger2010}. Die Kommunikation zwischen den Komponenten basiert in OpenDaVINCI UDP Multicast, welches eine Echtzeitfähige Kommunikation zwischen
-den Komponenten  und über Recheneinheiten hinweg Ermöglicht \cite{Kurose2013}. Für die Kommunikation bietet OpenDaVINCI Time-triggered sender und Data-triggered receiver an, von welchem in folgenden der Data-triggered receiver
-für die Anbindung der Software genutzt wird. Weiterhin bietet OpenDaVINCI viele weiter Funktionalitäten die das Handling von World Geodetic System 1984 (WGS84) Korridinaten an, welches für die Umwandlung
-von GPS koordinaten in lokale kartesische genutzt werden kann. Dazu ist die Angabe einer referenz GPS postion nötig, welche um den Berechnugsfehler klein zu halten,
-nicht zu weit entfernt sein sollte.
+% Autonome Software ist typischer weise ein verteiletes System, auf heutigen Fahrzeugen basiert dieses System auf ECUs und Bussystemen wie CAN,LIN.
+% Verteilete Sysoftware vereinfacht es komplexe Komponenten innheralb des Systems zu integreieren. Im bereich des Autonomen Fahrens iust der Historische aufbau von Fahrzeugen
+% mit ECU'S und can jedoch nicht optimal \cite{Broy2006}. Um die vielen benötigekten Komponenten zu handhaben, ist es von vorteil Komponenten auch innerhalb eines ECU's bzw einer Recheneinheit
+% zu entkoppeln. Für diesen Zweck gibt es beireits mehrer middelwares die unteranderm die Kommunikation innerhalb der Komponenten handhaben und abstrahieren.
+% m Rahmen des Copplar Projekets, wird hier die OpenDaVINCI middleware genutzt. OpenDaVINCI ist eine echtzeitfähige laufzeitumgebeung konzipiert für Autonome Fahrzeuge.
+% OpenDaVINCI basiert auf Hesperia \cite{Berger2010}. Die Kommunikation zwischen den Komponenten basiert in OpenDaVINCI UDP Multicast, welches eine Echtzeitfähige Kommunikation zwischen
+% den Komponenten  und über Recheneinheiten hinweg Ermöglicht \cite{Kurose2013}. Für die Kommunikation bietet OpenDaVINCI Time-triggered sender und Data-triggered receiver an, von welchem in folgenden der Data-triggered receiver
+% für die Anbindung der Software genutzt wird. Weiterhin bietet OpenDaVINCI viele weiter Funktionalitäten die das Handling von World Geodetic System 1984 (WGS84) Korridinaten an, welches für die Umwandlung
+% von GPS koordinaten in lokale kartesische genutzt werden kann. Dazu ist die Angabe einer referenz GPS postion nötig, welche um den Berechnugsfehler klein zu halten,
+% nicht zu weit entfernt sein sollte.
+
+Autonomous software is typically a distributed system, on today's vehicles this system is based on ECUs and bus systems such as CAN, LIN.
+Distributed software makes it easier to integrate complex components within the system. In the area of ​​autonomous driving, however,
+the historical structure of vehicles with ECUs and CAN is not optimal. \cite{Broy2006} In order to handle the many components required,
+it is also advantageous to decouple components within an ECU or a computing unit. For this purpose,
+there are several middelwares which handle and abstract communication within the components. As part of the Copplar project, the OpenDaVINCI middleware is used here.
+OpenDaVINCI is a real-time runtime environment designed for autonomous vehicles. OpenDaVINCI is based on Hesperia. \cite{Berger2010} 
+Communication between the components in OpenDaVINCI is based on UDP Multicast, which enables real-time communication between components and computing units. \cite{Kurose2013} 
+For the communication, OpenDaVINCI offers time-triggered transmitters and data-triggered receivers, 
+from which the data-triggered receiver is used to connect our software. Furthermore, OpenDaVINCI offers many further functionalities,
+which can be used, for example the handling of World Geodetic System 1984 (WGS84), for the conversion of GPS coordinates into local Cartesian coordinates.
+For this purpose, a reference GPS position is required, which should not be too far away to keep the calculation error small.
 
 
 

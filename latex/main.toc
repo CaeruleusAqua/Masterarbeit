@@ -5,7 +5,7 @@
 \contentsline {section}{\numberline {1.1}Ausgangssituation}{1}{section.1.1}
 \contentsline {subsection}{\numberline {1.1.1}Test Platform}{1}{subsection.1.1.1}
 \contentsline {subsubsection}{Velodyne VLP-16 LiDAR}{2}{section*.8}
-\contentsline {subsubsection}{Applanix POS LV}{3}{section*.10}
+\contentsline {subsubsection}{Applanix POS LV}{3}{section*.9}
 \contentsline {section}{\numberline {1.2}Zielsetzung}{3}{section.1.2}
 \contentsline {chapter}{\numberline {2}Basic Knowledge}{4}{chapter.2}
 \contentsline {section}{\numberline {2.1}Roundabouts}{4}{section.2.1}
@@ -36,7 +36,7 @@
 \contentsline {subsection}{\numberline {6.3.2}Object Tracking}{24}{subsection.6.3.2}
 \contentsline {subsection}{\numberline {6.3.3}Object Confidence}{27}{subsection.6.3.3}
 \contentsline {section}{\numberline {6.4}Classification}{27}{section.6.4}
-\contentsline {section}{\numberline {6.5}State Estimation}{27}{section.6.5}
+\contentsline {section}{\numberline {6.5}State Estimation}{28}{section.6.5}
 \contentsline {subsection}{\numberline {6.5.1}Constant Turn Rate and Velocity Model}{28}{subsection.6.5.1}
 \contentsline {subsection}{\numberline {6.5.2}Prediction}{28}{subsection.6.5.2}
 \contentsline {chapter}{\numberline {7}Simuation}{29}{chapter.7}
@@ -45,10 +45,11 @@
 \contentsline {subsection}{\numberline {7.2.1}Sensor Connection}{30}{subsection.7.2.1}
 \contentsline {subsection}{\numberline {7.2.2}Mapping}{31}{subsection.7.2.2}
 \contentsline {subsection}{\numberline {7.2.3}Statemachine}{32}{subsection.7.2.3}
-\contentsline {paragraph}{Start - State}{32}{section*.74}
-\contentsline {paragraph}{ToRoundabout - State}{32}{section*.75}
-\contentsline {paragraph}{Brake - State}{32}{section*.77}
-\contentsline {paragraph}{InRoundabout - State}{33}{section*.78}
+\contentsline {paragraph}{Start - State}{32}{section*.76}
+\contentsline {paragraph}{ToRoundabout - State}{32}{section*.77}
+\contentsline {paragraph}{Brake - State}{32}{section*.78}
+\contentsline {paragraph}{InRoundabout - State}{33}{section*.79}
+\contentsline {paragraph}{ExitRoundabout - State}{33}{section*.82}
 \contentsline {chapter}{\numberline {8}Evaluation}{34}{chapter.8}
 \contentsline {section}{\numberline {8.1}Simuation}{34}{section.8.1}
 \contentsline {section}{\numberline {8.2}Real Measurements}{34}{section.8.2}
