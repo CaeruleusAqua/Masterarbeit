@@ -13,7 +13,7 @@
 \usepackage{cleveref}
 \usepackage{siunitx}
 \usepackage{listings}
-\usepackage[bibencoding=auto,backend=biber,babel=other]{biblatex}
+\usepackage[bibencoding=auto,backend=biber,autolang=other]{biblatex}
 \usepackage{csquotes}
 \usepackage{amssymb}
 %\usepackage[style=numeric]{biblatex}
@@ -27,6 +27,45 @@
 \usepackage{xargs}                      % Use more than one optional parameter in a new commands
 \usepackage{acronym}
 \usepackage{tabularx}
+
+\newbibmacro*{bbx:parunit}{%
+  \ifbibliography
+    {\setunit{\bibpagerefpunct}\newblock
+     \usebibmacro{pageref}%
+     \clearlist{pageref}%
+     \setunit{\adddot\par\nobreak}}
+    {}}
+
+\renewbibmacro*{doi+eprint+url}{%
+  \usebibmacro{bbx:parunit}% Added
+  \iftoggle{bbx:doi}
+    {\printfield{doi}}
+    {}%
+  \iftoggle{bbx:eprint}
+    {\usebibmacro{eprint}}
+    {}%
+  \iftoggle{bbx:url}
+    {\usebibmacro{url+urldate}}
+    {}}
+
+\renewbibmacro*{eprint}{%
+  \usebibmacro{bbx:parunit}% Added
+  \iffieldundef{eprinttype}
+    {\printfield{eprint}}
+    {\printfield[eprint:\strfield{eprinttype}]{eprint}}}
+
+\renewbibmacro*{url+urldate}{%
+  \usebibmacro{bbx:parunit}% Added
+  \printfield{url}%
+  \iffieldundef{urlyear}
+    {}
+    {\setunit*{\addspace}%
+     \printtext[urldate]{\printurldate}}}
+
+
+\setcounter{biburlnumpenalty}{100}  % allow breaks at numbers
+\setcounter{biburlucpenalty}{100}   % allow breaks at uppercase letters
+\setcounter{biburllcpenalty}{100}   % allow breaks at lowercase letters
 
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
@@ -397,7 +436,7 @@ on the other hand the vehicle must have a very stiff chassis in order to prevent
 Furthermore, this only allows the removal of palanar surfaces, alo flat non-hilly grounds. 
 Another common method is the removal of the base plate on the basis of a statistical mean value \cite{Zhang}.
 However, this method also requires a calibration of the sensor distance to the ground. 
-And the determination of further threshold values ​​which are dependent on the environment.
+And the determination of further threshold values which are dependent on the environment.
 The advantages of both methods are their low computational performance and runtime $\mathcal{O}(n)$.
 Better methods such as gradient-based explansions algrythmenm need a starting point that can be identified as a bottom plate.
 A further possibility is the description of objects as convex objects \cite{5164280}, which can also be described on the basis of the gradients.
@@ -746,7 +785,7 @@ In fact, \ac{DBSCAN} is itself of linear complexity. However, most computing tim
 But instead of the range request via a tree structure, we here profit from the behavior, that measurements in a small neighborhood have a similar azimuth angle.
 For this purpose, we examine two additional entries for each measured value to the left and right in our array. 
 Therefore, we need to check $5 \cdot 16 = 80$ values. The runtime of the range request can therefore also be performed in linear complexity.
-All measured values ​​previously classified as ground are skipped during the calculation. In addition, the construction of a KD-tree is omitted, which aslo leaves us a run-time advantage.
+All measured values previously classified as ground are skipped during the calculation. In addition, the construction of a KD-tree is omitted, which aslo leaves us a run-time advantage.
 All clusters are stored by the algorithm as a list of references to the original array to avoid unnecessary copying.
 
 
@@ -1062,22 +1101,28 @@ v\\
 \end{bmatrix} 
 \end{align*}
 
-% Da es sich beid er Dynamikmatrix um einen nichtlinearen Zustandsübergang handelt benötigen wir noch die Jacobi Matrix.
-% Die Matrix wure mit Sympy generiert, und auf Grund ihrer Größe eingekürzt.
-% 
-% 
-% \begin{align*}
-% J(\vec{x})=
-% \begin{bmatrix}
-% 1 & 0 & \frac{v}{\omega} (-\cos(\theta)) + \cos(T \omega + \theta)& \dots & \dots \\
-% %\frac{1}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& multi-body simulation
-% %\frac{Tv}{\omega} \cos(T \omega + \theta) - \frac{v}{\omega^2}(-\sin(\theta) + \sin(T\omega + \theta) 
-% 0 & 1 & \frac{v}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& \dots & \dots \\
-% 0 & 0 & 1 & 0 & T\\
-% 0 & 0 & 0 & 1 & 0\\
-% 0 & 0 & 0 & 0 & 1
-% \end{bmatrix} 
-% \end{align*}
+Da es sich beid er Dynamikmatrix um einen nichtlinearen Zustandsübergang handelt benötigen wir noch die Jacobi Matrix.
+Die Matrix wure mit Sympy generiert, und auf Grund ihrer Größe eingekürzt.
+ 
+ 
+\begin{align*}
+J(\vec{x})=
+\begin{bmatrix}
+1 & 0 & \frac{v}{\omega} (-\cos(\theta)) + \cos(T \omega + \theta)& \dots & \dots \\
+%\frac{1}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& multi-body simulation
+%\frac{Tv}{\omega} \cos(T \omega + \theta) - \frac{v}{\omega^2}(-\sin(\theta) + \sin(T\omega + \theta) 
+0 & 1 & \frac{v}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& \dots & \dots \\
+0 & 0 & 1 & 0 & T\\
+0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 1
+\end{bmatrix} 
+\end{align*}
+
+Im Update Schritt des Filters muss beachtet werden, dass wir mir Rotationen arbeiten die im Bereich von $[-180 \le \theta \le 180]$ definiert sind und desshalb Singularitäten auftreten können.
+Da unsere Messdaten verraucht sind , kann es vorkommen, dass unser State bei 179 Grad ist und mit einem Wert von $-179$ geupdatet werden soll. Nehmen wir der einfachheit an,
+dass beide werte gleich gewichtet sind, ergibt sich nach dem update ein Wert von 0 Grad, dies ist offensichtilich falsch. Deshalb, wird vor jedem updateschritt bei bedarf
+$360$ Grad addiert oder suptrahiert, do das der Abstand zwischen State und Messwert minimert wird. Nach dem Updae wird der interne State wieder auf den bereich $[-180 \le \theta \le 180]$ normiert.
+Betrachten wir nun wieder unser Beispiel mit den korrigierten Werten, State: $179-360=-181$ Grad und Messwert: $-179$ Grad erhalten wir den korrekten Wert von $-180$ Grad.
 
 \subsection{Prediction}
 % Befindet sich ein Objekt innerhalb der Rechihweite des Velodyne Sensors und wird im Darauffolgenden Zeitschritt nicht erkannt,
@@ -1087,7 +1132,7 @@ v\\
 % abgeglichen. Befindet sich das neue Objekt nahe an der predizierten Position wird der Cluster dem Onjekt zugewiesen, und der Korrekturschritt des EKF durchgeführt.
 
 an object is within the range of the Velodyne sensor and is not detected in the subsequent time step, the prediction step of the Kalman filter is still executed.
-This is done as long as the uncertainty of the position passes a certain \ todo {threshold threshold} threshold. If one of these conditions does not apply,
+This is done as long as the uncertainty of the position passes a certain \todo{threshold threshold} threshold. If one of these conditions does not apply,
 the object is removed from the list of known objects. As soon as the clustertracking detects a new object which can not be assigned a previously known ID, 
 the position is matched with all objects in the prediction phase. If the new object is close to the predicted position, the cluster is assigned to the object
 and the correction step of the EKF is performed.
@@ -1160,8 +1205,8 @@ Since all subsequent calculations require little resources, the corresponding so
 % wird das Applanix system einfach aus den in Vrep auslesbaren Positions und Rotationsdaten generiert. Da die Position in VREP in Kartesischen Koordinaten
 % angeben ist, werden dies über die in OpenDAVINCI enhaltene Transformation anhand einer Referenzkoordinate in WGS84 Koordinaten transformiert.
 The object detection requires the data of the Velodyne VLP-16 and the data of the Applanix POS-LV as sensor input.
-However, only the current position in the WGS84 format and the current heading are required by the Applanix data.
-Since the Applanix sensor can not be easily reconstructed in VREP, the Applanix system is simply generated from the position and rotation data readable in Vrep.
+However, only the current position in the WGS84 format and the current heading are required by the object detection.
+Since the Applanix sensor can not be easily reconstructed in VREP, the necessary data is simply generated from the position and rotation data readable in Vrep.
 Since the position in VREP is specified in Cartesian coordinates, they are transformed via the transformation contained in OpenDAVINCI, using a reference coordinate in WGS84 format.
 
 % Die Anbindung des Velodyne VLP-16 gestaltet sich schwieriger, da der Aufabau der Messdaten sich signifikant vom Originalvelodyne unterscheidet.
@@ -1188,7 +1233,8 @@ the measured values are rounded down to the original resolution of 0.2 and 2 deg
 Thus, areas that are not detected have the value zero.
 
 % Nach dem alle Erforderlichen Messdaten gesammelt und umgewandelt wurden, werden diese über ein extra entwickeltes OpenDAVINCI-Python interface an die Objekterkennung gesendet.
-After all necessary measurement data have been collected and converted, they are sent to the object recognition via a specially developed OpenDAVINCI-Python interface.
+After all necessary measurement data have been collected and converted, they are sent to the object detection via a specially developed OpenDAVINCI-Python interface.
+Unnecessary data for the Applanix is simply set to zero.
 
 \subsection{Mapping}
 % Für das Maping wird das OpenDAVINCI interne Compressed Scenario Data Format (SCNX) \cite{Berger2010} genutzt. Diese erlaubt es Szenarien zu definieren, stationären und dynamischen Elemente, 
@@ -1213,9 +1259,8 @@ Therefore, the class lane has been extended by one type attribute, which makes i
 The structure of the extended Python classes can be examined in \cref{parer_objects}.
 
 \begin{figure}[!ht]
-%\begin{center}
+\begin{center}
 \caption{Parser Objects}
-
  \begin{tikzpicture} 
   \umlclass{ROAD}{
   roadid : int \\
@@ -1227,7 +1272,8 @@ The structure of the extended Python classes can be examined in \cref{parer_obje
   type : string \\
   leftlanemarking : string\\
   rightlanemarking : string\\
-  pointmodell : pointmodel
+  pointmodell : pointmodel\\
+  connections : tuple[]
   }{}
   \umlclass[x=6,y=-4]{POINTMODEL}{
   points : VERTEX2[]
@@ -1240,6 +1286,7 @@ The structure of the extended Python classes can be examined in \cref{parer_obje
   \umlunicompo[mult=2..*]{POINTMODEL}{VERTEX2}
   \end{tikzpicture}
 \label{parer_objects}
+\end{center}
 \end{figure}
 
 
@@ -1249,13 +1296,13 @@ The structure of the extended Python classes can be examined in \cref{parer_obje
 % duch einen inneren und äußeren Radius beschrieben werden können. Daher wurde für die Berschreibung des Kreisverkehres eine Klasse Kreisverker hinzugefügt,
 % welche den Centerpunkt des Kreisverkehres, Refrenzen zu allen Lanes, und derren innere und äußere Radien enhält. Weriterhin wirden in ihm die verbindungen zu den Anschlusstraßen definiert.
 
-For the handling of the roundabout, however, the map format had to be further extended. According to RASt \ cite {rast06}, a roundabout should be as circular as possible, 
+For the handling of the roundabout, however, the map format had to be further extended. According to RASt \cite{rast06}, a roundabout should be as circular as possible, 
 for the sake of simplicity, we assume that the roundabout in simulation is a perfect circle. This means that both roads,
-cycle paths and footpaths are perfectly circular and can be described by an inner and outer radius. For this reason, a class circle was added to the description of the roundabout,
-which contains the center point of the roundabout, references to all lanes, and inner and outer radii. Furthermore, the connections to the connecting lines are defined therein.
+cycle paths and footpaths are perfectly circular and can be described by an inner and outer radius. For this reason, a class ROUNDABOUT [\cref{roundabout_class}] was added to the description of the roundabout,
+which contains the center point of the roundabout, references to all lanes, and inner and outer radii. Furthermore, the connections to the connecting lanes are defined therein.
 
 \begin{figure}[!ht]
-%\begin{center}
+\begin{center}
 \caption{Roundabout Class}
  \begin{tikzpicture} 
   \umlclass{ROUNDABOUT}{
@@ -1268,7 +1315,33 @@ which contains the center point of the roundabout, references to all lanes, and 
   }{}
   \end{tikzpicture}
 \label{roundabout_class}
+\end{center}
 \end{figure}
+
+
+\subsubsection{Localization}
+Da wir uns innherlab der Simuation bewegen, können wir für die Lokalisierung eine perfekte position annehmen.
+Lokalisierung in rahmen der Karte bedeutet, das wir die aktuelle bekannte position auf ein Lanesegment mappen wollen.
+Da die lanes nur in Form von Punkten und Breite gegeben sind, werden für jeden Laneabschnitt Rechtecke berechnet und für jedes Rechteck geprüft,
+ob sich die aktuelle Postion innehalb des Rechteckes befindet. Dies wird gemacht, indem Das Rechteck (und die Position) in eine
+Achsen aligned Position gedreht und in den Koordinatenursprung verschoben wird. Weiterhin muss das Rechteck vergrößert werden, sofern wir nicht das letzte Lanesegment bearbeiten,
+da sonst eine Lücke zwischen den Rechtecken verbleiben würde. Dazu wird der Winkel zum nächsen Linienabschnitt genutzt.  Sas ganze ist in \cref{mapping} Symbolisiert.
+Wobei das blaue Rechteck das aktuell zu bearbeitende darstellt, das grüne Rechteck das nachfolgende und das orange die nötige Verlängerung
+\begin{figure}[!ht]
+\begin{center}
+\caption{Mapping Rectangles}
+\includegraphics[width=0.7\textwidth]{bilder/mapping.pdf}
+\label{mapping}
+\end{center}
+\end{figure}
+
+Wie in \cref{mapping} zu sehen, stehen die einzelnen Segmente üblicherweise nicht in einem 180 Grad winkel zueinander.
+Daher können sich die Rechtecke überschneiden und für eine Position können mehrere Rechtecke zurückgeliefert werden. In diesem Fall wird die Bewgungsrichtung des Objektes herangezogen
+und das aussicht der Bewegungsrichtung neuste Segment ausgewählt. Sollten sich mehrere Lanes überschneiden, z.B Radwege welche die Kreisverkehr einfaht kreuzen, wird 
+das richtige Segment anhand ders Objekttypes ausgewählt, also: auto -> Straße oder Radfahrer -> Radweg. Weiterhin wird die X koordinate des Objektes im gedrehten und verschobenen Koordinatensystem
+zuruckgeliefert, was für die Distanzberechnungen von nöten ist. Dabei nehmen wir immer an, dass sich das Objekt mittig auf der Spur befindet. Alternativ bietet sich für das Problem auch
+der ``Ray casting algorithm'' \cite{Galetzka2017} an. Da wir für alle Distanzberechnung annhemen, dass sich das Objekt mittig auf der Spur befindet, ergibt sich aus dieser Berechnung jedoch nur ein sehr kleiner
+Fehler und die Entfernung ergibt sich praktischer weise aus den Vorherigen Berechnungen, sodass dieser nicht umgesetzt wurde.
 
 \subsection{Statemachine}
 
@@ -1278,9 +1351,29 @@ which contains the center point of the roundabout, references to all lanes, and 
 % Die Statemachine ist nach Gang of Four  \cite{lester2008gang} implemetiert. Dafür wurden X \todo{nummer anpassen} States Implementiert.
 % Für alle Fahrzeugeigenen berechnungen wird ein Constant acceleartion modell angenommen. Zur bestimmung der Maximalen positiven und negativen Beschleunigung
 % wurden mit dem realen Fahrzeug testfahrten aufgezeichnet, bei denen die maximalen subjekiv angenehmen Werte bestimmt wurden.
-The statemachine is implemented according to Gang of Four \ cite {lester2008gang}. For this, X States were implemented. \todo{nummer anpassen}
+The statemachine is implemented according to Gang of Four \cite{lester2008gang}. For this, X States were implemented. \todo{nummer anpassen}
 A constant acceleartion model is assumed for all vehicle computations. In order to determine the maximum positive and negative acceleration, 
-test runs with the real vehicle  were recorded and the maximum subjectively pleasant values being determined.
+test runs with the real vehicle  were recorded and the maximum subjectively pleasant values being determined. 
+Die genutzten Aufnahmen sind in \cref{max_accel} zu sehen, dabei wurde das Fahrzeug von null auf 25 km/h beschleunigt bzw. von 25 auf null km/h gebremst.
+Es wurden jeweils die maximalen Werte abgelesen, so dass wir für die maximale positive Beschleunigung $3m/{s^2}$ udn für
+die maximale negatie Beschleunigung  $-4.5m/{s^2}$ annehmen.
+
+
+
+\begin{figure}[!ht]
+\caption{Acceleration Plott}
+\begin{center}
+  \begin{tikzpicture}
+    \begin{axis}[title={positive acceleration}, xmin=0, ylabel={acceleration [$\frac{m}{s^2}$]},xlabel={time [sec]}, width=\textwidth, height=0.5\textwidth]
+      \addplot table[mark=none] {accel.csv};
+    \end{axis}
+    \begin{axis}[title={negative acceleration}, xmin=0, ylabel={acceleration [$\frac{m}{s^2}$]},xlabel={time [sec]}, width=\textwidth, height=0.5\textwidth ,at={(0,-0.53\textwidth)}]
+      \addplot table[mark=none] {brake.csv};
+    \end{axis}
+  \end{tikzpicture}
+\label{max_accel}
+\end{center}
+\end{figure}
 
 \todo{plott acceleartion positiv/negativ, und auswertung}
 

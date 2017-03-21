@@ -14,6 +14,13 @@
   hyphenation={english}
 }
 
+@Manual{manVEL,
+  author = {Velodyne Acoustics, Inc.},
+  title  = {Velodyne LiDAR Puck (VLP-16) Manual},
+  year   = {2015},
+  hyphenation={english}
+}
+
 @book{rast06,
   title={Richtlinien f{\"u}r die Anlage von Stadtstra{\ss}en: RASt 06},
   author={Forschungsgesellschaft f{\"u}r Stra{\ss}en- und Verkehrswesen. Arbeitsgruppe Stra{\ss}enentwurf},
@@ -381,6 +388,38 @@
   hyphenation={english}
 }
 
+@incollection{Buehler2010,
+  abstract = {This volume, edited by Martin Buehler, Karl Iagnemma and Sanjiv Singh, presents a unique and comprehensive collection of the scientific results obtained by finalist teams that participated in the DARPA Urban Challenge in November 2007, in the mock city environment of the George Air Force base in Victorville, California. This book is the companion of a previous volume by the same editors which was devoted to the Grand Challenge, which took place in the Nevada desert during October 2005, and was the second in the series of autonomous vehicle races sponsored by DARPA. The Urban Challenge demonstrated how cutting-edge perception, control, and motion planning techniques can allow intelligent autonomous vehicles not only to travel significant distances in off-road terrain, but also to operate in urban scenarios. Beyond the value for future military applications--which motivated DARPA to sponsor the race-- the expected impact in the commercial sector for automotive manufacturers is equally, if not more, important: autonomous sensing and control constitute key technologies for vehicles of the future, and might help save thousands of lives that are now lost in traffic accidents.},
+  archivePrefix = {arXiv},
+  arxivId = {arXiv:1011.1669v3},
+  author = {Buehler, Martin and Iagnemma, Karl and Singh, Sanjiv},
+  booktitle = {The DARPA Urban Challenge},
+  doi = {10.1007/978-3-642-03991-1},
+  eprint = {arXiv:1011.1669v3},
+  isbn = {3642039901},
+  issn = {1610-7438},
+  keywords = {DARPA,DARPA Urban challenge,LIDAR,autonomousonomous,vehicle},
+  number = {0},
+  pages = {626},
+  pmid = {25246403},
+  title = {{The DARPA Urban Challenge}},
+  volume = {49},
+  year = {2010},
+  hyphenation={english}
+}
+
+
+@inproceedings{Galetzka2017,
+  author = {Galetzka, Michael and Glauner, Patrick},
+  booktitle = {Proceedings of the 12th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications},
+  doi = {10.5220/0006040801750178},
+  isbn = {978-989-758-224-0},
+  pages = {175--178},
+  publisher = {SCITEPRESS - Science and Technology Publications},
+  title = {{A Simple and Correct Even-Odd Algorithm for the Point-in-Polygon Problem for Complex Polygons}},
+  url = {http://www.scitepress.org/DigitalLibrary/Link.aspx?doi=10.5220/0006040801750178},
+  year = {2017}
+}
 
 
 

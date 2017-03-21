@@ -1,0 +1,12 @@
+
+\chapter*{Index of Abbreviations}
+
+\begin{acronym}[Bash]
+ \acro{DBSCAN} {Density-Based Spatial Clustering of Applications with Noise}
+ \acro{SVD}{Singular Value Decomposition}
+ \acro{LLSQ}{Linear least Squares}
+ \acro{RANSAC}{Random Sample Consensus}
+ \acro{MKS}{multi-body simulation}
+ \acro{ACC}{Adaptive Cruise Control}
+ \acro{DARPA}{Defense Advanced Research Projects Agency}
+ \end{acronym}

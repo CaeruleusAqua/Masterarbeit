@@ -41,7 +41,7 @@ Unfortunately, there are no publications known to the author in the context of a
     \addplot[gray!20!black,fill=gray!80!white] coordinates {(2.1,roandabout) (54.8,road) (36.9,intersection with signposts) (22.4 ,intersection with traffic light)};
   \end{axis}
 \end{tikzpicture}
-\label{unfall_roundabout}
+\label{accident_roundabout}
 %\end{center}
 \end{figure}
 
@@ -303,8 +303,9 @@ The \ac {DBSCAN} therefore has two parameters to determine, which influence the 
 % von GPS koordinaten in lokale kartesische genutzt werden kann. Dazu ist die Angabe einer referenz GPS postion nötig, welche um den Berechnugsfehler klein zu halten,
 % nicht zu weit entfernt sein sollte.
 
+
 Autonomous software is typically a distributed system, on today's vehicles this system is based on ECUs and bus systems such as CAN, LIN.
-Distributed software makes it easier to integrate complex components within the system. In the area of ​​autonomous driving, however,
+Distributed software makes it easier to integrate complex components within the system. In the area of autonomous driving, however,
 the historical structure of vehicles with ECUs and CAN is not optimal. \cite{Broy2006} In order to handle the many components required,
 it is also advantageous to decouple components within an ECU or a computing unit. For this purpose,
 there are several middelwares which handle and abstract communication within the components. As part of the Copplar project, the OpenDaVINCI middleware is used here.

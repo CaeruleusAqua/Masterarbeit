@@ -10,10 +10,12 @@ class Obstacle:
         varGPS = 6.0  # Standard Deviation of GPS Measurement
         varspeed = 1.0  # Variance of the speed measurement
         varyaw = 0.1  # Variance of the yawrate measurement
-        self.R = np.matrix([[varGPS ** 2, 0.0, 0.0, 0.0],
-                            [0.0, varGPS ** 2, 0.0, 0.0],
-                            [0.0, 0.0, varspeed ** 2, 0.0],
-                            [0.0, 0.0, 0.0, varyaw ** 2]])
+        sCourse = 0.1  # Variance of the theta measurement
+        self.R = np.matrix([[varGPS ** 2, 0.0, 0.0, 0.0, 0.0],
+                            [0.0, varGPS ** 2, 0.0, 0.0, 0.0],
+                            [0.0, 0.0, sCourse ** 2, 0.0, 0.0],
+                            [0.0, 0.0, 0.0, varspeed ** 2, 0.0],
+                            [0.0, 0.0, 0.0, 0.0, varyaw ** 2]])
 
     def predict(self, dt):
         if np.abs(self.x[4]) < 0.0001:  # Driving straight
@@ -61,14 +63,36 @@ class Obstacle:
         self.P = JA * self.P * JA.T + Q
 
     def correct(self, Z):
+        # # print "Bt: ", Z[2]
+        # # print "ft: ", self.x[2]
+        # print "ft: ", Z[2] - self.x[2]
+        # if Z[2] - self.x[2] > 1.5 * np.pi:
+
+        z2_1 = Z[2]
+        z2_2 = Z[2] + 2 * np.pi
+        z2_3 = Z[2] - 2 * np.pi
+
+        if abs(z2_1 - self.x[2]) < abs(z2_2 - self.x[2]) and abs(z2_1 - self.x[2] < z2_3 - self.x[2]):
+            Z[2] = z2_1
+        elif abs(z2_2 - self.x[2]) < abs(z2_1 - self.x[2]) and abs(z2_2 - self.x[2]) < abs(z2_3 - self.x[2]):
+            Z[2] = z2_2
+        elif abs(z2_3 - self.x[2]) < abs(z2_1 - self.x[2]) and abs(z2_3 - self.x[2]) < abs(z2_2 - self.x[2]):
+            Z[2] = z2_3
+
+        # print "Bt: ", Z[2]
+        # print "ft: ", self.x[2]
+        print "diff: ", Z[2] - self.x[2]
+
         # Measurement Function
         hx = np.matrix([[float(self.x[0])],
                         [float(self.x[1])],
+                        [float(self.x[2])],
                         [float(self.x[3])],
                         [float(self.x[4])]])
 
         JH = np.matrix([[1.0, 0.0, 0.0, 0.0, 0.0],
                         [0.0, 1.0, 0.0, 0.0, 0.0],
+                        [0.0, 0.0, 1.0, 0.0, 0.0],
                         [0.0, 0.0, 0.0, 1.0, 0.0],
                         [0.0, 0.0, 0.0, 0.0, 1.0]])
 
@@ -84,3 +108,4 @@ class Obstacle:
         # Update the error covariance
         I = np.eye(5)
         self.P = (I - (K * JH)) * self.P
+        #self.x[2] = (self.x[2] + np.pi) % (2.0 * np.pi) - np.pi

@@ -41,7 +41,7 @@ Unfortunately, there are no publications known to the author in the context of a
     \addplot[gray!20!black,fill=gray!80!white] coordinates {(2.1,roandabout) (54.8,road) (36.9,intersection with signposts) (22.4 ,intersection with traffic light)};
   \end{axis}
 \end{tikzpicture}
-\label{unfall_roundabout}
+\label{accident_roundabout}
 %\end{center}
 \end{figure}
 
@@ -223,11 +223,11 @@ it is mainly used in the evaluation of automatic measurements primarily in the f
 In this case, \ac{RANSAC} is supporting traditional compensation methods such as the least squares method, which usually fail with a larger number of outliers,
 by calculating an outliers free data set, the so-called consensus set. 
 
-Der \ac{RANSAC} benötogt mehr datenpunkte als für die eindeutige bestimmeung des Modells benötigt werden.
- Aus diesem Set von Datenpunkten werden dann zufällig soviele Datenpunkte ausgwählt, wie nötig sind um das Model eindeutig zu berstimmen.
-Aus den Restlichen Daten werden dann diejenigen ausgewählt, welche einen abstabnd haben der keliner ist als ein bestimmter Grenzwert. Diese Menge stellt nun das ``Consensus Set'' dar.  Enthält sie eine gewisse Mindestanzahl an Werten, wurde vermutlich ein gutes Modell gefunden, und der Consensus set wird gespeichert.
-Diese Schritte werden mehrmal wiederholt. Dann wird diejenige Teilmenge gewählt, welche die meisten Punkte enthält. Mit dieser Teilmenge werden mit einem der üblichen Ausgleichsverfahren die Modellparameter berechnet.
-Der \ac{RANSAC} hat also drei zu Bestimmende Parameter,m welche das ergebnis beeinflussen.
+% Der \ac{RANSAC} benötogt mehr datenpunkte als für die eindeutige bestimmeung des Modells benötigt werden.
+%  Aus diesem Set von Datenpunkten werden dann zufällig soviele Datenpunkte ausgwählt, wie nötig sind um das Model eindeutig zu berstimmen.
+% Aus den Restlichen Daten werden dann diejenigen ausgewählt, welche einen abstabnd haben der keliner ist als ein bestimmter Grenzwert. Diese Menge stellt nun das ``Consensus Set'' dar.  Enthält sie eine gewisse Mindestanzahl an Werten, wurde vermutlich ein gutes Modell gefunden, und der Consensus set wird gespeichert.
+% Diese Schritte werden mehrmal wiederholt. Dann wird diejenige Teilmenge gewählt, welche die meisten Punkte enthält. Mit dieser Teilmenge werden mit einem der üblichen Ausgleichsverfahren die Modellparameter berechnet.
+% Der \ac{RANSAC} hat also drei zu Bestimmende Parameter,m welche das ergebnis beeinflussen.
 
 The \ac{RANSAC} requires more data points than is required for the unambiguous determination of the model. 
 From this set of data points randomly as many data points are selected, as necessary to the model unambiguously. 
@@ -257,11 +257,18 @@ the model parameters are calculated using one of the usual compensation methods.
 Note that the \ac{RANSAC} is not a deterministic algorythm, beacuse of the random selection of the data points.
 
 \section{\acl{DBSCAN}}
-\ac{DBSCAN} \cite{DBSCAN} ist ein deterministischer Data-Mining-Algorithmus zur Clusteranalyse. Der Algorithmus basiert auf der Dichteverbundenheit, das heißt er bindet punkte basierend auf iher Enterferung zu Clustern
-\ac{DBSCAN} iterietert über alle  noch nicht beabreiteten Datenpunkte, jeder bearbeitete Datenpunkt wird als bearbeitet makiert. Für jeden dieser Pubnkte wird dann eine Berichsanfrage durchgeführt.
-Ist die größe der nachbarschaft keiner als ein bestimmter Grenzwert, wird der Punkt las Rausche makiert. Andernfalls Wird ein neuer Clusrer erstellt, indem für jeden Punkt in
-der nachbarschaft eine neue Bereichsanfrage durchgeführt wird, wird dieser Nicht als Rauschen klassifiziert, wird dieser zum Cluster hinzugefügt und als bearbeitet Makiert.
-Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbeitet makiert sind, also keine Weiteren punkte in der nachbarschaft erreichbar sind.
+% \ac{DBSCAN} \cite{DBSCAN} ist ein deterministischer Data-Mining-Algorithmus zur Clusteranalyse. Der Algorithmus basiert auf der Dichteverbundenheit, das heißt er bindet punkte basierend auf iher Enterferung zu Clustern
+% \ac{DBSCAN} iterietert über alle  noch nicht beabreiteten Datenpunkte, jeder bearbeitete Datenpunkt wird als bearbeitet makiert. Für jeden dieser Pubnkte wird dann eine Berichsanfrage durchgeführt.
+% Ist die größe der nachbarschaft keiner als ein bestimmter Grenzwert, wird der Punkt las Rausche makiert. 
+ %Andernfalls Wird ein neuer Clusrer erstellt, indem für jeden Punkt in
+% der nachbarschaft eine neue Bereichsanfrage durchgeführt wird, wird dieser Nicht als Rauschen klassifiziert, wird dieser zum Cluster hinzugefügt und als bearbeitet Makiert.
+% Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbeitet makiert sind, also keine Weiteren punkte in der nachbarschaft erreichbar sind.
+
+\ac {DBSCAN} \cite{DBSCAN} is a deterministic data mining algorithm for cluster analysis. The algorithm is based on density connectivity,
+that means, it binds points based on its distance to clusters, \ac {DBSCAN}, iterates over all data points that have not yet been processed, 
+each processed data point is marked as processed. A range query request is then made for each of these points. If the size of the returned neighborhood is lower then a certain limit,
+the point is marked as noise. Otherwise, a new clusrer is created by performing a new range request for each point in the neighborhood, if the point is not classified as noise,
+the Point is added to the cluster and marked as processed. This is repeated until all the points in the cluster are marked as processed, so no further points can be reached in the neighborhood.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -273,7 +280,7 @@ Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbei
 
 
 
-Der \ac{DBSCAN} hat also zwei zu Bestimmende Parameter, welche das ergebnis beeinflussen.
+The \ac {DBSCAN} therefore has two parameters to determine, which influence the result.
 \begin{itemize}
  \item maximum distance of the neighborhood points
  \item minimum number of points required to form a dense region
@@ -285,16 +292,28 @@ Der \ac{DBSCAN} hat also zwei zu Bestimmende Parameter, welche das ergebnis beei
 
 
 \section{Middleware OpenDAVINCI}
-Autonome Software ist typischer weise ein verteiletes System, auf heutigen Fahrzeugen basiert dieses System auf ECUs und Bussystemen wie CAN,LIN.
-Verteilete Sysoftware vereinfacht es komplexe Komponenten innheralb des Systems zu integreieren. Im bereich des Autonomen Fahrens iust der Historische aufbau von Fahrzeugen
-mit ECU'S und can jedoch nicht optimal \cite{Broy2006}. Um die vielen benötigekten Komponenten zu handhaben, ist es von vorteil Komponenten auch innerhalb eines ECU's bzw einer Recheneinheit
-zu entkoppeln. Für diesen Zweck gibt es beireits mehrer middelwares die unteranderm die Kommunikation innerhalb der Komponenten handhaben und abstrahieren.
-m Rahmen des Copplar Projekets, wird hier die OpenDaVINCI middleware genutzt. OpenDaVINCI ist eine echtzeitfähige laufzeitumgebeung konzipiert für Autonome Fahrzeuge.
-OpenDaVINCI basiert auf Hesperia \cite{Berger2010}. Die Kommunikation zwischen den Komponenten basiert in OpenDaVINCI UDP Multicast, welches eine Echtzeitfähige Kommunikation zwischen
-den Komponenten  und über Recheneinheiten hinweg Ermöglicht \cite{Kurose2013}. Für die Kommunikation bietet OpenDaVINCI Time-triggered sender und Data-triggered receiver an, von welchem in folgenden der Data-triggered receiver
-für die Anbindung der Software genutzt wird. Weiterhin bietet OpenDaVINCI viele weiter Funktionalitäten die das Handling von World Geodetic System 1984 (WGS84) Korridinaten an, welches für die Umwandlung
-von GPS koordinaten in lokale kartesische genutzt werden kann. Dazu ist die Angabe einer referenz GPS postion nötig, welche um den Berechnugsfehler klein zu halten,
-nicht zu weit entfernt sein sollte.
+% Autonome Software ist typischer weise ein verteiletes System, auf heutigen Fahrzeugen basiert dieses System auf ECUs und Bussystemen wie CAN,LIN.
+% Verteilete Sysoftware vereinfacht es komplexe Komponenten innheralb des Systems zu integreieren. Im bereich des Autonomen Fahrens iust der Historische aufbau von Fahrzeugen
+% mit ECU'S und can jedoch nicht optimal \cite{Broy2006}. Um die vielen benötigekten Komponenten zu handhaben, ist es von vorteil Komponenten auch innerhalb eines ECU's bzw einer Recheneinheit
+% zu entkoppeln. Für diesen Zweck gibt es beireits mehrer middelwares die unteranderm die Kommunikation innerhalb der Komponenten handhaben und abstrahieren.
+% m Rahmen des Copplar Projekets, wird hier die OpenDaVINCI middleware genutzt. OpenDaVINCI ist eine echtzeitfähige laufzeitumgebeung konzipiert für Autonome Fahrzeuge.
+% OpenDaVINCI basiert auf Hesperia \cite{Berger2010}. Die Kommunikation zwischen den Komponenten basiert in OpenDaVINCI UDP Multicast, welches eine Echtzeitfähige Kommunikation zwischen
+% den Komponenten  und über Recheneinheiten hinweg Ermöglicht \cite{Kurose2013}. Für die Kommunikation bietet OpenDaVINCI Time-triggered sender und Data-triggered receiver an, von welchem in folgenden der Data-triggered receiver
+% für die Anbindung der Software genutzt wird. Weiterhin bietet OpenDaVINCI viele weiter Funktionalitäten die das Handling von World Geodetic System 1984 (WGS84) Korridinaten an, welches für die Umwandlung
+% von GPS koordinaten in lokale kartesische genutzt werden kann. Dazu ist die Angabe einer referenz GPS postion nötig, welche um den Berechnugsfehler klein zu halten,
+% nicht zu weit entfernt sein sollte.
+
+Autonomous software is typically a distributed system, on today's vehicles this system is based on ECUs and bus systems such as CAN, LIN.
+Distributed software makes it easier to integrate complex components within the system. In the area of ​​autonomous driving, however,
+the historical structure of vehicles with ECUs and CAN is not optimal. \cite{Broy2006} In order to handle the many components required,
+it is also advantageous to decouple components within an ECU or a computing unit. For this purpose,
+there are several middelwares which handle and abstract communication within the components. As part of the Copplar project, the OpenDaVINCI middleware is used here.
+OpenDaVINCI is a real-time runtime environment designed for autonomous vehicles. OpenDaVINCI is based on Hesperia. \cite{Berger2010} 
+Communication between the components in OpenDaVINCI is based on UDP Multicast, which enables real-time communication between components and computing units. \cite{Kurose2013} 
+For the communication, OpenDaVINCI offers time-triggered transmitters and data-triggered receivers, 
+from which the data-triggered receiver is used to connect our software. Furthermore, OpenDaVINCI offers many further functionalities,
+which can be used, for example the handling of World Geodetic System 1984 (WGS84), for the conversion of GPS coordinates into local Cartesian coordinates.
+For this purpose, a reference GPS position is required, which should not be too far away to keep the calculation error small.
 
 
 

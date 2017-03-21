@@ -45,8 +45,8 @@ for n in range(1, m):
     x_vel.append((x[-1] - x[-2]) / dt)
     y_vel.append((y[-1] - y[-2]) / dt)
 
-x = np.array(x + np.random.randn(m) * 1)
-y = np.array(y + np.random.randn(m) * 1)
+x = np.array(x + np.random.randn(m) * 0.1)
+y = np.array(y + np.random.randn(m) * 0.1)
 x_vel = np.array(x_vel + np.random.randn(m) * 0.1)
 y_vel = np.array(y_vel + np.random.randn(m) * 0.1)
 

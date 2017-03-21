@@ -430,6 +430,45 @@
       \endverb
       \keyw{automated cartography,camera calibration,computer{\_}vision,epipolar,geometry,image matching,keypoints,location determination,match-rejection,model fitting,motion-estimation,multi-view,rpc,scene analysis,sift,stereo,structure{\_}from{\_}motion,tracking}
     \endentry
+    \entry{Galetzka2017}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=f6a9c210b24fa3ccbbada598d0d02eb8}{%
+           family={Galetzka},
+           familyi={G\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=4a599e60e852e953c9616b91b4dfdfb2}{%
+           family={Glauner},
+           familyi={G\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {SCITEPRESS - Science}%
+        {Technology Publications}%
+      }
+      \strng{namehash}{a9ce762c80fee23c79fd50ee23ff3e3f}
+      \strng{fullhash}{a9ce762c80fee23c79fd50ee23ff3e3f}
+      \strng{authornamehash}{a9ce762c80fee23c79fd50ee23ff3e3f}
+      \strng{authorfullhash}{a9ce762c80fee23c79fd50ee23ff3e3f}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 12th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications}
+      \field{isbn}{978-989-758-224-0}
+      \field{langid}{english}
+      \field{title}{{A Simple and Correct Even-Odd Algorithm for the Point-in-Polygon Problem for Complex Polygons}}
+      \field{year}{2017}
+      \field{pages}{175\bibrangedash 178}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.5220/0006040801750178
+      \endverb
+      \verb{url}
+      \verb http://www.scitepress.org/DigitalLibrary/Link.aspx?doi=10.5220/0006040801750178
+      \endverb
+    \endentry
     \entry{Himmelsbach2009}{article}{}
       \name{author}{3}{}{%
         {{hash=a7a8b9530523ae109d78af5f8e764e3e}{%
@@ -600,53 +639,6 @@
       \field{year}{2008}
       \verb{url}
       \verb https://books.google.de/books?id=9ApoM5GTpq0C
-      \endverb
-    \endentry
-    \entry{Li2016}{inproceedings}{}
-      \name{author}{3}{}{%
-        {{hash=a9c8728e355996d027a7e56b60820a18}{%
-           family={Li},
-           familyi={L\bibinitperiod},
-           given={Bo},
-           giveni={B\bibinitperiod}}}%
-        {{hash=bdcd1a06f2e39b7068049e68530704f4}{%
-           family={Zhang},
-           familyi={Z\bibinitperiod},
-           given={Tianlei},
-           giveni={T\bibinitperiod}}}%
-        {{hash=1c3a2dc4e9ad36c98e17a912894eaa02}{%
-           family={Xia},
-           familyi={X\bibinitperiod},
-           given={Tian},
-           giveni={T\bibinitperiod}}}%
-      }
-      \list{publisher}{2}{%
-        {Robotics: Science}%
-        {Systems Foundation}%
-      }
-      \strng{namehash}{66c48d0472719546abac1309358db3a0}
-      \strng{fullhash}{66c48d0472719546abac1309358db3a0}
-      \strng{authornamehash}{66c48d0472719546abac1309358db3a0}
-      \strng{authorfullhash}{66c48d0472719546abac1309358db3a0}
-      \field{sortinit}{L}
-      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{abstract}{Convolutional network techniques have recently achieved great success in vision based detection tasks. This paper introduces the recent development of our research on transplanting the fully convolutional network technique to the detection tasks on 3D range scan data. Specifically, the scenario is set as the vehicle detection task from the range data of Velodyne 64E lidar. We proposes to present the data in a 2D point map and use a single 2D end-to-end fully convolutional network to predict the objectness confidence and the bounding boxes simultaneously. By carefully design the bounding box encoding, it is able to predict full 3D bounding boxes even using a 2D convolutional network. Experiments on the KITTI dataset shows the state-of-the-art performance of the proposed method.}
-      \field{booktitle}{Robotics: Science and Systems XII}
-      \field{eprinttype}{arXiv}
-      \field{isbn}{9780992374723}
-      \field{langid}{english}
-      \field{title}{{Vehicle Detection from 3D Lidar Using Fully Convolutional Network}}
-      \field{year}{2016}
-      \verb{doi}
-      \verb 10.15607/RSS.2016.XII.042
-      \endverb
-      \verb{eprint}
-      \verb 10.15607
-      \endverb
-      \verb{url}
-      \verb http://www.roboticsproceedings.org/rss12/p42.pdf
       \endverb
     \endentry
     \entry{Montemerlo2009}{article}{}

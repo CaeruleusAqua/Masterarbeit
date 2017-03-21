@@ -10,9 +10,9 @@ from obstacle_yaw import Obstacle
 dt = 0.1
 
 # generate Measurements
-m = 200  # Measurements
+m = 250  # Measurements
 v = 20
-yaw = 0.1
+yaw = 0.2
 
 obst = Obstacle(0, 0, 0, v, yaw)
 
@@ -29,18 +29,19 @@ theta.append(0)
 yawrate.append(yaw)
 
 for n in range(1, m):
-    if n == m / 2:
-        yaw = -yaw * 2
+    # if n == m / 2:
+    #     yaw = -yaw * 2
     x.append(x[-1] + vel[-1] * cos(theta[-1]) * dt)
     y.append(y[-1] + vel[-1] * sin(theta[-1]) * dt)
     theta.append(theta[-1] + yawrate[-1] * dt)
     yawrate.append(yaw)
     vel.append(v)
 
-x = np.array(x + np.random.randn(m) * 1)
-y = np.array(y + np.random.randn(m) * 1)
+x = np.array(x + np.random.randn(m) * 0.2)
+y = np.array(y + np.random.randn(m) * 0.2)
 yawrate = np.array(yawrate + 0.1 * np.random.randn(m))
-vel = np.array(vel + 10 * np.random.randn(m)) +4
+vel = np.array(vel + 0.1 * np.random.randn(m))
+theta = np.array(theta + 0.1 * np.random.randn(m))
 # yawrate = np.array(yawrate*np.zeros(m))
 # vel = np.array(vel*np.zeros(m))
 
@@ -63,11 +64,13 @@ i = 0
 for n in range(len(measurements[0])):
     # if i%10 == 0:
     obst.predict(dt)
-    obst.correct(np.asarray([x[n], y[n], vel[n], yawrate[n]]))
+    bounded_theta = (theta[n] + np.pi) % (2.0 * np.pi) - np.pi
+    obst.correct(np.asarray([x[n], y[n],bounded_theta, vel[n], yawrate[n]]))
     xm = float(obst.x[0])
     ym = float(obst.x[1])
     # print xm, ym
     # print yawrate[n]
+
 
     # Save states for Plotting
     xt.append(xm)
