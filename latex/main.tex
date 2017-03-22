@@ -928,13 +928,13 @@ Since the size of the object can begin to be very small, there is a lower limit 
 \begin{axis}[ylabel={number of measurements},ybar interval, ymax=366,ymin=0, minor y tick num = 3,
 width=0.55\textwidth,
 height=0.6\textwidth]
-\addplot coordinates { (1.0, 29) (1.5, 58) (2.0, 366) (2.5, 35) (3.0, 3) (3.5, 1) };
+\addplot coordinates { (1.0, 29) (1.5, 58) (2.0, 366) (2.5, 35) (3.0, 3) (3.5, 1) (4.0, 0) (4.5, 0) (5.0, 0) (5.5, 0) (6.0, 0) (6.5, 0) };
 \end{axis}
 \begin{axis}[ybar interval, ymax=318,ymin=0, minor y tick num = 3,
 width=0.55\textwidth,
 height=0.6\textwidth,
 at={(0.50\textwidth,0)}]
-\addplot coordinates { (2.0, 7) (2.5, 6) (3.0, 9) (3.5, 2) (4.0, 64) (4.5, 84) (5.0, 318) (5.5, 3) (6.0, 2) (6.5, 2) };
+\addplot coordinates { (1.0, 0) (1.5, 0) (2.0, 7) (2.5, 6) (3.0, 9) (3.5, 2) (4.0, 64) (4.5, 84) (5.0, 318) (5.5, 3) (6.0, 2) (6.5, 2) };
 \end{axis}
 \node at (0.21\textwidth,0.5\textwidth) {width[m]};
 \node at (0.7\textwidth,0.5\textwidth) {length[m]};
@@ -949,7 +949,13 @@ at={(0.50\textwidth,0)}]
 % die Position des Fahrzeuges aus dem Mittelpunkt der Boundingbox bestimmt.
 
 Easy to see, a width of 2m and a length of 5m is calculated for the object. In this case the object is a Volvo S60, which has outer dimensions of approximately
-1.9m and 4.6m, whereby the deviations are correctly within, the rounding of the values. For the subsequent filtering of the measured values with the help of an extended Kalman filter, 
+1.9m and 4.6m, whereby the deviations are correctly within, the rounding of the values. 
+It can be seen that the distribution of the width, is similar to a normal distribution, which is due to the fact that the rotation of the object has a noise.
+In the case of length, however, we see that the algorythm tends to calculate to small values, which results from the fact that this can only be inadequately
+measured when the vehicle is moving towards the sensor. Because to the internal vehicle structure, the sensor is not able to see through the vehicle, so the
+values are to smal.
+
+For the subsequent filtering of the measured values with the help of an extended Kalman filter, 
 the position of the vehicle from the center of the bounding box is now determined, using the mean value of the four corner points
 
 % Die für die Berechnung der Bewegungsrichtung genutzte Position ist jedoch eine andere, da die so eben berechnete Position zu diesem Zeitpunkt noch nicht zur verfügung steht und
@@ -958,8 +964,8 @@ the position of the vehicle from the center of the bounding box is now determine
 % Da $\theta$ im initialen Zeitschritt Null ist, entpricht dies der globalen Maximalen x-Koordinate des Clusters. Dies Führt dazu, das wir im Initialen Zeitschritt annhemen, dass sich das Objekt
 % in die positive x-Richtung bewegt. Bei Objekten bei denen das nicht der Fall ist, führt das zu einem kurzzeitigen oszillieren der Orientierung, welche sich jedoch über die Zeit schnell stabilisiert.
 
-However, the position used for the calculation of the direction of movement is different, since the so calculated position is not yet available at this t
-ime and the position is very unstable shortly after the initial recognition due to the frequent dimensional changes. Therefore, the maximum x coordinate
+However, the position used for the calculation of the direction of movement is different, since the so calculated position is not yet available at this time 
+and the position is very unstable shortly after the initial recognition due to the frequent dimensional changes. Therefore, the maximum x coordinate
 of the rotated clusters is always used as the position. This position can also be examined in \cref{obst_rot}, as a small green circle. Since $\theta$ in the initial time step is zero, 
 this corresponds to the global maximum x-coordinate of the cluster. This leads to the assumption that the object moves in the positive x direction in the initial time step. 
 For objects where this is not the case, this leads to a short-term oscillation of the orientation, which however quickly stabilizes over time.

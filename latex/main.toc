@@ -34,7 +34,7 @@
 \contentsline {section}{\numberline {6.3}Tracking}{24}{section.6.3}
 \contentsline {subsection}{\numberline {6.3.1}Cluster Tracking}{24}{subsection.6.3.1}
 \contentsline {subsection}{\numberline {6.3.2}Object Tracking}{25}{subsection.6.3.2}
-\contentsline {subsection}{\numberline {6.3.3}Object Confidence}{28}{subsection.6.3.3}
+\contentsline {subsection}{\numberline {6.3.3}Object Confidence}{27}{subsection.6.3.3}
 \contentsline {section}{\numberline {6.4}Classification}{28}{section.6.4}
 \contentsline {section}{\numberline {6.5}State Estimation}{29}{section.6.5}
 \contentsline {subsection}{\numberline {6.5.1}Constant Turn Rate and Velocity Model}{29}{subsection.6.5.1}
