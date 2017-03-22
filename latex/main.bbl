@@ -127,6 +127,30 @@
       \verb :home/storm/darpa/Victor{\_}Tango.pdf:pdf
       \endverb
     \endentry
+    \entry{Baumert1998}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=0d06f8147a3c7ed01416d3b2423623c1}{%
+           family={Baumert},
+           familyi={B\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Ruhr-Universität Bochum}%
+      }
+      \strng{namehash}{0d06f8147a3c7ed01416d3b2423623c1}
+      \strng{fullhash}{0d06f8147a3c7ed01416d3b2423623c1}
+      \strng{authornamehash}{0d06f8147a3c7ed01416d3b2423623c1}
+      \strng{authorfullhash}{0d06f8147a3c7ed01416d3b2423623c1}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{ngerman}
+      \field{title}{{Verkehrssicherheit und Leistungsfähigkeit von einstreifigen Kreisverkehrsplätzen - untersucht an Beispielen aus dem Kreis Borken}}
+      \field{type}{phdthesis}
+      \field{year}{1998}
+    \endentry
     \entry{Berger2010}{thesis}{}
       \name{author}{1}{}{%
         {{hash=989e9c75cedce190a8efdde3ba9764ec}{%
@@ -185,6 +209,65 @@
       \field{type}{techreport}
       \field{year}{2012}
       \keyw{Dipl.-Ing. Heiko Vo{ß},Dipl.-Ing. Jörg Ortlepp,Dr.-Ing. Lothar Bondzio,Dr.-Ing. Roland Weinert}
+    \endentry
+    \entry{brilon2002verkehrssicherheit}{article}{}
+      \name{author}{3}{}{%
+        {{hash=61c3bbada258ec00b8de3f62b0873d2d}{%
+           family={Brilon},
+           familyi={B\bibinitperiod},
+           given={W},
+           giveni={W\bibinitperiod}}}%
+        {{hash=28ef62bf65cd2342cf5ccd47f4e435d8}{%
+           family={Bäumer},
+           familyi={B\bibinitperiod},
+           given={H},
+           giveni={H\bibinitperiod}}}%
+        {{hash=663226b397bd1ba01deb472d0316a8c1}{%
+           family={Flottmann},
+           familyi={F\bibinitperiod},
+           given={O},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{214b4fcb05df5bdefdda5c3d045d76bd}
+      \strng{fullhash}{214b4fcb05df5bdefdda5c3d045d76bd}
+      \strng{authornamehash}{214b4fcb05df5bdefdda5c3d045d76bd}
+      \strng{authorfullhash}{214b4fcb05df5bdefdda5c3d045d76bd}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Stra{ß}enverkehrstechnik}
+      \field{langid}{ngerman}
+      \field{number}{4}
+      \field{title}{Verkehrssicherheit an Mini-Kreisverkehren}
+      \field{volume}{46}
+      \field{year}{2002}
+    \endentry
+    \entry{brilon2004uberprufung}{book}{}
+      \name{author}{2}{}{%
+        {{hash=0fbb40580b50a0e3f5967f0a64f974ed}{%
+           family={Brilon},
+           familyi={B\bibinitperiod},
+           given={Werner},
+           giveni={W\bibinitperiod}}}%
+        {{hash=9a2d66bb47746bbd1f7b98a6362908ed}{%
+           family={Bäumer},
+           familyi={B\bibinitperiod},
+           given={Hanno},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{9db7ff2c26da55d3d1055fed197e829c}
+      \strng{fullhash}{9db7ff2c26da55d3d1055fed197e829c}
+      \strng{authornamehash}{9db7ff2c26da55d3d1055fed197e829c}
+      \strng{authorfullhash}{9db7ff2c26da55d3d1055fed197e829c}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{ngerman}
+      \field{number}{876}
+      \field{title}{Überprüfung von Kreisverkehren mit zweistreifig markierter oder einstreifig markierter, aber zweistreifig befahrbarer Kreisfahrbahn}
+      \field{year}{2004}
     \endentry
     \entry{Broy2006}{inproceedings}{}
       \name{author}{1}{}{%
@@ -1282,6 +1365,29 @@
       \field{langid}{english}
       \field{title}{Velodyne LiDAR Puck (VLP-16) Manual}
       \field{year}{2015}
+    \endentry
+    \entry{voss1994verkehrssicherheit}{article}{}
+      \name{author}{1}{}{%
+        {{hash=35858920f38057a906b60b3bb703bf60}{%
+           family={Vo{ß}},
+           familyi={V\bibinitperiod},
+           given={H},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{35858920f38057a906b60b3bb703bf60}
+      \strng{fullhash}{35858920f38057a906b60b3bb703bf60}
+      \strng{authornamehash}{35858920f38057a906b60b3bb703bf60}
+      \strng{authorfullhash}{35858920f38057a906b60b3bb703bf60}
+      \field{sortinit}{V}
+      \field{sortinithash}{d18f5ce25ce0b5ca7f924e3f6c04870e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Zeitschrift für Verkehrssicherheit}
+      \field{langid}{ngerman}
+      \field{number}{2}
+      \field{title}{Zur Verkehrssicherheit innerörtlicher Knotenpunkte - Knotenpunkte mit Lichtsignalsteuerung, mit Vorfahrtregelung durch Verkehrszeichen, Kreisverkehrsplätze}
+      \field{volume}{40}
+      \field{year}{1994}
     \endentry
     \entry{LLSQ}{online}{}
       \name{author}{1}{}{%

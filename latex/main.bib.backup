@@ -418,11 +418,28 @@
   publisher = {SCITEPRESS - Science and Technology Publications},
   title = {{A Simple and Correct Even-Odd Algorithm for the Point-in-Polygon Problem for Complex Polygons}},
   url = {http://www.scitepress.org/DigitalLibrary/Link.aspx?doi=10.5220/0006040801750178},
-  year = {2017}
+  year = {2017},
+  hyphenation={english}
 }
 
+@phdthesis{Baumert1998,
+  author = {Baumert, R.},
+  school = {Ruhr-Universit{\"{a}}t Bochum},
+  title = {{Verkehrssicherheit und Leistungsf{\"{a}}higkeit von einstreifigen Kreisverkehrspl{\"{a}}tzen - untersucht an Beispielen aus dem Kreis Borken}},
+  year = {1998},
+  hyphenation={ngerman}
+}
 
-
+@article{brilon1992flachenhafte,
+  title={Fl{\"a}chenhafte Verkehrsberuhigung: Ergebnisse der Unfallanalysen in 6 Modellst{\"a}dten},
+  author={Brilon, Werner and Blanke, Harald},
+  journal={Zeitschrift f{\"u}r Verkehrssicherheit},
+  volume={38},
+  number={3},
+  year={1992}
+  ,
+  hyphenation={ngerman}
+}
 
 
 @Comment{jabref-meta: databaseType:bibtex;}
