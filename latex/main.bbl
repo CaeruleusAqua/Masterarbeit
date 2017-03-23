@@ -19,6 +19,39 @@
 
 \refsection{0}
   \sortlist[entry]{nty/global/}
+    \entry{althoff2014online}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6212f49fc6e2ed8c269aa77471508561}{%
+           family={Althoff},
+           familyi={A\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c0308097b0913ec363c9026bcda89a22}{%
+           family={Dolan},
+           familyi={D\bibinitperiod},
+           given={John\bibnamedelima M},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{697fdf1891bbc9383a370394b8de4cc7}
+      \strng{fullhash}{697fdf1891bbc9383a370394b8de4cc7}
+      \strng{authornamehash}{697fdf1891bbc9383a370394b8de4cc7}
+      \strng{authorfullhash}{697fdf1891bbc9383a370394b8de4cc7}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Robotics}
+      \field{langid}{english}
+      \field{number}{4}
+      \field{title}{Online verification of automated road vehicles using reachability analysis}
+      \field{volume}{30}
+      \field{year}{2014}
+      \field{pages}{903\bibrangedash 918}
+      \range{pages}{16}
+    \endentry
     \entry{Atreya2007}{article}{}
       \name{author}{18}{}{%
         {{hash=489e75cb31ec9c416c0ce6beb366c2f1}{%
@@ -658,6 +691,47 @@
       \field{pages}{95}
       \range{pages}{1}
     \endentry
+    \entry{kong2015kinematic}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=ee91fa891eaa211d2b231a7273e9f413}{%
+           family={Kong},
+           familyi={K\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d12b111f1ede0f8364cc4818e5376e80}{%
+           family={Pfeiffer},
+           familyi={P\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=ab80c41939738b933da5e1c3aa333c27}{%
+           family={Schildbach},
+           familyi={S\bibinitperiod},
+           given={Georg},
+           giveni={G\bibinitperiod}}}%
+        {{hash=23f97b926e58810b9d3d65d50516ca6e}{%
+           family={Borrelli},
+           familyi={B\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{e0442868fc29817ef5067d03d1d81e2d}
+      \strng{fullhash}{0c157704d09d4eff8204daf0a802e1f8}
+      \strng{authornamehash}{e0442868fc29817ef5067d03d1d81e2d}
+      \strng{authorfullhash}{0c157704d09d4eff8204daf0a802e1f8}
+      \field{sortinit}{K}
+      \field{sortinithash}{a7d5b3aec5a0890aae7baf85a209abfc}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Intelligent Vehicles Symposium (IV), 2015 IEEE}
+      \field{langid}{english}
+      \field{title}{Kinematic and dynamic vehicle models for autonomous driving control design}
+      \field{year}{2015}
+      \field{pages}{1094\bibrangedash 1099}
+      \range{pages}{6}
+    \endentry
     \entry{Kurose2013}{book}{}
       \name{author}{2}{}{%
         {{hash=eaa988056a027bb9eebaf02515594f87}{%
@@ -723,6 +797,37 @@
       \verb{url}
       \verb https://books.google.de/books?id=9ApoM5GTpq0C
       \endverb
+    \endentry
+    \entry{miller2007rao}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=7567e0ecb3831ef79c8becfcad2a6dba}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Isaac},
+           giveni={I\bibinitperiod}}}%
+        {{hash=f1df80e54c7dce6e2e2822558cb603ab}{%
+           family={Campbell},
+           familyi={C\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{7b737cb80896ba56962c642e2f3f880f}
+      \strng{fullhash}{7b737cb80896ba56962c642e2f3f880f}
+      \strng{authornamehash}{7b737cb80896ba56962c642e2f3f880f}
+      \strng{authorfullhash}{7b737cb80896ba56962c642e2f3f880f}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Robotics and Automation, 2007 IEEE International Conference on}
+      \field{langid}{english}
+      \field{title}{Rao-blackwellized particle filtering for mapping dynamic environments}
+      \field{year}{2007}
+      \field{pages}{3862\bibrangedash 3869}
+      \range{pages}{8}
     \endentry
     \entry{Montemerlo2009}{article}{}
       \name{author}{25}{}{%
@@ -1042,6 +1147,29 @@
       \verb http://ieeexplore.ieee.org/xpls/abs%7B%5C_%7Dall.jsp?arnumber=4632283
       \endverb
       \keyw{motion models,ukf,vehicle tracking}
+    \endentry
+    \entry{snider2009automatic}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=76e16f34a01fc8be7b6e878bb3944a0f}{%
+           family={Snider},
+           familyi={S\bibinitperiod},
+           given={Jarrod\bibnamedelima M},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{0d512bbb26e8d835abbc22c19d13c404}
+      \strng{fullhash}{0d512bbb26e8d835abbc22c19d13c404}
+      \strng{authornamehash}{0d512bbb26e8d835abbc22c19d13c404}
+      \strng{authorfullhash}{0d512bbb26e8d835abbc22c19d13c404}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Robotics Institute, Pittsburgh, PA, Tech. Rep. CMU-RITR-09-08}
+      \field{langid}{english}
+      \field{title}{Automatic steering methods for autonomous automobile path tracking}
+      \field{year}{2009}
     \endentry
     \entry{Soderkvist2009}{report}{}
       \name{author}{1}{}{%

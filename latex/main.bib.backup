@@ -436,10 +436,66 @@
   journal={Zeitschrift f{\"u}r Verkehrssicherheit},
   volume={38},
   number={3},
-  year={1992}
-  ,
+  year={1992},
   hyphenation={ngerman}
 }
 
+@article{brilon2002verkehrssicherheit,
+  title={Verkehrssicherheit an Mini-Kreisverkehren},
+  author={Brilon, W and B{\"a}umer, H and Flottmann, O},
+  journal={Stra{\ss}enverkehrstechnik},
+  volume={46},
+  number={4},
+  year={2002},
+  hyphenation={ngerman}
+}
+
+@book{brilon2004uberprufung,
+  title={{\"U}berpr{\"u}fung von Kreisverkehren mit zweistreifig markierter oder einstreifig markierter, aber zweistreifig befahrbarer Kreisfahrbahn},
+  author={Brilon, Werner and B{\"a}umer, Hanno},
+  number={876},
+  year={2004},
+  hyphenation={ngerman}
+}
+
+@article{voss1994verkehrssicherheit,
+  title={Zur Verkehrssicherheit inner{\"o}rtlicher Knotenpunkte - Knotenpunkte mit Lichtsignalsteuerung, mit Vorfahrtregelung durch Verkehrszeichen, Kreisverkehrsplätze},
+  author={Vo{\ss}, H},
+  journal={Zeitschrift f{\"u}r Verkehrssicherheit},
+  volume={40},
+  number={2},
+  year={1994},
+  hyphenation={ngerman}
+}
+
+@article{althoff2014online,
+  title={Online verification of automated road vehicles using reachability analysis},
+  author={Althoff, Matthias and Dolan, John M},
+  journal={IEEE Transactions on Robotics},
+  volume={30},
+  number={4},
+  pages={903--918},
+  year={2014},
+  publisher={IEEE},
+  hyphenation={english}
+}
+
+@article{snider2009automatic,
+  title={Automatic steering methods for autonomous automobile path tracking},
+  author={Snider, Jarrod M and others},
+  journal={Robotics Institute, Pittsburgh, PA, Tech. Rep. CMU-RITR-09-08},
+  year={2009},
+  hyphenation={english}
+}
+
+@inproceedings{kong2015kinematic,
+  title={Kinematic and dynamic vehicle models for autonomous driving control design},
+  author={Kong, Jason and Pfeiffer, Mark and Schildbach, Georg and Borrelli, Francesco},
+  booktitle={Intelligent Vehicles Symposium (IV), 2015 IEEE},
+  pages={1094--1099},
+  year={2015},
+  organization={IEEE},
+  hyphenation={english}
+}
 
 @Comment{jabref-meta: databaseType:bibtex;}

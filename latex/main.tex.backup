@@ -153,18 +153,72 @@ einer verlassenen Kaserne des ehemaligen Air Force-Stützpunktes George Air Forc
 Die Fahrbahnen waren teilweise durch Linien markiert, teilweise durch Betonwände begrenzt. Alle selbstfahrenden Autos befanden sich gleichzeitig auf der Strecke. 
 Auf ein-, zwei- und vierspurigen Straßen mussten Kreisverkehr, 4-Wege-Kreuzungen mit Stoppschildern, blockierte Fahrbahnen und Einfädelsituationen erfolgreich bewältigt werden.
  
-Bei der Auswertung  möchte ich mich vorallem auf die Finalteams des Wettbewerbes beschränken. Ausgewertet werden dabei welcher Typ Sensoren und welche Anzahl die Teams verwendet haben.
+Bei der Auswertung  möchte ich mich vorallem auf die Finalteams des Wettbewerbes beschränken, da diese am Warscheinlichsten ein funktionierendes
+Konzept entwickelt haben. Ausgewertet werden dabei welcher Typ Sensoren und welche Anzahl die Teams für die Objekterkennung verwendet haben und 
+insoweit angegeben, welche algorythmen für Segmentierung und Tracking genutzt werden.
 
-\begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
-\hline \textbf{Team} & \textbf{2D Lidar} & \textbf{3D Lidar (low res)} & \textbf{3D Lidar (high res)} & \textbf{Radar} & \textbf{Camera}\\\hline
-Cornell \cite{Campbell2007} & 6 & 0 & 0 & 3 & 4 \\\hline
-TerraMax \cite{Corp2005} & 3 & 1 (4) & 0 & 0 & 3  \\\hline
-Stanford Racing Team \cite{Montemerlo2009} & 7 & 0 & 1 (64) & 3 & 1 \\\hline
-Tartan Racing \cite{Urmson2007} & 3 & 0 & 1 (64) & 2 & 1  \\\hline
-Victor Tango \cite{Atreya2007} & 1 & 1 (4) & 0 & 2 & 1  \\\hline
-\end{tabularx}
+% \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
+% \hline \textbf{Team} & \textbf{2D Lidar} & \textbf{3D Lidar (low res)} & \textbf{3D Lidar (high res)} & \textbf{Radar} & \textbf{Camera}\\\hline
+% Cornell \cite{Campbell2007} & 6 & 0 & 0 & 3 & 4 \\\hline
+% TerraMax \cite{Corp2005} & 3 & 1 (4) & 0 & 0 & 3  \\\hline
+% Stanford Racing Team \cite{Montemerlo2009} & 7 & 0 & 1 (64) & 3 & 1 \\\hline
+% Tartan Racing \cite{Urmson2007} & 3 & 0 & 1 (64) & 2 & 1  \\\hline
+% Victor Tango \cite{Atreya2007} & 1 & 1 (4) & 0 & 2 & 1  \\\hline
+% \end{tabularx}
+
+\subsubsection{Team VictorTango}
+Team VictorTango \cite{Atreya2007} nutzt 2x Ibeo Alasca XT Sensoren, mit einer Reichweite von 200m und einem Öffnungswinkel von 240 Grad, um den vorderen Bereich des Fahrzeuges abzudecken, die beiden Sensoren werden komplementär fusioniert, um die vertikale Auflösung zu erhöhen.
+Jeder Sensor verfügt dabei über eine Vertikale Auflösung von 4 Lagen. Für den hinteren Bereich wird ein einzelnes 2D IBEO A0 Lidar genutzt. Außerdem werden 4 Sick LMS291 LIDAR eingesetzt, 
+diese dienen jedoch nicht der Objekterkennung sondern werden Vertikal verbaut um die Fahrbahn in hoher auflösung nach Kanten abzusuchen. Die Onjektsegmentierung
+wird von Team VictorTango jedoch nicht selbst umgesetzt stadtdessen wird eine Komerzielle von Ibeo gelieferte ECU genutzt, welche die Daten der Ibeo Sensoren zu
+Objekten zusamenfasst. Die bereits fertig Segmentierten Objekte werden dann anhand der Road Detection gefiltert und anschließend von einer Softwarekomponente (Classification Center) zusammengefürt.
+Und innerhalb dieser gegen die Bildverarbeitung mit zwei 2D Kameras gegengeprüft. Eine Klassifizierung wird nur nach bewegten und unbewegten Objekten vorgnommen, als angnommen,
+das alle bewegten Objekte Autos sind.
+
+\subsubsection{Stanford Racing Team}
+
+Das Stanford Racing Team \cite{Montemerlo2009} ferfügt über eine Große Zahl von Sensoren unteranderm den großen Velodyne HDL-64E 3D LIDAR mit einer Vertikalen Auflösung von 64 Lagen, einer 360 Grad Rundumsicht und 120m reichweite.
+Dieser wird zusätzlich unterstützt von zwei SICK LD-LRS 2D LIDARs mit 250m reichweite am hinteren teil des Fahrzeuges, 2x Ibeo Alasca XT Sensore im vorderen Bereich sowie zusätzlich fünf Bosch
+Long Range Radare an der Front des Fahrzeuges. Zur Auswertung der Messdaten werden alle LIDAR Sensoren in einen  virtuellen 2D Laserscan transformiert. Dabei beschreibt das Team beim Velodyne Sensor
+Probleme mit Roll und Pitch Winkeln des Fahrzeuges welches zu False positives bei der Segentierung führen. Diese wurden dadurch korrigert, das die Messungen des Velodyne
+einen runden Kreis bilden (siehe\cref{stanford_junior_velodyne}). Diese Kreise haben bei korrekter Ausrichtung einen festen Abstand zueinander, über die betrachtung dieser Abstande konnte die Ausrichtung des Fahrzeuges korrigiert werden.
+Bei den 2D Sensoren wurde das Problem duch die Begrenzung der Reichweite behoben.
+
+\begin{figure}[!ht]
+\begin{center}
+\caption{Velodyne HDL-64E Scan Rings \cite{Montemerlo2009}}
+\includegraphics[width=0.7\textwidth]{bilder/stanford_junior_velodyne.png}
+\label{stanford_junior_velodyne}
+\end{center}
+\end{figure}
+
+Zur Segmentierung der Objekte werden zwei Zeitschritte des Virtuellen Laserscans miteinaner verglichen. Bereiche in denen dabei eine Änderung detektiert wird werden dann als Onjekt klassifiziertund
+mithilfe eines Partikelfilters getrackt. Der Tracker schätzt dabei die Position, die Rotation, die Geschwindigkeit und die Größe des Objekts.
+
+
+\subsubsection{Team Cornell}
+
+Team Cornell \cite{Campbell2007} nutzt für die Objekterkennung zwei seitliche Ibeo Alasca XT, ergänzend dazu werden drei RADAR Sensoren an der Fahrzeugfront genutzt welche es über den Doppler shift
+erlauben bewegte Objekte zu erkennen. Das Team hat auch einen Velodyne 3D LIDAR evaluiert sicha ber aufgrund des Preises und der Roll, Pitch Probleme für den Alasca XT entschieden,
+welcher 4 nahezu paralele Scans ausssendet und es so einfach macht, den boden zu erkennen. Über die Segmentierung der Objekte macht das Team keine Angaben, es wird lediglich gesagt, das die Sensorrohdaten
+in eine lokale Karte eingetragen, also fusioniert werden. Für das eigentliche Tracking wird ein ``Rao-Blackwellized Particle Filter''\cite{miller2007rao} genutzt.
+
+\subsubsection{TerraMax}
+Team TerraMax  \cite{Corp2005} nutzt ebenfalls den Ibeo Alasca XT und zusätzlich drei SICK LMS-291 LIDAR Sensoren Wobei der Ibeo Sensor frontal angebracht ist.
+Und die SICK Sensoren den seitlichen bzw hinteren Bereich abdecken. Weiterhin macht das Team intensiven gebrauch von einem selbt entwickelten Panorama Kamerasystem, das in idenischer ausführung
+einmal vorn und hinten moniert ist. Das System besteht jeweils aus 3 Kameras wobai abhängig von der geschindigkeit jeweils 2 Kameras genzuz werden um eine Stereobild der Umgebung zu berechnen.
+Bei höheren geschwindigkeiten wird auf die jeweiligen außeren Kameras umgeschalten, um eine höhere Tiefensicht zu erhalten. Um Objekte zu detektieren wird haupsächlich dieses System genutzt.
+Dabei wird von einer Flachen Fahrbahn ausgegangen, und alles was nicht flach ist als Objekt erkannt und dann mit den Rohdaten der LIDAR sensoren fusioniert.
+Team TerraMax beschreibt kein weiteres Tracken der Objekte.
+
+\subsubsection{Tartan Racing}
+Tartan Racing \cite{Urmson2007} nutzt eine kombination aus mehreren Sensoren zum Umfeldwarnehmung dabi ist der Velodyne HDL-64E, der Ibeo Alasca XT, ARS300 RADAT
+
 
 \chapter{Methodology}
+
+
+
 
 
 \todo{siehe jens BA, dashier ist zu kurz}
@@ -949,7 +1003,13 @@ at={(0.50\textwidth,0)}]
 % die Position des Fahrzeuges aus dem Mittelpunkt der Boundingbox bestimmt.
 
 Easy to see, a width of 2m and a length of 5m is calculated for the object. In this case the object is a Volvo S60, which has outer dimensions of approximately
-1.9m and 4.6m, whereby the deviations are correctly within, the rounding of the values. For the subsequent filtering of the measured values with the help of an extended Kalman filter, 
+1.9m and 4.6m, whereby the deviations are correctly within, the rounding of the values. 
+It can be seen that the distribution of the width, is similar to a normal distribution, which is due to the fact that the rotation of the object has a noise.
+In the case of length, however, we see that the algorythm tends to calculate to small values, which results from the fact that this can only be inadequately
+measured when the vehicle is moving towards the sensor. Because to the internal vehicle structure, the sensor is not able to see through the vehicle, so the
+values are to smal.
+
+For the subsequent filtering of the measured values with the help of an extended Kalman filter, 
 the position of the vehicle from the center of the bounding box is now determined, using the mean value of the four corner points
 
 % Die für die Berechnung der Bewegungsrichtung genutzte Position ist jedoch eine andere, da die so eben berechnete Position zu diesem Zeitpunkt noch nicht zur verfügung steht und
@@ -958,8 +1018,8 @@ the position of the vehicle from the center of the bounding box is now determine
 % Da $\theta$ im initialen Zeitschritt Null ist, entpricht dies der globalen Maximalen x-Koordinate des Clusters. Dies Führt dazu, das wir im Initialen Zeitschritt annhemen, dass sich das Objekt
 % in die positive x-Richtung bewegt. Bei Objekten bei denen das nicht der Fall ist, führt das zu einem kurzzeitigen oszillieren der Orientierung, welche sich jedoch über die Zeit schnell stabilisiert.
 
-However, the position used for the calculation of the direction of movement is different, since the so calculated position is not yet available at this t
-ime and the position is very unstable shortly after the initial recognition due to the frequent dimensional changes. Therefore, the maximum x coordinate
+However, the position used for the calculation of the direction of movement is different, since the so calculated position is not yet available at this time 
+and the position is very unstable shortly after the initial recognition due to the frequent dimensional changes. Therefore, the maximum x coordinate
 of the rotated clusters is always used as the position. This position can also be examined in \cref{obst_rot}, as a small green circle. Since $\theta$ in the initial time step is zero, 
 this corresponds to the global maximum x-coordinate of the cluster. This leads to the assumption that the object moves in the positive x direction in the initial time step. 
 For objects where this is not the case, this leads to a short-term oscillation of the orientation, which however quickly stabilizes over time.
@@ -1070,7 +1130,7 @@ objects which are not visible at the moment. Furthermore, it allows you to easil
 % Daher müssen wir uns auf ein relativ Einfaches ``Constant Turn Rate and Velocity'' Model beschränken. Dies erlaubt es uns allerdings das gleiche
 % Model für alle Klassen von Objekten zu nutzten. Da dieses Model ebenfalls auf Fußgänger und Radfahre angewendet werden kann.
 
-From the previous tracking, we can get the current position, speed, rotation and rotation speed. For an estimation of the state with the for vehicle common the bicycle model \todo{reference}, 
+From the previous tracking, we can get the current position, speed, rotation and rotation speed. For an estimation of the state with the for vehicle common the bicycle model \cite{althoff2014online,snider2009automatic,kong2015kinematic}, 
 we miss the wheelbase and the weight of the vehicle. Therefore, we must limit ourselves to a relatively simple ``Constant Turn Rate and Velocity'' model.
 This allows us to use the same model for all classes of objects. Because this model can also be used on pedestrians and cyclists.
 
