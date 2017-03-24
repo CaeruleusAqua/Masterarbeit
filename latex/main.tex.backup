@@ -1157,7 +1157,7 @@ However, since the orientation and position of the objects are used as input for
 % wird um eins erhöht, wenn das Objekt in zwei aufeinader folgenden Zeitschritten getrackt werden kann und folgende bedingungen erfüllt: 
 
 In order to prevent the detection of false positives immediately recognized as an object and thus to influence the subsequent logic, a confidence value is now introduced. 
-Before a recognized object is considered to be valid, this must achieve a certain confidence value. The initial confidence value of an object is zero. 
+Before a recognized object is considered to be valid, this must achieve a certain confidence value. The initial confidence value of an object is one. 
 The confidence value is increased by one if the object can be tracked in two consecutive time steps and satisfies the following conditions:
 
 \begin{itemize}
@@ -1167,8 +1167,8 @@ The confidence value is increased by one if the object can be tracked in two con
 \end{itemize}
 % Ist eine dieser Bedingunggen nicht erfüllt, wird der Confidence Wert statdessen halbiert. Damit ein Objekt als gütig erachtet wird, muss es einen Confidence wert von 3 erreichen, sodass
 % Ein Objekt erst nach mindestens 3 drei Iterationen erkannt werden kann.
-If one of these constraints is not met, the Confidence value is halved. For an object to be considered kind, it must reach a confidence value of 3 so that an object can only be 
-recognized after at least 3 three iterations. This value was empirically determined and represents a tradeoff between fast detection and filtering.
+If one of these constraints is not met, the Confidence value is halved. For an object to be considered kind, it must reach a confidence value of three so that an object can only be 
+recognized after at least two iterations. This value was empirically determined and represents a tradeoff between fast detection and filtering.
 
 
 \section{Classification}
@@ -1249,29 +1249,30 @@ v &\text{ - Object Velocity}\\
 The dynamic matrix is obtained by a non-linear state transition:
 
 \begin{align*}
-f = \vec{x}(t + T)=
+f = \vec{x}(t + \Delta t)=
 \begin{bmatrix}
-\frac{v}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta) + x(t) \\
-\frac{v}{\omega} (\cos(\theta)) - cos(T \omega + \theta) + y(t) \\
-\omega T + \theta\\
+\frac{v}{\omega} (-\sin(\theta) + \sin(\Delta t \omega + \theta)) + x(t) \\
+\frac{v}{\omega} (\cos(\theta) - cos(\Delta t \omega + \theta)) + y(t) \\
+\omega \Delta t + \theta\\
 v\\
 \omega
 \end{bmatrix} 
 \end{align*}
 
-Da es sich beid er Dynamikmatrix um einen nichtlinearen Zustandsübergang handelt benötigen wir noch die Jacobi Matrix.
-Diese wurde auf Grund ihrer Göße eingekürzt.
+% Da es sich beid er Dynamikmatrix um einen nichtlinearen Zustandsübergang handelt benötigen wir noch die Jacobi Matrix.
+% Diese wurde auf Grund ihrer Göße eingekürzt.
 %Die Matrix wure mit Sympy generiert, und auf Grund ihrer Größe eingekürzt.
+Since the dynamics matrix is a non-linear state transition, we still need the Jacobian matrix. This was shortened because of its size.
  
  
 \begin{align*}
 J(\vec{x})=
 \begin{bmatrix}
-1 & 0 & \frac{v}{\omega} (-\cos(\theta)) + \cos(T \omega + \theta)& \dots & \dots \\
+1 & 0 & \frac{v}{\omega} (-\cos(\theta) + \cos(\Delta t \omega + \theta))& \dots & \dots \\
 %\frac{1}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& multi-body simulation
 %\frac{Tv}{\omega} \cos(T \omega + \theta) - \frac{v}{\omega^2}(-\sin(\theta) + \sin(T\omega + \theta) 
-0 & 1 & \frac{v}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta)& \dots & \dots \\
-0 & 0 & 1 & 0 & T\\
+0 & 1 & \frac{v}{\omega} (-\sin(\theta) + \sin(\Delta t \omega + \theta))& \dots & \dots \\
+0 & 0 & 1 & 0 & \Delta t\\
 0 & 0 & 0 & 1 & 0\\
 0 & 0 & 0 & 0 & 1
 \end{bmatrix} 
@@ -1281,14 +1282,17 @@ J(\vec{x})=
 \subsection{Extendet Kalman Filter}
 
 
-Der Extendet Kalman Filter (EKF) ist die nichtlineare Version des Kalman-Filters, die sich über eine Schätzung des aktuellen Mittels und der Kovarianz linearisiert.
-Zusätlich zu unserem Modell werden noch weitere Werte benötigt. Dazu zehen wir uns die Berechnungsforschrift an:
+% Der Extendet Kalman Filter (EKF) ist die nichtlineare Version des Kalman-Filters, die sich über eine Schätzung des aktuellen Mittels und der Kovarianz linearisiert.
+% Zusätlich zu unserem Modell werden noch weitere Werte benötigt. Dazu zehen wir uns die Berechnungsforschrift an:
 
-\paragraph{predict}
+The Extendet Kalman Filter (EKF) \todo{reference} is the nonlinear version of the Kalman filter, which is linearized by an estimate of the current mean and the covariance.
+In addition to our model, further values are required. For this purpose, we look at the calculation rules of the necessary steps.
+
+\subsubsection{Prediction}
 
 \begin{align*}
-\hat{x_{k}} &= f(\hat{x_{k-1}},u_{k-1})\\
-P_{k}&=F_{k-1} P_{k-1} {F_{k-1}}^T + Q_{k-1}
+\hat{x}_{k} &= f(\hat{x}_{k-1},u_{k-1})\\
+P_{k}&=F_{k-1} P_{k-1} {F^T_{k-1}} + Q_{k-1}
 \end{align*}
 
 % with:
@@ -1299,30 +1303,102 @@ P_{k}&=F_{k-1} P_{k-1} {F_{k-1}}^T + Q_{k-1}
 % \end{itemize}
 
 Since we can not know the control variables of the other vehicles, we asume $u$ to be zero for our calculations.
-For the state transition model $F$ we use our previous calculated Jacobi matrix applied to the previous state.
+For the state transition model $F$ we use our previous calculated Jacobian matrix applied to the previous state.
 
 \begin{align*}
-\hat{x_{k}} &= f(\hat{x_{k-1}},0)\\
-P_{k}&=J_{k-1} P_{k-1} {J_{k-1}}^T + Q_{k-1}
+\hat{x_{k}} &= f(\hat{x}-{k-1},0)\\
+P_{k}&=J_{k-1} P_{k-1} {J^T_{k-1}} + Q_{k-1}
 \end{align*}
 
-Für die Process Noise Covariance Matrix Q nehmen wir als ausgangspunkt typische Fahrzeugwerte aus werte aus \cite{Kelly1994} an.
+% Für die Process Noise Covariance Matrix $Q$ nehmen wir als ausgangspunkt typische worst case werte für Fahrzeuge aus \cite{Kelly1994} an.
+% maximum acceleration: $a = 8.8 \frac{m}{s^2}$, maximum turn rate: $\omega = 0.1 \frac{rad}{s}$,   maximum turn rate acceleration: $\dot\omega = 0.1 \frac{rad}{s^2}$
+% Diese Werte werden dann integriert, bis die Einheit korrekt ist. Abschliend, da wir eine Varianz haben wollen werden die Werte quadriert.
 
-
-
-\paragraph{update}
+For the Process Noise Covariance Matrix $Q$, we assume typical worst case values for vehicles from \cite{Kelly1994} as the starting point,
+maximum acceleration: $a = 8.8 \frac{m}{s^2}$, maximum turn rate: $\omega = 0.1 \frac{rad}{s}$,   maximum turn rate acceleration: $\dot\omega = 0.1 \frac{rad}{s^2}$.
+These values are then integrated until the unit is correct. Finally, since we want to have a variance, the values are squared. 
+We assume no correlation between all other values and get only values in the main diagonal.
 
 \begin{align*}
-\tilde{y_k} &= z_k -h(\hat{x_{k}})\\
-S_k &= H P_k {H_K}^T + R_k\\
-K_k &= P_k {H_K}^T {S_K}^{-1}\\
-\hat{x_k} &= \hat{x_k} + K_k \tilde{y_k}\\
+Q=
+\begin{bmatrix}
+(\frac{a \cdot \Delta t^2}{2})^2 & 0 & 0 & 0 & 0\\
+0 & (\frac{a \cdot \Delta t^2}{2})^2 & 0 & 0 & 0\\
+0 & 0 & (\omega \cdot \Delta t)^2 & 0 & 0\\
+0 & 0 & 0 & (a \cdot \Delta t)^2 & 0\\
+0 & 0 & 0 & 0 & (\dot\omega \cdot \delta t)^2
+\end{bmatrix} 
+\end{align*}
+
+% sGPS     = 0.5*8.8*dt**2  # assume 8.8m/s2 as maximum acceleration, forcing the vehicle
+% sCourse  = 0.1*dt # assume 0.1rad/s as maximum turn rate for the vehicle
+% sVelocity= 8.8*dt # assume 8.8m/s2 as maximum acceleration, forcing the vehicle
+% sYaw     = 1.0*dt # assume 1.0rad/s2 as the maximum turn rate acceleration for the vehicle
+% 
+% Q = np.diag([sGPS**2, sGPS**2, sCourse**2, sVelocity**2, sYaw**2])
+
+% Weiterhin wurden  mussten in diesem Schritt eineige optimierungen gemacht werden um die nummerische stabilität zu gewährleisten.
+% Fällt die Drehrate auf einen sehr niedrigen wert, riskieren wir eine Division durch null. Um diesn fall abzufangen, wurde
+% ein neuer Zustandsübergang definiert:
+Furthermore, some optimization had to be made in this step in order to ensure the numerical stability. 
+If the yaw rate is very low, we risk a division by zero. In order to except this situation, a new state transition was defined:
+
+\begin{align*}
+f = \vec{x}(t + \Delta t)=
+\begin{bmatrix}
+v \cdot \Delta t \cdot \cos{\theta}+ x(t) \\
+v \cdot \Delta t \cdot \sin{\theta}+ y(t) \\
+\theta + \Delta t \cdot \omega\\
+v\\
+\omega
+\end{bmatrix} 
+\end{align*}
+
+The corresponding Jacobian matrix is then:
+\begin{align*}
+J(\vec{x})=
+\begin{bmatrix}
+1 & 0 & -\Delta t \cdot v \sin{\theta} & \Delta t \cdot \cos{\theta} & 0\\
+0 & 1 & \Delta t \cdot v \cos{\theta} & \Delta t \cdot \sin{\theta}  & 0\\
+0 & 0 & 1 & 0 & \Delta t\\
+0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 0 & 1
+\end{bmatrix} 
+\end{align*}
+
+
+
+\subsubsection{Updating}
+
+\begin{align*}
+\tilde{y}_k &= z_k -h(\hat{x}_{k})\\
+S_k &= H P_k H^T_k + R_k\\
+K_k &= P_k H^T_k S_k^{-1}\\
+\hat{x}_k &= \hat{x}_k + K_k \tilde{y}_k\\
 P_k &= (I - K_k H_k) P_k
 \end{align*}
 
 
 Since we directly measure all states of our system there is observation function for our measurements, means our
-$h(\hat{x_{k}})$ equals $\hat{x_{k}}$. Because of this our observation matrix $H$ results in a simple Identity matrix.
+$h(\hat{x}_k)$ equals $\hat{x}_k$. Because of this our observation matrix $H$ results in a simple Identity matrix.
+
+For the Measurement Noise Covariance Matrix $R$ we assume experimental determined values. Since we are quite sure about the position we
+assume a small value of 1 and a value of 0.1 for the rotation, for the same reason. For the velocity we chose a quite high value of 4,
+because it is derived from the position over time. The same for the yaw rate with a value of 0.1. Again we assume no correlation between all other values,
+which it is most likely not true, but would need more further investigation.
+
+\begin{align*}
+R=
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0.1 & 0 & 0\\
+0 & 0 & 0 & 4 & 0\\
+0 & 0 & 0 & 0 & 0.1
+\end{bmatrix} 
+\end{align*}
+
+
 
 % \begin{itemize}
 %  \item $h$ - predicted measurement transformation
@@ -1332,24 +1408,51 @@ $h(\hat{x_{k}})$ equals $\hat{x_{k}}$. Because of this our observation matrix $H
 % \end{itemize}
 
 
-Im Update Schritt des Filters muss beachtet werden, dass wir mir Rotationen arbeiten die im Bereich von $[-180 \le \theta \le 180]$ definiert sind und desshalb Singularitäten auftreten können.
-Da unsere Messdaten verraucht sind , kann es vorkommen, dass unser State bei 179 Grad ist und mit einem Wert von $-179$ geupdatet werden soll. Nehmen wir der einfachheit an,
-dass beide werte gleich gewichtet sind, ergibt sich nach dem update ein Wert von 0 Grad, dies ist offensichtilich falsch. Deshalb, wird vor jedem updateschritt bei bedarf
-$360$ Grad addiert oder suptrahiert, do das der Abstand zwischen State und Messwert minimert wird. Nach dem Updae wird der interne State wieder auf den bereich $[-180 \le \theta \le 180]$ normiert.
-Betrachten wir nun wieder unser Beispiel mit den korrigierten Werten, State: $179-360=-181$ Grad und Messwert: $-179$ Grad erhalten wir den korrekten Wert von $-180$ Grad.
+% In diesem Schritt des Filters muss beachtet werden, dass wir mir Rotationen arbeiten die im Bereich von $[-180 \le \theta \le 180]$ definiert sind und desshalb Singularitäten auftreten können.
+% Da unsere Messdaten verraucht sind , kann es vorkommen, dass unser State bei 179 Grad ist und mit einem Wert von $-179$ geupdatet werden soll. Nehmen wir der einfachheit an,
+% dass beide werte gleich gewichtet sind, ergibt sich nach dem update ein Wert von 0 Grad, dies ist offensichtilich falsch. Deshalb, wird vor jedem updateschritt bei bedarf
+% $360$ Grad addiert oder suptrahiert, do das der Abstand zwischen State und Messwert minimert wird. Nach dem Updae wird der interne State wieder auf den bereich $[-180 \le \theta \le 180]$ normiert.
+% Betrachten wir nun wieder unser Beispiel mit den korrigierten Werten, State: $179-360=-181$ Grad und Messwert: $-179$ Grad erhalten wir den korrekten Wert von $-180$ Grad.
 
-\subsection{Prediction}
+In this step of the filter it must be noted that we are working with $\theta$ that is defined in the range of $ [- 180 \le \theta \le 180] $ and therefore singularities can occur.
+Because our measurement data is noisy, our state may be at 179 degrees and is updated with a value of $ -179 $. For the sake of simplicity we assuming that both values are equally weighted,
+the update step results in a value of 0 degrees, which is obviously wrong. Therefore, before each updating step, $ 360 $ degree is added or suptracted,
+so the distance between state and measured value is minimized. After updating, the internal state is again normalized to the range $ [- 180 \le \theta \le 180] $.
+Consider now again our example with the corrected values, state: $ 179-360 = -181 $ degree and measured value: $ -179 $ degree, we get the correct value of $ -180 $ degree.
+
+
+\subsubsection{Initial Uncertainties}
+
+% Unsere Initale Covariance Matrix $P$ wurde ebenfalls expirimentel ermittelt. Für die Postition nehmen wir, da wir sie direckt messen können, eine hohe sicherheit an, und setzten 
+% diese auf eins. Da wir die Rotoation ebenfalls direckt mess nehmen wir einen wert von 0.1 an. Da wir die zeitabhängiugen größen im ersten schritt nicht messen können,
+% wird hier einsehr hoher Wert von 1000 angesetzt.
+Our initial covariance matrix $ P $ was also determined expirimentel. For the position we take a high degree of safety, since we can measure them directly, and put them on one. 
+Since we also measure the rotoation directly we take a value of 0.1. Since we can not measure the time-dependent variables in the first step, a very high value of 1000 is chosen here.
+
+\begin{align*}
+P_{initial}=
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0.1 & 0 & 0\\
+0 & 0 & 0 & 1000 & 0\\
+0 & 0 & 0 & 0 & 1000
+\end{bmatrix} 
+\end{align*}
+
+
+
+\subsection{Reassigning}
 % Befindet sich ein Objekt innerhalb der Rechihweite des Velodyne Sensors und wird im Darauffolgenden Zeitschritt nicht erkannt,
 % wird der Prediktionsschritt des Kalman filter weiterhin ausgeführt. Dies geschieht solange die Unsicherheit der Position einen gewissen \todo{konkretisieren schwellwert} Schwellwert üerschreitet.
 % Sollte eine dieser Bedingungen nicht zutreffen, wird das Objekt aus der Liste der bekannten Objekte entfernt. Sobald das Clustertracking dann ein neues Objekt detektiert,
 % dem keine Bisher bekannte ID zugewiesen werden kann, wird die Postion mit allen Onjekten in der Prediktionsphase
 % abgeglichen. Befindet sich das neue Objekt nahe an der predizierten Position wird der Cluster dem Onjekt zugewiesen, und der Korrekturschritt des EKF durchgeführt.
 
-an object is within the range of the Velodyne sensor and is not detected in the subsequent time step, the prediction step of the Kalman filter is still executed.
-This is done as long as the uncertainty of the position passes a certain \todo{threshold threshold} threshold. If one of these conditions does not apply,
-the object is removed from the list of known objects. As soon as the clustertracking detects a new object which can not be assigned a previously known ID, 
-the position is matched with all objects in the prediction phase. If the new object is close to the predicted position, the cluster is assigned to the object
-and the correction step of the EKF is performed.
+If an object is within the range of the Velodyne sensor and is not detected in the subsequent time step, the prediction step of the Kalman filter is still executed.
+This is done as long as the confidence value of the object does not reach zero. As soon as the cluster tracking detects a new object which can not be assigned a previously known ID,
+the position is matched with all objects in the prediction phase. If the new object is within three meters to the predicted position, the cluster is assigned to the object
+and the correction step of the EKF is performed. If more than one object matches these condition the closest object is assigned.
 
 \chapter{Simuation}
 % Die Simulationsumgebeung, welche verwendet wird ist VREP \footnote{\url{http://www.coppeliarobotics.com/}}. VREP wurde für verschiedenne Robottikanwendungen entwickelt.
