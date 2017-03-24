@@ -26,14 +26,25 @@ as opposed to crossroads (32), thus contributing greatly to road safety, which r
 % Furthermore, circular traffic also allows nodes to be constituted with more than 4 roads, which gives them a further advantage.
 % Unfortunately, there are no publications known to the author in the context of autonomous driving and roundabouts.
 
-In \cite{Baumert1998, brilon2002verkehrssicherheit, brilon2004uberprufung,voss1994verkehrssicherheit} wurden Untersuchungnen angestellt, welche die Sicherheit von Kreisverkehren im Innenstadtbereich untersuchen sollen. Die Auswertung wurde grafisch aufbereitet.
-Wobei \cref{accident_rate} die Unfallrate zeigt, welche eine Aussage über das allgemeine Risiko einen unfall zu haben macht. 
-Während \cref{charge_rate} die Kosten der Unfälle auf alle Fahrzeuge aufteilt und ein Maß für die Schwere der Unfälle darstellt, dabei werden sowohl Sach als auch Personenschäden
-miteinbezogen. Dabei ist erssichtlich, das mini Kreisverkehre [\cref{mini_roundabout}] und Kleine Kreisverkehre [\cref{smal_roundabout}] einen Signifikant kleiners Risiko aufweisen, als andere Kotenpunkte, sowohl was die Anzahl der Unfälle angeht
-als auch die Schwere. Während große Kreisverkehre mit normalen Kreuzungen in etwa vergleichbar sind. In \cite{Bondzio2012} wird dies auf die höhere Geschwindigkeit in diesem Kreisverkehren
-zurückgeführt. Daraus lässt sich ableiten, das kleine und mini Kreisverkehre aus der Risikosicht, dem großen Kreisverkehr zu bevorzugen sind. Zu beachten ist ,dass bei der Untsuchung von \cite{Bondzio2012} mit 100 Kreisverkehren auffällt dass  83\% der Kreisverkehre einen Durchmesser von weniger als 35m aufweisen und somit
-der Klasse Mini bzw. Kleiner Kreisverkehr zugeordnet werden können. Auch wenn diese Untersuchung nicht repräsentativ ist, ist davon auszugehen, das die Anzahl der Kleinen und Minikreisverkehre im 
-innerstätischenbereich größer ist, als die der großen kreisverkehre, was aufgrund der Platzverhältnisse im Innenstadtbereich sinnvoll erscheint.
+% In \cite{Baumert1998, brilon2002verkehrssicherheit, brilon2004uberprufung,voss1994verkehrssicherheit} wurden Untersuchungnen angestellt, welche die Sicherheit von Kreisverkehren im Innenstadtbereich untersuchen sollen. Die Auswertung wurde grafisch aufbereitet.
+% Wobei \cref{accident_rate} die Unfallrate zeigt, welche eine Aussage über das allgemeine Risiko einen unfall zu haben macht. 
+% Während \cref{charge_rate} die Unfallkostenrate zeigt welche, die Kosten der Unfälle auf alle Fahrzeuge aufteilt und ein Maß für die Schwere der Unfälle darstellt, dabei werden sowohl Sach als auch Personenschäden
+% miteinbezogen. Dabei ist erssichtlich, das mini Kreisverkehre [\cref{mini_roundabout}] und Kleine Kreisverkehre [\cref{smal_roundabout}] einen Signifikant kleiners Risiko aufweisen, als andere Kotenpunkte, sowohl was die Anzahl der Unfälle angeht
+% als auch die Schwere. Während große Kreisverkehre mit normalen Kreuzungen in etwa vergleichbar sind. In \cite{Bondzio2012} wird dies auf die höhere Geschwindigkeit in diesem Kreisverkehren
+% zurückgeführt. Daraus lässt sich ableiten, das kleine und mini Kreisverkehre aus der Risikosicht, dem großen Kreisverkehr zu bevorzugen sind. Zu beachten ist ,dass bei der Untsuchung von \cite{Bondzio2012} mit 100 Kreisverkehren auffällt dass  83\% der Kreisverkehre einen Durchmesser von weniger als 35m aufweisen und somit
+% der Klasse Mini bzw. Kleiner Kreisverkehr zugeordnet werden können. Auch wenn diese Untersuchung nicht repräsentativ ist, ist davon auszugehen, das die Anzahl der Kleinen und Minikreisverkehre im 
+% innerstätischenbereich größer ist, als die der großen kreisverkehre, was aufgrund der Platzverhältnisse im Innenstadtbereich sinnvoll erscheint.
+
+In \cite{Baumert1998, brilon2002verkehrssicherheit, brilon2004uberprufung,voss1994verkehrssicherheit}, is examined, the safety of roundabouts in the inner city area.
+The evaluation was graphically prepared. Where \cref{accident_rate} shows the accident rate, which makes a statement about the general risk of an accident.
+While \cref{charge_rate} shows the accident charge rate, which divides the costs of the accidents on all vehicles and represents a measure of the severity of the accidents,
+both material and personal injury are included. It can be seen that the mini roundabouts [\cref{mini_roundabout}] and small roundabouts [\cref{smal_roundabout}] have a significant 
+lower risk than other intersection points, in both the risk of accidents and severity. While large roundabouts are roughly comparable with normal crossings. 
+In \cite{Bondzio2012} this is reasonable to the higher speed in this roundabout. From this it can be deduced that the small and mini roundabouts from the point of risk,
+are to be preferred over the large roundabout. It should be noted that during the investigation of \cite{Bondzio2012} with 100 roundabouts it is noticeable that 83\%
+of the roundabouts have a diameter of less than 35m and can therefore be assigned the class mini or small roundabout.
+Although this study is not representative, it is to be assumed that the number of small and miniature circuits in the inner-city limits is larger than that of the large roundabouts,
+which seems reasonable on account of the space conditions in the inner-city limits.
 Furthermore, circular traffic also allows nodes to be constituted with more than 4 roads, which gives them a further advantage.
 Unfortunately, there are no publications known to the author in the context of autonomous driving and roundabouts.
 
@@ -41,12 +52,11 @@ Unfortunately, there are no publications known to the author in the context of a
 
 
 
-\definecolor{myblue}{HTML}{92dcec}
 
 
 \begin{figure}[!ht]
 \begin{center}
-\caption{Accident rate in City Limits}
+\caption{Accident Rate in City Limits}
 \begin{tikzpicture}
   \foreach \x in {1,...,7}  %Hilfslinien
     \draw[gray!50, text=black] (-0.2 cm,\x cm) -- (9.5cm,\x cm) 
@@ -65,7 +75,7 @@ Unfortunately, there are no publications known to the author in the context of a
                               6.5/1.55/crossroad,
                               8/1.45/crossroad w traffic lights}
     {
-     \draw[fill=myblue] (\x cm,0cm) rectangle (1.0cm+\x cm,\y cm) %die Säulen
+     \draw[fill=gray!50] (\x cm,0cm) rectangle (1.0cm+\x cm,\y cm) %die Säulen
        node at (0.5cm + \x cm,\y cm + 0.3cm) {\y}; %die Prozente über den Säulen
      \node[rotate=45, left] at (0.6 cm +\x cm,-0.1cm) {\country}; %Säulenbeschriftung
     };
@@ -76,7 +86,7 @@ Unfortunately, there are no publications known to the author in the context of a
 
 \begin{figure}[!ht]
 \begin{center}
-\caption{Accident charge rate in City Limits}
+\caption{Accident Charge Rate in City Limits}
 \begin{tikzpicture}
   \foreach \x in {1,...,7}{  %Hilfslinien
    \pgfmathsetmacro\result{\x *2}
@@ -97,7 +107,7 @@ Unfortunately, there are no publications known to the author in the context of a
                               6.5/6.15/12.3/crossroad,
                               8/6.9/13.8/crossroad w traffic lights}
     {
-     \draw[fill=myblue] (\x cm,0cm) rectangle (1.0cm+\x cm,\y cm) %die Säulen
+     \draw[fill=gray!50] (\x cm,0cm) rectangle (1.0cm+\x cm,\y cm) %die Säulen
        node at (0.5cm + \x cm,\y cm + 0.3cm) {\value}; %die Prozente über den Säulen
      \node[rotate=45, left] at (0.6 cm +\x cm,-0.1cm) {\country}; %Säulenbeschriftung
     };
@@ -230,7 +240,7 @@ Bypasses are generally not required in the areas where mini roundabout can be us
 %\end{center}
 \end{figure}
 
-The small roundabout has a single lane circular path and single lane circular driveways and exits. The roundabout island is not passable.
+The small roundabout has a single lane circular path and single lane circular driveways and exits. The roundabout island is not passable and can be building area.
 The outer diameter must be at least 26 m. Bypasses can be set up for driving geometric reasons or to increase performance.
 
 
@@ -271,9 +281,8 @@ For geometrical reasons, the outer diameter must be at least 40 m for two-laned 
 \end{figure}
 
 %Große Kreisverkehre mit zwei oder mehreren durch Markierungen gekennzeichnete Fahrstreifen auf der Kreisfahrbahn sollen bei enger
-%Abstimmung zwischen Knotenpunktentwurf und Verkehrssteuerung nur mit Lichtsignalanlage betrieben wer den.
-Large Roundabouts with two or more lanes marked by markers on the circular path should be operated with a light signaling system only,
-if the nodal point design and traffic control are closely coordinated.
+%Abstimmung zwischen Knotenpunktentwurf und Verkehrssteuerung nur mit Lichtsignalanlage betrieben werden.
+Large Roundabouts with two or more lanes marked by markers on the circular path should be operated only with a light signaling system and closely coordinated roundabout design and traffic control,
 
 
 \section{\acl{RANSAC}}
@@ -296,24 +305,26 @@ From this set of data points randomly as many data points are selected, as neces
 From the remaining data, those which have a spacing which is smaller than a certain limit value are then selected.
 This set now represents the ``consensus set''. If it contains a certain minimum number of values, a good model was probably found and the consensus set is stored.
 These steps are repeated several times. Then the subset that contains the most points is selected. Using this subset, 
-the model parameters are calculated using one of the usual compensation methods. The \ac{RANSAC} therefore has three parameters to determine, which influence the result.
-
-
-\todo{missing refernce to pics in dbscan and ransac}
-\begin{figure}[!ht]
-\begin{center}
-\caption{\acs{RANSAC} \cite{Fischler1981}}
-\includegraphics[width=0.6\textwidth]{bilder/ransac.pdf}
-\label{ransac}
-\end{center}
-\end{figure}
-
+the model parameters are calculated using one of the usual compensation methods. The \ac{RANSAC} therefore has three parameters to determine, which influence the result:
 
 \begin{itemize}
  \item number of iterations
  \item minimum size of the ``Consensus Set''
  \item distance threshold value (eps)
 \end{itemize}
+
+Figure \ref{ransac} shows an example for an good ``consensus set''.
+
+\todo{missing refernce to pics in dbscan and ransac}
+\begin{figure}[!ht]
+\begin{center}
+\caption{\acs{RANSAC}}
+\includegraphics[width=0.6\textwidth]{bilder/ransac.pdf}
+\label{ransac}
+\end{center}
+\end{figure}
+
+
 
 % Zu beachten ist, das der \ac{RANSAC} durch die zufällige Auswahl der Datenpunkte kein deterministischer algorythmus ist.
 Note that the \ac{RANSAC} is not a deterministic algorythm, beacuse of the random selection of the data points.
@@ -326,15 +337,17 @@ Note that the \ac{RANSAC} is not a deterministic algorythm, beacuse of the rando
 % der nachbarschaft eine neue Bereichsanfrage durchgeführt wird, wird dieser Nicht als Rauschen klassifiziert, wird dieser zum Cluster hinzugefügt und als bearbeitet Makiert.
 % Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbeitet makiert sind, also keine Weiteren punkte in der nachbarschaft erreichbar sind.
 
-\ac {DBSCAN} \cite{DBSCAN} is a deterministic data mining algorithm for cluster analysis. The algorithm is based on density connectivity,
+\ac{DBSCAN} \cite{DBSCAN} is a deterministic data mining algorithm for cluster analysis. The algorithm is based on density connectivity,
 that means, it binds points based on its distance to clusters, \ac {DBSCAN}, iterates over all data points that have not yet been processed, 
 each processed data point is marked as processed. A range query request is then made for each of these points. If the size of the returned neighborhood is lower then a certain limit,
-the point is marked as noise. Otherwise, a new clusrer is created by performing a new range request for each point in the neighborhood, if the point is not classified as noise,
-the Point is added to the cluster and marked as processed. This is repeated until all the points in the cluster are marked as processed, so no further points can be reached in the neighborhood.
+the point is marked as noise. Otherwise, a new clusrer is created by performing a new range request for each point in the neighborhood 
+and adding the Points to the cluster and marked as processed. This is repeated until all the points in the cluster are marked as processed, so no further points can be reached in the neighborhood.
+Figure \ref{dbscan} shows an example, with an point threshold of one. So the blue point is marked as noise, because there are no neighbors inside of the maximum allowed distance.
+The original \ac{DBSCAN} also makes a differentiation between core and border points, where core points are dense
 
 \begin{figure}[!ht]
 \begin{center}
-\caption{\acs{DBSCAN} \cite{DBSCAN}}
+\caption{\acs{DBSCAN}}
 \includegraphics[width=0.6\textwidth]{bilder/dbscan.pdf}
 \label{dbscan}
 \end{center}

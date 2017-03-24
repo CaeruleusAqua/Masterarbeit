@@ -52,6 +52,79 @@
       \field{pages}{903\bibrangedash 918}
       \range{pages}{16}
     \endentry
+    \entry{Aly2007}{article}{}
+      \name{author}{10}{}{%
+        {{hash=424c4f70b4febaba28c27b5490b5a268}{%
+           family={Aly},
+           familyi={A\bibinitperiod},
+           given={Mohammed},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e6367664e7e37f3abf3b11b8362d6aa7}{%
+           family={Burdick},
+           familyi={B\bibinitperiod},
+           given={Joel\bibnamedelima W},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=b490578a1a47d8c70728b39664687f0d}{%
+           family={Carson},
+           familyi={C\bibinitperiod},
+           given={Vanessa},
+           giveni={V\bibinitperiod}}}%
+        {{hash=b719c32dfc1efa49065e4c0fd6494316}{%
+           family={Di},
+           familyi={D\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod}}}%
+        {{hash=213c4a38711b26e0228bba3c50728ab9}{%
+           family={Flores},
+           familyi={F\bibinitperiod},
+           given={Melvin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=cd9aeee13268e489184a9ce894a7d45c}{%
+           family={Gonzalez},
+           familyi={G\bibinitperiod},
+           given={Jessica},
+           giveni={J\bibinitperiod}}}%
+        {{hash=315c4166fc1f7cb66324a7f0d82827cd}{%
+           family={Howard},
+           familyi={H\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cc32aada070435112dc9d33ab9de9e66}{%
+           family={Lindzey},
+           familyi={L\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=78b5cf8737fd5e295c3b16aed12ed020}{%
+           family={Ma},
+           familyi={M\bibinitperiod},
+           given={Jeremy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=50047985693cc525e8d466fb35bc7cb9}{%
+           family={Murray},
+           familyi={M\bibinitperiod},
+           given={Richard\bibnamedelima M},
+           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{07f861693b65f7fffa7d9b42522c35f1}
+      \strng{fullhash}{5c8d19f33556d9e13e2335e3d49958ce}
+      \strng{authornamehash}{07f861693b65f7fffa7d9b42522c35f1}
+      \strng{authorfullhash}{5c8d19f33556d9e13e2335e3d49958ce}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This report describes Team Caltech's technical approach and results$\backslash$nfor the 2007 DARPA Urban $\backslash$n$\backslash$nChallenge. Our primary technical thrusts were in three areas: (1)$\backslash$nmission and contingency manage- $\backslash$n$\backslash$nment for autonomous systems; (2) distributed sensor fusion, mapping$\backslash$nand situational awareness; $\backslash$n$\backslash$nand (3) optimization-based guidance, navigation and control. Our autonomous$\backslash$nvehicle, Alice, $\backslash$n$\backslash$ndemonstrated new capabiliites in each of these areas and drove approximate$\backslash$n300 autonomous miles $\backslash$n$\backslash$nin preparation for the race. The vehicle completed 2 of the 3 qualification$\backslash$ntests, but did not ulti- $\backslash$n$\backslash$nmately qualify for the race due to poor performance in the merging$\backslash$ntests at the National Qualifying $\backslash$n$\backslash$nEvent.}
+      \field{journaltitle}{Traffic}
+      \field{langid}{english}
+      \field{number}{1}
+      \field{title}{{Sensing , Navigation and Reasoning Technologies for the DARPA Urban Challenge 1 Introduction and Overview}}
+      \field{year}{2007}
+      \field{pages}{1\bibrangedash 25}
+      \range{pages}{25}
+      \verb{file}
+      \verb :home/storm/workspace/Masterarbeit/documents/Cal{\_}Tech.pdf:pdf
+      \endverb
+    \endentry
     \entry{Atreya2007}{article}{}
       \name{author}{18}{}{%
         {{hash=489e75cb31ec9c416c0ce6beb366c2f1}{%
@@ -1104,6 +1177,43 @@
       \endverb
       \verb{url}
       \verb http://tigerprints.clemson.edu/all%7B%5C_%7Dtheses
+      \endverb
+    \endentry
+    \entry{Release2007}{article}{}
+      \name{author}{3}{}{%
+        {{hash=e39fbdc0fc17c1c4cd8e4f31f309fdf0}{%
+           family={Release},
+           familyi={R\bibinitperiod},
+           given={For\bibnamedelima Immediate},
+           giveni={F\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=aaeb6baf8669f8b4040e8089e16492f4}{%
+           family={Shipley},
+           familyi={S\bibinitperiod},
+           given={Don},
+           giveni={D\bibinitperiod}}}%
+        {{hash=38da6670f67660ecc96c24ec5896c2b7}{%
+           family={Walker},
+           familyi={W\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{d7712b4c5f73c9c3834418879499005f}
+      \strng{fullhash}{d7712b4c5f73c9c3834418879499005f}
+      \strng{authornamehash}{d7712b4c5f73c9c3834418879499005f}
+      \strng{authorfullhash}{d7712b4c5f73c9c3834418879499005f}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Defense}
+      \field{langid}{english}
+      \field{number}{March 2004}
+      \field{title}{{Tartan racing wins {\$}2 million prize for darpa urban challenge}}
+      \field{year}{2007}
+      \field{pages}{2004\bibrangedash 2005}
+      \range{pages}{2}
+      \verb{file}
+      \verb :home/storm/workspace/Masterarbeit/documents/ucwinnertt.pdf:pdf
       \endverb
     \endentry
     \entry{Schubert2008}{article}{}

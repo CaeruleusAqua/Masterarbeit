@@ -136,29 +136,38 @@ I would also like to thank all the other colleagues from Gothenburg, who have su
 \include{basics}
 
 \chapter{State of the Art}
-Auch wenn Autonomes Fahren ein aaktuelles Forschungsthema ist, gibt es bisher keine dem author bekannten veröffentlichungen welche sich explizit mit Kreisverkehren beschäftigen.
-Um trotzdem einen Verleich zur Sensoraustattung und Verkehrsbeobachtung zu haben werden an dieser Stelle einige Paper der \acs{DARPA} Urban Challenge herangezogen.
-Die DARPA Urban Challenge ist ein Rennen zwischen autonomen Fahrzeugen, welches im Jahre 2007 von der \ac{DARPA} ausgetragen wurde. \cite{Buehler2010} Das Rennen fand in bebautem Gebiet
-einer verlassenen Kaserne des ehemaligen Air Force-Stützpunktes George Air Force Base statt, die Karte kann ist in \cref{darpa_map} zu sehen.
+% Auch wenn Autonomes Fahren ein aaktuelles Forschungsthema ist, gibt es bisher keine dem author bekannten veröffentlichungen welche sich explizit mit Kreisverkehren beschäftigen.
+% Um trotzdem einen Verleich zur Sensoraustattung und Verkehrsbeobachtung zu haben werden an dieser Stelle einige Paper der \acs{DARPA} Urban Challenge herangezogen.
+% Die DARPA Urban Challenge ist ein Rennen zwischen autonomen Fahrzeugen, welches im Jahre 2007 von der \ac{DARPA} ausgetragen wurde. \cite{Buehler2010} Das Rennen fand in bebautem Gebiet
+% einer verlassenen Kaserne des ehemaligen Air Force-Stützpunktes George Air Force Base statt, die Karte kann ist in \cref{darpa_map} zu sehen.
+Even if Autonomous Driving is an actual research subject, there are so far no publications known to the author, which deal explicitly with roundabouts.
+In order to have a comparison to the sensor equipment and traffic monitoring, some papers of the \acs{DARPA} Urban Challenge are used here. 
+The DARPA Urban Challenge is a race between autonomous vehicles, which was launched in 2007 by the \ac{DARPA} \cite {Buehler2010}.
+The race took place in the built-up area of an abandoned barracks of the former Air Force base George Air Force Base, the map can be seen in \cref{darpa_map}
+\footnote{\url{http://rsta.royalsocietypublishing.org/content/368/1928/4649}}.
 
 \begin{figure}[!ht]
 %\begin{center}
 \caption{ \acs{DARPA} Urban Challenge Map }
-\footnote{\url{http://rsta.royalsocietypublishing.org/content/368/1928/4649}}
 \includegraphics[width=\textwidth]{bilder/darpa_map_bw.png}
 \label{darpa_map}
 %\end{center}
 \end{figure}
 
-Die Fahrbahnen waren teilweise durch Linien markiert, teilweise durch Betonwände begrenzt. Alle selbstfahrenden Autos befanden sich gleichzeitig auf der Strecke. 
-Auf ein-, zwei- und vierspurigen Straßen mussten Kreisverkehr, 4-Wege-Kreuzungen mit Stoppschildern, blockierte Fahrbahnen und Einfädelsituationen erfolgreich bewältigt werden.
+% Die Fahrbahnen waren teilweise durch Linien markiert, teilweise durch Betonwände begrenzt. Alle selbstfahrenden Autos befanden sich gleichzeitig auf der Strecke. 
+% Auf ein-, zwei- und vierspurigen Straßen mussten Kreisverkehr, 4-Wege-Kreuzungen mit Stoppschildern, blockierte Fahrbahnen und Einfädelsituationen erfolgreich bewältigt werden.
+The lanes were partially marked by lines, partially limited by concrete walls. All self driving cars were on the line at the same time.
+On one-, two- and four-lane streets, roundabouts, 4-way intersections with stop signs, blocked lanes and threading situations had to be successfully managed.
  
-Bei der Auswertung  möchte ich mich vorallem auf die Finalteams des Wettbewerbes beschränken, da diese am Warscheinlichsten ein funktionierendes
-Konzept entwickelt haben. Ausgewertet werden dabei welcher Typ Sensoren und welche Anzahl die Teams für die Objekterkennung verwendet haben und 
-insoweit angegeben, welche algorythmen für Segmentierung und Tracking genutzt werden.
+% Bei der Auswertung  möchte ich mich vorallem auf die Finalteams des Wettbewerbes beschränken, da diese am Warscheinlichsten ein funktionierendes
+% Konzept entwickelt haben. Ausgewertet werden dabei welcher Typ Sensoren und welche Anzahl die Teams für die Objekterkennung verwendet haben und 
+% insoweit angegeben, welche algorythmen für Segmentierung und Tracking genutzt werden.
+
+The evaluation is mainly limited to the final teams of the competition, since they have most likely developed a functioning concept.
+The type and number of the sensors, for the object detection, used by the teams and the algorythms used for segmentation and tracking, if indicated, are evaluated.
 
 % \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
-% \hline \textbf{Team} & \textbf{2D Lidar} & \textbf{3D Lidar (low res)} & \textbf{3D Lidar (high res)} & \textbf{Radar} & \textbf{Camera}\\\hline
+% \hline \textbf{Team} & \textbf{2D LiDAR} & \textbf{3D LiDAR (low res)} & \textbf{3D LiDAR (high res)} & \textbf{Radar} & \textbf{Camera}\\\hline
 % Cornell \cite{Campbell2007} & 6 & 0 & 0 & 3 & 4 \\\hline
 % TerraMax \cite{Corp2005} & 3 & 1 (4) & 0 & 0 & 3  \\\hline
 % Stanford Racing Team \cite{Montemerlo2009} & 7 & 0 & 1 (64) & 3 & 1 \\\hline
@@ -169,22 +178,36 @@ insoweit angegeben, welche algorythmen für Segmentierung und Tracking genutzt w
 \section{DARPA Urban Teams}
 
 \subsubsection{Team VictorTango}
-Team VictorTango \cite{Atreya2007} nutzt 2x Ibeo Alasca XT Sensoren, mit einer Reichweite von 200m und einem Öffnungswinkel von 240 Grad, um den vorderen Bereich des Fahrzeuges abzudecken, die beiden Sensoren werden komplementär fusioniert, um die vertikale Auflösung zu erhöhen.
-Jeder Sensor verfügt dabei über eine Vertikale Auflösung von 4 Lagen. Für den hinteren Bereich wird ein einzelnes 2D IBEO A0 Lidar genutzt. Außerdem werden 4 Sick LMS291 LIDAR eingesetzt, 
-diese dienen jedoch nicht der Objekterkennung sondern werden Vertikal verbaut um die Fahrbahn in hoher auflösung nach Kanten abzusuchen. Die Onjektsegmentierung
-wird von Team VictorTango jedoch nicht selbst umgesetzt stadtdessen wird eine Komerzielle von Ibeo gelieferte ECU genutzt, welche die Daten der Ibeo Sensoren zu
-Objekten zusamenfasst. Die bereits fertig Segmentierten Objekte werden dann anhand der Road Detection gefiltert und anschließend von einer Softwarekomponente (Classification Center) zusammengefürt.
-Und innerhalb dieser gegen die Bildverarbeitung mit zwei 2D Kameras gegengeprüft. Eine Klassifizierung wird nur nach bewegten und unbewegten Objekten vorgnommen, als angnommen,
-das alle bewegten Objekte Autos sind.
+% Team VictorTango \cite{Atreya2007} nutzt 2x Ibeo Alasca XT Sensoren, mit einer Reichweite von 200m und einem Öffnungswinkel von 240 Grad, um den vorderen Bereich des Fahrzeuges abzudecken, die beiden Sensoren werden komplementär fusioniert, um die vertikale Auflösung zu erhöhen.
+% Jeder Sensor verfügt dabei über eine Vertikale Auflösung von 4 Lagen. Für den hinteren Bereich wird ein einzelnes 2D IBEO A0 LiDAR genutzt. Außerdem werden 4 Sick LMS291 LiDAR eingesetzt, 
+% diese dienen jedoch nicht der Objekterkennung sondern werden Vertikal verbaut um die Fahrbahn in hoher auflösung nach Kanten abzusuchen. Die Onjektsegmentierung
+% wird von Team VictorTango jedoch nicht selbst umgesetzt stadtdessen wird eine Komerzielle von Ibeo gelieferte ECU genutzt, welche die Daten der Ibeo Sensoren zu
+% Objekten zusamenfasst. Die bereits fertig Segmentierten Objekte werden dann anhand der Road Detection gefiltert und anschließend von einer Softwarekomponente (Classification Center) zusammengefürt.
+% Und innerhalb dieser gegen die Bildverarbeitung mit zwei 2D Kameras gegengeprüft. Eine Klassifizierung wird nur nach bewegten und unbewegten Objekten vorgnommen, als angnommen,
+% das alle bewegten Objekte Autos sind. Das Team erreichte im Wettbewerb den dritten Platz \cite{Release2007}.
 
+Team VictorTango \cite{Atreya2007} uses two Ibeo Alasca XT sensors, with a range of 200m and an opening angle of 240 degrees to cover the front area of ​​the vehicle, 
+the two sensors are complementary fused to increase the vertical resolution. Each sensor has a vertical resolution of four layers. For the rear area, a single 2D Ibeo A0 LiDAR is used. 
+In addition, four Sick LMS291 LiDARs are used, but these are not used for object detection but are installed vertically in order to search for edges on the road in high resolution.
+However, the object segmentation is not implemented by Team VictorTango itself. In the meantime, a comercial ECU supplied by Ibeo is used, which directly detects objects in the data from the Ibeo sensors.
+The objects already finished are then filtered using the Road Detection and are then combined by a software component (Classification Center). And within that counter-checked against image processing
+with two 2D cameras. A classification is carried out only between moving and non moving objects, ie, all moving objects are cars. The team reached the third place in the competition \cite{Release2007}.
 \subsubsection{Stanford Racing Team}
 
-Das Stanford Racing Team \cite{Montemerlo2009} ferfügt über eine Große Zahl von Sensoren unteranderm den großen Velodyne HDL-64E 3D LIDAR mit einer Vertikalen Auflösung von 64 Lagen, einer 360 Grad Rundumsicht und 120m reichweite.
-Dieser wird zusätzlich unterstützt von zwei SICK LD-LRS 2D LIDARs mit 250m reichweite am hinteren teil des Fahrzeuges, 2x Ibeo Alasca XT Sensore im vorderen Bereich sowie zusätzlich fünf Bosch
-Long Range Radare an der Front des Fahrzeuges. Zur Auswertung der Messdaten werden alle LIDAR Sensoren in einen  virtuellen 2D Laserscan transformiert. Dabei beschreibt das Team beim Velodyne Sensor
-Probleme mit Roll und Pitch Winkeln des Fahrzeuges welches zu False positives bei der Segentierung führen. Diese wurden dadurch korrigert, das die Messungen des Velodyne
-einen runden Kreis bilden (siehe\cref{stanford_junior_velodyne}). Diese Kreise haben bei korrekter Ausrichtung einen festen Abstand zueinander, über die betrachtung dieser Abstande konnte die Ausrichtung des Fahrzeuges korrigiert werden.
-Bei den 2D Sensoren wurde das Problem duch die Begrenzung der Reichweite behoben.
+% Das Stanford Racing Team \cite{Montemerlo2009} ferfügt über eine Große Zahl von Sensoren unteranderm den großen Velodyne HDL-64E 3D LiDAR mit einer Vertikalen Auflösung von 64 Lagen, einer 360 Grad Rundumsicht und 120m reichweite.
+% Dieser wird zusätzlich unterstützt von zwei SICK LD-LRS 2D LiDARs mit 250m reichweite am hinteren teil des Fahrzeuges, 2x Ibeo Alasca XT Sensore im vorderen Bereich sowie zusätzlich fünf Bosch
+% Long Range Radare an der Front des Fahrzeuges. Zur Auswertung der Messdaten werden alle LiDAR Sensoren in einen  virtuellen 2D Laserscan transformiert. Dabei beschreibt das Team beim Velodyne Sensor
+% Probleme mit Roll und Pitch Winkeln des Fahrzeuges welches zu False positives bei der Segentierung führen. Diese wurden dadurch korrigert, das die Messungen des Velodyne
+% einen runden Kreis bilden (siehe\cref{stanford_junior_velodyne}). Diese Kreise haben bei korrekter Ausrichtung einen festen Abstand zueinander, über die betrachtung dieser Abstande konnte die Ausrichtung des Fahrzeuges korrigiert werden.
+% Bei den 2D Sensoren wurde das Problem duch die Begrenzung der Reichweite behoben. 
+
+The Stanford Racing Team \cite{Montemerlo2009} has a large number of sensors with the large Velodyne HDL-64E 3D LiDAR with a vertical resolution of 64 layers, 
+a 360 degree panoramic view and a range of 120m. This is additionally supported by two SICK LD-LRS 2D LiDARs with 250m range at the rear of the vehicle, 2x Ibeo Alasca XT 
+sensors in the front area and additional five Bosch long range radars at the front of the vehicle. To evaluate the measurement data, all LiDAR sensors are transformed 
+into a virtual 2D laser scanner. The team describes, with the Velodyne sensor, problems with the roll and pitch angles of the vehicle which lead to false positives during the
+segmentation. These were corrected by the measurements of the Velodyne forming a round circle (see \cref{stanford_junior_velodyne}). These circles have a fixed distance
+from each other, if the alignment is correct. The roll and pitch angles of the vehicle can be corrected by looking at these distances. In the case of the 2D sensors, 
+the problem was limited by limiting the range.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -194,43 +217,97 @@ Bei den 2D Sensoren wurde das Problem duch die Begrenzung der Reichweite behoben
 \end{center}
 \end{figure}
 
-Zur Segmentierung der Objekte werden zwei Zeitschritte des Virtuellen Laserscans miteinaner verglichen. Bereiche in denen dabei eine Änderung detektiert wird werden dann als Onjekt klassifiziertund
-mithilfe eines Partikelfilters getrackt. Der Tracker schätzt dabei die Position, die Rotation, die Geschwindigkeit und die Größe des Objekts.
+% Zur Segmentierung der Objekte werden zwei Zeitschritte des Virtuellen Laserscans miteinaner verglichen. Bereiche in denen dabei eine Änderung detektiert wird werden dann als Onjekt klassifiziertund
+% mithilfe eines Partikelfilters getrackt. Der Tracker schätzt dabei die Position, die Rotation, die Geschwindigkeit und die Größe des Objekts.
+% Das Team erreichte im Wettbewerb den zweiten Platz  \cite{Release2007}.
+
+For the segmentation of the objects, two time steps of the virtual laser scan are compared with one another. Areas in which a change is detected are then classified 
+as objects and tracked using a particle filter. The tracker estimates the position, the rotation, the speed, and the size of the object.
+The team reached the second prize in the competition \cite{Release2007}.
 
 
 \subsubsection{Team Cornell}
-
-Team Cornell \cite{Campbell2007} nutzt für die Objekterkennung zwei seitliche Ibeo Alasca XT, ergänzend dazu werden drei RADAR Sensoren an der Fahrzeugfront genutzt welche es über den Doppler shift
-erlauben bewegte Objekte zu erkennen. Das Team hat auch einen Velodyne 3D LIDAR evaluiert sicha ber aufgrund des Preises und der Roll, Pitch Probleme für den Alasca XT entschieden,
-welcher 4 nahezu paralele Scans ausssendet und es so einfach macht, den boden zu erkennen. Über die Segmentierung der Objekte macht das Team keine Angaben, es wird lediglich gesagt, das die Sensorrohdaten
-in eine lokale Karte eingetragen, also fusioniert werden. Für das eigentliche Tracking wird ein ``Rao-Blackwellized Particle Filter''\cite{miller2007rao} genutzt.
+% Team Cornell \cite{Campbell2007} nutzt für die Objekterkennung zwei seitliche Ibeo Alasca XT, ergänzend dazu werden drei RADAR Sensoren an der Fahrzeugfront genutzt welche es über den Doppler shift
+% erlauben bewegte Objekte zu erkennen. Das Team hat auch einen Velodyne 3D LiDAR evaluiert sicha ber aufgrund des Preises und der Roll, Pitch Probleme für den Alasca XT entschieden,
+% welcher 4 nahezu paralele Scans ausssendet und es so einfach macht, den boden zu erkennen. Über die Segmentierung der Objekte macht das Team keine Angaben, es wird lediglich gesagt, das die Sensorrohdaten
+% in eine lokale Karte eingetragen, also fusioniert werden. Für das eigentliche Tracking wird ein ``Rao-Blackwellized Particle Filter''\cite{miller2007rao} genutzt.
+Team Cornell \cite{Campbell2007} uses two side Ibeo Alasca XTs for the object detection. In addition, three RADAR sensors are used on the vehicle front, 
+which allow the Doppler shift to detect moving objects. The team has also evaluated a Velodyne 3D LiDAR, but decided on the price and the roll, pitch problems
+for the Alasca XT, which ejects 4 nearly parallel scans and makes it so easy to detect the ground. The team does not give any information about the
+segmentation of the objects, it is merely said that the sensor raw data is written into a local map, ie fused. For the actual tracking a 
+``Rao-Blackwellized Particle Filter'' \cite{miller2007rao} is used.
 
 \subsubsection{TerraMax}
-Team TerraMax  \cite{Corp2005} nutzt ebenfalls den Ibeo Alasca XT und zusätzlich drei SICK LMS-291 LIDAR Sensoren Wobei der Ibeo Sensor frontal angebracht ist.
-Und die SICK Sensoren den seitlichen bzw hinteren Bereich abdecken. Weiterhin macht das Team intensiven gebrauch von einem selbt entwickelten Panorama Kamerasystem, das in idenischer ausführung
-einmal vorn und hinten moniert ist. Das System besteht jeweils aus 3 Kameras wobai abhängig von der geschindigkeit jeweils 2 Kameras genzuz werden um eine Stereobild der Umgebung zu berechnen.
-Bei höheren geschwindigkeiten wird auf die jeweiligen außeren Kameras umgeschalten, um eine höhere Tiefensicht zu erhalten. Um Objekte zu detektieren wird haupsächlich dieses System genutzt.
-Dabei wird von einer Flachen Fahrbahn ausgegangen, und alles was nicht flach ist als Objekt erkannt und dann mit den Rohdaten der LIDAR sensoren fusioniert.
-Team TerraMax beschreibt kein weiteres Tracken der Objekte.
+% Team TerraMax  \cite{Corp2005} nutzt ebenfalls den Ibeo Alasca XT und zusätzlich drei SICK LMS-291 LiDAR Sensoren Wobei der Ibeo Sensor frontal angebracht ist.
+% Und die SICK Sensoren den seitlichen bzw hinteren Bereich abdecken. Weiterhin macht das Team intensiven gebrauch von einem selbt entwickelten Panorama Kamerasystem, das in idenischer ausführung
+% einmal vorn und hinten moniert ist. Das System besteht jeweils aus 3 Kameras wobai abhängig von der geschindigkeit jeweils 2 Kameras genzuz werden um eine Stereobild der Umgebung zu berechnen.
+% Bei höheren geschwindigkeiten wird auf die jeweiligen außeren Kameras umgeschalten, um eine höhere Tiefensicht zu erhalten. Um Objekte zu detektieren wird haupsächlich dieses System genutzt.
+% Dabei wird von einer Flachen Fahrbahn ausgegangen, und alles was nicht flach ist als Objekt erkannt und dann mit den Rohdaten der LiDAR sensoren fusioniert.
+% Team TerraMax beschreibt kein weiteres Tracken der Objekte.
+Team TerraMax \cite{Corp2005} also uses the Ibeo Alasca XT and an additional three SICK LMS-291 LiDAR sensors. The Ibeo sensor is front-mounted and the SICK sensors 
+cover the lateral or rear area. Furthermore, the team makes intensive use of a self-developed panorama camera system, which is mounted in an identical version, once
+on the front and on the rear of the car. The system consists of three cameras each, depending on the speed, two cameras are used to calculate a stereo image of the environment.
+At higher speeds, the respective outer cameras are switched over in order to obtain a higher depth of view. In order to detect objects, this system is mainly used.
+In this case, a flat road is supposed, and everything which is not flat is detected as an object and then fused with the raw data of the LiDAR sensors. 
+Team TerraMax does not describe any further tracking of the objects.
 
 \subsubsection{Tartan Racing}
-Tartan Racing \cite{Urmson2007} nutzt eine kombination aus mehreren Sensoren zum Umfeldwarnehmung dabi ist der Velodyne HDL-64E, der Ibeo Alasca XT, ein ARS300 RADAR und diverse SICK 2D LIDARs.
-Die Segmentierung der Objekte wird dabei auf jedem Sensor einzeln durchgeführt und die Erkannten Objekte werden erst im darauf folgenden Schritt fusioniert. Über die Segmentierung macht
-das Team leider keine genauen angangen. Statische Objekte werden mithilfe einer cost map klassifiziert nund dynamische Objekte werden mit Hilfe eines Extendet Kalmanfiters und einem
-Constant Turn Rate and Acceleration (CTRA) Model getrackt und in eine Objektdatenbak eingetragen.
+% Tartan Racing \cite{Urmson2007} nutzt eine kombination aus mehreren Sensoren zum Umfeldwarnehmung dabi ist der Velodyne HDL-64E, der Ibeo Alasca XT, ein ARS300 RADAR und diverse SICK 2D LiDARs.
+% Die Segmentierung der Objekte wird dabei auf jedem Sensor einzeln durchgeführt und die Erkannten Objekte werden erst im darauf folgenden Schritt fusioniert. Über die Segmentierung macht
+% das Team leider keine genauen angangen. Statische Objekte werden mithilfe einer cost map klassifiziert nund dynamische Objekte werden mit Hilfe eines Extendet Kalmanfiters und einem
+% Constant Turn Rate and Acceleration (CTRA) Model getrackt und in eine Objektdatenbak eingetragen. Das Team erreichte im Wettbewerb den ersten Platz  \cite{Release2007}.
+Tartan Racing \cite{Urmson2007} uses a combination of several sensors for environmental awareness, the Velodyne HDL-64E, the Ibeo Alasca XT, an ARS300 RADAR and various SICK 2D LiDARs.
+The segmentation of the objects is performed individually on each sensor and the detected objects are fused only in the next step. Unfortunately,
+the team does not make any precise statements about segmentation. Static objects are classified using a cost map and dynamic objects are tracked using an
+Extended Kalman filter and a ``Constant Turn Rate and Acceleration'' (CTRA) model and written into an object database. The team reached the first place in the competition \cite{Release2007}.
 
 \subsubsection{Team Caltech}
+% Team Caltech \cite{Aly2007} nutz zur Objekterkennung vier Sick LMS 221, mit einer Reichweite von 30m aber einer hohen Frequenz von 75Hz, auf jeder seite des Fahrzeuges.
+% Da das Team nur 2D Laserscaner verwendent, werden Objekte einfach Segementiert, indem Zusammenhängende Messungungen ohne Unterbrechung zusammengefasst werden.
+% Danach werden die Werte in ein Lokales Koordinatensystem transformiert, Aufgrund der 75 Hz-Aktualisierungsrate der Sensoren und den relativ langsamen Geschwindigkeit der Fahrzeuge 
+% im Rennen, kann eine gute verknüpfung von neuen Daten zu zuvor gesehenen Objekten einfach über ein Distanzkritterum gemacht werden. 
+% Danach werden die Objekt an einen Kalman-Filter übergeben welcher Schätzposition und -geschwindigkeit aktualisiert,
+% Wenn nach einer gewissen Anzahl von Beobachtungen die geschätzte Geschwindigkeit des Objekts über einer Schwelle liegt, wird es als Auto klassifiziert.
+Team Caltech \cite{Aly2007} use four Sick LMS 221, with a range of 30m but a high frequency of 75Hz, on each side of the vehicle. 
+Since the team only uses 2D laser scanners, objects are simply segmented by uniting neighbored measurements without interruption. 
+After this, the values are transformed into a local coordinate system. Due to the 75 Hz update rate of the sensors and the relatively 
+slow speed of the vehicles in the race, a good linkage of new data to previously viewed objects can easily be made over a distance criterion.
+Then, the object is passed to a Kalman filter which is updated to estimate position and velocity. If, after a certain number of observations, 
+the estimated velocity of the object is above a threshold, it is classified as a car.
 
 \section{Conclusion}
+% Wie wir gesehen haben, nutzen die teams teilweise sehr unterschiedlichs strategien um andere Fahrzeuge zu erkennen. Einige Teams führen die Segemntierung vor der Fusion der Daten durch,
+% andere danach. Manche Teams nuzten eine Kombination aus Bildverarbeitung und LiDAR Sensoren, andere Vertrauen ausschließlich auf LiDAR Sensoren.
+% Auffällig ist auch dass die beiden besten Teams (Tartan Racing, Stanford Racing Team) einen Velodyne HDL-64E nutzen, welcher im vergleich zu allen anderen Sensoren sie höchste auflösung 
+% hat. Trotzdem wird dieser jedoch stets mit anderen Sensoren kombiniert, welche über eine höhere Reichweite verfügen. Vermutlich hatte die Sensorausstattung einen großen einfluss 
+% auf den Ausgang des Wettbewerbes. Vergleicht man die Testfahzeuge der Teams mit unserem Testfahrzeug ``Snowfox'' ähnelt die Sensorausstattung am eheseten den Teams welch
+% den Velodyne HDL-64E eingesetzt haben, welcher dem Velodyne VLP-16  ähnelt. Dieser von ``Snowfox'' genutzte VSensor war zum zeitpunkt des Wettbewerbes jedoch 
+% noch nicht auf dem Markt \footnote{\url{http://www.spar3d.com/news/LiDAR/vol12no37-velodyne-announces-puck-LiDAR-sensor/}  [visited on 03/23/2017]}.
+% Allerdings ist zu beachten, das der VLP-16 über eine signifikant niederigere Vertikae Auflösung verfügt als der HDL-64E, diese liegt jedoch immernoch
+% über allen anderen verwendeten Sensoren. Allerdings muss ach gesagt werden, dass die Anforderungen in Wettbewerb unter denen dieses Projektes lagen.
+% So war es im Wettbewerb nicht nötig zwischen verschienden Verkehrsteilnemern zu unterscheiden, da sich lediglich die Fahrzeuge der anderen Teams auf dem Parcour befanden.
+% Da im Rahmen unseren Projekte auch andere Verkehrsteilnehmer wie Fußgänger und Radfahre erkannt werden müssen, stellt dies erhöte Anfordrungen an die Klassifisierung.
+% Da Fußgänger und Radfahrer bedeutend kleiner sind als Fahrzeuge ist eine hohe Auflösung wünschenwert. 
+% Ob der Sensor für seine Aufgabe geeignet ist, gilt es im folgenden zu untersuchen.
+
+As we have seen, the teams share very different strategies to detect other vehicles. Some teams perform the segmentation before the fusing of the data, others afterwards.
+Some teams used a combination of image processing and LiDAR sensors, others trusted solely on LiDAR sensors. 
+It is also noticeable that the two best teams (Tartan Racing, Stanford Racing Team) use a Velodyne HDL-64E,
+which has the highest resolution in comparison to all other sensors. Nevertheless, this is always combined with other sensors, which have a higher range. 
+Presumably the sensor equipment had a great influence on the outcome of the competition. Comparing the test vehicles of the teams with our test vehicle ``Snowfox'' the sensor equipment
+is most similar to the teams which have the Velodyne HDL-64E, which is similar to the Velodyne VLP-16.
+However, this sensor used by ``Snowfox'' was not yet on the market at the time of the competition \footnote{\url{http://www.spar3d.com/news/LiDAR/vol12no37-velodyne-announces-puck-LiDAR-sensor/}
+(03/23/2017)}. However, the VLP-16 has a significantly lower vertical resolution than the HDL-64E, but it is still above all other sensors.
+However, it must be said that the requirements in competition were below those of this project. Thus it was not necessary in the competition to distinguish between 
+different traffic, since only the vehicles of the other teams were on the course. As other traffic, such as pedestrians and cyclists, have to be detected as part of this project,
+this places higher demands on classification and segmentation. Since pedestrians and cyclists are considerably smaller than vehicles, a high resolution is desirable. 
+Whether the sensor is suitable for its task is to be investigated in the following.
+
+
+
 
 
 \chapter{Methodology}
-
-
-
-
-
-\todo{siehe jens BA, dashier ist zu kurz}
 % Der eigentliche Kern der Arbeit. In diesen Kapiteln wird die Vorgehensweise methodisch
 % erklärt. Oft werden fur Teilprobleme separate Kapitel angefertigt. Oft sind diese ¨
 % Methodik-Kapitel aber auch logisch getrennt. Beispielsweise Kapitel fur ¨ Problemanalyse,
@@ -249,18 +326,21 @@ Constant Turn Rate and Acceleration (CTRA) Model getrackt und in eine Objektdate
 % Weiterhin haben wir die zur verfügung stehende Testplatform und ihre Sensorik begutachtet. Dabei haben wir festgestellt, das für die Erkennung von Objekten in andren
 % Arbeiten häufig mehrere und teurere Sensoren kombiniert werden um ein Zuverlässiges erkennen von anderen Verkehrsteilnehmern zu gewährleisten.
 
-In the previous chapter we looked at the types of roundabouts and their components. We also reviewed the available test platform and its sensor technology.
-We have found that the detection of objects in other projects often combines several and more expensive sensors in order to ensure a reliable detection of other traffic users.
+In the previous chapters we looked at the types of roundabouts and their components. We also reviewed the available test platform ``Snowfox'' and its sensor technology.
+We have found that the detection of objects in other projects often combines several and more expensive sensors in order to ensure a reliable detection of other traffic users or
+extend range.
 
-\todo{beleg}
-In der Research Questian eins haben wir festgehalten, das wir die verwendung eines günstigen VLP-16 Sensors in einem 
-Komplexen Verkehrszenario, die Verkehrsbeobachtung eines Kreisverkehrs evaluieren wollen.
+% Wir der Zielsetzung haben wir festgehalten, das wir überprüfen wollen ob die Sensorausstattung des Testfahrzeuges ``Snowfox'' , 
+% speziell der Velodyne VLP-16, für das Handling eines komplexen Verkehrszenarios, die Verkehrsbeobachtung eines Kreisverkehrs geeignet ist.
+
+We have determined that we want to check whether the sensor equipment of the test vehicle `` Snowfox '', especially the Velodyne VLP-16, is suitable for the 
+handling of a complex traffic scenario, the traffic monitoring of a roundabout.
 
 % Dazu wird im folgenden ein Algorithms zum erkennen und Tracken von Objekten mit hilfe des Velodyne VLP-16 vorgeschlagen
 % und implementiert. Die Schwierigkeit besteht dabei in der Verwendung eines Einzigen und im vergleich günstigen
 % Umfeldsensors, welcher offensichtlich nicht als standalone Lösung für diesen Einsatzzweck entwickelt wurde.
 
-For this purpose, an algorithm for recognizing and tracking objects with the help of the Velodyne VLP-16 is proposed and implemented. 
+For this purpose, an algorithm for detecting and tracking objects with the help of the Velodyne VLP-16 is proposed and implemented. 
 The difficulty lies in the use of a single and in a comparatively low priced environmental sensor, which obviously has not been developed as a standalone solution for this purpose.
 
 % Dieser Sensor bietet in seiner aktuellen Anwendung in dem für diese Arbeit relevanten Bereich eine vergleichsweise
@@ -268,46 +348,47 @@ The difficulty lies in the use of a single and in a comparatively low priced env
 % der Segmentierung häufig fehl. \todo{beleg} Aus diesem Grund wird für die Segmentierung eine Groundplane basierender Algorithms implementiert.
 
 In its current application, this sensor offers a comparatively low resolution in the area wich is relevant for this work.
-Therefore, with many gradient-based algorythms used in similar projects Segmentation will often fail.
-\todo{beleg} For this reason, a ground plane based algorithm is implemented for the segmentation.
+Therefore, with many gradient-based algorythms, segmentation will often fail, beacuse the gradients becomes to smal.
+For this reason, a ground plane based algorithm is implemented for the segmentation.
 
 % Außerdem ist es Bauartbedingt in Kreisverkehren mit bebauten Mittelinseln und Mehrspurigen Kreisverkehren nötig
 % Fahrzeuge über ihren Messhorizont hinaus zu verfolgen, um ein sicheres einfahren in den Kreisverkehr zu gerwährleisten.
 % Zu diesem Zweck wird in Section \todo{section reference} ein Tracking und State Estimation Algorithms entwickelt welches dies gewähreisten soll.
 
-In addition, it is necessary to follow vehicles beyond their measuring horizon in roundabouts with built-up central islands and multi-lane roundabouts, 
+In addition, it is necessary to follow vehicles beyond the measuring horizon in roundabouts, with built-up central islands and multi-lane roundabouts, 
 in order to ensure a safe entry into the roundabout.
-For this purpose, a tracking and state estimation algorithm is developed in section \todo{section reference}, which should grant that.
+For this purpose, a tracking and state estimation algorithm is developed in \cref{tracking}, which should grant that.
 
 % Zur Evaluation dieser Algorythmen wurden mehrere Datensammlungen auf den nahe gelegenen schwedischen AstaZero Prüfgelände in Sandhult [\cref{astazero}]
 % durchgeführt, für alle nicht dort durchgeführten Expirimente werden in einer dafür erstellten Simuation durchgeführt. In dieser Simulation
 % wird ein Innerstätischer Kreiverkehr mit Fuß un Radweg nachgebaut, welche der Kreisverkehr auf AstaZero nicht bieten kann.
 
-In order to evaluate these algorythms, were collected several data collections at the Swedish AstaZero test area nearby Sandhult [\cref{astazero}]
-For all expiriments not carried out there, are carried out in a simulation made for this purpose. In this simulation a roundabout in a urban area 
+In order to evaluate the sensor setup with these algorythms, were collected several data collections at the Swedish AstaZero test area nearby Sandhult (see \cref{astazero}
+\footnote{\url{http://www.astazero.com/wp-content/uploads/2016/09/\%C3\%96versiktsskiss_mod.pdf} (03/24/2017)}).
+Some other expiriments not carried out there, are carried out in a simulation made for this purpose. In this simulation a roundabout in a urban area 
 with pavement and bikeway is designed, which the roundabout on AstaZero can not offer.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{AstaZero Proving Ground}
+\includegraphics[width=\textwidth]{bilder/AstaZero.pdf}
+\label{astazero}
+%\end{center}
+\end{figure}
 
 % Die Evaluierung findet dabei von Hand anhand der grafisch aufbereiteten Messdaten statt. Dabei wird besonders auf False-Negativ
 % und False Positiv erkannte Hindernisse eingegangen. Grobe Außreißer bei der Position oder Orientierung dr Objekte werden ebenfalls verkmerkt.
 
 The evaluation is carried out manually by using of the graphically prepared measurement data. 
 While the evaluation especially False-Negative and False-Positive detected obstacles will be discussed.
-Coarse outliers in the position or orientation of objects are also noted.
+Coarse outliers in the position or orientation of objects are also noted. Also, a performance analysis is made.
 
 % Zur Evaluation der Handbarkeit des Kreisverkehrs wird außerdem eine Statemachine Implementiert welche das Fahrzeug Sicher und Unfallfrei
 % durch den Kreiverker bewegen soll. Dazu wird die Simulation über einen längeren Zeitraum beobachtet, und die Anzahl der eventuellen
 % Kollisionen notiert.
 
 In order to evaluate the operability of the roundabout, a statemachine is implemented which is intended to move the vehicle safely and accident-free through the roundabout.
-For this purpose, the simulation is monitored over a longer period of time, and the number of possible collisions is noted.
-
-\begin{figure}[!ht]
-%\begin{center}
-\caption{AstaZero Proving Ground\\ \url{http://www.astazero.com/wp-content/uploads/2016/09/\%C3\%96versiktsskiss_mod.pdf} }
-\includegraphics[width=\textwidth]{bilder/AstaZero.pdf}
-\label{astazero}
-%\end{center}
-\end{figure}
+For this purpose, the simulation is monitored over a longer period of time and the number of possible collisions is noted.
 
 
 \chapter{Sensor Analysis}
@@ -338,21 +419,23 @@ Large Roundabout& >40m &  - \\\hline
 % nicht relevant sind sehen wir uns nur die acht winkel im bereich von -1 bis -15 Grad an. 
 
 For a comparison to the Velodyne VLP-16, we will look at the visual range of the sensor in the 2D side view. The sensor provides 16 measurements at the same azimuth angle,
-at a distance of 2 degrees. Since for the evaluation, and unfortunately also for the recognition, the angles greater than 0 degrees are not relevant,
-we only see the eight angles in the range of -1 to -15 degrees.
+with a distance of 2 degrees.Since for the evaluation, and unfortunately also for the detection, the angles greater than 0 degrees are not relevant, because they look into
+the air. So we only see the eight angles in the range of -1 to -15 degrees.
 
 % Bei der auswertung gehen wir davon aus, das wir versuchen einen Kleinwagen mit einer länge von 4 Metern und 1.5 Metern höhe zu erkennen. Dabei gehen wir von dem Idealfall aus, das sich das Fahrzeug
 % auf uns zu bewegt. Weiterhin gehen wir von einer Befestigungshöhe des Sensors von 2.1 Metern aus, da dies letztendlich die montagehöhte des Sensors uf dem Testfahrzeug darstellt.
 
-In the evaluation we assume that we try to recognize a small car with a length of 4 meters and 1.5 meters height. In doing so, we start from the ideal situation that the vehicle drives to us.
-Furthermore, we assume a mounting height of the sensor of 2.1 meters as this is finaly the mounting height of the sensor on the test vehicle.
+In this evaluation we assume that we try to detect a small car with a length of 4 meters and 1.5 meters height. In doing so, we start from
+the ideal situation that the vehicle drives in your direction.
+Furthermore, we assume a mounting height of the sensor of 2.1 meters as this is finally the mounting height of the sensor on the test vehicle.
 
 \paragraph{Range 0-25m}
 % Für den Bereich von 0m bis 25m sehen wir in \cref{velodyne_range_25}, dass wir im schlimmsten fall noch eine Messung vom Sensor erhalten. Befindet sich das Fahrzeug sehr nache am 
 % Sensor erhalten wir sogar einen Großteil der zur verfügung stehenden Auflösung, wobei dabei sich nahe dahnter befindliche flache Fahrzeuge verdeckt werden können. 
 % Daher sehen wir, das der Mini Roundabout mit dem Sensr geut abgedeckt werden kann, wir uns jedoch gendanken über verdeckte hindernisse machen müssen.
 
-For the range from 0m to 25m, we see in \cref{velodyne_range_25} that in the worst case we still get at least one measurement from the sensor. Is the vehicle very much at the
+For the range from 0m to 25m, we see in \cref{velodyne_range_25} that in the worst case, we still get at least one measurement from the sensor. 
+Is the vehicle very much at the
 Sensor, we get even a large part of the available resolution, whereby close to behind lying flat vehicles can be hidden. Therefore, we can see 
 that the mini roundabout can be covered with the sensor, but we have to think about hidden obstacles.
 
@@ -403,7 +486,7 @@ However, there is a higher likelihood that vehicles have already been hidden in 
 % evaluieren, ob es überhaupt nötig ist, alle Fahrzeuge im Kreisverkehr zu beobachten, da die Strecke von Einfahrt zu Einfahrt entsprechend größer wird.
 % Eventuell ist es so möglich den Kreisverkher als einfache Vorfahrtsituation zu betreachten.
 
-As we can see, we can excellent cover the area up to 25 meters and thus observe the mini roundabout completely, for larger circular traffic the sensor is only conditionally suitable. 
+As we can see, we can excellent cover the area up to 25 meters and thus observe the mini roundabout completely, for larger roundabouts the sensor is only conditionally suitable. 
 For all the following considerations, we shall consider only miniature circuits or smaller small roundabouts. 
 For all other roundabouts, evaluate whether it is at all necessary to observe all the vehicles in the roundabout as the distance from driveway to driveway increases accordingly.
 It is possible to consider the roundabout as a simple yield sign situation.
@@ -484,7 +567,7 @@ In the last step, the objects are classified into types using the predetermined 
 \section{Ground Removal}
 % Um in einer PointCloud Ojekte zu erkennen ist es nötig, zu wissen, welche Messungen zu Boden und welche zu Objekten gehören. Es gibt viele Möglichkeiten dieses
 % zu erreichen. Die Naivste Methode ist das entfernen, der Bodenplatte anhand ihrer Z-Koordinate. Diese Mehode hat allerdings viele Nachteile, zum einen muss
-% der LIDAR Sensor exakt gerade auf em Fahrzeug angebracht werden, zum anderen muss das Fahrzeug ein sehr steifes Fahrwerk haben, um eventuelle Neigungen des Sensors zu verhindern.
+% der LiDAR Sensor exakt gerade auf em Fahrzeug angebracht werden, zum anderen muss das Fahrzeug ein sehr steifes Fahrwerk haben, um eventuelle Neigungen des Sensors zu verhindern.
 % Weiterhin erlaubt dies ausschließlich die Entfernung von Palanaren Grundflächen, alo flache nicht hügelige Untergründe. Eine weitere Verbreitete Methode ist das 
 % Entfernen der Bodenplatte auf basis eines Statistischer mittelwertes \cite{Zhang}.  Diese Methode benötigt allerdings auch eine Kalibireirung der Sensorabstandes zum Boden.
 % Und die Bestimmung weiterer Schwellwerte, welche umgebungsabhäng sind. Die Votreile beider Methoden sind ihre gering nötige rechenleistung und laufzeit O(n).
@@ -494,7 +577,7 @@ In the last step, the objects are classified into types using the predetermined 
 
 In order to recognize objects in a PointCloud, it is necessary to know which measurements belong to the ground and which belong to objects.
 There are many ways to achieve this. The most naive method is to remove the bottom plate by its Z coordinate.
-However, this method has many drawbacks, on the one hand, the LIDAR sensor has to be mounted exactly straight on a vehicle, 
+However, this method has many drawbacks, on the one hand, the LiDAR sensor has to be mounted exactly straight on a vehicle, 
 on the other hand the vehicle must have a very stiff chassis in order to prevent a possible tilt of the sensor. 
 Furthermore, this only allows the removal of palanar surfaces, alo flat non-hilly grounds. 
 Another common method is the removal of the base plate on the basis of a statistical mean value \cite{Zhang}.
@@ -770,12 +853,12 @@ From the normal vector $\vec{n}$ and the mean point $\overline{P}$, we can again
 In the end, we have been able to break down the algorithm from $\mathcal{O}(m^2n)$ to $\mathcal{O}(n)$.
 
 \section{Clustering}
-% In aktuellen Arbeiten mit 3D-LIDAR Daten werden de Daten haufig als erstes in eine Heightmap projeziert \cite{Zhang,Himmelsbach2009,Li2016}.
+% In aktuellen Arbeiten mit 3D-LiDAR Daten werden de Daten haufig als erstes in eine Heightmap projeziert \cite{Zhang,Himmelsbach2009,Li2016}.
 % Danach werden direckt benachbarte Messungen mit ähnlichen Messwerten zusammengefasst. Alternativ werden die Messungen auch anhand eines Distanzkritterums 
 % zusammengefasst. Erstere Methode hate den Nachteil, dass einzelne Ausreißer dazu führen, das das Objekt in mehrer Cluster zerfällt.
 % Letztere wird meißt mit einem KD-Tree oder einer ähnlichen Datenstrucktur kombiniert, welche typischerweise hohe Kosten für die Erstellung verursachen.
 % Da der Baum nach jeder 360 Grad messung neu Aufgebaut werden muss ist das Problematisch
-In current work with 3D-LIDAR data, the data is often first projected into a heightmap. Then directly adjacent measurements are combined with similar measured values.
+In current work with 3D-LiDAR data, the data is often first projected into a heightmap. Then directly adjacent measurements are combined with similar measured values.
 Alternatively, the measurements are also summarized by means of a distance criterion. 
 The former method has the disadvantage that individual outliers cause the object to disintegrate in several clusters.
 The latter is usually combined with a KD tree or a similar data structure, which typically entails high costs for the creation.
@@ -853,6 +936,7 @@ All clusters are stored by the algorithm as a list of references to the original
 
 
 \section{Tracking}
+\label{tracking}
 % Die Aufgabe des Trackings ist es nun einen Zusammenhang der Messwerte über die Zeit herzustellen. Dabei ist das Tracking in zwei Abschnitte unterteilt.
 % Dem Tracking der Cluster vom \ac{DBSCAN} und dem Erstellen und Tracken von Hindernissen.
 The task of tracking is to establish a relationship between the measured values over time. The tracking is divided into two sections.
@@ -985,28 +1069,27 @@ The most probable value is then selected. This causes the size of the obstacle t
 Since the size of the object can begin to be very small, there is a lower limit of 0.9m for both values. Measured values for a sample object can be seen in \cref{obst_hist}.
 \begin{figure}[!ht]
   %\addcontentsline{lof}{figure}{LaTeX--Strukturelemente}
-%\begin{center}
+\begin{center}
 \caption{Object Size Histogram}
 \begin{tikzpicture}
-\begin{axis}[ylabel={number of measurements},ybar interval, ymax=366,ymin=0, minor y tick num = 3,
-width=0.55\textwidth,
+\begin{axis}[ylabel={number of measurements},ybar interval, ymax=366,ymin=0,xmin=0.7,xmax=6.8, minor y tick num = 3,
+width=0.54\textwidth,
 height=0.6\textwidth]
-\addplot coordinates { (1.0, 29) (1.5, 58) (2.0, 366) (2.5, 35) (3.0, 3) (3.5, 1) (4.0, 0) (4.5, 0) (5.0, 0) (5.5, 0) (6.0, 0) (6.5, 0) };
+\addplot[fill=gray!50] coordinates { (1.0, 29) (1.5, 58) (2.0, 366) (2.5, 35) (3.0, 3) (3.5, 1) (4.0, 0) (4.5, 0) (5.0, 0) (5.5, 0) (6.0, 0) (6.5, 0) };
 \end{axis}
-\begin{axis}[ybar interval, ymax=318,ymin=0, minor y tick num = 3,
-width=0.55\textwidth,
+\begin{axis}[ybar interval, ymax=366,ymin=0,xmin=0.7,xmax=6.8, minor y tick num = 3,
+width=0.54\textwidth,
 height=0.6\textwidth,
-at={(0.50\textwidth,0)}]
-\addplot coordinates { (1.0, 0) (1.5, 0) (2.0, 7) (2.5, 6) (3.0, 9) (3.5, 2) (4.0, 64) (4.5, 84) (5.0, 318) (5.5, 3) (6.0, 2) (6.5, 2) };
+at={(0.48\textwidth,0)}]
+\addplot[fill=gray!50] coordinates { (1.0, 0) (1.5, 0) (2.0, 7) (2.5, 6) (3.0, 9) (3.5, 2) (4.0, 64) (4.5, 84) (5.0, 318) (5.5, 3) (6.0, 2) (6.5, 2) };
 \end{axis}
 \node at (0.21\textwidth,0.5\textwidth) {width[m]};
 \node at (0.7\textwidth,0.5\textwidth) {length[m]};
 \end{tikzpicture}
 \label{obst_hist}
-%\end{center}
+\end{center}
 \end{figure}
 
-\todo{skalierung angleichen, achsenbeschriftung}
 % Leicht zu sehen wird für das Object eine breite von 2m und eine Länge von 5m berechnet. Das Objektist in diesm Fall ein Volvo S60, welcher Außenmaße von ca. 1.9m und 4.6m hat,
 % womit die Abweichungen sich korrekt innerhalb, der Rundung der Werte befinden. Für die Nachfolgende filterung der Messwerte mit Hilfe eines Kalman filters, wurd nun
 % die Position des Fahrzeuges aus dem Mittelpunkt der Boundingbox bestimmt.
@@ -1056,7 +1139,6 @@ other hand it can provide a wrong orientation as seen in \cref{min_box}.
 However, since the orientation and position of the objects are used as input for the subsequent Kalman filter, which reacts very sensitively to false orientations, the algorithm was developed.
 
 \subsection{Object Confidence}
-\todo{implementierung Konfidence wert auf 1 setzen und entfernen, wenn wert unter 1, oder objekte auf basis ihrer Position entfernen}
 % Um zu verhindern, dass kurzzeitig erkannte False Positives direckt als Objekt erkannt werden und damit die nachfolgende Logik beeinflusst, wird nun ein Confidence Wert eingeführt
 % Bevor ein erkanntes Objekt als gültig erachtet wird, muss dieses einen gewissen Confidence Wert erreichen. Der Initiale Konfidence Wert eines Objektes ist Null. Der Konfidence wert
 % wird um eins erhöht, wenn das Objekt in zwei aufeinader folgenden Zeitschritten getrackt werden kann und folgende bedingungen erfüllt: 

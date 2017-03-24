@@ -20,7 +20,7 @@ The project is located in the ReVeRe (Chalmers Research Vehicle Resource). The v
 Within the scope of the project, the vehicle is to be examined in various traffic scenarios. The focus is on urban transport and the vehicle must not only be able to interact with other cars, 
 but also be safe with trams, buses, bicycles and all other traffic users.
 
-\section{Ausgangssituation}
+\section{Initial Situation}
 
 
 \subsection{Test Platform}
@@ -52,10 +52,10 @@ As well as a stereo camera and a Velodyne VLP-16 LiDAR. The arrangement of the s
 
 % Zusätlich zur Umfeldsensorik und der serienmäßgigen Fahrzeugsensorik (z.B. Odometer, Interialsensorik) ist im Fahrzeug ein Applanix POS LV verbaut.
 % Zu Zeitpunkt des Verfassens dieser Arbeit war es leider noch nicht möglich auf die Radarsensoren und die Stereokamera zuzugreifen. 
-% Daher werden im folgenden lediglich der Velodyne Lidar und das Applanix System genauer beschrieben.
+% Daher werden im folgenden lediglich der Velodyne LiDAR und das Applanix System genauer beschrieben.
 A Applanix POS LV is installed in the vehicle in addition to the environmental sensor system and the standard vehicle sensors (for example odometer, intertial sensors).
 At the time of writing this work, it was unfortunately not yet possible to access the radar sensors and the stereo camera.
-Therefore, only the Velodyne Lidar and the Applanix system will be described in detail.
+Therefore, only the Velodyne LiDAR and the Applanix system will be described in detail.
 
 \subsubsection{Velodyne VLP-16 LiDAR}
 % Der Velodyne VLP-16 ist ein 360 Grad 3D Laserscannermit einer Rotationsgeschwindigkeit von 5 bis 20 Umdrehungen pro Sekunde \cite{manVEL}. Er bietet ein vertikales FOV von 30 Grad, bei 2 Grad Auflösung.
@@ -65,13 +65,13 @@ Therefore, only the Velodyne Lidar and the Applanix system will be described in 
 % Bei einer eingestellten Geschwindigkeit von 10Hz liefert der VLP-16 eine Auflösung von 0.2 Grad bei einer Abreichung von +-3cm. Der VLP-16 ist mittig auf dem Dach des XC90 moniert, um eine möglichst hohe Positionierung
 % zu erreichen, die eine Rundumsicht umd Das Fahrzeug zu erreichen. Zu beachten ist, das diese Ausrichtung für den Sensor denkbar ungünstig ist, da der Sensor ein vertikales
 % Sichtfeld von -15 bis +15 Grad hat. Dadurch sind nachezu alle messungen über Null grad quasi nutzlos. Der blick auf die Herstellerseite
-% \footnote{\url{http://velodynelidar.com/vlp-16.html} (03/09/2017)}
+% \footnote{\url{http://velodyneLiDAR.com/vlp-16.html} (03/09/2017)}
 % verrät, das Der VLP-16 aunteranderem auf die verwendung mit Drohnen hin konstuiert wurde, während der Größere HDL64E
-% \footnote{\url{http://velodynelidar.com/hdl-64e.html} (03/09/2017)}
+% \footnote{\url{http://velodyneLiDAR.com/hdl-64e.html} (03/09/2017)}
 % explizit für den Urbanen Automotivebereich beworben wird, und über ein Sichtfeld von +2 bis -24.9 Grad verfügt und somit für die Verwendung im
 % Automotive bereich geeigneter erscheint. Die dabei entstehenden Probleme werden später diskutiert.
 
-The Velodyne VLP-16 is a 360 degree 3D laser scanner with a rotational speed of 5 to 20 revolutions per second \ cite {manVEL}.
+The Velodyne VLP-16 is a 360 degree 3D laser scanner with a rotational speed of 5 to 20 revolutions per second \cite{manVEL}.
 It provides a vertical FOV of 30 degrees, at 2 degrees resolution.
 With a range of 100m it can cover a circumference of 200m diameter. 
 Furthermore, the VLP-16 can be syncronized with the Applanix POS LV, which allows a low-jitter signal. 
@@ -82,9 +82,9 @@ At a set speed of 10Hz, the VLP-16 provides a resolution of 0.2 degrees with a v
 The VLP-16 is centered on the roof of the XC90 in order to achieve the highest possible positioning to achieve a panoramic view of the vehicle.
 It is important to note that this alignment is unacceptable to the sensor because the sensor has a vertical field of view of -15 to +15 degrees.
 As a result, all measurements over zero degrees are practically useless. The view of the manufacturer side
-\footnote{\url{http://velodynelidar.com/vlp-16.html} (03/09/2017)}
+\footnote{\url{http://velodyneLiDAR.com/vlp-16.html} (03/09/2017)}
 Reveals that the VLP-16 has been constituted for use with drones, while the larger HDL64E
-\footnote{\url{http://velodynelidar.com/hdl-64e.html} (03/09/2017)}
+\footnote{\url{http://velodyneLiDAR.com/hdl-64e.html} (03/09/2017)}
 is advertised explicitly for the urban automotive sector, and has a field of view of +2 to -24.9 degrees and thus for use in the
 Automotive sector appears to be more appropriate. The resulting problems will be discussed later.
 
@@ -106,14 +106,15 @@ the POS-LV can provide a position through its odeomerter and the inertial sensor
 can be expected 60 seconds after the GPS signal is lost. \cite{manAP}
 
 
-\section{Zielsetzung}
+\section{Research Goal}
 % Da das Autonome Fahren ein sehr weites, indisziplinäres thema ist, ist es Offensichtlich. das nicht alles in dieser Arbreit abgehandelt werden kann.
 % Im Rahmen der darpah Chalenge wurden beiteits viele Veröffentlichungen zu diesem Thema erstellet.
 % Was im rahmen dieser Veröffenticghungten noch nicht berhandelt wurde, sit dei Handhabung von Kreisverkehre, mit atonomen Fahrzeugen.
 % Ziel dieser Arbeit ist es Daher zu analysieren, welche Sensorausstattung für die beobachtung von Kreisverkehren vonnöten ist, bzw. ob die vorhandenne Sensorausstattung des ReVeRe Testfahrzeuges Snowfox
 % als ausreichend betrachtet werden kann.
-Since autonomous driving is a very wide, indisciplinary subject, it is obvious. That not everything in this work can be dealt with.
-Within the scope of darpah Chalenge many papers were published on this subject. What has not yet been explicitly discussed in these publications
-is the handling of roundabouts, with atonomic vehicles. The aim of this thesis is therefore to analyze what sensor equipment is necessary for 
-the observation of roundabouts, or whether the existing sensor equipment of the ReVeRe test vehicle Snowfox can be regarded as sufficient.
+Since autonomous driving is a very wide, indisciplinary subject, it is obvious, that not everything can be dealt within this work.
+Within the scope of \acs{DARPA} Chalenge many papers were published on this subject. What has not yet been explicitly discussed in these publications
+is the explicit handling of roundabouts, with atonomic vehicles, also the author is not aware of any further publications. 
+So the aim of this thesis is therefore to analyze what sensor equipment is necessary for the observation of roundabouts,
+or whether the existing sensor equipment of the ReVeRe test vehicle Snowfox can be regarded as sufficient.
 

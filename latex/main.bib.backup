@@ -498,4 +498,27 @@
   hyphenation={english}
 }
 
+@inproceedings{miller2007rao,
+  title={Rao-blackwellized particle filtering for mapping dynamic environments},
+  author={Miller, Isaac and Campbell, Mark},
+  booktitle={Robotics and Automation, 2007 IEEE International Conference on},
+  pages={3862--3869},
+  year={2007},
+  organization={IEEE},
+  hyphenation={english}
+}
+
+@article{Aly2007,
+  abstract = {This report describes Team Caltech's technical approach and results$\backslash$nfor the 2007 DARPA Urban $\backslash$n$\backslash$nChallenge. Our primary technical thrusts were in three areas: (1)$\backslash$nmission and contingency manage- $\backslash$n$\backslash$nment for autonomous systems; (2) distributed sensor fusion, mapping$\backslash$nand situational awareness; $\backslash$n$\backslash$nand (3) optimization-based guidance, navigation and control. Our autonomous$\backslash$nvehicle, Alice, $\backslash$n$\backslash$ndemonstrated new capabiliites in each of these areas and drove approximate$\backslash$n300 autonomous miles $\backslash$n$\backslash$nin preparation for the race. The vehicle completed 2 of the 3 qualification$\backslash$ntests, but did not ulti- $\backslash$n$\backslash$nmately qualify for the race due to poor performance in the merging$\backslash$ntests at the National Qualifying $\backslash$n$\backslash$nEvent.},
+  author = {Aly, Mohammed and Burdick, Joel W and Carson, Vanessa and Di, Stefano and Flores, Melvin and Gonzalez, Jessica and Howard, Andrew and Lindzey, Laura and Ma, Jeremy and Murray, Richard M},
+  file = {:home/storm/workspace/Masterarbeit/documents/Cal{\_}Tech.pdf:pdf},
+  journal = {Traffic},
+  number = {1},
+  pages = {1--25},
+  title = {{Sensing , Navigation and Reasoning Technologies for the DARPA Urban Challenge 1 Introduction and Overview}},
+  year = {2007},
+  hyphenation={english}
+}
+
+
 @Comment{jabref-meta: databaseType:bibtex;}
