@@ -65,6 +65,13 @@ Highlighting=None
 Indentation Mode=normal
 Mode=
 
+[document-settings,item:main.bbl]
+Bookmarks=
+Encoding=UTF-8
+Highlighting=LaTeX
+Indentation Mode=normal
+Mode=LaTeX
+
 [document-settings,item:main.bib]
 Bookmarks=
 Encoding=UTF-8
@@ -122,10 +129,10 @@ archive=true
 column=0
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=73
 mode=LaTeX
-open=false
-order=-1
+open=true
+order=3
 
 [item:Introduction.tex.backup]
 archive=true
@@ -189,13 +196,13 @@ order=-1
 
 [item:basics.tex]
 archive=true
-column=0
+column=35
 encoding=UTF-8
 highlight=LaTeX
-line=0
+line=231
 mode=LaTeX
-open=false
-order=-1
+open=true
+order=4
 
 [item:basics.tex.backup]
 archive=true
@@ -229,11 +236,11 @@ order=-1
 
 [item:main.bbl]
 archive=true
-column=1
-encoding=
-highlight=
+column=0
+encoding=UTF-8
+highlight=LaTeX
 line=0
-mode=
+mode=LaTeX
 open=false
 order=-1
 
@@ -249,10 +256,10 @@ order=-1
 
 [item:main.bib]
 archive=true
-column=12
+column=101
 encoding=UTF-8
 highlight=BibTeX
-line=260
+line=158
 mode=BibTeX
 open=true
 order=1
@@ -329,10 +336,10 @@ order=-1
 
 [item:main.tex]
 archive=true
-column=90
+column=25
 encoding=UTF-8
 highlight=LaTeX
-line=675
+line=93
 mode=LaTeX
 open=true
 order=0
@@ -429,10 +436,10 @@ order=-1
 
 [item:shorts.tex]
 archive=true
-column=2
+column=13
 encoding=UTF-8
 highlight=LaTeX
-line=8
+line=4
 mode=LaTeX
 open=true
 order=2
@@ -469,9 +476,9 @@ order=-1
 
 [view-settings,view=0,item:Introduction.tex]
 CursorColumn=0
-CursorLine=0
+CursorLine=73
 JumpList=
-ViMarks=
+ViMarks=.,73,0,[,73,0,],73,0,a,65,0
 
 [view-settings,view=0,item:Introduction.tex.backup]
 CursorColumn=0
@@ -498,10 +505,10 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:basics.tex]
-CursorColumn=0
-CursorLine=0
+CursorColumn=35
+CursorLine=231
 JumpList=
-ViMarks=
+ViMarks=.,0,25,[,1,0,],-1,-1,a,207,0,b,232,0
 
 [view-settings,view=0,item:basics.tex.backup]
 CursorColumn=0
@@ -509,17 +516,23 @@ CursorLine=0
 JumpList=
 ViMarks=
 
-[view-settings,view=0,item:main.bib]
-CursorColumn=12
-CursorLine=260
+[view-settings,view=0,item:main.bbl]
+CursorColumn=0
+CursorLine=0
 JumpList=
-ViMarks=.,260,11,[,260,11,],260,11
+ViMarks=
+
+[view-settings,view=0,item:main.bib]
+CursorColumn=101
+CursorLine=158
+JumpList=
+ViMarks=.,299,0,[,298,0,],299,22
 
 [view-settings,view=0,item:main.tex]
-CursorColumn=90
-CursorLine=675
+CursorColumn=25
+CursorLine=93
 JumpList=
-ViMarks=.,0,0,[,0,0,],-1,-1
+ViMarks=.,93,9,[,93,9,],93,24
 
 [view-settings,view=0,item:mpreport.cls]
 CursorColumn=37
@@ -528,10 +541,10 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:shorts.tex]
-CursorColumn=2
-CursorLine=8
+CursorColumn=13
+CursorLine=4
 JumpList=
-ViMarks=.,8,1,[,8,1,],8,1
+ViMarks=.,7,0,[,7,0,],7,0
 
 [view-settings,view=0,item:tikz.log]
 CursorColumn=0

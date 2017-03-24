@@ -1249,7 +1249,7 @@ v &\text{ - Object Velocity}\\
 The dynamic matrix is obtained by a non-linear state transition:
 
 \begin{align*}
-\vec{x}(t + T)=
+f = \vec{x}(t + T)=
 \begin{bmatrix}
 \frac{v}{\omega} (-\sin(\theta)) + \sin(T \omega + \theta) + x(t) \\
 \frac{v}{\omega} (\cos(\theta)) - cos(T \omega + \theta) + y(t) \\
@@ -1280,14 +1280,56 @@ J(\vec{x})=
 
 \subsection{Extendet Kalman Filter}
 
-Der EKF nutzt eine lokale lineare Approximation des nicht-linearen Modells (Jakobi Matrix).
+
+Der Extendet Kalman Filter (EKF) ist die nichtlineare Version des Kalman-Filters, die sich über eine Schätzung des aktuellen Mittels und der Kovarianz linearisiert.
 Zusätlich zu unserem Modell werden noch weitere Werte benötigt. Dazu zehen wir uns die Berechnungsforschrift an:
 
+\paragraph{predict}
 
 \begin{align*}
-\hat{x_{k+1}} = f(\hat{x_k},u_k)\\
-P_{k+1}=J_k P_k {J_k}^T
+\hat{x_{k}} &= f(\hat{x_{k-1}},u_{k-1})\\
+P_{k}&=F_{k-1} P_{k-1} {F_{k-1}}^T + Q_{k-1}
 \end{align*}
+
+% with:
+% \begin{itemize}
+%  \item $f$ - state transition
+%  \item $\hat{x}$ - estimated state
+%  \item $u$ - control vector
+% \end{itemize}
+
+Since we can not know the control variables of the other vehicles, we asume $u$ to be zero for our calculations.
+For the state transition model $F$ we use our previous calculated Jacobi matrix applied to the previous state.
+
+\begin{align*}
+\hat{x_{k}} &= f(\hat{x_{k-1}},0)\\
+P_{k}&=J_{k-1} P_{k-1} {J_{k-1}}^T + Q_{k-1}
+\end{align*}
+
+Für die Process Noise Covariance Matrix Q nehmen wir als ausgangspunkt typische Fahrzeugwerte aus werte aus \cite{Kelly1994} an.
+
+
+
+\paragraph{update}
+
+\begin{align*}
+\tilde{y_k} &= z_k -h(\hat{x_{k}})\\
+S_k &= H P_k {H_K}^T + R_k\\
+K_k &= P_k {H_K}^T {S_K}^{-1}\\
+\hat{x_k} &= \hat{x_k} + K_k \tilde{y_k}\\
+P_k &= (I - K_k H_k) P_k
+\end{align*}
+
+
+Since we directly measure all states of our system there is observation function for our measurements, means our
+$h(\hat{x_{k}})$ equals $\hat{x_{k}}$. Because of this our observation matrix $H$ results in a simple Identity matrix.
+
+% \begin{itemize}
+%  \item $h$ - predicted measurement transformation
+%  \item $z$ - measurements
+%  \item $u$ - control vector
+%  \item $H$ - observation matrices
+% \end{itemize}
 
 
 Im Update Schritt des Filters muss beachtet werden, dass wir mir Rotationen arbeiten die im Bereich von $[-180 \le \theta \le 180]$ definiert sind und desshalb Singularitäten auftreten können.
