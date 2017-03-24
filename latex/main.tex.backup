@@ -894,12 +894,13 @@ compact form that fits into a single UDP frame. The structure can be seen in \cr
 % einem Unsigned 16Bit Integer umgewandelt werden, welcher dann die Messung in cm enthält. Jeweils 16 dieser Werte ergeben dann einen Messframe in dem der Polarwinkel
 % auf einen Bereich zwischen -15 und +15 abgebildtet werden muss. Nachdem die sphärische Daten jedes Messpunktes widerhergestellt wurden, werden diese In Kartesische umgewandelt und
 % in eine Punkt Datenstruktur gespeichert. 
-In this case, we asume a constant rotational rate of the sensor output, which results in an equidistant distance of the measured values. The number of measurements per azimuth is recorded in 
+In this case, we asume a constant rotational rate of the sensor output, which results in an equidistant distance of the measured values. Important to know is also 
+that we always get a complete degree measurement. The number of measurements per azimuth is recorded in 
 entriesPerAzimuth and corresponds to the Velodyne VLP-16. In order to arrive at the actual measured values, two distance values must be merged and converted to an unsigned 16-bit integer,
 which then contains the measurement in cm. In each case, 16 of these values result in a measuring frame in which the polar angle must be mapped to a range between -15 and +15 degrees.
-After the spherical data of each measurement point have been reconstructed, they are converted into Cartesian coordinates and stored in a point data structure, to see in \cref{pcdc}
-
-\todo{iterativen ablauf des ganzen Algorythmusses klar machen}
+After the spherical data of each measurement point have been reconstructed, we rotate our coordinate system with the help of the heading of the Applanix POS LV
+which we add to the azimuth angle. As a result, the y-axis of our coordinate system is always aligned to the north, which greatly simplifies the subsequent tracking of the objects.
+Afterwards the spherical data is converted into Cartesian coordinates and stored in a point data structure, to see in \cref{pcdc}.
 
 \begin{figure}[!ht]
 \caption{Point Data Structure}
@@ -952,10 +953,7 @@ All clusters are stored by the algorithm as a list of references to the original
 % Die Aufgabe des Trackings ist es nun einen Zusammenhang der Messwerte über die Zeit herzustellen. Dabei ist das Tracking in zwei Abschnitte unterteilt.
 % Dem Tracking der Cluster vom \ac{DBSCAN} und dem Erstellen und Tracken von Hindernissen.
 The task of tracking is to establish a relationship between the measured values over time. The tracking is divided into two sections.
-Tracking of the clusters from the \ac{DBSCAN} and the creation and tracking of the objects.
-
-\todo{datenstrucktur Onjekte hinzufügen, weil positionen und attribute verwirrend}
-
+Tracking of the clusters from the \ac{DBSCAN} and the creation and tracking of parameterizable objects.
 
 \subsection{Cluster Tracking}
 % Für das Tracking der Cluster nehmen wir an, dass sich Objekte von Zeitschritt zu Zeitschritt nur geringefügig bewegen, weiterhin
@@ -975,9 +973,9 @@ This results in the fact that multiple clusters can be assigned the same ID, whi
 % Basis für das Objekt Tracking sind die zuvor gtrackten Cluster. Im Initialen Schritt werden aus allen Cluster mit der Selben IDs Objekte gebildet.
 % Welche abgesehen von den Messerten weitere Parameter zur beschreibung des Objekts Enthalten. Dazu gehören Werte wie die potentielle Größe und Postition des Objektes als Rechteck,
 % die Geschwindikteit des Objektes und seine Richtung, die ID und Typ des Objektes und seine Confidence. Die ID ergibt sich dabei aus der ID des initialen genutzten Clusters
-The basis for the object tracking are the previously tracked clusters. In the initial step, objects are created from all clusters with the same IDs.
+The basis for the object tracking are the previously tracked clusters. In the initial step, objects are created from all clusters, with the same ID as the clusters have.
 Which apart from the measured values contain further parameters for the description of the object. This includes values such as the potential size and 
-position of the object as a rectangle, the speed of the object and its direction, the ID and type of the object, and its confidence. The ID is derived from the ID of the initial used cluster
+position of the object as a rectangle, the speed of the object and its direction, the ID and type of the object and its confidence. The ID is derived from the ID of the initial used cluster
 
 % \begin{center}
 % \begin{tikzpicture} 
@@ -996,10 +994,10 @@ position of the object as a rectangle, the speed of the object and its direction
 
 %In jeden weiteren Schritt werden Alle Cluster mit der zuvor gleichen ID zum updaten der Objekte genutzt. Aus Clustern mit neuen IDs werden neue Objekte gebildet.
 
-Der vorerst wichtigste Schritt beim Updatevorgang ist die berechnung der Bewegungsrichtung eines Objektes, da folgende Berechnungen auf dieser basieren.
-Bei der Berechnung der Bewegungsrichtung ist zu beachten, dass die Bewegung des eigenen Fahrzeuges herausgerechnet werden muss.
-Dazu werden die Positionsdaten des Applanix POS-LV genutzt. Da sowohl die Positionsdaten des Applanix Systems, als auch die Erkannte Postition des Fahrzeuges Fehlerbehaftet sind,
-wird die Bewegungrichtung nur ab einer minimalen Bewegung von 2m geupdatet.
+% Der vorerst wichtigste Schritt beim Updatevorgang ist die berechnung der Bewegungsrichtung eines Objektes, da folgende Berechnungen auf dieser basieren.
+% Bei der Berechnung der Bewegungsrichtung ist zu beachten, dass die Bewegung des eigenen Fahrzeuges herausgerechnet werden muss.
+% Dazu werden die Positionsdaten des Applanix POS-LV genutzt. Da sowohl die Positionsdaten des Applanix Systems, als auch die Erkannte Postition des Fahrzeuges Fehlerbehaftet sind,
+% wird die Bewegungrichtung nur ab einer minimalen Bewegung von 2m geupdatet.
 
 In each further step, all clusters with the previously identical ID are used to update the objects. New objects are created from clusters with new IDs.
 
@@ -1022,25 +1020,25 @@ The result can be viewed in \cref{obst_rot}. It is easy to see that the directio
 but the bounding box is correctly oriented. How this calculation comes from is clarified in the following.
 
 \begin{figure}[!ht]
-%\begin{center}
+\begin{center}
 \caption{Obstacle Movement}
 \includegraphics[width=0.5\textwidth]{bilder/obst_rot.png}
 \label{obst_rot}
-%\end{center}
+\end{center}
 \end{figure}
 
 % Basierend auf der Bewegungrichtung wird nun die Ausrichtung des Fahrzeiges berechnet. Dazu werden alle dem Objekt zugewiesenden Cluster zusammengefasst und um $-\theta$ gedreht.
 % Danach wird das Objekt wird in 3 gleich große Segmente unterteilt (\cref{obst_devide}).
 
 Based on the direction of movement, the alignment of the vehicle is now calculated. To do this, all clusters assigned to the object are grouped together and rotated by $-\theta$.
-Then the object is divided into 3 equal segments (\cref{obst_devide}).
+Then the object is divided into 3 equal sized segments (\cref{obst_devide}).
 
 \begin{figure}[!ht]
-%\begin{center}
+\begin{center}
 \caption{Obstacle Cutting}
 \includegraphics[width=0.5\textwidth]{bilder/obst_devide.png}
 \label{obst_devide}
-%\end{center}
+\end{center}
 \end{figure}
 
 % Weiterhin wird bestimmt ob sich das Objekt oberhalb oder unterhalb der x-Achse befindet. Dies ist wichtig, da wir wissen müssen, welche seite des Objekts wir messen.
@@ -1053,21 +1051,25 @@ It is also determined whether the object is above or below the x-axis. This is i
 If the object is below the x-axis, then the y-value is maximized in the next step; if it is above, it is minimized.
 In the following, we assume that the object is under the x-axis. Therefore we maximize the y-values in the left and right segment of the divided obstacle.
 The division into 3 segments is necessary to prevent the two maxima from running into the same point and the distance of the points doesn't become too small, 
-which would cause a great inaccuracy. With these points $(\vec{R};\vec{L})$ a correction of the rotation of the object is now calculated:
+which would cause a great inaccuracy. With these points $(\vec{R};\vec{L})$ (\cref{obst_correction}) a correction of the rotation of the object is now calculated:
 
-\begin{figure}[!ht]
-%\begin{center}
-\caption{$\theta$ - Correction}
-\includegraphics[width=0.5\textwidth]{bilder/obst_devide_angle.png}
-\label{obst_correction}
-%\end{center}
-\end{figure}
+
+
 
 \begin{align*}
 \Delta x &= R_x - L_x\\
 \Delta y &= R_y - L_y\\
 \theta_{correction} &= \atantwo(\Delta y,\Delta x)
 \end{align*}
+
+
+\begin{figure}[!ht]
+\begin{center}
+\caption{$\theta$ - Correction}
+\includegraphics[width=0.5\textwidth]{bilder/obst_devide_angle.png}
+\label{obst_correction}
+\end{center}
+\end{figure}
 
 % Nach Anwendung der Korrektur wird die größe des Hindernises berechnet. Dazu werden die maximalen und minimalen x und y Werte des erneut um $\theta_{correction}$ gedrehten Onjektes herangezogen.
 % Mit diesen Werten wird nun über die Zeit ein auf 0.5m gerundetes Histogram für die Länge und Breite des Hindernises aufgebaut.
@@ -1076,11 +1078,10 @@ which would cause a great inaccuracy. With these points $(\vec{R};\vec{L})$ a co
 % gibt es für beide Werte einen unteren Grenzwert von 0.9m . Messerte für ein Beispielobjekt sind in \cref{obst_hist} zu sehen.
 
 After applying the correction, the size of the obstacle is calculated. For this purpose, the maximum and minimum x and y values of
-rotated objects are used. With these values, a histogram for the length and width of the obstacle, rounded to 0.5 m, is now established over time. 
+rotated objects are used. With these values, a histogram for the length and width of the obstacle, rounded to 0.5 m, is now established over time. \todo{warum 0.5m??}
 The most probable value is then selected. This causes the size of the obstacle to change more often before the size converges to a stable value.
-Since the size of the object can begin to be very small, there is a lower limit of 0.9m for both values. Measured values for a sample object can be seen in \cref{obst_hist}.
+Since the size of the objectat the begin can be very small, there is a lower limit of 0.9m for both values. Measured values for a sample object can be seen in \cref{obst_hist}.
 \begin{figure}[!ht]
-  %\addcontentsline{lof}{figure}{LaTeX--Strukturelemente}
 \begin{center}
 \caption{Object Size Histogram}
 \begin{tikzpicture}
@@ -1159,8 +1160,6 @@ In order to prevent the detection of false positives immediately recognized as a
 Before a recognized object is considered to be valid, this must achieve a certain confidence value. The initial confidence value of an object is zero. 
 The confidence value is increased by one if the object can be tracked in two consecutive time steps and satisfies the following conditions:
 
-
-\todo{wie ergibt sich höhe und breite! (aus der orientierung.... erklären)}
 \begin{itemize}
 \item The width of the object must be less than the length of the obstacle plus 1.5m
 \item The length of the obstacle must be less than 10m
@@ -1173,10 +1172,7 @@ recognized after at least 3 three iterations. This value was empirically determi
 
 
 \section{Classification}
-\todo{text zu listing anpssen}
 \todo{implementierung Plausibilitätstest}
-\todo{filterung in code entfernen, weil größe bereits gefiltert wird}
-
 % Nun wird eine  Klassifizierung der Objekte anhand ihrer Größe vorgenommen, es findet keine Klassifizierung nach bewegten und unbewegten Objeten Stadt.
 % Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterium wird die Größe der Onjekte genutzt.
 % Die Klassifizierung sieht wie folgt aus:
@@ -1198,7 +1194,7 @@ The classification is as follows:
 
 Furthermore, a plausibility test is carried out using the speed. Thus, a pedestrian must not exceed a speed of 10km/h and the maximum speed for a cyclist is 30km/h.
 Since no sensible speed limit can be assumed for vehicles, we use the change of orientation in their place.
-The maximum rotation rate is assumed to be 0.3 rads/sec from \cite{Kelly1994}. Since the value is an upper limit, we assume a slightly higher value of 0.4 rads/sec.
+The maximum rotation rate is assumed to be 0.1 rads/sec from \cite{Kelly1994}. Since the value is an upper limit, we assume a slightly higher value of 0.2 rads/sec.
 If one of these values is exceeded, the confidence is also halved.
 
 
@@ -1223,10 +1219,9 @@ If one of these values is exceeded, the confidence is also halved.
 % Objekten zu treffe, welche im Moment nicht sichtbar sind. Weiterin erlaubt es auf einfache Weise zeitweise nicht erkannte Objekte wiederzuerkennen, also dem Objekt
 % die gleich ID zuzuweisen wie zuvor. 
 Following the tracking, a state estimation is performed on the detected objects. This is necessary because objects can be hidden during the movement,
-be it by other moving objects or buildings. An estimation of the state beyond the recognition horizon allows us to make a statement about the position of 
-objects which are not visible at the moment. Furthermore, it allows you to easily rerecognize objects that have not been recognized at a time, ie to assign the same ID to the object as before.
-
-\todo{kalman nicht nur für Prediction auch für filterung}
+be it by other moving objects or buildings. An estimation of the state beyond the detection horizon allows us to make a statement about the position of 
+objects which are not visible at the moment. Furthermore, it allows you to easily redetect objects that have not been detected at a time, ie to assign the same ID to the object as before
+and allows a well filtering of the measured objects.
 
 % Aus dem zuvor durchgführten Tracking können wir die Aktuelle Position, Geschwindigekeit, Drehung und Drehgeschwindigkeit erhalten. 
 % Für eine Zustandschätzung mit den für Fahrzeuge üblichen Bicycle Model fehlen \todo{reference} und Angangen über den Radstand und Gewicht des Fahrzeues.
@@ -1265,7 +1260,8 @@ v\\
 \end{align*}
 
 Da es sich beid er Dynamikmatrix um einen nichtlinearen Zustandsübergang handelt benötigen wir noch die Jacobi Matrix.
-Die Matrix wure mit Sympy generiert, und auf Grund ihrer Größe eingekürzt.
+Diese wurde auf Grund ihrer Göße eingekürzt.
+%Die Matrix wure mit Sympy generiert, und auf Grund ihrer Größe eingekürzt.
  
  
 \begin{align*}
@@ -1280,6 +1276,19 @@ J(\vec{x})=
 0 & 0 & 0 & 0 & 1
 \end{bmatrix} 
 \end{align*}
+
+
+\subsection{Extendet Kalman Filter}
+
+Der EKF nutzt eine lokale lineare Approximation des nicht-linearen Modells (Jakobi Matrix).
+Zusätlich zu unserem Modell werden noch weitere Werte benötigt. Dazu zehen wir uns die Berechnungsforschrift an:
+
+
+\begin{align*}
+\hat{x_{k+1}} = f(\hat{x_k},u_k)\\
+P_{k+1}=J_k P_k {J_k}^T
+\end{align*}
+
 
 Im Update Schritt des Filters muss beachtet werden, dass wir mir Rotationen arbeiten die im Bereich von $[-180 \le \theta \le 180]$ definiert sind und desshalb Singularitäten auftreten können.
 Da unsere Messdaten verraucht sind , kann es vorkommen, dass unser State bei 179 Grad ist und mit einem Wert von $-179$ geupdatet werden soll. Nehmen wir der einfachheit an,

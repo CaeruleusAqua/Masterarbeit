@@ -42,23 +42,24 @@
 \contentsline {section}{\numberline {6.3}Tracking}{26}{section.6.3}
 \contentsline {subsection}{\numberline {6.3.1}Cluster Tracking}{26}{subsection.6.3.1}
 \contentsline {subsection}{\numberline {6.3.2}Object Tracking}{27}{subsection.6.3.2}
-\contentsline {subsection}{\numberline {6.3.3}Object Confidence}{29}{subsection.6.3.3}
+\contentsline {subsection}{\numberline {6.3.3}Object Confidence}{30}{subsection.6.3.3}
 \contentsline {section}{\numberline {6.4}Classification}{30}{section.6.4}
-\contentsline {section}{\numberline {6.5}State Estimation}{31}{section.6.5}
+\contentsline {section}{\numberline {6.5}State Estimation}{30}{section.6.5}
 \contentsline {subsection}{\numberline {6.5.1}Constant Turn Rate and Velocity Model}{31}{subsection.6.5.1}
-\contentsline {subsection}{\numberline {6.5.2}Prediction}{32}{subsection.6.5.2}
+\contentsline {subsection}{\numberline {6.5.2}Extendet Kalman Filter}{31}{subsection.6.5.2}
+\contentsline {subsection}{\numberline {6.5.3}Prediction}{32}{subsection.6.5.3}
 \contentsline {chapter}{\numberline {7}Simuation}{33}{chapter.7}
 \contentsline {section}{\numberline {7.1}Simuation Scenario}{33}{section.7.1}
 \contentsline {section}{\numberline {7.2}Simulation Logic}{34}{section.7.2}
 \contentsline {subsection}{\numberline {7.2.1}Sensor Connection}{34}{subsection.7.2.1}
 \contentsline {subsection}{\numberline {7.2.2}Mapping}{35}{subsection.7.2.2}
-\contentsline {subsubsection}{Localization}{36}{section*.72}
+\contentsline {subsubsection}{Localization}{36}{section*.68}
 \contentsline {subsection}{\numberline {7.2.3}Statemachine}{37}{subsection.7.2.3}
-\contentsline {paragraph}{Start - State}{38}{section*.80}
-\contentsline {paragraph}{ToRoundabout - State}{38}{section*.81}
-\contentsline {paragraph}{Brake - State}{38}{section*.82}
-\contentsline {paragraph}{InRoundabout - State}{38}{section*.83}
-\contentsline {paragraph}{ExitRoundabout - State}{38}{section*.86}
+\contentsline {paragraph}{Start - State}{38}{section*.76}
+\contentsline {paragraph}{ToRoundabout - State}{38}{section*.77}
+\contentsline {paragraph}{Brake - State}{38}{section*.78}
+\contentsline {paragraph}{InRoundabout - State}{38}{section*.79}
+\contentsline {paragraph}{ExitRoundabout - State}{38}{section*.82}
 \contentsline {chapter}{\numberline {8}Evaluation}{39}{chapter.8}
 \contentsline {section}{\numberline {8.1}Simuation}{39}{section.8.1}
 \contentsline {section}{\numberline {8.2}Real Measurements}{39}{section.8.2}
