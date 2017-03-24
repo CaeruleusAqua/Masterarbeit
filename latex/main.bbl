@@ -257,6 +257,39 @@
       \field{type}{phdthesis}
       \field{year}{1998}
     \endentry
+    \entry{Bentley1975}{article}{}
+      \name{author}{1}{}{%
+        {{hash=fc83c07bda606ccb8bf28d7c928412ec}{%
+           family={Bentley},
+           familyi={B\bibinitperiod},
+           given={Jon\bibnamedelima Louis},
+           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{fc83c07bda606ccb8bf28d7c928412ec}
+      \strng{fullhash}{fc83c07bda606ccb8bf28d7c928412ec}
+      \strng{authornamehash}{fc83c07bda606ccb8bf28d7c928412ec}
+      \strng{authorfullhash}{fc83c07bda606ccb8bf28d7c928412ec}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{00010782}
+      \field{journaltitle}{Communications of the ACM}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{number}{9}
+      \field{title}{{Multidimensional binary search trees used for associative searching}}
+      \field{volume}{18}
+      \field{year}{1975}
+      \field{pages}{509\bibrangedash 517}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1145/361002.361007
+      \endverb
+      \verb{url}
+      \verb http://portal.acm.org/citation.cfm?doid=361002.361007
+      \endverb
+    \endentry
     \entry{Berger2010}{thesis}{}
       \name{author}{1}{}{%
         {{hash=989e9c75cedce190a8efdde3ba9764ec}{%
@@ -658,6 +691,31 @@
       \verb http://www.scitepress.org/DigitalLibrary/Link.aspx?doi=10.5220/0006040801750178
       \endverb
     \endentry
+    \entry{Goldberger1964}{article}{}
+      \name{author}{1}{}{%
+        {{hash=d861d183cbba5dd2690a13428ff510d5}{%
+           family={Goldberger},
+           familyi={G\bibinitperiod},
+           given={A\bibnamedelima S},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{d861d183cbba5dd2690a13428ff510d5}
+      \strng{fullhash}{d861d183cbba5dd2690a13428ff510d5}
+      \strng{authornamehash}{d861d183cbba5dd2690a13428ff510d5}
+      \strng{authorfullhash}{d861d183cbba5dd2690a13428ff510d5}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Economic theory is used to describe and explain decision making in the context of scarce resources.}
+      \field{isbn}{0-471-31101-4}
+      \field{journaltitle}{Economic Theory}
+      \field{langid}{english}
+      \field{title}{{Classical Linear Regression}}
+      \field{year}{1964}
+      \field{pages}{156\bibrangedash 212}
+      \range{pages}{57}
+    \endentry
     \entry{Himmelsbach2009}{article}{}
       \name{author}{3}{}{%
         {{hash=a7a8b9530523ae109d78af5f8e764e3e}{%
@@ -869,6 +927,53 @@
       \field{year}{2008}
       \verb{url}
       \verb https://books.google.de/books?id=9ApoM5GTpq0C
+      \endverb
+    \endentry
+    \entry{Li2016}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=a9c8728e355996d027a7e56b60820a18}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=bdcd1a06f2e39b7068049e68530704f4}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Tianlei},
+           giveni={T\bibinitperiod}}}%
+        {{hash=1c3a2dc4e9ad36c98e17a912894eaa02}{%
+           family={Xia},
+           familyi={X\bibinitperiod},
+           given={Tian},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Robotics: Science}%
+        {Systems Foundation}%
+      }
+      \strng{namehash}{66c48d0472719546abac1309358db3a0}
+      \strng{fullhash}{66c48d0472719546abac1309358db3a0}
+      \strng{authornamehash}{66c48d0472719546abac1309358db3a0}
+      \strng{authorfullhash}{66c48d0472719546abac1309358db3a0}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Convolutional network techniques have recently achieved great success in vision based detection tasks. This paper introduces the recent development of our research on transplanting the fully convolutional network technique to the detection tasks on 3D range scan data. Specifically, the scenario is set as the vehicle detection task from the range data of Velodyne 64E lidar. We proposes to present the data in a 2D point map and use a single 2D end-to-end fully convolutional network to predict the objectness confidence and the bounding boxes simultaneously. By carefully design the bounding box encoding, it is able to predict full 3D bounding boxes even using a 2D convolutional network. Experiments on the KITTI dataset shows the state-of-the-art performance of the proposed method.}
+      \field{booktitle}{Robotics: Science and Systems XII}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{9780992374723}
+      \field{langid}{english}
+      \field{title}{{Vehicle Detection from 3D Lidar Using Fully Convolutional Network}}
+      \field{year}{2016}
+      \verb{doi}
+      \verb 10.15607/RSS.2016.XII.042
+      \endverb
+      \verb{eprint}
+      \verb 10.15607
+      \endverb
+      \verb{url}
+      \verb http://www.roboticsproceedings.org/rss12/p42.pdf
       \endverb
     \endentry
     \entry{miller2007rao}{inproceedings}{}
@@ -1626,31 +1731,6 @@
       \field{title}{Zur Verkehrssicherheit innerörtlicher Knotenpunkte - Knotenpunkte mit Lichtsignalsteuerung, mit Vorfahrtregelung durch Verkehrszeichen, Kreisverkehrsplätze}
       \field{volume}{40}
       \field{year}{1994}
-    \endentry
-    \entry{LLSQ}{online}{}
-      \name{author}{1}{}{%
-        {{hash=9c677286866aad38f8e9b660f5411814}{%
-           family={Wikipedia},
-           familyi={W\bibinitperiod}}}%
-      }
-      \strng{namehash}{9c677286866aad38f8e9b660f5411814}
-      \strng{fullhash}{9c677286866aad38f8e9b660f5411814}
-      \strng{authornamehash}{9c677286866aad38f8e9b660f5411814}
-      \strng{authorfullhash}{9c677286866aad38f8e9b660f5411814}
-      \field{sortinit}{W}
-      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{langid}{english}
-      \field{title}{Linear least squares (mathematics)}
-      \field{urlday}{6}
-      \field{urlmonth}{3}
-      \field{urlyear}{2017}
-      \field{year}{2017}
-      \field{urldateera}{ce}
-      \verb{url}
-      \verb https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics)
-      \endverb
     \endentry
     \entry{Zhang}{article}{}
       \name{author}{5}{}{%

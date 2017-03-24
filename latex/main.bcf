@@ -2201,22 +2201,25 @@
     <bcf:citekey order="53">Ram2007</bcf:citekey>
     <bcf:citekey order="53">Soderkvist2009</bcf:citekey>
     <bcf:citekey order="54">Holmes2007</bcf:citekey>
-    <bcf:citekey order="55">LLSQ</bcf:citekey>
-    <bcf:citekey order="56">LLSQ</bcf:citekey>
-    <bcf:citekey order="57">DBSCAN</bcf:citekey>
-    <bcf:citekey order="58">Zhang</bcf:citekey>
-    <bcf:citekey order="58">Himmelsbach2009</bcf:citekey>
+    <bcf:citekey order="55">Goldberger1964</bcf:citekey>
+    <bcf:citekey order="56">Zhang</bcf:citekey>
+    <bcf:citekey order="56">Himmelsbach2009</bcf:citekey>
+    <bcf:citekey order="56">Li2016</bcf:citekey>
+    <bcf:citekey order="57">Bentley1975</bcf:citekey>
+    <bcf:citekey order="58">DBSCAN</bcf:citekey>
+    <bcf:citekey order="59">Zhang</bcf:citekey>
     <bcf:citekey order="59">Himmelsbach2009</bcf:citekey>
     <bcf:citekey order="60">Himmelsbach2009</bcf:citekey>
-    <bcf:citekey order="61">Kelly1994</bcf:citekey>
-    <bcf:citekey order="62">althoff2014online</bcf:citekey>
-    <bcf:citekey order="62">snider2009automatic</bcf:citekey>
-    <bcf:citekey order="62">kong2015kinematic</bcf:citekey>
-    <bcf:citekey order="63">Schubert2008</bcf:citekey>
-    <bcf:citekey order="64">Berger2010</bcf:citekey>
-    <bcf:citekey order="65">rast06</bcf:citekey>
-    <bcf:citekey order="66">Galetzka2017</bcf:citekey>
-    <bcf:citekey order="67">lester2008gang</bcf:citekey>
+    <bcf:citekey order="61">Himmelsbach2009</bcf:citekey>
+    <bcf:citekey order="62">Kelly1994</bcf:citekey>
+    <bcf:citekey order="63">althoff2014online</bcf:citekey>
+    <bcf:citekey order="63">snider2009automatic</bcf:citekey>
+    <bcf:citekey order="63">kong2015kinematic</bcf:citekey>
+    <bcf:citekey order="64">Schubert2008</bcf:citekey>
+    <bcf:citekey order="65">Berger2010</bcf:citekey>
+    <bcf:citekey order="66">rast06</bcf:citekey>
+    <bcf:citekey order="67">Galetzka2017</bcf:citekey>
+    <bcf:citekey order="68">lester2008gang</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global/" type="entry" sortscheme="nty" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>

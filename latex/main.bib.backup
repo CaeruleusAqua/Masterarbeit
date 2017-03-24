@@ -520,5 +520,34 @@
   hyphenation={english}
 }
 
+@article{Release2007,
+  author = {Release, For Immediate and Shipley, Don and Walker, Jan},
+  file = {:home/storm/workspace/Masterarbeit/documents/ucwinnertt.pdf:pdf},
+  journal = {Defense},
+  number = {March 2004},
+  pages = {2004--2005},
+  title = {{Tartan racing wins {\$}2 million prize for darpa urban challenge}},
+  year = {2007},
+  hyphenation={english}
+}
+
+@article{Goldberger1964,
+  abstract = {Economic theory is used to describe and explain decision making in the context of scarce resources.},
+  author = {Goldberger, A S},
+  doi = {10.1070/IM2010v074n01ABEH002481},
+  isbn = {8257007439},
+  issn = {10645632},
+  journal = {Economic Theory},
+  number = {4},
+  pages = {119--146},
+  pmid = {20137023},
+  title = {{Economic Theory}},
+  url = {http://www.springerlink.com/index/T60245873T732660.pdf},
+  volume = {19},
+  year = {1964},
+  hyphenation={english}
+}
+
+
 
 @Comment{jabref-meta: databaseType:bibtex;}

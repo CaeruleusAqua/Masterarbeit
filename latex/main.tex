@@ -488,8 +488,8 @@ However, there is a higher likelihood that vehicles have already been hidden in 
 
 As we can see, we can excellent cover the area up to 25 meters and thus observe the mini roundabout completely, for larger roundabouts the sensor is only conditionally suitable. 
 For all the following considerations, we shall consider only miniature circuits or smaller small roundabouts. 
-For all other roundabouts, evaluate whether it is at all necessary to observe all the vehicles in the roundabout as the distance from driveway to driveway increases accordingly.
-It is possible to consider the roundabout as a simple yield sign situation.
+For all other roundabouts, evaluate whether it is necessary to observe all the vehicles in the roundabout, as the distance from driveway to driveway increases accordingly.
+It is maybe possible to consider the roundabout as a simple yield sign situation.
 
 \section{Practical Analysis}
 % Da wir uns nun bereits die Theoretischen überlegungen angesehen haben sehen wir uns die praktischen Messungen des Sensors an. 
@@ -511,25 +511,27 @@ To do this, we can see a measurement on the test roundabout on AstaZero in the b
 % Daher musste für die Montage ein kompromiss geschlossen werden, entweder messungen im vorderen Bereich zu verlieren ider im Hinteren. Die Fahlenden Messungen werden
 % vom Fahrzeugdach verdeckt. Die Kleineren lücken im vorderen Bereich stammen von der GPS Antenne des Aplanix Systems und ließ sich leider auch nicht verhindern.
 
-It can be seen here that the measurements in the front and especially in the rear region have gaps. Unfortunately, this was not prevented during installation of the Velodyne since 
+It can be seen here that the measurements in the front and especially in the rear region have gaps. Unfortunately, this can not prevented during installation of the Velodyne since 
 the holding pre-treatment of the sensor does not provide a further height adjustment and no invasive changes should be made to the test vehicle. 
 Therefore, a compromise had to be concluded for the assembly, either to lose measurements in the front area, or to lose in the rear.
-The missing measurements are obscured by the vehicle roof. The smaller gaps in the front area come from the GPS antenna of the Applanix system and unfortunately could not be prevented.
+The missing measurements are obscured by the vehicle roof. The smaller gaps in the front area come from the GPS antenna of the Applanix system and unfortunately also 
+could not be prevented.
 
 % Da die Beocbachtung des Hinteren Bereiches für die Kreisverkehrbeobachtung nicht wichtig ist sind die Fehlenden Messungen im Hinteren Bereich jedoch zu vernachlässsigen.
 % Da wir im vorderen Nahebereich des Sensors die höchste Auflösung haben fallen die fehlenden Messungen im im Frontbereich auch nicht ins gewicht, denn diese befinden sich 
 % nur im ersten Messlayer.
 
-Since the monitoring of the rear area is not important for the roundabout observation, the missing measurements in the rear area are negligible. Since we have the highest
-resolution in the front sensor range of the sensor, the missing measurements in the front range are also not important, because these are only in the first measurement layer.
+Since the monitoring of the rear area is not important for the roundabout observation, the missing measurements in the rear area are negligible. 
+Since we have the highest resolution in the front area of the sensor, the missing measurements in the front range are not important,
+also these are only in the first measurement layer.
 
 
 % Weiterhin in \cref{velodyne_hidden} zu sehen ist es weiteres Testfahrzeug (rote box). An diesem ist zu erkennen, das wir auch im eigentlich verdeckten hinteren Bereich des Fahrzeuges
 % Messungen erhalten. Dies ist dadurch zu erklären, dass der Sensor über mehrere Return Modes verfügt, die es Ihm erlaubt durch Transparente Objekte zu sehen. Dies kann in \cref{vel_trans}
 % gesehen werden
 
-Further in \cref{velodyne_hidden} to see it is another test vehicle (red box). It can be seen from this that we also get measurements in the rear of the vehicle, which is actually hidden.
-This is explained by the fact that the sensor has several return modes, which allows it to see through transparent objects. This can be seen in the example in \cref{vel_trans}
+Further in \cref{velodyne_hidden} to see is another test vehicle (red box). It can be seen from this that we also get measurements in the rear of the vehicle, which is actually hidden.
+This is explained by the fact that the sensor has several return modes, which allows it to see through transparent objects. This can be seen in the example in \cref{vel_trans}.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -555,7 +557,7 @@ always provide sufficient measurements in the front area, in addition to keeping
 % Dies ist nötig, um zeitabhängige größen wie die Geschwindigkeit und Drehrate der erkannten Objekte zu bestimmen. Im letzten Schritt werden die Objekten anhand der Zuvor bestimmten Parameter
 % in Typen classifiziert. 
 
-In the following chapter, we will present the Velodyne VLP-16 with the recognition of traffic users. We begin with the segmentation,
+In the following chapter, we will present the Velodyne VLP-16 with the detection of traffic users. We begin with the segmentation,
 that is, in the first step all measured values which do not represent potential traffic are removed. 
 In the next step, the remaining measured values are combined with the aid of a clustering algorithm. 
 In the third step the objects are abstracted and tracked, that is, we try to establish a relationship between the objects between different time steps.
@@ -578,15 +580,15 @@ In the last step, the objects are classified into types using the predetermined 
 In order to recognize objects in a PointCloud, it is necessary to know which measurements belong to the ground and which belong to objects.
 There are many ways to achieve this. The most naive method is to remove the bottom plate by its Z coordinate.
 However, this method has many drawbacks, on the one hand, the LiDAR sensor has to be mounted exactly straight on a vehicle, 
-on the other hand the vehicle must have a very stiff chassis in order to prevent a possible tilt of the sensor. 
-Furthermore, this only allows the removal of palanar surfaces, alo flat non-hilly grounds. 
+on the other hand the vehicle must have a very stiff chassis in order to prevent a possible tilt of the sensor, as seen in the \ac{DARPA} Challenge.
+Furthermore, this only allows the removal of palanar surfaces, means only flat non-hilly grounds. 
 Another common method is the removal of the base plate on the basis of a statistical mean value \cite{Zhang}.
 However, this method also requires a calibration of the sensor distance to the ground. 
 And the determination of further threshold values which are dependent on the environment.
 The advantages of both methods are their low computational performance and runtime $\mathcal{O}(n)$.
-Better methods such as gradient-based explansions algrythmenm need a starting point that can be identified as a bottom plate.
+Better methods such as gradient-based expansion algorithms require a starting point that can be identified as a bottom plate.
 A further possibility is the description of objects as convex objects \cite{5164280}, which can also be described on the basis of the gradients.
-The advantage of this method is that no initial position is required for the floor plate, but this is very processing power intensive.
+The advantage of this method is that no initial position is required for the bottom plate, but this is very processing power intensive.
 % 
 % Für unseren Anwendungsfall mit dem Velodyne VLP-16 besteht das Problem darin, dass die Auflösung des Sensor in der Höhe sehr gering ist. Abhängig von der Entfernung des 
 % Fahrzeuges innerhalb der benötigten Reichweite fallen nur zwei Lagen auf die Testfahrzeuge, wesshalb Gradientenbasierende Methoden hier zuverlässig versagen. \todo{beleg} Da die Gradienten zu klein sind und
@@ -595,12 +597,12 @@ The advantage of this method is that no initial position is required for the flo
 % Auch leicht erhöhte Geschwindigekiten im Kreisverkehr (ca 30 km/h) führen zu einer deutlichen Seitenneigung des Fahrzeuges. Darum wird nun eine weitere Methode vorgeschlagen.
 % Die Erkennung einer Grundfläche in den Messdaten. 
 
-For our application with the Velodyne VLP-16, the problem is that the resolution of the sensor is very low in height.
+For our application with the Velodyne VLP-16, the problem is in addition that the resolution of the sensor is very low in height.
 Depending on the distance of the vehicle within the required range, only two layers fall on the test vehicles, which means that gradient-based methods fail reliably,
-\todo{beleg} beacuse the gradients are too small and the depletion of the necessary thresholds leads to frequent false positives. 
+beacuse the gradients are too small and the depletion of the necessary thresholds leads to frequent false positives. 
 The method of the statistical mean and the method based on the Z coordinate, suffer from the chassis of the Volvo XC90 SUV. 
 The height of the vehicle varies by several centimeters by changing the driving profile (Sport / Eco, etc.). Even slightly increased speed in the roundabout (about 30 km/h)
-lead to a clear lateral inclination of the vehicle. Therefore, another method is proposed. The detection of a base area in the measurement data.
+lead to a clear lateral inclination of the vehicle. Therefore, another method is proposed. The detection of a ground plane in the measurement data.
 
 % Für die Erkennung des Bodens gehen wir von Folgenden Annahmen aus, die Straße lösst sich approximativ als Ebene im R3 darstellen. Weiterin ist die Grundfläche die niedrigste
 % Fläche im gesuchten Bereich. Daher wird im ersten schritt der in Polarkoordinaten vorliegende Datensatz in  in 30 Tortenstück förmige Segmente geteilt.
@@ -608,10 +610,10 @@ lead to a clear lateral inclination of the vehicle. Therefore, another method is
 % dass sich die Straße vor, bzw hinter dem Fahrzeug befindet. Zukünfitg könnte die Auswahl der Segmente auch mit hilfe des Fahrzeuglenkwinkes optimiert werden. Oder der Gültige Bereich
 % von einer Lane Detection geliefert werden.
 
-For the recognition of the ground floor we assume the following assumptions: the road can be presented approximately as a plane in $\mathbb{R}^3$.
-Further, the ground floor is the lowest area in the searched area. Therefore, in the first step, the data set in polar coordinates is divided into segments segmentated into 30 of cake piece formed pieces.
-From this pieces, two segments [\cref{segments}] are then selected in front and rear, which are not neighbored. The selection of the segments follows from the assumption
-that the road is in front or behind the vehicle. In future, the selection of the segments could also be optimized with the help of the vehicle steering angle,
+For the detection of the ground plane we assume the following assumptions: the road can be presented approximately as a plane in $\mathbb{R}^3$.
+Further, the ground plane is the lowest plane in the mesurement area. Therefore, in the first step, the data set in polar coordinates is divided into 30 of cake piece formed segments.
+From this segments, two segments [\cref{segments}] are then selected in front and rear, which are not neighbored. The selection of the segments follows from the assumption
+that the road is in front or behind the vehicle. In future, the selection of the segments could also be optimized with the help of the vehicle steering angle 
 or the valid range can be provided by a lane detection.
 
 \begin{figure}[!ht]
@@ -640,12 +642,12 @@ Within these segments a search for the 10 measurements with the lowest Z value i
 since the measurements of all higher layers are too far away. The division into segments is therefore necessary in order to prevent all measured values running into a single local minima. 
 
 
-From this pre-filtered readings three are now randomly selected for a \ac{RANSAC}, wich will run iteratively.
+From this pre-filtered readings three are now randomly selected for a modified \ac{RANSAC}, wich will run iteratively.
 
 From these three points a plane is now formed in the Hesse normal form, which allows an efficient distance calculation to other points.
-After that, we collect all other points from our set of minima, using a distance criterion. 
-\todo{welcher threthold wurde gewählt, und warum?}
-If can find more than 10 other points in our minima set, a new plane and their error is calculated from the plane and the new Collected Points by a Planefitting Algorithms [\cref{subssec:planefitting}].
+After that, we collect all other points from our set of minima, using a distance criterion. This threshold is chosen as 0.2m experimentally.
+If can find more than 10 other points in our minima set, which fits our criteria, a new plane and their error is calculated from the plane and
+the new Collected Points by a Planefitting Algorithms [\cref{subssec:planefitting}].
 The error is calculated over the sum of the squared distances of all points to the plane.
 
 However, before we add the plane as a possible solution candidate, it is checked whether the layer is within a plausible parameter range.
@@ -672,12 +674,12 @@ For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkv
 of the \ac{RANSAC} is very often called with a large number of points, running to the \ac{SVD} within the \ac{RANSAC} causes a very high running time.
 For this reason, a \ac{LLSQ} algorithm with some optimization is used here.
 When using the \ac{LLSQ}, it is important to note that the \ac{LLSQ} is not optimizing the distance of the points to the plane but the distance of the points the along an axis (in our case the z axis),
-see \cref{LLSQ_MIN}. This can lead to problems, if the points are scattered far apart from the optimal plane. However, since we are using our preselected points from our the \ac{RANSAC}
+see \cref{LLSQ_MIN}\footnote{\url{https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics) (03/06/2017)}}. This can lead to problems, if the points are scattered far apart from the optimal plane. However, since we are using our preselected points from our the \ac{RANSAC}
 distance criterion, this poses no problem.
 
 \begin{figure}[!ht]
 %\begin{center}
-\caption{Linear least Squares (LLSQ)  \cite{LLSQ}}
+\caption{Linear least Squares (LLSQ)}
 \includesvg[width=0.5\textwidth]{Linear_least_squares_min}
 \label{LLSQ_MIN}
 %\end{center}
@@ -722,7 +724,7 @@ This system usually doesn't have a solution, but our real goal isn't finding an 
 \hat{\beta} = \min{(|| \vec{z} - X\vec{\beta} ||^2)}
 \end{align*}
 
-We can do this by multiplying our equation by the transpose of our point matrix $X$:
+We can do this by multiplying our equation by the transpose of our point matrix $X$ \cite{Goldberger1964}:
 
 \begin{align*}
 (X^TX) \hat{\beta} &= X^T \vec{z}\\
@@ -760,7 +762,7 @@ y_0 & y_1 & \dots & y_n \\
 % nun ein weiterer Trick um rechenleistung zu sparen.
 % Nach dem Multiplizieren der Transponierten erhalten wir:
 
-This equation system can now be solved with the inverse of $(X^TX)$. Since the calculation of inverse matrices with $\mathcal{O}(n^3)$ is also expensive, now another trick to save computing power.
+This equation system can now be solved with the inverse of $(X^TX)$. Since the calculation of inverse matrices with $\mathcal{O}(dim^3)$ is also expensive, now another trick to save computing power.
 After multiplying with the transpose we get:
 
 \begin{align*}
@@ -784,7 +786,7 @@ d
 
 % Gut zu sehen sind hier die Summen in den Randbereichen der Matrix X und dem Vektor $\vec{z}$. Diese können wir auf Null setzten, wenn wir alle Punkte relativ zum Mittelwert-Punkt
 % aller Punkte definieren, also $P_i = P_i - \overline{P}$. Nun erhalten wir:
-The sums in the boundary areas of the matrix X and the vector $\vec{z}$ are good to see. We can set this to zero if we define all points relative to the mean point of all points,
+The sums in the boundary areas of the matrix X and the vector $\vec{z}$ are good to see. We can set these to zero if we define all points relative to the mean point of all points,
 ie $P_i = P_i - \overline{P}$. Now we get:
 
 \begin{align*}
@@ -808,7 +810,7 @@ d
 
 % Nun können wir d ebenfalls auf Null setzten, denn wenn alle unsere Punkte relativ zum Mittelwert-Punkt sind, dann läuft auch unsere Ebene immer durch diesen Punkt. Daher können wir 
 % nun eine komplette Dimension streichen:
-Now we can also set d to zero, because if all our points are relative to the mean point, then our plane always runs through this point. Therefore we now can get rid of a complete dimension:
+Now we can also set $d$ to zero, because if all our points are relative to the mean point, then our plane always runs through this point. Therefore we now can get rid of a complete dimension:
 
 \begin{align*}
 \begin{bmatrix}
@@ -842,14 +844,14 @@ b &= \frac{\sum x_i y_i \cdot \sum x_i z_i - \sum x_i x_i \cdot \sum y_i z_i }{D
 It should be noted that the determinant can not be zero or near zero. However, since the angle between the vehicle and the plane is always close to 90 degrees,
 the determinant is typically very large. If the determinant is nevertheless close to zero (not equal to zero), the calculation is carried out in spite of the fact that
 this also leads to a large error in the fitting. This is desirable at this point since the \ac{RANSAC} sorts out invalid layers based on the error.
-If the determinant is extinct zero, the calculation is continued with a small value for D.
+If the determinant is exactly zero, the calculation is continued with a small value for the determinant.
 
 % Aus dem Normalenvektor $\vec{n}$ und dem Mittelwert-Punkt $\overline{P}$ können wir nun wieder die Hessische Normalenvektor bestimmen.
 % 
 % Letztendlich haben wir so den Algorithms von $\mathcal{O}(m^2n)$ auf $\mathcal{O}(n) $ runterbrechen können.
 
 From the normal vector $\vec{n}$ and the mean point $\overline{P}$, we can again determine the Hessian normal vector.
-
+\todo{komplexität und argumentation überprüfen}
 In the end, we have been able to break down the algorithm from $\mathcal{O}(m^2n)$ to $\mathcal{O}(n)$.
 
 \section{Clustering}
@@ -858,29 +860,35 @@ In the end, we have been able to break down the algorithm from $\mathcal{O}(m^2n
 % zusammengefasst. Erstere Methode hate den Nachteil, dass einzelne Ausreißer dazu führen, das das Objekt in mehrer Cluster zerfällt.
 % Letztere wird meißt mit einem KD-Tree oder einer ähnlichen Datenstrucktur kombiniert, welche typischerweise hohe Kosten für die Erstellung verursachen.
 % Da der Baum nach jeder 360 Grad messung neu Aufgebaut werden muss ist das Problematisch
-In current work with 3D-LiDAR data, the data is often first projected into a heightmap. Then directly adjacent measurements are combined with similar measured values.
+In current work with 3D-LiDAR data, the data is often first projected into a heightmap \cite{Zhang,Himmelsbach2009,Li2016}. Then directly adjacent measurements are combined with similar measured values.
 Alternatively, the measurements are also summarized by means of a distance criterion. 
 The former method has the disadvantage that individual outliers cause the object to disintegrate in several clusters.
-The latter is usually combined with a KD tree or a similar data structure, which typically entails high costs for the creation.
-Since the tree has to be rebuilt after each 360 degree measurement is the problem
+The latter is usually combined with a KD-tree or a similar data structure, which typically entails high costs for the creation ($\mathcal{O}(n\log n)$ in case of KD-Tree \cite{Bentley1975}).
+Since the tree has to be rebuilt after each 360 degree measurement this is an problem.
 
 % Hier wird eine Methode vorgeschlagen welche die Vorteile beider Methoden kombiniert. Dauzu ist es nötig zu wissen, wie die Daten von der OpenDAVINCI 
 % Middleware geliefert werden. Das OpenDAVINCI auf der Übertragung der Daten mit UDP Multicast setzt, werden die Daten in einer Kompakten form übertragen, welche in einen einzigen
 % UDP Frame passt.\\
 Here a method is suggested which combines the advantages of both methods. It is therefore necessary to know how the data from the OpenDAVINCI
 Middleware is delivered. Because the OpenDAVINCI Middleware relies on the transmission of the data with UDP Multicast, the data is transferred in a 
-compact form that fits into a single UDP frame.\\
-\begin{center}
-\begin{tikzpicture} 
-\umlclass{CompactPointCloud}{
-startAzimuth : float \\
-endAzimuth : float \\
-entriesPerAzimuth : uint32 \\
-distances : byte[]}
-{getStartAzimuth : float\\
-\dots}
-\end{tikzpicture}
-\end{center}
+compact form that fits into a single UDP frame. The structure can be seen in \cref{odv_ds}.
+
+\begin{figure}[!ht]
+\caption{OpenDAVINCI Point Cloud Data Structure}
+  \begin{center}
+      \begin{tikzpicture} 
+	\umlclass{CompactPointCloud}{
+	startAzimuth : float \\
+	endAzimuth : float \\
+	entriesPerAzimuth : uint32 \\
+	distances : byte[]}
+	{getStartAzimuth : float\\
+	\dots}
+      \end{tikzpicture}
+  \end{center}
+\label{odv_ds}
+\end{figure}
+
 % Dabei wird von einer konstanten Drehrate des Sensors ausgegangen, was in einer äquidistanten der Messwerte resultiert. Die Anzahl der Messungen pro Azimuth
 % wird in entriesPerAzimuth festgehalten und entspricht für den Velodyne VLP16 16. Um nun an die Eigentlichen Messwerte zu kommen müssen jeweils zwei distance Werte zu
 % einem Unsigned 16Bit Integer umgewandelt werden, welcher dann die Messung in cm enthält. Jeweils 16 dieser Werte ergeben dann einen Messframe in dem der Polarwinkel
@@ -889,23 +897,27 @@ distances : byte[]}
 In this case, we asume a constant rotational rate of the sensor output, which results in an equidistant distance of the measured values. The number of measurements per azimuth is recorded in 
 entriesPerAzimuth and corresponds to the Velodyne VLP-16. In order to arrive at the actual measured values, two distance values must be merged and converted to an unsigned 16-bit integer,
 which then contains the measurement in cm. In each case, 16 of these values result in a measuring frame in which the polar angle must be mapped to a range between -15 and +15 degrees.
-After the spherical data of each measurement point have been reconstructed, they are converted into Cartesian coordinates and stored in a point data structure.
+After the spherical data of each measurement point have been reconstructed, they are converted into Cartesian coordinates and stored in a point data structure, to see in \cref{pcdc}.
 
 \todo{iterativen ablauf des ganzen Algorythmusses klar machen}
 
-\begin{center}
-\begin{tikzpicture} 
-\umlclass{Point}{
-azimuth : float \\
-measurement : float \\
-visited : bool \\
-isGround : bool \\
-point : vector3f \\
-}
-{getAzimuth : float\\
-\dots}
-\end{tikzpicture}
-\end{center}
+\begin{figure}[!ht]
+\caption{Point Data Structure}
+  \begin{center}
+    \begin{tikzpicture} 
+      \umlclass{Point}{
+      azimuth : float \\
+      measurement : float \\
+      visited : bool \\
+      isGround : bool \\
+      point : vector3f \\
+      }
+      {getAzimuth : float\\
+      \dots}
+    \end{tikzpicture}
+  \end{center}
+\label{pcdc}
+\end{figure}
 
 % Diese wird wiedrrum in ein Statisches 2 Dimensionales Array Gespeichert: Points[2000][16]. Die Reihenfolge der Daten wird dabei beibehalten, um einen effizenten Zugriff auf die Werte
 % auf basis ihres azimuth winkels zu ermoglichen. Diese Datenstruktur stellt nun die Basis für den Nachfolgenden Clustering alorythmus dar.
@@ -940,10 +952,7 @@ All clusters are stored by the algorithm as a list of references to the original
 % Die Aufgabe des Trackings ist es nun einen Zusammenhang der Messwerte über die Zeit herzustellen. Dabei ist das Tracking in zwei Abschnitte unterteilt.
 % Dem Tracking der Cluster vom \ac{DBSCAN} und dem Erstellen und Tracken von Hindernissen.
 The task of tracking is to establish a relationship between the measured values over time. The tracking is divided into two sections.
-Tracking of the clusters from the \ac{DBSCAN} and the creation and tracking of the objects.
-
-\todo{datenstrucktur Onjekte hinzufügen, weil positionen und attribute verwirrend}
-
+Tracking of the clusters from the \ac{DBSCAN} and the creation and tracking of parameterizable objects.
 
 \subsection{Cluster Tracking}
 % Für das Tracking der Cluster nehmen wir an, dass sich Objekte von Zeitschritt zu Zeitschritt nur geringefügig bewegen, weiterhin
@@ -965,7 +974,7 @@ This results in the fact that multiple clusters can be assigned the same ID, whi
 % die Geschwindikteit des Objektes und seine Richtung, die ID und Typ des Objektes und seine Confidence. Die ID ergibt sich dabei aus der ID des initialen genutzten Clusters
 The basis for the object tracking are the previously tracked clusters. In the initial step, objects are created from all clusters with the same IDs.
 Which apart from the measured values contain further parameters for the description of the object. This includes values such as the potential size and 
-position of the object as a rectangle, the speed of the object and its direction, the ID and type of the object, and its confidence. The ID is derived from the ID of the initial used cluster
+position of the object as a rectangle, the speed of the object and its direction, the ID and type of the object and its confidence. The ID is derived from the ID of the initial used cluster
 
 % \begin{center}
 % \begin{tikzpicture} 
@@ -984,10 +993,10 @@ position of the object as a rectangle, the speed of the object and its direction
 
 %In jeden weiteren Schritt werden Alle Cluster mit der zuvor gleichen ID zum updaten der Objekte genutzt. Aus Clustern mit neuen IDs werden neue Objekte gebildet.
 
-Der vorerst wichtigste Schritt beim Updatevorgang ist die berechnung der Bewegungsrichtung eines Objektes, da folgende Berechnungen auf dieser basieren.
-Bei der Berechnung der Bewegungsrichtung ist zu beachten, dass die Bewegung des eigenen Fahrzeuges herausgerechnet werden muss.
-Dazu werden die Positionsdaten des Applanix POS-LV genutzt. Da sowohl die Positionsdaten des Applanix Systems, als auch die Erkannte Postition des Fahrzeuges Fehlerbehaftet sind,
-wird die Bewegungrichtung nur ab einer minimalen Bewegung von 2m geupdatet.
+% Der vorerst wichtigste Schritt beim Updatevorgang ist die berechnung der Bewegungsrichtung eines Objektes, da folgende Berechnungen auf dieser basieren.
+% Bei der Berechnung der Bewegungsrichtung ist zu beachten, dass die Bewegung des eigenen Fahrzeuges herausgerechnet werden muss.
+% Dazu werden die Positionsdaten des Applanix POS-LV genutzt. Da sowohl die Positionsdaten des Applanix Systems, als auch die Erkannte Postition des Fahrzeuges Fehlerbehaftet sind,
+% wird die Bewegungrichtung nur ab einer minimalen Bewegung von 2m geupdatet.
 
 In each further step, all clusters with the previously identical ID are used to update the objects. New objects are created from clusters with new IDs.
 
