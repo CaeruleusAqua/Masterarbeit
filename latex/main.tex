@@ -943,7 +943,7 @@ measurement from the sensor can have errors within a real scenario, which can be
 In fact, \ac{DBSCAN} is itself of linear complexity. However, most computing times are caused by the neighborhood calculation.
 But instead of the range request via a tree structure, we here profit from the behavior, that measurements in a small neighborhood have a similar azimuth angle.
 For this purpose, we examine two additional entries for each measured value to the left and right in our array. 
-Therefore, we need to check $5 \cdot 16 = 80$ values. The runtime of the range request can therefore also be performed in linear complexity.
+Therefore, we need to check $5 \cdot 16 = 80$ values. The runtime of the range request can therefore also be performed in linear complexity. \todo{linear complexity ???????? und erklären welchen Einfluss das ganze hat!}
 All measured values previously classified as ground are skipped during the calculation. In addition, the construction of a KD-tree is omitted, which aslo leaves us a run-time advantage.
 All clusters are stored by the algorithm as a list of references to the original array to avoid unnecessary copying.
 

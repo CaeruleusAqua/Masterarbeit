@@ -128,7 +128,7 @@ class CarLogic:
         Grp1Data_msg = self.node.proto_dict[533]()
         pos = self.car.getPosition() * 10
         print "POS: ", pos
-        wgs84_pos = self.trans.transformToWGS84XY(pos[0], pos[1])
+        wgs84_pos = self.trans.transformToWGS84XY(pos[1], -pos[0])
         Grp1Data_msg.lat = wgs84_pos.getLatitude()
         Grp1Data_msg.lon = wgs84_pos.getLongitude()
 
