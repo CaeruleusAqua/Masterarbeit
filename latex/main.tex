@@ -1285,15 +1285,19 @@ J(\vec{x})=
 % Der Extendet Kalman Filter (EKF) ist die nichtlineare Version des Kalman-Filters, die sich über eine Schätzung des aktuellen Mittels und der Kovarianz linearisiert.
 % Zusätlich zu unserem Modell werden noch weitere Werte benötigt. Dazu zehen wir uns die Berechnungsforschrift an:
 
-The Extendet Kalman Filter (EKF) \todo{reference} is the nonlinear version of the Kalman filter, which is linearized by an estimate of the current mean and the covariance.
+The Extendet Kalman Filter (EKF) \cite{Ribeiro2004} is the nonlinear version of the Kalman filter, which is linearized by an estimate of the current mean and the covariance.
 In addition to our model, further values are required. For this purpose, we look at the calculation rules of the necessary steps.
 
 \subsubsection{Prediction}
+
+In the first step of the filtering process, the preceding estimation of the state dynamics is projected to a prediction for the current time.
 
 \begin{align*}
 \hat{x}_{k} &= f(\hat{x}_{k-1},u_{k-1})\\
 P_{k}&=F_{k-1} P_{k-1} {F^T_{k-1}} + Q_{k-1}
 \end{align*}
+
+Where $\hat{x}_{k}$ is the estimate of our state for the current time step and $P_{k}$ is, because of the prediction, our increased covariance.
 
 % with:
 % \begin{itemize}
@@ -1302,7 +1306,7 @@ P_{k}&=F_{k-1} P_{k-1} {F^T_{k-1}} + Q_{k-1}
 %  \item $u$ - control vector
 % \end{itemize}
 
-Since we can not know the control variables of the other vehicles, we asume $u$ to be zero for our calculations.
+Since we can not know the control variables of the other objects, we asume $u$ to be zero for our calculations.
 For the state transition model $F$ we use our previous calculated Jacobian matrix applied to the previous state.
 
 \begin{align*}
@@ -1341,10 +1345,12 @@ Q=
 % Fällt die Drehrate auf einen sehr niedrigen wert, riskieren wir eine Division durch null. Um diesn fall abzufangen, wurde
 % ein neuer Zustandsübergang definiert:
 Furthermore, some optimization had to be made in this step in order to ensure the numerical stability. 
-If the yaw rate is very low, we risk a division by zero. In order to except this situation, a new state transition was defined:
-\todo{wodurch unterscheidet sich die vereinfachte state transition
-es ist gut dargestellt WARUM du die vereinfachung machst
-aber was die physikalisch bedeutet könnte man noch klarer darstellen}
+If the yaw rate is very low, we risk a division by zero. In order to except this situation, a new state transition was defined,
+in which we ignore the direct influence of the yaw rate on the position, when it falls below a value of $0.0001\frac{rad}{s}$. 
+The resulting error is very small, since the yaw rate is close to zero.
+% \todo{wodurch unterscheidet sich die vereinfachte state transition
+% es ist gut dargestellt WARUM du die vereinfachung machst
+% aber was die physikalisch bedeutet könnte man noch klarer darstellen}
 
 \begin{align*}
 f = \vec{x}(t + \Delta t)=
@@ -1379,6 +1385,8 @@ was machst du mit statevector
 was machst du mit uncertainty
 so den state estimation teil hab ich durchgelesen
 }
+
+The predictions are finally corrected with the new information of the measurements.
 
 \begin{align*}
 \tilde{y}_k &= z_k -h(\hat{x}_{k})\\

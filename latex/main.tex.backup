@@ -647,7 +647,7 @@ From this pre-filtered readings three are now randomly selected for a modified \
 From these three points a plane is now formed in the Hesse normal form, which allows an efficient distance calculation to other points.
 After that, we collect all other points from our set of minima, using a distance criterion. This threshold is chosen as 0.2m experimentally.
 If can find more than 10 other points in our minima set, which fits our criteria, a new plane and their error is calculated from the plane and
-the new Collected Points by a Planefitting Algorithms [\cref{subssec:planefitting}].
+the new Collected Points by a plane fitting Algorithms [\cref{subssec:planefitting}].
 The error is calculated over the sum of the squared distances of all points to the plane.
 
 However, before we add the plane as a possible solution candidate, it is checked whether the layer is within a plausible parameter range.
@@ -657,7 +657,7 @@ The number of iterations of the \ac{RANSAC} is limited to 50. After the run of t
 pointcloud are marked by their distance to the plane as ground. As distance threshold, an optimum value of 0.5 m was determined experimentally.
 
 
-\subsection{Planefitting}
+\subsection{Plane Fitting}
 \label{subssec:planefitting}
 
 
@@ -670,7 +670,7 @@ pointcloud are marked by their distance to the plane as ground. As distance thre
 % Distanzkriteriums vorselektieren, stellt dies kein Problem dar.
 
 \todo{Macht das überhaut sinn? Laut ransac sollte das Planefitting nicht iterativ ausgeführt werden???? Fuck!}
-For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. SVD has a complexity of $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, since the planefitting inside
+For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. SVD has a complexity of $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, since the plane fitting inside
 of the \ac{RANSAC} is very often called with a large number of points, running to the \ac{SVD} within the \ac{RANSAC} causes a very high running time.
 For this reason, a \ac{LLSQ} algorithm with some optimization is used here.
 When using the \ac{LLSQ}, it is important to note that the \ac{LLSQ} is not optimizing the distance of the points to the plane but the distance of the points the along an axis (in our case the z axis),
@@ -1239,8 +1239,8 @@ The state vector \cite{Schubert2008} of the CTRV model looks as follows:
 \begin{bmatrix}
 x & y & \theta & v & \omega
 \end{bmatrix}^T\\
-x &\text{ - Y Axis}\\
-y &\text{ - X Axis}\\
+x &\text{ - X Axis}\\
+y &\text{ - Y Axis}\\
 \theta &\text{ - Object Yaw Angle}\\
 v &\text{ - Object Velocity}\\
 \omega &\text{ - Yaw Rate}
@@ -1289,6 +1289,8 @@ The Extendet Kalman Filter (EKF) \todo{reference} is the nonlinear version of th
 In addition to our model, further values are required. For this purpose, we look at the calculation rules of the necessary steps.
 
 \subsubsection{Prediction}
+
+In the first step of the filtering process, the preceding estimation of the state dynamics is projected to a prediction for the current time.
 
 \begin{align*}
 \hat{x}_{k} &= f(\hat{x}_{k-1},u_{k-1})\\
@@ -1341,7 +1343,12 @@ Q=
 % Fällt die Drehrate auf einen sehr niedrigen wert, riskieren wir eine Division durch null. Um diesn fall abzufangen, wurde
 % ein neuer Zustandsübergang definiert:
 Furthermore, some optimization had to be made in this step in order to ensure the numerical stability. 
-If the yaw rate is very low, we risk a division by zero. In order to except this situation, a new state transition was defined:
+If the yaw rate is very low, we risk a division by zero. In order to except this situation, a new state transition was defined,
+in which we ignore the direct influence of the yaw rate on the position, when it falls below a value of $0.0001\frac{rad}{s}$. 
+The resulting error is very small, since the yaw rate is close to zero.
+% \todo{wodurch unterscheidet sich die vereinfachte state transition
+% es ist gut dargestellt WARUM du die vereinfachung machst
+% aber was die physikalisch bedeutet könnte man noch klarer darstellen}
 
 \begin{align*}
 f = \vec{x}(t + \Delta t)=
@@ -1369,6 +1376,13 @@ J(\vec{x})=
 
 
 \subsubsection{Updating}
+\todo{correction step EKF näher beschreiben
+da der nicht standard im ekf is
+was machst du mit statevector
+(wohl nur werte überschreiben)
+was machst du mit uncertainty
+so den state estimation teil hab ich durchgelesen
+}
 
 \begin{align*}
 \tilde{y}_k &= z_k -h(\hat{x}_{k})\\
@@ -1414,10 +1428,10 @@ R=
 % $360$ Grad addiert oder suptrahiert, do das der Abstand zwischen State und Messwert minimert wird. Nach dem Updae wird der interne State wieder auf den bereich $[-180 \le \theta \le 180]$ normiert.
 % Betrachten wir nun wieder unser Beispiel mit den korrigierten Werten, State: $179-360=-181$ Grad und Messwert: $-179$ Grad erhalten wir den korrekten Wert von $-180$ Grad.
 
-In this step of the filter it must be noted that we are working with $\theta$ that is defined in the range of $ [- 180 \le \theta \le 180] $ and therefore singularities can occur.
-Because our measurement data is noisy, our state may be at 179 degrees and is updated with a value of $ -179 $. For the sake of simplicity we assuming that both values are equally weighted,
+In this step of the filter it must be noted that we are working with $\theta$ that is defined in the range of $ [- 180^{\circ} \le \theta \le 180^{\circ}] $ and therefore singularities can occur.
+Because our measurement data is noisy, our state may be at 179 degrees and is updated with a value of $ -179^{\circ} $. For the sake of simplicity we assuming that both values are equally weighted,
 the update step results in a value of 0 degrees, which is obviously wrong. Therefore, before each updating step, $ 360 $ degree is added or suptracted,
-so the distance between state and measured value is minimized. After updating, the internal state is again normalized to the range $ [- 180 \le \theta \le 180] $.
+so the distance between state and measured value is minimized. After updating, the internal state is again normalized to the range $ [- 180^{\circ} \le \theta \le 180^{\circ}] $.
 Consider now again our example with the corrected values, state: $ 179-360 = -181 $ degree and measured value: $ -179 $ degree, we get the correct value of $ -180 $ degree.
 
 
@@ -1637,13 +1651,19 @@ which contains the center point of the roundabout, references to all lanes, and 
 
 
 \subsubsection{Localization}
-Da wir uns innherlab der Simuation bewegen, können wir für die Lokalisierung eine perfekte position annehmen.
-Lokalisierung in rahmen der Karte bedeutet, das wir die aktuelle bekannte position auf ein Lanesegment mappen wollen.
-Da die lanes nur in Form von Punkten und Breite gegeben sind, werden für jeden Laneabschnitt Rechtecke berechnet und für jedes Rechteck geprüft,
-ob sich die aktuelle Postion innehalb des Rechteckes befindet. Dies wird gemacht, indem Das Rechteck (und die Position) in eine
-Achsen aligned Position gedreht und in den Koordinatenursprung verschoben wird. Weiterhin muss das Rechteck vergrößert werden, sofern wir nicht das letzte Lanesegment bearbeiten,
-da sonst eine Lücke zwischen den Rechtecken verbleiben würde. Dazu wird der Winkel zum nächsen Linienabschnitt genutzt.  Sas ganze ist in \cref{mapping} Symbolisiert.
-Wobei das blaue Rechteck das aktuell zu bearbeitende darstellt, das grüne Rechteck das nachfolgende und das orange die nötige Verlängerung
+% Da wir uns innherlab der Simuation bewegen, können wir für die Lokalisierung eine perfekte position annehmen.
+% Lokalisierung in rahmen der Karte bedeutet, das wir die aktuelle bekannte position auf ein Lanesegment mappen wollen.
+% Da die lanes nur in Form von Punkten und Breite gegeben sind, werden für jeden Laneabschnitt Rechtecke berechnet und für jedes Rechteck geprüft,
+% ob sich die aktuelle Postion innehalb des Rechteckes befindet. Dies wird gemacht, indem Das Rechteck (und die Position) in eine
+% Achsen aligned Position gedreht und in den Koordinatenursprung verschoben wird. Weiterhin muss das Rechteck vergrößert werden, sofern wir nicht das letzte Lanesegment bearbeiten,
+% da sonst eine Lücke zwischen den Rechtecken verbleiben würde. Dazu wird der Winkel zum nächsen Linienabschnitt genutzt.  Sas ganze ist in \cref{mapping} Symbolisiert.
+% Wobei das blaue Rechteck das aktuell zu bearbeitende darstellt, das grüne Rechteck das nachfolgende und das orange die nötige Verlängerung
+As we are within simulation, we can assume a perfect position for localization. Localization within the map means that we want to map 
+the current known position to a lane segment. Since the lanes are only given in the form of points and width, rectangles are calculated
+for each lane segment and the current position is checked against each rectangle.
+This is done by rotating the rectangle (and the position) to an axis-aligned position and moving it to the coordinate origin. Furthermore, the rectangle must be enlarged if we
+do not process the last line segment, since otherwise a gap would remain between the rectangles. For this purpose, the angle to the next line segment is used.
+The whole situation is symbolized in \cref{mapping}. The blue rectangle represents the current one to be edited, the green rectangle the next and the orange the necessary extension.
 \begin{figure}[!ht]
 \begin{center}
 \caption{Mapping Rectangles}
@@ -1652,18 +1672,24 @@ Wobei das blaue Rechteck das aktuell zu bearbeitende darstellt, das grüne Recht
 \end{center}
 \end{figure}
 
-Wie in \cref{mapping} zu sehen, stehen die einzelnen Segmente üblicherweise nicht in einem 180 Grad winkel zueinander.
-Daher können sich die Rechtecke überschneiden und für eine Position können mehrere Rechtecke zurückgeliefert werden. In diesem Fall wird die Bewgungsrichtung des Objektes herangezogen
-und das aussicht der Bewegungsrichtung neuste Segment ausgewählt. Sollten sich mehrere Lanes überschneiden, z.B Radwege welche die Kreisverkehr einfaht kreuzen, wird 
-das richtige Segment anhand ders Objekttypes ausgewählt, also: auto -> Straße oder Radfahrer -> Radweg. Weiterhin wird die X koordinate des Objektes im gedrehten und verschobenen Koordinatensystem
-zuruckgeliefert, was für die Distanzberechnungen von nöten ist. Dabei nehmen wir immer an, dass sich das Objekt mittig auf der Spur befindet. Alternativ bietet sich für das Problem auch
-der ``Ray casting algorithm'' \cite{Galetzka2017} an. Da wir für alle Distanzberechnung annhemen, dass sich das Objekt mittig auf der Spur befindet, ergibt sich aus dieser Berechnung jedoch nur ein sehr kleiner
-Fehler und die Entfernung ergibt sich praktischer weise aus den Vorherigen Berechnungen, sodass dieser nicht umgesetzt wurde.
+% Wie in \cref{mapping} zu sehen, stehen die einzelnen Segmente üblicherweise nicht in einem 180 Grad winkel zueinander.
+% Daher können sich die Rechtecke überschneiden und für eine Position können mehrere Rechtecke zurückgeliefert werden. In diesem Fall wird die Bewgungsrichtung des Objektes herangezogen
+% und das aussicht der Bewegungsrichtung neuste Segment ausgewählt. Sollten sich mehrere Lanes überschneiden, z.B Radwege welche die Kreisverkehr einfaht kreuzen, wird 
+% das richtige Segment anhand ders Objekttypes ausgewählt, also: auto -> Straße oder Radfahrer -> Radweg. Weiterhin wird die X koordinate des Objektes im gedrehten und verschobenen Koordinatensystem
+% zuruckgeliefert, was für die Distanzberechnungen von nöten ist. Dabei nehmen wir immer an, dass sich das Objekt mittig auf der Spur befindet. Alternativ bietet sich für das Problem auch
+% der ``Ray casting algorithm'' \cite{Galetzka2017} an. Da wir für alle Distanzberechnung annhemen, dass sich das Objekt mittig auf der Spur befindet, ergibt sich aus dieser Berechnung jedoch nur ein sehr kleiner
+% Fehler und die Entfernung ergibt sich praktischer weise aus den Vorherigen Berechnungen, sodass dieser nicht umgesetzt wurde.
+As seen in \cref{mapping}, the individual segments are usually not at a 180 degree angle to each other. Therefore, the rectangles can overlap and more than one rectangle can 
+be returned for one position. In this case, the direction of movement from the object is used and the most recent segment of the direction of movement is selected.
+If several lanes cross over, for example, cycle paths that intersect the roundabout, the correct segment is selected based on the object type, ie: auto -> road or cyclist -> cycle path.
+Furthermore, the X coordinate of the object in the rotated and shifted coordinate system is returned, which is necessary for the distance calculations. We always assume that the
+object is in the middle of the track. Alternatively, the `` Ray Casting Algorithm '' \cite{Galetzka2017} can be used for this problem. Since we assume for all
+distance calculations that the object is in the middle of the track, this calculation results in a very small error and the distance is practically derived from the
+previous calculations so that it was not applied.
 
 \subsection{Statemachine}
 
 \todo{suimulation mit sythetischen daten (aus vrep) und daten aus object tracking vergleiche}
-\todo{Annhame constant acceleartion model}
 % 
 % Die Statemachine ist nach Gang of Four  \cite{lester2008gang} implemetiert. Dafür wurden X \todo{nummer anpassen} States Implementiert.
 % Für alle Fahrzeugeigenen berechnungen wird ein Constant acceleartion modell angenommen. Zur bestimmung der Maximalen positiven und negativen Beschleunigung
@@ -1671,9 +1697,13 @@ Fehler und die Entfernung ergibt sich praktischer weise aus den Vorherigen Berec
 The statemachine is implemented according to Gang of Four \cite{lester2008gang}. For this, X States were implemented. \todo{nummer anpassen}
 A constant acceleartion model is assumed for all vehicle computations. In order to determine the maximum positive and negative acceleration, 
 test runs with the real vehicle  were recorded and the maximum subjectively pleasant values being determined. 
-Die genutzten Aufnahmen sind in \cref{max_accel} zu sehen, dabei wurde das Fahrzeug von null auf 25 km/h beschleunigt bzw. von 25 auf null km/h gebremst.
-Es wurden jeweils die maximalen Werte abgelesen, so dass wir für die maximale positive Beschleunigung $3m/{s^2}$ udn für
-die maximale negatie Beschleunigung  $-4.5m/{s^2}$ annehmen.
+
+The used recordings can be seen in \cref{max_accel}, the vehicle was accelerated from 0 to 25 km/h or braked from 25 to 0 km/h.
+The maximum values were read, so we assume $ 3m/{s^2} $ for the maximum positive acceleration and $ -4.5m/{s ^ 2} $ for the maximum negative acceleration.
+
+% Die genutzten Aufnahmen sind in \cref{max_accel} zu sehen, dabei wurde das Fahrzeug von null auf 25 km/h beschleunigt bzw. von 25 auf null km/h gebremst.
+% Es wurden jeweils die maximalen Werte abgelesen, so dass wir für die maximale positive Beschleunigung $3m/{s^2}$ udn für
+% die maximale negatie Beschleunigung  $-4.5m/{s^2}$ annehmen.
 
 
 
@@ -1691,8 +1721,6 @@ die maximale negatie Beschleunigung  $-4.5m/{s^2}$ annehmen.
 \label{max_accel}
 \end{center}
 \end{figure}
-
-\todo{plott acceleartion positiv/negativ, und auswertung}
 
 % Vor jedem aufruf einenes States, werden alle von der Objekterkennung gelieferten Objekte abgeholt und auf die in der Karte festgehalten Fahrspuren gemappt.
 % Weiterhin wird die zu erwartende Intersection position mit allen Spuren im Kreiverkehr bestimmt, dies ist nötig, da Das Fahrzeug nicht gerade in den Kreisverkehr einfährt

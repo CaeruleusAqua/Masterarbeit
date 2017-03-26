@@ -1321,6 +1321,40 @@
       \verb :home/storm/workspace/Masterarbeit/documents/ucwinnertt.pdf:pdf
       \endverb
     \endentry
+    \entry{Ribeiro2004}{article}{}
+      \name{author}{1}{}{%
+        {{hash=b3d8292462ca0f0387e9fb5c71ae3300}{%
+           family={Ribeiro},
+           familyi={R\bibinitperiod},
+           given={Maria\bibnamedelima Isabel},
+           giveni={M\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{b3d8292462ca0f0387e9fb5c71ae3300}
+      \strng{fullhash}{b3d8292462ca0f0387e9fb5c71ae3300}
+      \strng{authornamehash}{b3d8292462ca0f0387e9fb5c71ae3300}
+      \strng{authorfullhash}{b3d8292462ca0f0387e9fb5c71ae3300}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This report presents and derives the Kalman filter and the Extended Kalman filter dynamics. The general filtering problem is formulated and it is shown that, under linearity and Gaussian conditions on the systems dynamics, the general filter particularizes to the Kalman filter. It is shown that the Kalman filter is a linear, discrete time, finite dimensional time-varying system that evaluates the state estimate that minimizes the mean-square error}
+      \field{journaltitle}{Institute for Systems and Robotics Lisboa Portugal}
+      \field{langid}{english}
+      \field{number}{February}
+      \field{title}{{Kalman and Extended Kalman Filters : Concept , Derivation and Properties}}
+      \field{year}{2004}
+      \field{pages}{42}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1.1.2.5088
+      \endverb
+      \verb{file}
+      \verb :home/storm/workspace/Masterarbeit/documents/kalman.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.2.5088%7B%5C&%7Drep=rep1%7B%5C&%7Dtype=pdf
+      \endverb
+    \endentry
     \entry{Schubert2008}{article}{}
       \name{author}{3}{}{%
         {{hash=5bf46c6b676a12bb0a66eb4ef38bf0e5}{%
