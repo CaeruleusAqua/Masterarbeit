@@ -647,7 +647,7 @@ From this pre-filtered readings three are now randomly selected for a modified \
 From these three points a plane is now formed in the Hesse normal form, which allows an efficient distance calculation to other points.
 After that, we collect all other points from our set of minima, using a distance criterion. This threshold is chosen as 0.2m experimentally.
 If can find more than 10 other points in our minima set, which fits our criteria, a new plane and their error is calculated from the plane and
-the new Collected Points by a Planefitting Algorithms [\cref{subssec:planefitting}].
+the new Collected Points by a plane fitting Algorithms [\cref{subssec:planefitting}].
 The error is calculated over the sum of the squared distances of all points to the plane.
 
 However, before we add the plane as a possible solution candidate, it is checked whether the layer is within a plausible parameter range.
@@ -657,7 +657,7 @@ The number of iterations of the \ac{RANSAC} is limited to 50. After the run of t
 pointcloud are marked by their distance to the plane as ground. As distance threshold, an optimum value of 0.5 m was determined experimentally.
 
 
-\subsection{Planefitting}
+\subsection{Plane Fitting}
 \label{subssec:planefitting}
 
 
@@ -670,7 +670,7 @@ pointcloud are marked by their distance to the plane as ground. As distance thre
 % Distanzkriteriums vorselektieren, stellt dies kein Problem dar.
 
 \todo{Macht das überhaut sinn? Laut ransac sollte das Planefitting nicht iterativ ausgeführt werden???? Fuck!}
-For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. SVD has a complexity of $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, since the planefitting inside
+For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. SVD has a complexity of $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, since the plane fitting inside
 of the \ac{RANSAC} is very often called with a large number of points, running to the \ac{SVD} within the \ac{RANSAC} causes a very high running time.
 For this reason, a \ac{LLSQ} algorithm with some optimization is used here.
 When using the \ac{LLSQ}, it is important to note that the \ac{LLSQ} is not optimizing the distance of the points to the plane but the distance of the points the along an axis (in our case the z axis),
@@ -1239,8 +1239,8 @@ The state vector \cite{Schubert2008} of the CTRV model looks as follows:
 \begin{bmatrix}
 x & y & \theta & v & \omega
 \end{bmatrix}^T\\
-x &\text{ - Y Axis}\\
-y &\text{ - X Axis}\\
+x &\text{ - X Axis}\\
+y &\text{ - Y Axis}\\
 \theta &\text{ - Object Yaw Angle}\\
 v &\text{ - Object Velocity}\\
 \omega &\text{ - Yaw Rate}
@@ -1342,6 +1342,9 @@ Q=
 % ein neuer Zustandsübergang definiert:
 Furthermore, some optimization had to be made in this step in order to ensure the numerical stability. 
 If the yaw rate is very low, we risk a division by zero. In order to except this situation, a new state transition was defined:
+\todo{wodurch unterscheidet sich die vereinfachte state transition
+es ist gut dargestellt WARUM du die vereinfachung machst
+aber was die physikalisch bedeutet könnte man noch klarer darstellen}
 
 \begin{align*}
 f = \vec{x}(t + \Delta t)=
@@ -1369,6 +1372,13 @@ J(\vec{x})=
 
 
 \subsubsection{Updating}
+\todo{correction step EKF näher beschreiben
+da der nicht standard im ekf is
+was machst du mit statevector
+(wohl nur werte überschreiben)
+was machst du mit uncertainty
+so den state estimation teil hab ich durchgelesen
+}
 
 \begin{align*}
 \tilde{y}_k &= z_k -h(\hat{x}_{k})\\
@@ -1414,10 +1424,10 @@ R=
 % $360$ Grad addiert oder suptrahiert, do das der Abstand zwischen State und Messwert minimert wird. Nach dem Updae wird der interne State wieder auf den bereich $[-180 \le \theta \le 180]$ normiert.
 % Betrachten wir nun wieder unser Beispiel mit den korrigierten Werten, State: $179-360=-181$ Grad und Messwert: $-179$ Grad erhalten wir den korrekten Wert von $-180$ Grad.
 
-In this step of the filter it must be noted that we are working with $\theta$ that is defined in the range of $ [- 180 \le \theta \le 180] $ and therefore singularities can occur.
-Because our measurement data is noisy, our state may be at 179 degrees and is updated with a value of $ -179 $. For the sake of simplicity we assuming that both values are equally weighted,
+In this step of the filter it must be noted that we are working with $\theta$ that is defined in the range of $ [- 180^{\circ} \le \theta \le 180^{\circ}] $ and therefore singularities can occur.
+Because our measurement data is noisy, our state may be at 179 degrees and is updated with a value of $ -179^{\circ} $. For the sake of simplicity we assuming that both values are equally weighted,
 the update step results in a value of 0 degrees, which is obviously wrong. Therefore, before each updating step, $ 360 $ degree is added or suptracted,
-so the distance between state and measured value is minimized. After updating, the internal state is again normalized to the range $ [- 180 \le \theta \le 180] $.
+so the distance between state and measured value is minimized. After updating, the internal state is again normalized to the range $ [- 180^{\circ} \le \theta \le 180^{\circ}] $.
 Consider now again our example with the corrected values, state: $ 179-360 = -181 $ degree and measured value: $ -179 $ degree, we get the correct value of $ -180 $ degree.
 
 
