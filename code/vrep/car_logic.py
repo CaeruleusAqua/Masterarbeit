@@ -7,6 +7,7 @@ import numpy as np
 
 import States
 from Objects import Enemy
+from Objects import DetectionEnemy
 from Objects import Lane
 from Objects import Roundabout
 from Objects import VrepObject
@@ -20,9 +21,21 @@ from opendavinci.DVnode import DVnode
 import cv2
 from tools import WGS84Coordinate
 
+import socket
+
 
 class CarLogic:
     def __init__(self, port):
+        TCP_IP = '127.0.0.1'
+        TCP_PORT = 1234
+        self.BUFFER_SIZE = 98  # Normally 1024, but we want fast response
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind((TCP_IP, TCP_PORT))
+        s.listen(1)
+
+        self.conn, self.addr = s.accept()
+
         self.clientID = -1
         self.port = port
         self.parser = Parser()
@@ -79,10 +92,10 @@ class CarLogic:
         self.car = VrepObject(self.clientID, 'mycar')
 
         self.enemys = list()
-        self.enemys.append(Enemy(self.clientID, 'enemy_car1', 'c', self))
-        self.enemys.append(Enemy(self.clientID, 'enemy_car2', 'c', self))
-        self.enemys.append(Enemy(self.clientID, 'enemy_bicycle1', 'b', self))
-        self.enemys.append(Enemy(self.clientID, 'Bill_base', 'p', self))
+        # self.enemys.append(Enemy(self.clientID, 'enemy_car1', 'c', self))
+        # self.enemys.append(Enemy(self.clientID, 'enemy_car2', 'c', self))
+        # self.enemys.append(Enemy(self.clientID, 'enemy_bicycle1', 'b', self))
+        # self.enemys.append(Enemy(self.clientID, 'Bill_base', 'p', self))
 
     def connect(self):
         print ('Trying to connect..')
@@ -97,8 +110,8 @@ class CarLogic:
         return math.sqrt(x[0] ** 2 + x[1] ** 2 + x[2] ** 2)
 
     def update(self):
-        for enemy in self.enemys:
-            enemy.update(self.car_handle)
+        # for enemy in self.enemys:
+        #     enemy.update(self.car_handle)
         self.roundabout.update(self.car_handle)
         self.car.update(-1)
 
@@ -194,6 +207,23 @@ class CarLogic:
 
             self.node.publish(container)
 
+
+            data = self.conn.recv(4096)
+            if data:
+                objects = data.split("::-::")
+                print "received data: ",
+                print self.node.proto_dict[820]
+                msg = self.node.proto_dict[820]()
+                for obst in objects:
+                    msg.ParseFromString(obst)
+                    enemy = self.isInEnemys(msg)
+                    if(enemy is not None):
+                        enemy.update(msg)
+                    else:
+                        self.enemys.append(DetectionEnemy.DetEnemy(msg,self))
+
+
+
             print "Bounds:"
             print angle.min()
             print angle.max()
@@ -208,6 +238,13 @@ class CarLogic:
             if enemy.getDistance() < range:
                 enemyInRange.append(enemy)
         return enemyInRange
+
+    def isInEnemys(self,msg):
+        for enemy in self.enemys:
+            if enemy.id == msg.objId:
+                enemy
+        return None
+
 
     def getEnemysInRect(self, width, height):
         enemyInRect = list()
@@ -287,9 +324,16 @@ tmp = CarLogic(port=19997)
 
 try:
     tmp.run()
+
 except KeyboardInterrupt:
+    tmp.conn.close()
     vrep.simxPauseSimulation(tmp.clientID, vrep.simx_opmode_blocking)
     vrep.simxFinish(-1)
+
+finally:
+    print "Close Connection"
+    tmp.conn.close()
+    vrep.simxFinish(tmp.clientID)
 
 # plt.plot(tmp.speed_array)
 # plt.plot(tmp.alpha_array)
