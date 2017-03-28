@@ -140,7 +140,7 @@ class CarLogic:
 
         Grp1Data_msg = self.node.proto_dict[533]()
         pos = self.car.getPosition() * 10
-        print "POS: ", pos
+        #print "POS: ", pos
         wgs84_pos = self.trans.transformToWGS84XY(pos[1], -pos[0])
         Grp1Data_msg.lat = wgs84_pos.getLatitude()
         Grp1Data_msg.lon = wgs84_pos.getLongitude()
@@ -148,7 +148,7 @@ class CarLogic:
         theta = self.getOrientation()
         if theta is not None:
 
-            print "Theta: ", theta
+            #print "Theta: ", theta
             theta = -theta / math.pi * 180
 
             Grp1Data_msg.heading = float(theta)

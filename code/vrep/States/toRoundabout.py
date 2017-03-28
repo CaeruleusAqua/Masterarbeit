@@ -37,7 +37,7 @@ class ToRoundabout:
         for enemy in enemys:
 
             # reset dynamic paramters
-            enemy.lane = None
+            #enemy.lane = None
 
             # ---------------------- assign enemy to lane and estimatespeed --------------------
             enemy.mapToLane()
