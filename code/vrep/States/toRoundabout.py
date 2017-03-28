@@ -26,7 +26,8 @@ class ToRoundabout:
         self.globals.target_speed = self.globals.max_speed
         self.brake = None
 
-        enemys = self.globals.getEnemysInRange(3)
+        #enemys = self.globals.getEnemysInRange(3)
+        enemys = self.globals.enemys
 
         if self.globals.roundabout.getDistance() - 1 < self.globals.car_length / 2:
             print "\033[1;33m------------------------------State_Change----------------------------------\033[0m"
@@ -40,7 +41,8 @@ class ToRoundabout:
 
             # ---------------------- assign enemy to lane and estimatespeed --------------------
             enemy.mapToLane()
-            enemy.estimateSpeed()
+            if enemy.lane is not None:
+                enemy.estimateSpeed()
 
             enemy.printStats()
 

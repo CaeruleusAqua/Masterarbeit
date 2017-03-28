@@ -16,11 +16,12 @@ class DetEnemy():
         self.intersection_distance = None
         self.oldPosition = None
         self.speedVector = None
-        self.pos = [msg.pos_x, msg.pos_y, 0]
+        self.pos = [msg.pos_y / 10.0, -msg.pos_x / 10.0, 0]
+
         self.id = msg.objId
         self.name = msg.objId
         self.yawrate = msg.yaw_rate
-        self.dspeed = msg.speed
+        self.speed = msg.speed / 10.0
         self.theta = msg.theta
         if msg.type == 1:
             self.type = 'c'
@@ -29,14 +30,14 @@ class DetEnemy():
         elif msg.type == 3:
             self.type = 'p'
         else:
-            self.type = 'unknow'
+            self.type = msg.type
 
     def update(self, msg):
         print msg.objId
-        self.pos = [msg.pos_x, msg.pos_y, 0]
+        self.pos = [msg.pos_y / 10.0, -msg.pos_x / 10.0, 0]
         self.id = msg.objId
         self.yawrate = msg.yaw_rate
-        self.dspeed = msg.speed
+        self.speed = msg.speed / 10.0
         self.theta = msg.theta
         if msg.type == 1:
             self.type = 'c'
@@ -45,7 +46,7 @@ class DetEnemy():
         elif msg.type == 3:
             self.type = 'p'
         else:
-            self.type = 'unknow'
+            self.type = msg.type
 
     def getPosition(self):
         return self.pos
@@ -55,13 +56,15 @@ class DetEnemy():
 
     def mapToLane(self):
         # ---------------------- assign enemy to lane --------------------
-        r_dist = self.globals.norm(self.getPosition() - self.globals.roundabout.getPosition())
+        r_dist = self.globals.norm(self.getPosition()-self.globals.roundabout.getPosition())
+        print "Roundabout dist: ", r_dist
         for lane in self.globals.roundabout.lanes:  #
             if r_dist < lane.outer_r and r_dist > lane.inner_r:
                 self.lane = lane
 
     def printStats(self):
-        print "----------------" + str(self.name) + "----------------"
+        print "----------------\033[1;33m" + str(self.name) + "\033[0m---------------- "
+        print "Pos: X: " + str(self.pos[0]) + " Y: " + str(self.pos[1])
         print "Type: ", self.type
         if self.speed is not None:
             print('Speed: % .2f' % self.speed)
@@ -112,10 +115,11 @@ class DetEnemy():
             if not (-1 <= ((b ** 2 + c ** 2 - a ** 2) / (2 * b * c)) <= 1):
                 # roundabout distorted or data noisy
                 # raise AttributeError('roundabout distorted or data to noisy')
-                self.speed = None
+                #self.speed = None
                 self.intersection_distance = None
                 # print "-------------------------------reset--------------------------------------"
             else:
+                print "Intersection Calculated!!"
                 alpha = math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c))
                 # calculate enemy intersection distance
                 enemy_intersection_distance = (alpha / (2 * math.pi)) * (math.pi * 2 * self.lane.r)
@@ -134,10 +138,10 @@ class DetEnemy():
 
                     self.intersection_distance = enemy_intersection_distance
                     sign = lambda a: (a > 0) - (a < 0)
-                    if self.speed is not None:
-                        self.speed = (0.8 * abs(self.speed) + 0.2 * abs(estimated_speed)) * sign(estimated_speed)
-                    else:
-                        self.speed = estimated_speed
+                    # if self.speed is not None:
+                    #     self.speed = (0.8 * abs(self.speed) + 0.2 * abs(estimated_speed)) * sign(estimated_speed)
+                    # else:
+                    #     self.speed = estimated_speed
 
     def estimateSpeedSimpe(self):
         # ---------------- estimate enemy speed on lane ------------------

@@ -71,7 +71,7 @@ class CarLogic:
         self.old = list()
         self.new = list()
         self.radius = list()
-        self.sim_time=0
+        self.sim_time = 0
 
         self.point_cloud = []
         self.cloud_state = 0
@@ -176,14 +176,14 @@ class CarLogic:
             old_angle = None
             sample_index = 0
             for index, value in enumerate(angle):
-                #if ((layer_angle[index] + 15) < 16):
+                # if ((layer_angle[index] + 15) < 16):
                 mapped_angle = int(value * 5 + 0.5) / 5.0
                 if mapped_angle != old_angle:
                     sample_index += 1
-                #print layer_angle[index]
-                self.cpc[int(mapped_angle * 5)][(layer_angle[index] + 15)/2] = ranges[index]
+                # print layer_angle[index]
+                self.cpc[int(mapped_angle * 5)][(layer_angle[index] + 15) / 2] = ranges[index]
                 old_angle = mapped_angle
-            #print sample_index
+            # print sample_index
 
             shaped_cpc = self.cpc.reshape(1803 * 16)
             msg = self.node.proto_dict[49]()
@@ -197,7 +197,7 @@ class CarLogic:
             container = self.node.proto_dict[0]()
             container.dataType = 49
             container.serializedData = msg.SerializeToString()
-            #container.sent = self.node.proto_dict[12]()
+            # container.sent = self.node.proto_dict[12]()
             seconds = int(self.sim_time / 1000)
             microseconds = int(self.sim_time * 1000 - seconds * 1000000)
 
@@ -206,23 +206,23 @@ class CarLogic:
             container.sent.seconds = seconds
 
             self.node.publish(container)
-
-
-            data = self.conn.recv(4096)
+            data = None
+            while data == None:
+                data = self.conn.recv(4096)
             if data:
-                objects = data.split("::-::")
-                print "received data: ",
-                print self.node.proto_dict[820]
+                startIndex = data.find("startHere::") +11
+                objects = data[startIndex:].split("::-::")
                 msg = self.node.proto_dict[820]()
-                for obst in objects:
+                newEenemys = []
+                for obst in objects[:-1]:
                     msg.ParseFromString(obst)
                     enemy = self.isInEnemys(msg)
-                    if(enemy is not None):
+                    if (enemy is not None):
                         enemy.update(msg)
+                        newEenemys.append(enemy)
                     else:
-                        self.enemys.append(DetectionEnemy.DetEnemy(msg,self))
-
-
+                        newEenemys.append(DetectionEnemy.DetEnemy(msg, self))
+                self.enemys = newEenemys
 
             print "Bounds:"
             print angle.min()
@@ -239,12 +239,11 @@ class CarLogic:
                 enemyInRange.append(enemy)
         return enemyInRange
 
-    def isInEnemys(self,msg):
+    def isInEnemys(self, msg):
         for enemy in self.enemys:
             if enemy.id == msg.objId:
-                enemy
+                return enemy
         return None
-
 
     def getEnemysInRect(self, width, height):
         enemyInRect = list()
