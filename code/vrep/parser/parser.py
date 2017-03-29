@@ -279,8 +279,13 @@ class Parser:
                                         if line.startswith('ENDPOINTMODEL\n'):
 
                                             ## building line segments
+                                            precursor = None
                                             for index in xrange(len(pointmodel) - 1):
-                                                current_lane.lineSegments.append(LineSegment(pointmodel[index], pointmodel[index + 1], current_lane))
+                                                tmp = LineSegment(pointmodel[index], pointmodel[index + 1], current_lane, precursor, index)
+                                                current_lane.lineSegments.append(tmp)
+                                                precursor = tmp
+                                            current_lane.lineSegments[0].precursor=current_lane.lineSegments[-1]
+                                            current_lane.lineSegments[-1].successor = current_lane.lineSegments[0]
                                             current_lane.pointmodel = pointmodel
                                             pointmodel = None
 

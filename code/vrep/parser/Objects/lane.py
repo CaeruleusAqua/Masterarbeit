@@ -18,9 +18,8 @@ class Lane:
         self.lanemarking_left = None
         self.pointmodel = []
         self.lineSegments = []
-        #self.type = self.LaneMarking.SOLID_WHITE
+        # self.type = self.LaneMarking.SOLID_WHITE
         self.parent = None
         self.connections = []
         self.connections_str = []
         self.driving_direction = []
-

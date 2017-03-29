@@ -13,13 +13,14 @@ class Brake:
         print "-----------------------------------------"
         print "Roundabout distance: ", self.globals.roundabout.getDistance()
         print "MyCar Speed: ", self.globals.speed
-        print "Branking in: ", self.distance
+        print "Braking in: ", self.distance
 
         if self.globals.speed == 0:
             print "\033[1;33m------------------------------State_Change----------------------------------\033[0m"
             # print "------------------------------Waiting 1Sek----------------------------------"
             # time.sleep(1)
             self.globals.currentState = self.nextState
+            self.globals.target_speed = 0
             return
 
         # calculating acceleration

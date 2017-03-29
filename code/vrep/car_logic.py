@@ -49,7 +49,7 @@ class CarLogic:
         self.max_speed = 0.83
         self.length = 0
         self.dt = 0.05
-        self.accel = 1.0
+        self.accel = 10.0
         self.neg_accel = 1.1
         self.max_dist = 30
         self.speed_array = list()
@@ -87,8 +87,9 @@ class CarLogic:
         # self.radar = vrep.simxGetObjectHandle(self.clientID, 'radar', vrepConst.simx_opmode_blocking)[1]
         # vrep.simxGet
         self.car_handle = vrep.simxGetObjectHandle(self.clientID, 'anchor', vrepConst.simx_opmode_blocking)[1]
-        self.roundabout = Roundabout(self.clientID, 'Roundabout_center', [Lane(0.5, 1.0, 'c'), Lane(1.1, 1.3, 'b'), Lane(1.3, 1.55, 'p')])
-        self.debug = VrepObject(self.clientID, 'Sphere')
+        self.roundabout = Roundabout(self.clientID, 'Roundabout_center',
+                                     [Lane(0.5, 1.0, 'c', VrepObject(self.clientID, 'SphereC')), Lane(1.1, 1.3, 'b', VrepObject(self.clientID, 'SphereB')),
+                                      Lane(1.3, 1.55, 'p', VrepObject(self.clientID, 'SphereP'))])
         self.car = VrepObject(self.clientID, 'mycar')
 
         self.enemys = list()
@@ -140,15 +141,16 @@ class CarLogic:
 
         Grp1Data_msg = self.node.proto_dict[533]()
         pos = self.car.getPosition() * 10
-        #print "POS: ", pos
+        print "-------------------------------------------------------------------------------------------------------------------------POS: ", pos
         wgs84_pos = self.trans.transformToWGS84XY(pos[1], -pos[0])
-        Grp1Data_msg.lat = wgs84_pos.getLatitude()
-        Grp1Data_msg.lon = wgs84_pos.getLongitude()
+        Grp1Data_msg.lat = pos[1] ##wgs84_pos.getLatitude()
+        Grp1Data_msg.lon = -pos[0] #wgs84_pos.getLongitude()
+        Grp1Data_msg.roll = 1234
 
         theta = self.getOrientation()
         if theta is not None:
 
-            #print "Theta: ", theta
+            # print "Theta: ", theta
             theta = -theta / math.pi * 180
 
             Grp1Data_msg.heading = float(theta)
@@ -201,7 +203,7 @@ class CarLogic:
             seconds = int(self.sim_time / 1000)
             microseconds = int(self.sim_time * 1000 - seconds * 1000000)
 
-            print "seconds: " + str(seconds) + "  :  microseconds: " + str(microseconds)
+            #print "seconds: " + str(seconds) + "  :  microseconds: " + str(microseconds)
             container.sent.microseconds = microseconds
             container.sent.seconds = seconds
 
@@ -210,7 +212,7 @@ class CarLogic:
             while data == None:
                 data = self.conn.recv(4096)
             if data:
-                startIndex = data.find("startHere::") +11
+                startIndex = data.find("startHere::") + 11
                 objects = data[startIndex:].split("::-::")
                 msg = self.node.proto_dict[820]()
                 newEenemys = []
@@ -224,9 +226,9 @@ class CarLogic:
                         newEenemys.append(DetectionEnemy.DetEnemy(msg, self))
                 self.enemys = newEenemys
 
-            print "Bounds:"
-            print angle.min()
-            print angle.max()
+            #print "Bounds:"
+            #print angle.min()
+            #print angle.max()
             # struct.pack('q', int_)
 
             self.cloud_state = 0

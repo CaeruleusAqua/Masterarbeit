@@ -7,13 +7,15 @@ from VrepObject import VrepObject
 
 class DetEnemy():
     def __init__(self, msg, globals):
-        print msg.objId
+        #print msg.objId
         self.globals = globals
         self.speed = None
         self.distance_hist = None
         self.lane = None
+        self.lineSegment = None
 
         self.intersection_distance = None
+        self.old_intersection_distance = None
         self.oldPosition = None
         self.speedVector = None
         self.pos = [-msg.pos_x / 10.0, -msg.pos_y / 10.0, 0]
@@ -34,7 +36,7 @@ class DetEnemy():
             self.type = msg.type
 
     def update(self, msg):
-        print msg.objId
+        #print msg.objId
         self.pos_global = [msg.pos_y / 10.0, -msg.pos_x / 10.0, 0]
         self.pos = [-msg.pos_x / 10.0, -msg.pos_y / 10.0, 0]
         self.id = msg.objId
@@ -50,10 +52,8 @@ class DetEnemy():
         else:
             self.type = msg.type
 
-
     def getGlobalPos(self):
-        self.pos_global + self.globals.car.getPosition()
-
+        return self.pos_global + self.globals.car.getPosition()
 
     def getPosition(self):
         return self.pos
@@ -61,9 +61,15 @@ class DetEnemy():
     def getDistance(self):
         return math.sqrt(self.pos[0] * self.pos[0] + self.pos[1] * self.pos[1])
 
+    def mapToLineSegment(self):
+        mypos = self.getGlobalPos() * 10
+        line_segments = self.globals.parser.scenario.getLineSegments(mypos)
+        for segment in line_segments:
+            self.lineSegment = segment
+
     def mapToLane(self):
         # ---------------------- assign enemy to lane --------------------
-        r_dist = self.globals.norm(self.getPosition()-self.globals.roundabout.getPosition())
+        r_dist = self.globals.norm(self.getPosition() - self.globals.roundabout.getPosition())
         print "Roundabout dist: ", r_dist
         # print "Car_pos :", self.globals.car.getPosition()
         # print "myPos :", self.pos
@@ -74,8 +80,11 @@ class DetEnemy():
 
     def printStats(self):
         print "----------------\033[1;33m" + str(self.name) + "\033[0m---------------- "
+        print "Pos: " + str(self.pos)
         print "Global Pos: " + str(self.getGlobalPos())
         print "Type: ", self.type
+        if self.lineSegment is not None:
+            print "MapRoad: ", self.lineSegment[0].parent.parent.name
         if self.speed is not None:
             print('Speed: % .2f' % self.speed)
         else:
@@ -85,6 +94,30 @@ class DetEnemy():
 
         if self.speedVector is not None:
             print "SpeedVector: ", self.speedVector
+
+    def getIntersectionDistance(self):
+        if self.lane is not None:
+            intersection_position = self.lane.intersection_position
+            if intersection_position is not None:
+                intersection_distance = None
+                a = self.globals.norm(intersection_position - self.getPosition())
+
+                # get roundabout angle with Law of cosines
+                b = c = self.lane.r
+                if (-1 <= ((b ** 2 + c ** 2 - a ** 2) / (2 * b * c)) <= 1):
+                    alpha = math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c))
+                    # calculate enemy intersection distance
+                    intersection_distance = (alpha / (2 * math.pi)) * (math.pi * 2 * self.lane.r)
+                    self.old_intersection_distance = self.intersection_distance
+                    self.intersection_distance = intersection_distance
+
+                    if self.old_intersection_distance is not None:
+                        if self.old_intersection_distance < intersection_distance:
+                            intersection_distance = -intersection_distance
+
+                        return intersection_distance
+
+        return None
 
     def estimateSpeed(self):
         # ---------------- estimate enemy speed on lane ------------------
@@ -101,11 +134,11 @@ class DetEnemy():
                 beta = math.pi - math.asin((math.sin(alpha) * b) / a)  # mehrere loesungen!!!!! SSW Dreieck
                 gamma = math.pi - alpha - beta
                 d = (a * math.sin(gamma)) / math.sin(alpha)
-                if self.type == 'c':
-                    # self.globals.angle.append(alpha * 180 / math.pi)  # 360 * alpha / math.pi) #b
-                    # self.globals.new.append(beta * 180 / math.pi)  # d)  # 360 * alpha / math.pi) #g
-                    # self.globals.old.append(gamma * 180 / math.pi)  # self.globals.norm(intersection_position)) #r
-                    self.globals.debug.setPosition([d, 0, 0.02], self.globals.car_handle)
+                # if self.type == 'c':
+                # self.globals.angle.append(alpha * 180 / math.pi)  # 360 * alpha / math.pi) #b
+                # self.globals.new.append(beta * 180 / math.pi)  # d)  # 360 * alpha / math.pi) #g
+                # self.globals.old.append(gamma * 180 / math.pi)  # self.globals.norm(intersection_position)) #r
+                # self.globals.debug.setPosition([d, 0, 0.02], self.globals.car_handle)
 
                 intersection_position = np.array([d, 0, 0])
             else:
@@ -126,7 +159,7 @@ class DetEnemy():
                 print "Intersection  Not Calculated!!!!!!!!!!!!!!!!!!!!!!1!!!!!!!!!!!!!!!"
                 # roundabout distorted or data noisy
                 # raise AttributeError('roundabout distorted or data to noisy')
-                #self.speed = None
+                # self.speed = None
                 self.intersection_distance = None
                 # print "-------------------------------reset--------------------------------------"
             else:

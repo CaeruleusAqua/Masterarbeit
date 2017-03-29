@@ -2,6 +2,7 @@ import datetime
 from layer import Layer
 from groundlayer import GroundLayer
 
+
 class Scenario:
     def __init__(self):
         self.version = "v1.0"
@@ -10,7 +11,7 @@ class Scenario:
         self.name = "Masterarbeit"
         self.origin = []
         self.ground = GroundLayer()
-        self.ground.parent=self
+        self.ground.parent = self
         self.rotation = 0
         self.layer = list()
 
@@ -19,8 +20,7 @@ class Scenario:
         self.analyzed_id = False
         self.highest_id = 0
 
-
-    def addNewLayer(self,name, height):
+    def addNewLayer(self, name, height):
         layer = Layer()
         layer.name = name
         layer.height = height
@@ -28,7 +28,6 @@ class Scenario:
         layer.id = self.getNextId()
         self.layer.append(layer)
         print "ID = " + str(layer.id)
-
 
     def getNextId(self):
         if not self.analyzed_id:
@@ -41,14 +40,33 @@ class Scenario:
 
         return self.highest_id
 
-
     def getLineSegments(self, pos):
         possible_objects = list()
         for road in self.layer[0].roads:
             for lane in road.lanes:
                 for segment in lane.lineSegments:
-                    if segment.isInSegment(pos):
-                        possible_objects.append(segment)
+                    distance = segment.isInSegment(pos)
+                    if distance is not False:
+                        possible_objects.append([segment,distance])
         return possible_objects
 
+    def getDistance(self, startSegment, endSegment):
+        print "Start Index: ", startSegment.index
+        print "End Index: ", endSegment.index
+        if startSegment.index >= endSegment.index:
+            current_segment = startSegment
+            length = 0
+            while current_segment.index != endSegment.index:
+                length += current_segment.length
+                current_segment = current_segment.successor
 
+            return length
+
+        else:
+            current_segment = endSegment
+            length = 0
+            while current_segment.index != startSegment.index:
+                length += current_segment.length
+                current_segment = current_segment.precursor
+
+            return length

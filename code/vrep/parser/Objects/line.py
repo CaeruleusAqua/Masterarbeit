@@ -3,10 +3,15 @@ from math import atan2, cos, sin
 
 
 class LineSegment:
-    def __init__(self, p, q, parent):
+    def __init__(self, p, q, parent, precursor,index):
+        self.index= index
+        self.precursor = precursor
+        self.successor = None
+        self.parent = parent
+        if precursor is not None:
+            precursor.successor = self
 
         # berechnung aus der Nomalenform
-        self.parent = parent
         self.start = p[:2]
         self.end = q[:2]
         self.length = np.linalg.norm(self.start - self.end)
@@ -15,7 +20,18 @@ class LineSegment:
             self.normal = self.normal / np.linalg.norm(self.normal)
         else:
             self.normal = -self.normal / np.linalg.norm(self.normal)
+
+        #calculate rectangle extension
+        self.angle = None
         self.distance = np.dot(self.start, self.normal)
+        self.extension = 0
+        if precursor is not None:
+            a = precursor.start - precursor.end
+            b = self.end - self.start
+            skalar_prod = np.dot(a, b)
+            self.angle = np.arccos(skalar_prod / (np.linalg.norm(a) * np.linalg.norm(b)))
+            self.extension = np.tan(np.pi-self.angle) * (self.parent.width / 2)
+            #print "Segment Extension: ", self.extension
 
     def getDist(self, p):
         point = p[:2]
@@ -29,9 +45,9 @@ class LineSegment:
         rot = np.array([[cos(theta), sin(theta)], [-sin(theta), cos(theta)]])
         endx = np.matmul(rot, new_end)[0]
         proj_point = np.matmul(rot, point - self.start)
-        if proj_point[0] >= 0 and proj_point[0] <= endx:
+        if proj_point[0] >= -self.extension and proj_point[0] <= endx:
             if abs(proj_point[1]) < self.parent.width / 2:
-                return True
+                return proj_point[0]
         return False
 
         # # to many special cases if origin is in line segment!

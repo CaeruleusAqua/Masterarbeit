@@ -47,22 +47,22 @@
 \contentsline {section}{\numberline {6.5}State Estimation}{30}{section.6.5}
 \contentsline {subsection}{\numberline {6.5.1}Constant Turn Rate and Velocity Model}{31}{subsection.6.5.1}
 \contentsline {subsection}{\numberline {6.5.2}Extendet Kalman Filter}{31}{subsection.6.5.2}
-\contentsline {subsubsection}{Prediction}{31}{section*.61}
-\contentsline {subsubsection}{Updating}{33}{section*.62}
-\contentsline {subsubsection}{Initial Uncertainties}{33}{section*.64}
+\contentsline {subsubsection}{Prediction}{31}{section*.62}
+\contentsline {subsubsection}{Updating}{33}{section*.63}
+\contentsline {subsubsection}{Initial Uncertainties}{33}{section*.65}
 \contentsline {subsection}{\numberline {6.5.3}Reassigning}{34}{subsection.6.5.3}
 \contentsline {chapter}{\numberline {7}Simuation}{35}{chapter.7}
 \contentsline {section}{\numberline {7.1}Simuation Scenario}{35}{section.7.1}
 \contentsline {section}{\numberline {7.2}Simulation Logic}{36}{section.7.2}
 \contentsline {subsection}{\numberline {7.2.1}Sensor Connection}{36}{subsection.7.2.1}
 \contentsline {subsection}{\numberline {7.2.2}Mapping}{37}{subsection.7.2.2}
-\contentsline {subsubsection}{Localization}{38}{section*.71}
+\contentsline {subsubsection}{Localization}{38}{section*.72}
 \contentsline {subsection}{\numberline {7.2.3}Statemachine}{39}{subsection.7.2.3}
-\contentsline {paragraph}{Start - State}{39}{section*.77}
-\contentsline {paragraph}{ToRoundabout - State}{40}{section*.78}
-\contentsline {paragraph}{Brake - State}{40}{section*.79}
-\contentsline {paragraph}{InRoundabout - State}{40}{section*.80}
-\contentsline {paragraph}{ExitRoundabout - State}{40}{section*.83}
+\contentsline {paragraph}{Start - State}{39}{section*.78}
+\contentsline {paragraph}{ToRoundabout - State}{40}{section*.79}
+\contentsline {paragraph}{Brake - State}{40}{section*.80}
+\contentsline {paragraph}{InRoundabout - State}{40}{section*.81}
+\contentsline {paragraph}{ExitRoundabout - State}{40}{section*.84}
 \contentsline {chapter}{\numberline {8}Evaluation}{41}{chapter.8}
 \contentsline {section}{\numberline {8.1}Simuation}{41}{section.8.1}
 \contentsline {section}{\numberline {8.2}Real Measurements}{41}{section.8.2}
