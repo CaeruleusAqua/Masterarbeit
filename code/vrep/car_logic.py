@@ -88,8 +88,8 @@ class CarLogic:
         # vrep.simxGet
         self.car_handle = vrep.simxGetObjectHandle(self.clientID, 'anchor', vrepConst.simx_opmode_blocking)[1]
         self.roundabout = Roundabout(self.clientID, 'Roundabout_center',
-                                     [Lane(0.5, 1.0, 'c', VrepObject(self.clientID, 'SphereC')), Lane(1.1, 1.3, 'b', VrepObject(self.clientID, 'SphereB')),
-                                      Lane(1.3, 1.55, 'p', VrepObject(self.clientID, 'SphereP'))])
+                                     [Lane(0.7, 1.5, 'c', VrepObject(self.clientID, 'SphereC')), Lane(1.9, 2.085, 'b', VrepObject(self.clientID, 'SphereB')),
+                                      Lane(2.085, 2.285, 'p', VrepObject(self.clientID, 'SphereP'))])
         self.car = VrepObject(self.clientID, 'mycar')
 
         self.enemys = list()

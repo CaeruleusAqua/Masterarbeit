@@ -25,8 +25,8 @@ class ToRoundabout:
         print "Branking Distance: ", self.globals.getBrakingDistance()
         print "MyCar Speed: ", self.globals.speed
         mypos = self.globals.car.getPosition() * 10
-        line_segments = self.globals.parser.scenario.getLineSegments(mypos)
-        print "Roadname: ", line_segments[-1][0].parent.parent.name
+        #line_segments = self.globals.parser.scenario.getLineSegments(mypos)
+        #print "Roadname: ", line_segments[-1][0].parent.parent.name
         # for seg in line_segments:
         #     print "Roadname: ",seg[0].parent.parent.name
 
@@ -51,10 +51,10 @@ class ToRoundabout:
                 # print "intersection_position far away.."
                 intersection_position = None
             lane.intersection_position = intersection_position
-            line_segments = self.globals.parser.scenario.getLineSegments(intersection_position * 10)
-            for segment in line_segments:
-                lane.lineSegment = segment[0]
-                lane.posInLineSegment = segment[1]
+            # line_segments = self.globals.parser.scenario.getLineSegments(intersection_position * 10)
+            # for segment in line_segments:
+            #     lane.lineSegment = segment[0]
+            #     lane.posInLineSegment = segment[1]
 
         self.globals.target_speed = self.globals.max_speed
         self.brake = None
