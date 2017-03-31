@@ -33,12 +33,7 @@ for key in measurements.keys():
             break
 
 
-
-
-
-
 print mapping
-
 
 for sim_key in simulation.keys():
     print sim_key
@@ -49,10 +44,32 @@ for sim_key in simulation.keys():
 
         for data in measurements[mess]:
             dist = np.linalg.norm(np.array(data[1]) - np.array(simulation[sim_key][data[0]][1]))
-            times.append(data[0])
-            distances.append(dist)
+            if data[0] < 150:
+                times.append(data[0]/10.0)
+                distances.append(dist*10)
+        if measurements[mess][0][0] < 150 and len(measurements[mess])>2:
+            pylab.plot(times,distances,label=str(mess))
+    pylab.ylabel("error [m]")
+    pylab.xlabel("time [s]")
+    pylab.title(str(sim_key))
+    pylab.legend(loc='upper left')
+    pylab.show()
 
-        pylab.plot(times,distances,label=str(mess))
-    pylab.ylabel(str(sim_key))
+for sim_key in simulation.keys():
+    for mess in mapping[sim_key]:
+        times= list()
+        speed = list()
+
+        for data in measurements[mess]:
+            dist = np.array(data[2]) #- np.array(simulation[sim_key][data[0]][2])
+            if data[0] < 150:
+                times.append(data[0]/10.0)
+                speed.append(dist*10)
+        if measurements[mess][0][0]<150 and len(measurements[mess])>2:
+            pylab.plot(times,speed,label=str(mess))
+
+    pylab.ylabel("speed [m/s]")
+    pylab.xlabel("time [s]")
+    pylab.title(str(sim_key))
     pylab.legend(loc='upper left')
     pylab.show()
