@@ -25,12 +25,10 @@ class ToRoundabout:
         print "Branking Distance: ", self.globals.getBrakingDistance()
         print "MyCar Speed: ", self.globals.speed
         mypos = self.globals.car.getPosition() * 10
-        #line_segments = self.globals.parser.scenario.getLineSegments(mypos)
-        #print "Roadname: ", line_segments[-1][0].parent.parent.name
-        # for seg in line_segments:
-        #     print "Roadname: ",seg[0].parent.parent.name
-
-
+        line_segments = self.globals.parser.scenario.getLineSegments(mypos)
+        print "Roadname: ", line_segments[-1][0].parent.parent.name
+        for seg in line_segments:
+            print "Roadname: ", seg[0].parent.parent.name
 
         # calculate intersection positions
         for lane in self.globals.roundabout.lanes:
@@ -59,8 +57,8 @@ class ToRoundabout:
         self.globals.target_speed = self.globals.max_speed
         self.brake = None
 
-        # enemys = self.globals.getEnemysInRange(3)
-        enemys = self.globals.enemys
+        enemys = self.globals.getEnemysInRange(4)
+        #enemys = self.globals.enemys
 
         if self.globals.roundabout.getDistance() - 1 < self.globals.car_length / 2:
             print "\033[1;33m------------------------------State_Change----------------------------------\033[0m"
@@ -99,33 +97,33 @@ class ToRoundabout:
 
             intersection_distance = enemy.getIntersectionDistance()
             print "intersection_distance: ", intersection_distance
+            if enemy.lane is not None:
+                lane_dist = self.globals.roundabout.getDistance() - enemy.lane.outer_r
+                brake_dist = self.globals.getBrakingDistance() + self.globals.car_length + 0.2
+                if lane_dist <= brake_dist and enemy.speed != 0 and intersection_distance is not None:
+                    if intersection_distance > 0:
 
-            lane_dist = self.globals.roundabout.getDistance() - self.globals.roundabout.outer_r
-            brake_dist = self.globals.getBrakingDistance() + self.globals.car_length + 0.2
-            if lane_dist <= brake_dist and enemy.speed is not None and intersection_distance is not None:
-                if intersection_distance > 0:
+                        enemy_timewindow = abs(intersection_distance / enemy.speed)
 
-                    enemy_timewindow = abs(intersection_distance / enemy.speed)
+                        deltav = self.globals.max_speed - self.globals.speed
+                        t = deltav / self.globals.accel
+                        s = 0
+                        if enemy_timewindow - t < 0:
+                            s = (self.globals.accel / 2) * enemy_timewindow * enemy_timewindow + self.globals.speed * enemy_timewindow
 
-                    deltav = self.globals.max_speed - self.globals.speed
-                    t = deltav / self.globals.accel
-                    s = 0
-                    if enemy_timewindow - t < 0:
-                        s = (self.globals.accel / 2) * enemy_timewindow * enemy_timewindow + self.globals.speed * enemy_timewindow
+                        else:
+                            s = ((self.globals.accel / 2) * t * t + self.globals.speed * t) + (enemy_timewindow - t) * self.globals.max_speed
 
-                    else:
-                        s = ((self.globals.accel / 2) * t * t + self.globals.speed * t) + (enemy_timewindow - t) * self.globals.max_speed
+                        goal_distance = enemy.lane.intersection_position[0] + self.globals.car_length
+                        stop_distance = self.globals.roundabout.getDistance() - enemy.lane.outer_r - self.globals.car_length
+                        print "Goal distance: ", goal_distance
+                        print "Stop distance: ", stop_distance
+                        print "Estimated Car distance: ", s
+                        print "Estimated Time Window: ", enemy_timewindow
 
-                    goal_distance = self.globals.roundabout.getDistance() - enemy.lane.r + self.globals.car_length
-                    stop_distance = self.globals.roundabout.getDistance() - 1.55 - self.globals.car_length
-                    print "Goal distance: ", goal_distance
-                    print "Stop distance: ", stop_distance
-                    print "Estimated Car distance: ", s
-                    print "Estimated Time Window: ", enemy_timewindow
-
-                    if s < goal_distance and s > stop_distance:
-                        print "Stop Caused my: ", enemy.name
-                        self.setBrakeDistance(self.globals.roundabout.getDistance() - 1.55 - self.globals.car_length / 2)
+                        if s < goal_distance and s > stop_distance:
+                            print "Stop Caused my: ", enemy.name
+                            self.setBrakeDistance(self.globals.roundabout.getDistance() - enemy.lane.outer_r - self.globals.car_length / 2 - 0.1)
 
         if self.brake is not None:
             print "\033[1;33m------------------------------State_Change----------------------------------\033[0m"

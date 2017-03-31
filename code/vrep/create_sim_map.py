@@ -19,9 +19,9 @@ points_ped = list()
 trans = WGS84Coordinate(57.772840, 12.769964)
 
 for deg in np.arange(0, 360, 5):
-    points_car.append([np.cos(deg * trans.deg2rad) * 7.5, np.sin(deg * trans.deg2rad) * 7.5])
-    points_bicycle.append([np.cos(deg * trans.deg2rad) * 12.0, np.sin(deg * trans.deg2rad) * 12.0])
-    points_ped.append([np.cos(deg * trans.deg2rad) * 14.0, np.sin(deg * trans.deg2rad) * 14.0])
+    points_car.append([np.cos(deg * trans.deg2rad) * 11, np.sin(deg * trans.deg2rad) * 11])
+    points_bicycle.append([np.cos(deg * trans.deg2rad) * 20.85, np.sin(deg * trans.deg2rad) * 20.85])
+    points_ped.append([np.cos(deg * trans.deg2rad) * 22.85, np.sin(deg * trans.deg2rad) * 22.85])
 
 # parser.parseSCN("resources/scenario.scn")
 
@@ -48,11 +48,11 @@ scenario.addNewLayer("Groundfloor", 0.01)
 
 # Add Roundabout
 scenario.layer[0].addNewRoad("Roundabout")
-scenario.layer[0].roads[0].addNewLane(5, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
+scenario.layer[0].roads[0].addNewLane(8, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
 scenario.layer[0].roads[0].lanes[0].pointmodel = points_car
-scenario.layer[0].roads[0].addNewLane(2, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
+scenario.layer[0].roads[0].addNewLane(1.85, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
 scenario.layer[0].roads[0].lanes[1].pointmodel = points_bicycle
-scenario.layer[0].roads[0].addNewLane(2.5, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
+scenario.layer[0].roads[0].addNewLane(2, lanemarking_left=Lane.LaneMarking.SOLID_WHITE, lanemarking_right=Lane.LaneMarking.SOLID_WHITE)
 scenario.layer[0].roads[0].lanes[2].pointmodel = points_ped
 
 ##Add streets

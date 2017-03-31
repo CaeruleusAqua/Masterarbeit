@@ -943,7 +943,7 @@ measurement from the sensor can have errors within a real scenario, which can be
 In fact, \ac{DBSCAN} is itself of linear complexity. However, most computing times are caused by the neighborhood calculation.
 But instead of the range request via a tree structure, we here profit from the behavior, that measurements in a small neighborhood have a similar azimuth angle.
 For this purpose, we examine two additional entries for each measured value to the left and right in our array. 
-Therefore, we need to check $5 \cdot 16 = 80$ values. The runtime of the range request can therefore also be performed in linear complexity.
+Therefore, we need to check $5 \cdot 16 = 80$ values. The runtime of the range request can therefore also be performed in linear complexity. \todo{linear complexity ???????? und erklären welchen Einfluss das ganze hat!}
 All measured values previously classified as ground are skipped during the calculation. In addition, the construction of a KD-tree is omitted, which aslo leaves us a run-time advantage.
 All clusters are stored by the algorithm as a list of references to the original array to avoid unnecessary copying.
 
@@ -1285,7 +1285,7 @@ J(\vec{x})=
 % Der Extendet Kalman Filter (EKF) ist die nichtlineare Version des Kalman-Filters, die sich über eine Schätzung des aktuellen Mittels und der Kovarianz linearisiert.
 % Zusätlich zu unserem Modell werden noch weitere Werte benötigt. Dazu zehen wir uns die Berechnungsforschrift an:
 
-The Extendet Kalman Filter (EKF) \todo{reference} is the nonlinear version of the Kalman filter, which is linearized by an estimate of the current mean and the covariance.
+The Extendet Kalman Filter (EKF) \cite{Ribeiro2004} is the nonlinear version of the Kalman filter, which is linearized by an estimate of the current mean and the covariance.
 In addition to our model, further values are required. For this purpose, we look at the calculation rules of the necessary steps.
 
 \subsubsection{Prediction}
@@ -1297,6 +1297,8 @@ In the first step of the filtering process, the preceding estimation of the stat
 P_{k}&=F_{k-1} P_{k-1} {F^T_{k-1}} + Q_{k-1}
 \end{align*}
 
+Where $\hat{x}_{k}$ is the estimate of our state for the current time step and $P_{k}$ is, because of the prediction, our increased covariance.
+
 % with:
 % \begin{itemize}
 %  \item $f$ - state transition
@@ -1304,7 +1306,7 @@ P_{k}&=F_{k-1} P_{k-1} {F^T_{k-1}} + Q_{k-1}
 %  \item $u$ - control vector
 % \end{itemize}
 
-Since we can not know the control variables of the other vehicles, we asume $u$ to be zero for our calculations.
+Since we can not know the control variables of the other objects, we asume $u$ to be zero for our calculations.
 For the state transition model $F$ we use our previous calculated Jacobian matrix applied to the previous state.
 
 \begin{align*}
@@ -1383,6 +1385,8 @@ was machst du mit statevector
 was machst du mit uncertainty
 so den state estimation teil hab ich durchgelesen
 }
+
+The predictions are finally corrected with the new information of the measurements.
 
 \begin{align*}
 \tilde{y}_k &= z_k -h(\hat{x}_{k})\\
@@ -1752,7 +1756,8 @@ of all obstacles wich are moving in the direction of the intersection, to the in
 Based on this distances and the object speeds the estimated time window is calculated, in which the obstacles reaches the intersection point.
 A time window is also calculated from the maximum acceleration and speed \ todo {define max speed} of our vehicle and the calculated distance to the intersection point.
 If this time window is smaller than one of the obstacles plus a safety interval of two seconds, the vehicle enters the roundabout and changes to the InRoundabout state.
-Therefore, the necessary acceleration is reduced to such an value that the condition is still fulfilled. If this condition does not apply, the vehicle enters the Brake state.
+%Therefore, the necessary acceleration is reduced to such an value that the condition is still fulfilled. 
+If this condition does not apply, the vehicle enters the Brake state.
 
 \paragraph{Brake - State}
 % In diesem Zustand wird die Entfernung des Fahrzeuges zum Schnittpunkt der Fahrzeugtrajktorie mit der äußersten Spur des Kreisverkehrs berechnet.
@@ -1760,15 +1765,15 @@ Therefore, the necessary acceleration is reduced to such an value that the condi
 % Nach den das Fahrzeug zum stehen gebracht wurde wechselt dieses wieder in den ToRoundabout-State.
 In this state, the distance of the our vehicle to the next intersection point is calculated.
 With this distance, the necessary Negtive acceleration is now calculated in order to get the vehicle standing up to this point,
-and sent to the vehicle. After the vehicle has been brought to a standstill, we changes back into the ToRoundabout state.
+and sent to the vehicle. After the vehicle has been brought to a standstill, we changes back into the last called state.
 
 \paragraph{InRoundabout - State}
 % Wenn sich das Fahrzeug innerhalb des Kreisverkehres befindet, führ es ein \ac{ACC} aus. Das heißt das Fahrzeug fährt mit konstanter geschwindigkeit, bis es
 % auf ein hindernis trifft. Sobald es auf ein Hindernis getroffen ist, wird die Geschwindigkeit proportional zum abstand des Hindernisses reduziert, sodass sich ein Sicherheisabstand
 % einstellt. Zusätzlich wird bei jedem aufruf das Zeitfenster bechnet, welches das Fahrzeug benötigt um  die Zielausfahrt zu erreichen. \todo{was ist die Zielausfart (welche koordinate)}
-When the vehicle is inside the roundabout, it carries out \ ac {ACC}. That is, the vehicle travels at a constant speed until it encounters an obstacle. 
+When the vehicle is inside the roundabout, it carries out \ac {ACC}. That is, the vehicle travels at a constant speed until it encounters an obstacle. 
 As soon as an obstacle is reached, the speed is reduced proportionally to the distance of the obstacle, so that a safety distance is established.
-In addition, the time window is calculated for each call which the vehicle needs to reach the target exit. \todo{was ist die Zielausfart (welche koordinate)}
+In addition, the time window is calculated for each call which the vehicle needs to reach the target exit, wich is defindet in the Map. \todo{was ist die Zielausfart (welche koordinate)}
 
 
 % Sollte sich das Fahrzeug der Zielausfahrt auf 10m nähren, wird in des Zustand ExitRoundabout gewechselt \todo{wo wird zielausfahrt definiert}

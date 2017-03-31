@@ -1704,6 +1704,7 @@ test runs with the real vehicle  were recorded and the maximum subjectively plea
 
 The used recordings can be seen in \cref{max_accel}, the vehicle was accelerated from 0 to 25 km/h or braked from 25 to 0 km/h.
 The maximum values were read, so we assume $ 3m/{s^2} $ for the maximum positive acceleration and $ -4.5m/{s ^ 2} $ for the maximum negative acceleration.
+The maximum speed of the simulated test vehicle is set to 30 km/h.
 
 % Die genutzten Aufnahmen sind in \cref{max_accel} zu sehen, dabei wurde das Fahrzeug von null auf 25 km/h beschleunigt bzw. von 25 auf null km/h gebremst.
 % Es wurden jeweils die maximalen Werte abgelesen, so dass wir für die maximale positive Beschleunigung $3m/{s^2}$ udn für
@@ -1740,7 +1741,9 @@ the intersection points of trajectory and lanes are calculated from the expected
 
 \paragraph{Start - State}
 % Das Fahrzeug befindet sich solange im Start State, bis es einen Abstand von 20m zur außeren Lane des Kreisverkehres erreicht, danach wird in den ToRoundabout-State gewechselt
+
 The vehicle is in the start state until it reaches a distance of 20 m to the outside lane of the roundabout, afterwards the state is changed to the ToRoundabout state.
+In this state the vehicle is driving at a maximum speed of 30 km/h
 
 
 \paragraph{ToRoundabout - State}
@@ -1751,12 +1754,13 @@ The vehicle is in the start state until it reaches a distance of 20 m to the out
 % ebenfalls ein Zeitfenster berechnet. Sollte dieses Zeitfenster kleiner sein als eines der Zeitfenster der Hindernisse zuzüglich eines Sicherheitsabstandes von zwei Sekunden, 
 % fährt das Fahrzeug in den Kreisverkehr ein, und wechselt in den Zustand InRoundabout. Dafür wird die nötige beschleunigung soweit reduziert,
 % das die bedingung noch erfüllt ist. Sollte diese Bedingung nicht zutreffen, geht das Fahrzeug in den Zustand Brake.
-We are in this State, if the vehicle is not yet located in the roundabout. At each call, the remaining distance,
+We are in this state, if the vehicle is not yet located in the roundabout. At each call, the remaining distance,
 of all obstacles wich are moving in the direction of the intersection, to the intersection point is calculated. 
 Based on this distances and the object speeds the estimated time window is calculated, in which the obstacles reaches the intersection point.
-A time window is also calculated from the maximum acceleration and speed \ todo {define max speed} of our vehicle and the calculated distance to the intersection point.
-If this time window is smaller than one of the obstacles plus a safety interval of two seconds, the vehicle enters the roundabout and changes to the InRoundabout state.
-Therefore, the necessary acceleration is reduced to such an value that the condition is still fulfilled. If this condition does not apply, the vehicle enters the Brake state.
+A time window is also calculated from the maximum acceleration and speed of our vehicle and the calculated distance to the intersection point.
+If this time window is smaller than one of the obstacles plus a safety interval of two seconds, the vehicle enters the roundabout and changes to the InRoundabout - State.
+%Therefore, the necessary acceleration is reduced to such an value that the condition is still fulfilled. 
+If this condition does not apply, the vehicle enters the Brake state.
 
 \paragraph{Brake - State}
 % In diesem Zustand wird die Entfernung des Fahrzeuges zum Schnittpunkt der Fahrzeugtrajktorie mit der äußersten Spur des Kreisverkehrs berechnet.
@@ -1764,21 +1768,30 @@ Therefore, the necessary acceleration is reduced to such an value that the condi
 % Nach den das Fahrzeug zum stehen gebracht wurde wechselt dieses wieder in den ToRoundabout-State.
 In this state, the distance of the our vehicle to the next intersection point is calculated.
 With this distance, the necessary Negtive acceleration is now calculated in order to get the vehicle standing up to this point,
-and sent to the vehicle. After the vehicle has been brought to a standstill, we changes back into the ToRoundabout state.
+and sent to the vehicle. After the vehicle has been brought to a standstill, we changes back into the last called state.
 
 \paragraph{InRoundabout - State}
 % Wenn sich das Fahrzeug innerhalb des Kreisverkehres befindet, führ es ein \ac{ACC} aus. Das heißt das Fahrzeug fährt mit konstanter geschwindigkeit, bis es
 % auf ein hindernis trifft. Sobald es auf ein Hindernis getroffen ist, wird die Geschwindigkeit proportional zum abstand des Hindernisses reduziert, sodass sich ein Sicherheisabstand
 % einstellt. Zusätzlich wird bei jedem aufruf das Zeitfenster bechnet, welches das Fahrzeug benötigt um  die Zielausfahrt zu erreichen. \todo{was ist die Zielausfart (welche koordinate)}
-When the vehicle is inside the roundabout, it carries out \ ac {ACC}. That is, the vehicle travels at a constant speed until it encounters an obstacle. 
+When the vehicle is inside the roundabout, it carries out \ac {ACC}. That is, the vehicle travels at a constant speed until it encounters an obstacle. 
 As soon as an obstacle is reached, the speed is reduced proportionally to the distance of the obstacle, so that a safety distance is established.
-In addition, the time window is calculated for each call which the vehicle needs to reach the target exit. \todo{was ist die Zielausfart (welche koordinate)}
+If the vehicle feeds the target exit at 10m, the state will be changed to ExitRoundabout. The position from the target exit is defined in the map.
 
 
 % Sollte sich das Fahrzeug der Zielausfahrt auf 10m nähren, wird in des Zustand ExitRoundabout gewechselt \todo{wo wird zielausfahrt definiert}
-If the vehicle feeds the target exit at 10m, the state will be changed to ExitRoundabout. \todo{wo wird zielausfahrt definiert}
+
 
 \paragraph{ExitRoundabout - State}
+% Im ExitRaoundabout state wird geprüft ob sich innerhalb eines vorgegebenen Bereiches Hindernisse auf dem Rad oder Fußweg befinden.
+% Solle dies der fall sein, wechselt das Fahrzeug in den Brake State und hält vor dem Radweg an. Das Fahrzeug fährt erst weiter, wenn der Vorgegbene Bereich frei wieder frei ist.
+% Das Fahrzeug bleib solange im ExitRoundabout State bis das Fahrzeug durch die Simulation auf die startposition zurückgestetzt wird.
+% Danach wechselt das Fahrzeug in den StartState
+
+The ExitRaoundabout state checks whether there are obstacles on the wheel or footpath within a given range.
+If this is the case, the vehicle changes to the Brake - State and stops in front of the cycle track. The vehicle does not move until the specified range is free again.
+The vehicle remains in the ExitRoundabout state until the vehicle is reset to the starting position by the simulation.
+The vehicle then changes to StartState
 
 
 

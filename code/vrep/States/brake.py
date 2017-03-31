@@ -32,7 +32,7 @@ class Brake:
         else:
             neg_accel = self.globals.max_neg_accel
 
-        neg_accel = max((neg_accel, 0.001))
+        neg_accel = max((neg_accel, 0.05))
         self.globals.neg_accel = neg_accel
         self.globals.target_speed = 0
 

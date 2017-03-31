@@ -69,13 +69,13 @@ class DetEnemy():
 
     def mapToLane(self):
         # ---------------------- assign enemy to lane --------------------
-        r_dist = self.globals.norm(self.getPosition() - self.globals.roundabout.getPosition())
-        print "Roundabout dist: ", r_dist
+        r_dist = self.globals.norm(self.getGlobalPos())
+        #print "Roundabout dist: ", r_dist
         # print "Car_pos :", self.globals.car.getPosition()
         # print "myPos :", self.pos
-        # print "roundabout Pos :", self.globals.roundabout.getPosition()
+        #print "roundabout Pos :", self.globals.roundabout.getPosition()
         for lane in self.globals.roundabout.lanes:  #
-            if r_dist < lane.outer_r and r_dist > lane.inner_r:
+            if r_dist <= lane.outer_r and r_dist >= lane.inner_r:
                 self.lane = lane
 
     def printStats(self):
@@ -112,7 +112,7 @@ class DetEnemy():
                     self.intersection_distance = intersection_distance
 
                     if self.old_intersection_distance is not None:
-                        if self.old_intersection_distance < intersection_distance:
+                        if self.getGlobalPos()[0] > 0.5:
                             intersection_distance = -intersection_distance
 
                         return intersection_distance

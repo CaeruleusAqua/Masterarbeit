@@ -39,8 +39,11 @@ class CarLogic:
         self.clientID = -1
         self.port = port
         self.parser = Parser()
-        self.parser.parseSCN("resources/Scenarios/simulation/scenario.scn")
+        self.parser.parseSCN("resources/Scenarios/simulation_2/scenario.scn")
         self.trans = WGS84Coordinate(57.772840, 12.769964)
+        self.milliseconds = 0
+        self.seconds = 0
+        self.minutes = 0
 
         # Parameters:
         self.time = time.time()
@@ -49,8 +52,8 @@ class CarLogic:
         self.max_speed = 0.83
         self.length = 0
         self.dt = 0.05
-        self.accel = 10.0
-        self.neg_accel = 1.1
+        self.accel = 0.3
+        self.neg_accel = 0.4
         self.max_dist = 30
         self.speed_array = list()
         self.alpha_array = list()
@@ -108,9 +111,19 @@ class CarLogic:
         print ('Successfully connected to remote API server')
 
     def norm(self, x):
-        return math.sqrt(x[0] ** 2 + x[1] ** 2 + x[2] ** 2)
+        return math.sqrt(x[0] ** 2 + x[1] ** 2)
 
     def update(self):
+
+        print "----------- Time: " + str(self.minutes) + ":" + str(self.seconds) + ":" + str(self.milliseconds)
+
+        self.milliseconds += 50
+        self.seconds += self.milliseconds / 1000
+        self.milliseconds %= 1000
+
+        self.minutes += self.seconds / 60
+        self.seconds %= 60
+
         # for enemy in self.enemys:
         #     enemy.update(self.car_handle)
         self.roundabout.update(self.car_handle)
@@ -141,10 +154,9 @@ class CarLogic:
 
         Grp1Data_msg = self.node.proto_dict[533]()
         pos = self.car.getPosition() * 10
-        print "-------------------------------------------------------------------------------------------------------------------------POS: ", pos
         wgs84_pos = self.trans.transformToWGS84XY(pos[1], -pos[0])
-        Grp1Data_msg.lat = pos[1] ##wgs84_pos.getLatitude()
-        Grp1Data_msg.lon = -pos[0] #wgs84_pos.getLongitude()
+        Grp1Data_msg.lat = pos[1]  ##wgs84_pos.getLatitude()
+        Grp1Data_msg.lon = -pos[0]  # wgs84_pos.getLongitude()
         Grp1Data_msg.roll = 1234
 
         theta = self.getOrientation()
@@ -203,7 +215,7 @@ class CarLogic:
             seconds = int(self.sim_time / 1000)
             microseconds = int(self.sim_time * 1000 - seconds * 1000000)
 
-            #print "seconds: " + str(seconds) + "  :  microseconds: " + str(microseconds)
+            # print "seconds: " + str(seconds) + "  :  microseconds: " + str(microseconds)
             container.sent.microseconds = microseconds
             container.sent.seconds = seconds
 
@@ -226,9 +238,9 @@ class CarLogic:
                         newEenemys.append(DetectionEnemy.DetEnemy(msg, self))
                 self.enemys = newEenemys
 
-            #print "Bounds:"
-            #print angle.min()
-            #print angle.max()
+            # print "Bounds:"
+            # print angle.min()
+            # print angle.max()
             # struct.pack('q', int_)
 
             self.cloud_state = 0
