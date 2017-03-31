@@ -56,16 +56,17 @@
 \contentsline {section}{\numberline {7.2}Simulation Logic}{36}{section.7.2}
 \contentsline {subsection}{\numberline {7.2.1}Sensor Connection}{36}{subsection.7.2.1}
 \contentsline {subsection}{\numberline {7.2.2}Mapping}{37}{subsection.7.2.2}
-\contentsline {subsubsection}{Localization}{38}{section*.72}
-\contentsline {subsection}{\numberline {7.2.3}Statemachine}{39}{subsection.7.2.3}
-\contentsline {paragraph}{Start - State}{40}{section*.78}
-\contentsline {paragraph}{ToRoundabout - State}{40}{section*.79}
-\contentsline {paragraph}{Brake - State}{40}{section*.80}
-\contentsline {paragraph}{InRoundabout - State}{40}{section*.81}
-\contentsline {paragraph}{ExitRoundabout - State}{40}{section*.83}
+\contentsline {subsubsection}{Localization}{37}{section*.71}
+\contentsline {subsection}{\numberline {7.2.3}State Machine}{39}{subsection.7.2.3}
+\contentsline {paragraph}{Start - State}{40}{section*.76}
+\contentsline {paragraph}{ToRoundabout - State}{40}{section*.77}
+\contentsline {paragraph}{Brake - State}{40}{section*.78}
+\contentsline {paragraph}{InRoundabout - State}{40}{section*.79}
+\contentsline {paragraph}{ExitRoundabout - State}{40}{section*.81}
 \contentsline {chapter}{\numberline {8}Evaluation}{41}{chapter.8}
 \contentsline {section}{\numberline {8.1}Simuation}{41}{section.8.1}
 \contentsline {section}{\numberline {8.2}Real Measurements}{41}{section.8.2}
+\contentsline {section}{\numberline {8.3}Performance}{41}{section.8.3}
 \contentsline {chapter}{\numberline {9}Conclusions}{42}{chapter.9}
 \contentsline {chapter}{\numberline {10}Future Work}{43}{chapter.10}
 \select@language {english}

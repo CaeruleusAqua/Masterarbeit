@@ -17,6 +17,8 @@ from parser import Parser
 import matplotlib.pyplot as plt
 import struct
 
+import pickle
+
 from opendavinci.DVnode import DVnode
 import cv2
 from tools import WGS84Coordinate
@@ -85,6 +87,9 @@ class CarLogic:
         self.node.connect()
 
         self.connect()
+        self.listofmeasurements = dict()
+        self.listofenemys = dict()
+        self.iteration = 0
 
         # initHandles
         # self.radar = vrep.simxGetObjectHandle(self.clientID, 'radar', vrepConst.simx_opmode_blocking)[1]
@@ -96,10 +101,14 @@ class CarLogic:
         self.car = VrepObject(self.clientID, 'mycar')
 
         self.enemys = list()
-        # self.enemys.append(Enemy(self.clientID, 'enemy_car1', 'c', self))
-        # self.enemys.append(Enemy(self.clientID, 'enemy_car2', 'c', self))
-        # self.enemys.append(Enemy(self.clientID, 'enemy_bicycle1', 'b', self))
-        # self.enemys.append(Enemy(self.clientID, 'Bill_base', 'p', self))
+        self.sim_enemys = list()
+        self.sim_enemys.append(Enemy(self.clientID, 'enemy_car1', 'c', 0.93, self))
+        self.sim_enemys.append(Enemy(self.clientID, 'enemy_car2', 'c', 0.83, self))
+        self.sim_enemys.append(Enemy(self.clientID, 'enemy_car3', 'c', 0.88, self))
+        self.sim_enemys.append(Enemy(self.clientID, 'bike', 'b', 0.24, self))
+        self.sim_enemys.append(Enemy(self.clientID, 'bike0', 'b', 0.24, self))
+        self.sim_enemys.append(Enemy(self.clientID, 'bike1', 'b', 0.24, self))
+        self.sim_enemys.append(Enemy(self.clientID, 'Bill_base', 'p', 0.056, self))
 
     def connect(self):
         print ('Trying to connect..')
@@ -124,8 +133,8 @@ class CarLogic:
         self.minutes += self.seconds / 60
         self.seconds %= 60
 
-        # for enemy in self.enemys:
-        #     enemy.update(self.car_handle)
+        for enemy in self.sim_enemys:
+            enemy.update(self.car_handle)
         self.roundabout.update(self.car_handle)
         self.car.update(-1)
 
@@ -238,6 +247,12 @@ class CarLogic:
                         newEenemys.append(DetectionEnemy.DetEnemy(msg, self))
                 self.enemys = newEenemys
 
+            for enemy in self.sim_enemys:
+                self.listofenemys[enemy.name].append([self.iteration, enemy.getPosition(), enemy.speed, enemy.getOriantation(), enemy.type])
+                print [self.iteration, enemy.getPosition(), enemy.speed, enemy.getOriantation(), enemy.type]
+
+            self.iteration += 1
+
             # print "Bounds:"
             # print angle.min()
             # print angle.max()
@@ -347,6 +362,10 @@ finally:
     print "Close Connection"
     tmp.conn.close()
     vrep.simxFinish(tmp.clientID)
+    # self.listofmeasurements = dict()
+    # self.listofenemys = dict()
+    pickle.dump(tmp.listofmeasurements, open("measurements.p", "wb"))
+    pickle.dump(tmp.listofenemys, open("simulation.p", "wb"))
 
 # plt.plot(tmp.speed_array)
 # plt.plot(tmp.alpha_array)

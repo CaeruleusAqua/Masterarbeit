@@ -7,6 +7,7 @@ from VrepObject import VrepObject
 
 class DetEnemy():
     def __init__(self, msg, globals):
+
         #print msg.objId
         self.globals = globals
         self.speed = None
@@ -35,6 +36,10 @@ class DetEnemy():
         else:
             self.type = msg.type
 
+        self.globals.listofmeasurements[msg.objId] = list()
+        self.globals.listofmeasurements[msg.objId].append([self.globals.iteration, self.pos, self.speed, self.theta, self.type])
+
+
     def update(self, msg):
         #print msg.objId
         self.pos_global = [msg.pos_y / 10.0, -msg.pos_x / 10.0, 0]
@@ -51,6 +56,10 @@ class DetEnemy():
             self.type = 'p'
         else:
             self.type = msg.type
+
+        print [self.globals.iteration, self.pos, self.speed, self.theta, self.type]
+        self.globals.listofmeasurements[msg.objId].append([self.globals.iteration, self.pos, self.speed, self.theta, self.type])
+
 
     def getGlobalPos(self):
         return self.pos_global + self.globals.car.getPosition()

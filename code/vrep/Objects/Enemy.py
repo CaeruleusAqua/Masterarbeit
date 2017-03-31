@@ -6,9 +6,10 @@ from VrepObject import VrepObject
 
 
 class Enemy(VrepObject):
-    def __init__(self, clientID, name, type, globals):
+    def __init__(self, clientID, name, type,speed, globals):
+        globals.listofenemys[name] = list()
         self.globals = globals
-        self.speed = None
+        self.speed = speed
         self.distance_hist = None
         self.lane = None
         self.type = type

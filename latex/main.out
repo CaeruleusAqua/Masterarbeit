@@ -35,9 +35,10 @@
 \BOOKMARK [1][-]{section.7.2}{Simulation Logic}{chapter.7}% 35
 \BOOKMARK [2][-]{subsection.7.2.1}{Sensor Connection}{section.7.2}% 36
 \BOOKMARK [2][-]{subsection.7.2.2}{Mapping}{section.7.2}% 37
-\BOOKMARK [2][-]{subsection.7.2.3}{Statemachine}{section.7.2}% 38
+\BOOKMARK [2][-]{subsection.7.2.3}{State Machine}{section.7.2}% 38
 \BOOKMARK [0][-]{chapter.8}{Evaluation}{}% 39
 \BOOKMARK [1][-]{section.8.1}{Simuation}{chapter.8}% 40
 \BOOKMARK [1][-]{section.8.2}{Real Measurements}{chapter.8}% 41
-\BOOKMARK [0][-]{chapter.9}{Conclusions}{}% 42
-\BOOKMARK [0][-]{chapter.10}{Future Work}{}% 43
+\BOOKMARK [1][-]{section.8.3}{Performance}{chapter.8}% 42
+\BOOKMARK [0][-]{chapter.9}{Conclusions}{}% 43
+\BOOKMARK [0][-]{chapter.10}{Future Work}{}% 44

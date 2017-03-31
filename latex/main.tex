@@ -387,7 +387,7 @@ Coarse outliers in the position or orientation of objects are also noted. Also, 
 % durch den Kreiverker bewegen soll. Dazu wird die Simulation über einen längeren Zeitraum beobachtet, und die Anzahl der eventuellen
 % Kollisionen notiert.
 
-In order to evaluate the operability of the roundabout, a statemachine is implemented which is intended to move the vehicle safely and accident-free through the roundabout.
+In order to evaluate the operability of the roundabout, a state machine is implemented which is intended to move the vehicle safely and accident-free through the roundabout.
 For this purpose, the simulation is monitored over a longer period of time and the number of possible collisions is noted.
 
 
@@ -1481,15 +1481,21 @@ The simulation environment being used is VREP \footnote{\url{http://www.coppelia
 VREP allows you to construct any \ac{MKS} based on various physicsgines within a graphic editor. Furthermore, VREP already has many ready-to-use sensor models, such as
 the Velodyne VLP-16. The whole simulation can communicate via a RemoteAPI interface with nearly every programming language.
 
+
+
+\section{Simuation Scenario}
+
+
 \begin{figure}[!ht]
 %\begin{center}
 \caption{VREP}
-\includegraphics[width=\textwidth]{bilder/path.png}
+\includegraphics[width=\textwidth]{bilder/scenario.png}
 \label{vrep}
 %\end{center}
 \end{figure}
 
-\section{Simuation Scenario}
+
+
 
 \todo{referenzen zu ``roundabout in law'' mit formelsymbolen und so}
 % Für Das Simalations Scenario wurde eine einfacher kleiner Kresiverkehr mit einem Außendurchmesser von 26m und ein Minikreisverkehr designt, da dies auf grund seiner größe 
@@ -1498,11 +1504,11 @@ the Velodyne VLP-16. The whole simulation can communicate via a RemoteAPI interf
 % mittelinsel gute möglichkeiten das Tracking zu testen. Weiterhin ist es aufgrund seiner Größe möglich den kompletten Kreisverkehr zu überblicken.
 % Das Ganze Senarion wurde aufgrund von limitierungen in Vrep um den Faktor 10 herunterscaliert.
 
-For the simulation scenario, a simple small roundabout with an outside diameter of 26m and a miniature circuit was designed,
-as this is the most interesting object due to its size in combination with the VLP-16, which still has an acceptable resolution in this area.
-And in urban areas due to their size, they are frequent. To test the object detection, the small roundabout offers good possibilities to test the tracking due to its buildable roundabout island.
-\todo{bebaubare mittelinsel in smal roundabout ergenzen (im ersten Kapietel)}
-Furthermore, due to its size, it is possible to survey the entire roundabout. The whole scenario was down-scaled by a factor of 10 due to limitations in Vrep.
+For the simulation scenario, a simple small roundabout with an outside diameter of 30m, according to the rules in \cite{man06} was designed. According this the cycle path must have a minimum distance of 4 m to the road and
+the lane width of the circular driveway and circular exit sould be 3.75m. The recommended corner rounding radius is according to \cite{man06} 12m.
+
+The small roundabout was chosen because this is the most interesting object due to its size in combination with the VLP-16, which still has an acceptable resolution in this area.
+And in urban areas due to their size, they are frequent. Furthermore, due to its size, it is possible to survey the entire roundabout. The whole scenario was down-scaled by a factor of 10 due to limitations in Vrep.
 
 % Innhrhalb des Szenarosn bewegen sich innerhalb des Kreisverkehrs ein Fahrad, ein Fußgänder und ander 2 Fahrzeuge. Die Objekte bewegen sich dabei auf festgelegten Pfaden.
 % Dei Geschwindigekeit aller Verkehrsteilnehmer ist dabei auf den Typ angepasst. Der Füßgänger bewegt sichn mit für füßgänger übliche 5km/h.
@@ -1510,10 +1516,10 @@ Furthermore, due to its size, it is possible to survey the entire roundabout. Th
 % Fahrzeuge an der vorderseite mit Distanzsensoren ausgestattet. Sollte dieser Sensor ein Fahrzeug erkennen, geht das Fahrzeug in eine  Adaptive Cruise Control modus und
 % passt sich dem vorderen Fahrzeug an. Das Adaptive Cruise Control ist dabei als einfacher proportional regler umgesetzt.
 
-Inside the scenario there is a bicycle, a pedestrian and two other vehicles driving around the roundabout. The objects are moving on fixed paths.
+Inside the scenario there are three bicycles, two pedestrians and three other vehicles driving around the roundabout. The objects are moving on fixed paths.
 The speed of all traffic is adapted to the type. The pedestrian moves with the 5km/h usually asumed for pedestrians.
 The bike with 15km/h. The two cars move at different speeds between 25 and 35 km/h. In order to avoid a collision of the vehicles,
-both vehicles are equipped with distance sensors at the front. If this sensor detects a vehicle, the vehicle enters an Adaptive Cruise Control mode and adapts to the front vehicle.
+both vehicles are equipped with distance sensors at the front. If this sensor detects a vehicle, the vehicle enters an \acl{AAC} mode and adapts to the front vehicle.
 The Adaptive Cruise Control is implemented as a simple proportional controller.
 
 % Das autonome Fahrzeug bewegt sich dabei ebenfalls auf eine festen Pfad, dieser führt von rechts in den Kreisverkehr ein und verlässt den Kreisverkehr an der dritten ausfahrt.
@@ -1521,8 +1527,8 @@ The Adaptive Cruise Control is implemented as a simple proportional controller.
 % und die Andren Fahrzeuge innerhalb des Kreisverkehres achten. Dazu ist das Fahrzeug mit einem virtuellen Velodyne VLP-16 ausgestattet.
 
 The autonomous vehicle also moves along a fixed path, which leads from the right into the roundabout and leaves the roundabout at the third exit. 
-The task of the vehicle is to safely enter the roundabout and safely leave the roundabout. In doing so, the vehicle must pay attention both to the pedestrian,
-the cyclist and the other vehicles within the roundabout. For this, the vehicle is equipped with a virtual Velodyne VLP-16.
+The task of the vehicle is to safely enter the roundabout and safely leave the roundabout. In doing so, the vehicle must pay attention both to the pedestrians,
+the cyclists and the other vehicles within the roundabout. For this, the vehicle is equipped with a virtual Velodyne VLP-16 and the previously described algorithms deliver the detected objects.
 
 \section{Simulation Logic}
 
@@ -1530,7 +1536,7 @@ the cyclist and the other vehicles within the roundabout. For this, the vehicle 
 % auch die Lokalisierung des Fahrzeuges in dem Scenario als auch die Anbinung aller Sensoren an die Objekt Erkennung. Da alle nachfolgenden Berchungen nur wenig resscourcen bentigen
 % wurde die entsprechende Software in Pyhon entwickelt.
 
-In order to carry out the previously described scenario, a logic had to be developed, which includes not only the statemachine for passing through the roundabout,
+In order to carry out the previously described scenario, a logic had to be developed, which includes not only the state machine for passing through the roundabout,
 but also the localization of the vehicle in the scenario as well as the connection of all sensors to the object detection.
 Since all subsequent calculations require little resources, the corresponding software was developed in Python.
 
@@ -1691,14 +1697,11 @@ object is in the middle of the track. Alternatively, the `` Ray Casting Algorith
 distance calculations that the object is in the middle of the track, this calculation results in a very small error and the distance is practically derived from the
 previous calculations so that it was not applied.
 
-\subsection{Statemachine}
-
-\todo{suimulation mit sythetischen daten (aus vrep) und daten aus object tracking vergleiche}
-% 
+\subsection{State Machine} 
 % Die Statemachine ist nach Gang of Four  \cite{lester2008gang} implemetiert. Dafür wurden X \todo{nummer anpassen} States Implementiert.
 % Für alle Fahrzeugeigenen berechnungen wird ein Constant acceleartion modell angenommen. Zur bestimmung der Maximalen positiven und negativen Beschleunigung
 % wurden mit dem realen Fahrzeug testfahrten aufgezeichnet, bei denen die maximalen subjekiv angenehmen Werte bestimmt wurden.
-The statemachine is implemented according to Gang of Four \cite{lester2008gang}. For this, X States were implemented. \todo{nummer anpassen}
+The state machine is implemented according to Gang of Four \cite{lester2008gang}. For this, X States were implemented. \todo{nummer anpassen}
 A constant acceleartion model is assumed for all vehicle computations. In order to determine the maximum positive and negative acceleration, 
 test runs with the real vehicle  were recorded and the maximum subjectively pleasant values being determined. 
 
@@ -1797,10 +1800,47 @@ The vehicle then changes to StartState
 
 \chapter{Evaluation}
 
+% Wir starten mit der Evaluierung in der Simualtion. Diese erlaubt es uns eine aussage über die Eekannten Werte wie Position und Geschwindigkeit zumachen,
+% da die realen weete innerhalb der Simulation einfach ausgelesen werden können.
 
+We start with the evaluation in the simulation. This allows us to make a statement about the calculated values ​​such as position and speed, since the real values can be easily read within the simulation.
 
 \section{Simuation}
+
+Diagramm Geschwindigkeit \\
+
+
+Diagramm Positionsabweichung \\
+
+
+Diagramm Entfernung / Fehlerkennungen (per hand abzählen)\\
+
+
+Bild mit Rotationsproblemen\\
+
+
+Bilder Classifizierung der Objekte (Radfahrer falsch etc...)\\
+
+Bilder Erfolgreiche erkennungen.\\
+
+Digramm komplettausfall erkennung (ab welcher entfernung)\\
+
 \section{Real Measurements}
+
+Probleme mit Noise von umgebeung\\
+
+Probleme Segementierung (mit diagramm ground detection (x,y,z wert des Normalenverktors))\\
+
+Probleme mit verschmelzen von objekten\\
+
+
+\section{Performance}
+
+Benchmark und Profilingchart einfügen.\\
+
+
+
+
 \chapter{Conclusions}
 Kann in mehrere Unterkapitel gegliedert werden\\\\
 Greift Thesen oder Fragestellungen aus der Einleitung wieder auf\\\\
