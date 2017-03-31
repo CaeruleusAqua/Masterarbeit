@@ -8,7 +8,7 @@ from VrepObject import VrepObject
 class DetEnemy():
     def __init__(self, msg, globals):
 
-        #print msg.objId
+        # print msg.objId
         self.globals = globals
         self.speed = None
         self.distance_hist = None
@@ -37,11 +37,10 @@ class DetEnemy():
             self.type = msg.type
 
         self.globals.listofmeasurements[msg.objId] = list()
-        self.globals.listofmeasurements[msg.objId].append([self.globals.iteration, self.pos, self.speed, self.theta, self.type])
-
+        self.globals.listofmeasurements[msg.objId].append([self.globals.iteration, self.getGlobalPos(), self.speed, self.theta, self.type])
 
     def update(self, msg):
-        #print msg.objId
+        # print msg.objId
         self.pos_global = [msg.pos_y / 10.0, -msg.pos_x / 10.0, 0]
         self.pos = [-msg.pos_x / 10.0, -msg.pos_y / 10.0, 0]
         self.id = msg.objId
@@ -58,8 +57,7 @@ class DetEnemy():
             self.type = msg.type
 
         print [self.globals.iteration, self.pos, self.speed, self.theta, self.type]
-        self.globals.listofmeasurements[msg.objId].append([self.globals.iteration, self.pos, self.speed, self.theta, self.type])
-
+        self.globals.listofmeasurements[msg.objId].append([self.globals.iteration, self.getGlobalPos(), self.speed, self.theta, self.type])
 
     def getGlobalPos(self):
         return self.pos_global + self.globals.car.getPosition()
@@ -79,10 +77,10 @@ class DetEnemy():
     def mapToLane(self):
         # ---------------------- assign enemy to lane --------------------
         r_dist = self.globals.norm(self.getGlobalPos())
-        #print "Roundabout dist: ", r_dist
+        # print "Roundabout dist: ", r_dist
         # print "Car_pos :", self.globals.car.getPosition()
         # print "myPos :", self.pos
-        #print "roundabout Pos :", self.globals.roundabout.getPosition()
+        # print "roundabout Pos :", self.globals.roundabout.getPosition()
         for lane in self.globals.roundabout.lanes:  #
             if r_dist <= lane.outer_r and r_dist >= lane.inner_r:
                 self.lane = lane

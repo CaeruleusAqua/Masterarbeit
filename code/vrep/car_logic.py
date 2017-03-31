@@ -89,6 +89,7 @@ class CarLogic:
         self.connect()
         self.listofmeasurements = dict()
         self.listofenemys = dict()
+        self.listofenemys["mycar"] = list()
         self.iteration = 0
 
         # initHandles
@@ -134,7 +135,7 @@ class CarLogic:
         self.seconds %= 60
 
         for enemy in self.sim_enemys:
-            enemy.update(self.car_handle)
+            enemy.update(-1)
         self.roundabout.update(self.car_handle)
         self.car.update(-1)
 
@@ -249,6 +250,7 @@ class CarLogic:
 
             for enemy in self.sim_enemys:
                 self.listofenemys[enemy.name].append([self.iteration, enemy.getPosition(), enemy.speed, enemy.getOriantation(), enemy.type])
+                self.listofenemys["mycar"].append([self.iteration, self.car.getPosition(), self.speed, self.car.getOriantation(), 'self'])
                 print [self.iteration, enemy.getPosition(), enemy.speed, enemy.getOriantation(), enemy.type]
 
             self.iteration += 1
