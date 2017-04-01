@@ -1952,7 +1952,8 @@ die Eine evaluierung dahingehend ermöglichen
 \subsubsection{Speed}
 
 Das für die bewältiging des Simulationsszenarios abgesehen von der Position auch die Geschwindigkeit der Objekte besonders wichtig ist, vergleichen wir im
-folgenden die Geschwindigkeit der erkannnten Objekte mit den realen werten in der Simulation.
+folgenden die Geschwindigkeit der erkannnten Objekte mit den realen werten in der Simulation. Dazu sind in \cref{car2_speed} die Messwerte
+grafisch dargestellt. Der Graph Car2 stellt dabei die Idealen werte aus der Simualtion dar.
 
 
 \begin{figure}[!htb]
@@ -1962,17 +1963,25 @@ folgenden die Geschwindigkeit der erkannnten Objekte mit den realen werten in de
  \label{car2_speed}
 \end{figure}
 
+Da die geschwindigkeit der Objekte aus der Position abgeleitet ist, ist sie im initalen Zeitschritt null was gut in der Abbildung zu erkennen ist.
+Weiterhin fällt ausßerdem auf, dass die Messwerte den idealen werten zwar folgen, jedoch verzögert sind. Dies lässt sich ebenfalls auf die Ableitung der Geschwindigkeit
+aus der Positionsänderung zurückführen.  Liegt jedoch auch am von Kalman Filter verwendetetn \ac{CTRV} Model, welchen von einer konstanten gewschwindigkeit ausgeht.
+Aus diesem Grund wirkt der Kalman Filter hier wie ein einfacher Tiefpass und verzögert die Werte zusätlich. Außreißer treten jedoch auch hier auf, wenn Tracking im begriff ist, das Objekt zu verlieren.
+
+Beterachten wir ein andrers Fahrzeug, mit einer konstaten Geschwindigekeit in \cref{car0_speed}. 
+\begin{figure}[!htb]
+  \caption{Car2 Speed} 
+  \centering
+  \includegraphics[width=\textwidth]{bilder/Car0_speed.pdf}
+ \label{car0_speed}
+\end{figure}
+Hier ist gut zu erkennen, dass sich die werte nach einer kurzen einschwingzeit stets nahe am echte wert befinden. Die Stärkern abweichungen in den ersten drei Sekunden sidn auf eine Instabile
+erkennung des Fahrzeiges aufgrund eines Ungünstigen winkels des Fahrzeuges zum realen Fahrzeug zurückzuführen.  Besoders im Zeitraum von Sekunde 8 bis 14 ist jedoch immer eine optimale
+erkennung des Fahrzeuges gegeben und die Messwerte haben nur eine geringe Abweichung.
 
 
-
-
-Diagramm Geschwindigkeit \\
-
-
-Diagramm Positionsabweichung \\
-
-
-Diagramm Entfernung / Fehlerkennungen (per hand abzählen)\\
+\subsubsection{Scenario Handling}
+Im folgen werten wir das Simulationsscenario an sich aus, idem wir uns die beiden Krittischen Situationen das einfacehn und ausfahren der testfahrzeuges aus
 
 
 Bild mit Rotationsproblemen\\
