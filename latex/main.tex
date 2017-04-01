@@ -21,12 +21,15 @@
 \usepackage{mathtools}
 \usepackage{svg}
 \usepackage{tikz}
+
+
 \usepackage{tikz-uml}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.14}
 \usepackage{xargs}                      % Use more than one optional parameter in a new commands
 \usepackage{acronym}
 \usepackage{tabularx}
+\usepackage{subcaption}
 
 \newbibmacro*{bbx:parunit}{%
   \ifbibliography
@@ -94,6 +97,7 @@
 %  Betreuer}
 
 \pagenumbering{Roman}
+
 
 
 \begin{document}
@@ -1519,7 +1523,7 @@ And in urban areas due to their size, they are frequent. Furthermore, due to its
 Inside the scenario there are three bicycles, two pedestrians and three other vehicles driving around the roundabout. The objects are moving on fixed paths.
 The speed of all traffic is adapted to the type. The pedestrian moves with the 5km/h usually asumed for pedestrians.
 The bike with 15km/h. The two cars move at different speeds between 25 and 35 km/h. In order to avoid a collision of the vehicles,
-both vehicles are equipped with distance sensors at the front. If this sensor detects a vehicle, the vehicle enters an \acl{AAC} mode and adapts to the front vehicle.
+both vehicles are equipped with distance sensors at the front. If this sensor detects a vehicle, the vehicle enters an \acl{ACC} mode and adapts to the front vehicle.
 The Adaptive Cruise Control is implemented as a simple proportional controller.
 
 % Das autonome Fahrzeug bewegt sich dabei ebenfalls auf eine festen Pfad, dieser führt von rechts in den Kreisverkehr ein und verlässt den Kreisverkehr an der dritten ausfahrt.
@@ -1806,6 +1810,44 @@ The vehicle then changes to StartState
 We start with the evaluation in the simulation. This allows us to make a statement about the calculated values ​​such as position and speed, since the real values can be easily read within the simulation.
 
 \section{Simuation}
+
+
+\subsection{Detection Distance Performance}
+Zuerst sehen wir uns die allgemeine Erkkneungsperformance des Algorythmussses an, dazu vergleichen wir die ersten beiden Zeitschritte der Simulation.
+Diese sind in \cref{detection_performance} zu sehen. Die Abbildungen stellen dabei einen Bereich von 200x200 metern dar. Im ersten Zeitschritt wird nichts erkannt,
+da der Algorythmus mindestenz einen Zeitschritt braucht, um den Confidence wert der erkenntnen Objekte über den threshold zu heben.
+
+Im zweiten Zeitschritt sehen wir das 3 objekte erkannt werden. 
+
+
+\begin{figure}[htb]
+  \caption{Detection Distance Performance} 
+    \centering
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bilder/alg/img100001_r.png}
+        Timestep 1
+    \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+	\includegraphics[width=\textwidth]{bilder/alg/img100002_r.png}
+        Timestep 2
+    \end{minipage}
+    \label{detection_performance}
+\end{figure}
+
+
+
+\begin{figure}[!htb]
+  \caption{Detection Distance Performance Pedestians/Cyclists} 
+  \centering
+  \includegraphics[width=\textwidth]{bilder/alg/img100002_r.png}
+ \label{detection_performance2}
+\end{figure}
+
+
+
 
 Diagramm Geschwindigkeit \\
 
