@@ -125,8 +125,8 @@ $\overline{~~~~~~~~~\mbox{Julian-B. Scholle}~~~~~~~~~}$
 % dem ``Deutschen Akademischen Austauschdienst'' - DAAD für ihre finanzielle Unterstüzung während meines Aufenthaltes in Göteborg.
 % Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, welche mich bei meiner Arbeit fachlich und moralisch untersützt haben.
 
-I would especially like to thank Associate professor Christian Berger and J. Prof Sebastian Zug for their organizational and technical support during and especially in the run-up to this work and
-The ``Deutschen Akademischen Austauschdienst'' - DAAD for their financial support during my stay in Gothenburg.
+I would especially like to thank Associate Professor Christian Berger and J. Professor Sebastian Zug for their organizational and technical support during and especially in the run-up to this work and
+the ``Deutschen Akademischen Austauschdienst'' - DAAD for their financial support during my stay in Gothenburg.
 I would also like to thank all the other colleagues from Gothenburg, who have supported me professionally and morally.
 
 \include{shorts}
@@ -1811,15 +1811,11 @@ We start with the evaluation in the simulation. This allows us to make a stateme
 
 \section{Simuation}
 
+
+\subsection{Detection Distance Performance}
 Zuerst sehen wir uns die allgemeine Erkkneungsperformance des Algorythmussses an, dazu vergleichen wir die ersten beiden Zeitschritte der Simulation.
-Diese sind in \cref{detection_performance} zu sehen. Die Abbildungen stellen dabei einen Bereich von 200x200 metern dar. Im ersten Zeitschritt wird nichts erkannt,
-da der Algorythmus mindestenz einen Zeitschritt braucht, um den Confidence wert der erkenntnen Objekte über den threshold zu heben.
-
-Im zweiten Zeitschritt sehen wir das 3 objekte erkannt werden.
-
-
-
-
+Diese sind in \cref{detection_performance} zu sehen. Die Abbildungen stellen dabei einen Bereich von 120x120 metern dar, sodass wir etwas mehr als die hälfte Messbereich den Sensors abdecken.
+Im ersten Zeitschritt wird nichts erkannt, da der Algorythmus mindestenz einen Zeitschritt braucht, um den Confidence wert der erkenntnen Objekte über den threshold zu heben.
 
 
 \begin{figure}[htb]
@@ -1840,13 +1836,132 @@ Im zweiten Zeitschritt sehen wir das 3 objekte erkannt werden.
 \end{figure}
 
 
+Im zweiten Zeitschritt sehen wir das 3 objekte erkannt werden. Bei allen dieser Objekte handelt es sich um Fahrzeuge. Das Fahrzeug in der unteren in linken seite hat dabei eine Entfernung von 68 metern zum Testfahrzeug und wurde korrekt erkannt und klassifizierfiziert.
+Die Farbe der Boxen stellt dabei den Typ der Klassizierung dar, grüne boxen sind Fahrzeuge, blaue boxen Radfahrer.
+
+Die maximlae entfernung bei der Fahrzeug vollständig erkannt werden kann wurd in im Rahmen der Simulation mit nahe 95m bestimmt. was durch die Reichweite des Sensors limitiert
+wird. Ob das Fahrzeug dabei korrekt Klassifiziert, hängt von der Ausrichtung des Fahrzeuges ab. Bewegt sich das Fahreug gerade auf das Testfahrzeug zu kann nur die Front des Fahrzeuges gesehen werden.
+Das fürt dazu, dass das Fahrzeug eine Falsche größe hat, und als Radfahrer oder Fußgänger erkannt wird. Da für die Berecnung der Größe ein Historamm herangezogen wird, hat diese Falsche Klassifisierung
+solange bestand, bis das Historamm auf die richtige größe konvergiert.
+
+Sehen wir uns den zweiten Zeiitschritt genauer an \cref{detection_performance2} können wir ekennen, das sowohl Fußgänger und Radfahrer, obwohl in den Daten sichtbar (Rote Boxen), nicht erkannt werden.
+Dies ist darin begründet, dass diese den $minPts$ Threshold des \ac{DBSCAN} nicht überschreiten. Dies ist erst der Fall wenn diese sich näher am Testfahrzeug befinden, genauer innerhalb des 6. Messlayers des Sensors (ca 23m)
 
 \begin{figure}[!htb]
-  \caption{Detection Distance Performance Zoom} 
+  \caption{Detection Distance Performance Pedestians/Cyclists} 
   \centering
-  \includegraphics[width=\textwidth]{bilder/alg/img100002_r.png}
+  \includegraphics[width=\textwidth]{bilder/alg/img100002_m.png}
  \label{detection_performance2}
 \end{figure}
+
+
+
+\subsection{Measurements Performance}
+
+In diesen abschnitt evaluieren wir die qualität in der Simulation messbaren größen, Geschwindigkeit und Position der Objekte.
+Dazu wurde ein während der Simulation ständig sichtbares Fahzzeug ausgewählt. Dies ist das einzige Fahrzeug, was sich nicht ständig innerhalb des Kreisverkehres befindet, sondern in diesen einfährt und wieder verlässt.
+Der Pfad des Fahhrzeuges ist in \cref{car_path1} zu sehen. Der Fehler der Position wurde dabei aus der euklidischen distanz der Position innerhalb der Simulation und der erkannten Position berechnet.
+
+\begin{figure}[!htb]
+  \caption{Car Path} 
+  \centering
+  \includegraphics[width=\textwidth]{bilder/car_path.png}
+ \label{car_path1}
+\end{figure}
+
+\subsubsection{Position Error}
+
+Betrachten wir nun den Fehler der Position über die Zeit \cref{car_pos_err}. Die Legende der Abbildung ist die jeweilige ID des Trackings zu erkennen.
+Es ist ersichtlich, das das dem Fahrzeug zwei verschiedene ID's zugeordnet wurden, was bedeutet, das das Tracking das Fahrzeug einmal verloren hat.
+
+\begin{figure}[!htb]
+  \caption{Car Position Error} 
+  \centering
+  \includegraphics[width=\textwidth]{bilder/Car2_pos_err.pdf}
+ \label{car_pos_err}
+\end{figure}
+Betrachten wir die Daten genauer, sehen wir, dass die Position in dem Bereich, in dem das Fahhzeug stabil erkannt werden kann einen Fehler, von rund 0.8 metern aufweißt.
+in dem Moment in dem Das Fahrzeug nicht mehr getrackt werden kann, steigt der fehler rasant an, bis das Tracking das Objekt als ungütig erkennt.
+Weiterhin ist zu erkennen, das nachdem dem Fahrzeug eine neue ID zugewiesen wurde, der Positionsfehler insgeammt höher ist.
+
+Die Ursache des größen Fehlers in der Position liegt unter anderem im verhalten des Kalman Filters. Wie in \cref{kalman_error} zu sehen
+befindet sich die Position des Filters (hellblau) beri eine Fahrzeug innerhalb des Kreisverkehres immer etwas ausßerhalb des Rechteckmittelpunktes.
+Dies ist darin begründet, das dr Filter mit einem \ac{CTRV} Modell arbeitet, was nicht ganz das Verhalten der Fahrzeuge wiederspiegelt.
+Denn diese Bewegen sich nicht in die Richtung ihrer aktuellen ausrichtung, sondern annährend iherer  Fahrdynamik.
+
+\begin{figure}[!htb]
+  \caption{Car Position Error} 
+  \centering
+  \includegraphics[width=0.5\textwidth]{bilder/kalman.png}
+ \label{kalman_error}
+\end{figure}
+
+
+
+Sehen wir uns im Folgenden in \cref{lost} an, warum das Fahrzeug veroren ging und der Positionfehler gestiegen ist.
+
+\begin{figure}[htb]
+  \caption{Tracking Error} 
+    \centering
+    \begin{minipage}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bilder/alg/lost.png}
+    \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
+    \\
+    \begin{minipage}[t]{\textwidth}
+        \centering
+	\includegraphics[width=\textwidth]{bilder/alg/redetect.png}
+    \end{minipage}
+    \label{lost}
+\end{figure}
+
+Darin ist zu erkennen, dass das Objekt  zum Großtei durch Objekt 98 verdeckt wird,  dadurch ist sowohl die Position als auch die Ausrichtung des Objektes Fehlerhaft.
+Der Kalman Filter (hellblauer punkt und pfeil) behält jedoch grob die Bewegungsrichtung bei. Der Confidence wert des onjektes scheit jedoch nichtr auszureichen um das Objekt bis zu dem
+Zeitpunkt zurückzuverfolgen, bis dieses wieder sichtbar ist. Im zweite teil der Abbildung sehen wird, das das Fahrzeug einige Zeitschritte später wieder erkannt werden kann.
+Da wir das Fahrzeug nun niur von hinten sehen können. Wird die Größe des Fahrzeuges Falsch erkannt. Dadurch wird dieses als Fahrrad klassifiziert und da die Position
+des Fahrzeiges aus dem Mittelpunkt des Rechteckes berechnet wird führt dies zu einem Systematischen Fehler. Wir sehen auch, das wir im vordern Bereich des Fahrzeuges Messerte bekommen.
+Dies sind die Räder des Fahrzeuges, die wir aufgrund des Steilen Messwinkels sehen können. Da die Distanz zum Rest des Objektes allerdings zu groß ist, werden diese nicht 
+zum Objekt hinzugefügt.
+
+Da die Reine bertrachtung des Positionsfehlers nicht serh ausssagekrftig ist, sehen wir uns nun den Fahler in abhängigkeit von der Entfernung zu Testfahrzeug an.
+
+\begin{figure}[!htb]
+  \caption{Car Position Error / Distance} 
+  \centering
+  \includegraphics[width=\textwidth]{bilder/Car2_pos_err_dist.pdf}
+ \label{car_pos_err}
+\end{figure}
+
+Lassen wir den Positionsfehler von Objekt 154 außer acht, sehen wir, dass der Fahler mit der Entfernung konstant zunimmt. Was auf dem ersten Blick intutiv logisch erscheint,
+erinnern wir uns jedoch an \cref{detection_performance2} zuück, sehen wird das Das Objekt innherlab der Messdaten auch bei grlößen entfernungeb korrekt erkannt wird.
+Das Konstate ansteigen der Position ist stadtdessen in einer limitierung der Simulationssoftware zu suchen.
+
+\begin{figure}[!htb]
+  \caption{Simualtion Sensor Resolution} 
+  \centering
+  \includegraphics[width=0.5\textwidth]{bilder/sen_err.png}
+ \label{sen_res}
+\end{figure}
+
+Auf \cref{sen_res} gut zu sehen, ist das die Auflösung der Sensor messwerte mit zunehmender Entfernung immer weiter abnimmt, was zu einer Rasterung der Messkreise führt. Dies ist darin begründet,
+das dieser mit hilfe von OpenGL simuliert wird, welches mit fixed point arithmetic arbeitet. Im letzten im bild ersichtlichen Messlayer des Sensors beträgt die 
+Auflösung des Sensors nur noch 2m. Diese Eigenschaft tritt offensichtlich nicht mit dem Realensensort auf. Leider Wurden keine geeigenten messdaten für den realen Velodyn sensor aufgenommnen.
+die Eine evaluierung dahingehend ermöglichen
+
+.
+\subsubsection{Speed}
+
+Das für die bewältiging des Simulationsszenarios abgesehen von der Position auch die Geschwindigkeit der Objekte besonders wichtig ist, vergleichen wir im
+folgenden die Geschwindigkeit der erkannnten Objekte mit den realen werten in der Simulation.
+
+
+\begin{figure}[!htb]
+  \caption{Car2 Speed} 
+  \centering
+  \includegraphics[width=\textwidth]{bilder/Car2_speed.pdf}
+ \label{car2_speed}
+\end{figure}
+
 
 
 

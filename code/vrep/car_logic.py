@@ -365,9 +365,9 @@ finally:
     tmp.conn.close()
     vrep.simxFinish(tmp.clientID)
     # self.listofmeasurements = dict()
-    # self.listofenemys = dict()
-    pickle.dump(tmp.listofmeasurements, open("measurements.p", "wb"))
-    pickle.dump(tmp.listofenemys, open("simulation.p", "wb"))
+    ## self.listofenemys = dict()
+    #pickle.dump(tmp.listofmeasurements, open("measurements.p", "wb"))
+    #pickle.dump(tmp.listofenemys, open("simulation.p", "wb"))
 
 # plt.plot(tmp.speed_array)
 # plt.plot(tmp.alpha_array)

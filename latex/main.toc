@@ -65,10 +65,14 @@
 \contentsline {paragraph}{ExitRoundabout - State}{40}{section*.81}
 \contentsline {chapter}{\numberline {8}Evaluation}{41}{chapter.8}
 \contentsline {section}{\numberline {8.1}Simuation}{41}{section.8.1}
-\contentsline {section}{\numberline {8.2}Real Measurements}{42}{section.8.2}
-\contentsline {section}{\numberline {8.3}Performance}{42}{section.8.3}
-\contentsline {chapter}{\numberline {9}Conclusions}{44}{chapter.9}
-\contentsline {chapter}{\numberline {10}Future Work}{45}{chapter.10}
+\contentsline {subsection}{\numberline {8.1.1}Detection Distance Performance}{41}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}Measurements Performance}{42}{subsection.8.1.2}
+\contentsline {subsubsection}{Position Error}{43}{section*.85}
+\contentsline {subsubsection}{Speed}{46}{section*.92}
+\contentsline {section}{\numberline {8.2}Real Measurements}{47}{section.8.2}
+\contentsline {section}{\numberline {8.3}Performance}{47}{section.8.3}
+\contentsline {chapter}{\numberline {9}Conclusions}{48}{chapter.9}
+\contentsline {chapter}{\numberline {10}Future Work}{49}{chapter.10}
 \select@language {english}
 \select@language {english}
 \select@language {english}
