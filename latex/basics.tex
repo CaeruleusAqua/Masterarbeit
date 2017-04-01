@@ -43,7 +43,7 @@ lower risk than other intersection points, in both the risk of accidents and sev
 In \cite{Bondzio2012} this is reasonable to the higher speed in this roundabout. From this it can be deduced that the small and mini roundabouts from the point of risk,
 are to be preferred over the large roundabout. It should be noted that during the investigation of \cite{Bondzio2012} with 100 roundabouts it is noticeable that 83\%
 of the roundabouts have a diameter of less than 35m and can therefore be assigned the class mini or small roundabout.
-Although this study is not representative, it is to be assumed that the number of small and miniature circuits in the inner-city limits is larger than that of the large roundabouts,
+Although this study is not representative, it is to be assumed that the number of small and mini roundabouts in the inner-city limits is larger than that of the large roundabouts,
 which seems reasonable on account of the space conditions in the inner-city limits.
 Furthermore, circular traffic also allows nodes to be constituted with more than 4 roads, which gives them a further advantage.
 Unfortunately, there are no publications known to the author in the context of autonomous driving and roundabouts.
@@ -67,10 +67,10 @@ Unfortunately, there are no publications known to the author in the context of a
   \draw (-0.1cm,0cm) -- (-0.1cm,7.0cm);  %Ordinate
   \draw (-0.1cm,0cm) -- (-0.2cm,0cm);  %unteres Ende der Ordinate
   \draw (-0.1cm,7.0cm) -- (-0.2cm,7.0cm);  %oberes Ende der Ordinate
-  \node[rotate=90, left] at (-1.0cm,6cm) {Accidents per 1 million cars}; %Säulenbeschriftung
+  \node[rotate=90, left] at (-1.0cm,6cm) {Accidents per one million cars}; %Säulenbeschriftung
   \foreach \x/\y/\country in {0.5/0.56/Mini Roundabout,  %\x ist Anfang der Säulen
-                              2/0.53/Smal Roundabout,  %\y ist Höhe der Säulen
-                              3.5/1.14/Two-lane Passable,
+                              2/0.53/Small Roundabout,  %\y ist Höhe der Säulen
+                              3.5/1.14/Two-lane Passable R.,
                               5/6.57/Large Roundabout,
                               6.5/1.55/crossroad,
                               8/1.45/crossroad w traffic lights}
@@ -101,11 +101,11 @@ Unfortunately, there are no publications known to the author in the context of a
   \draw (-0.1cm,7.0cm) -- (-0.2cm,7.0cm);  %oberes Ende der Ordinate
   \node[rotate=90, left] at (-1.0cm,5cm) {€ per 1000 cars}; %Säulenbeschriftung
   \foreach \x/\y/\value/\country in {0.5/1.95/3.9/Mini Roundabout,  %\x ist Anfang der Säulen
-                              2/1.55/3.1/Smal Roundabout,  %\y ist Höhe der Säulen
-                              3.5/4.7/9.4/Two-lane Passable,
+                              2/1.55/3.1/Small Roundabout,  %\y ist Höhe der Säulen
+                              3.5/4.7/9.4/Two-lane Passable R.,
                               5/6.9/13.8/Large Roundabout,
                               6.5/6.15/12.3/crossroad,
-                              8/6.9/13.8/crossroad w traffic lights}
+                              8/6.9/13.8/crossroad w. traffic lights}
     {
      \draw[fill=gray!50] (\x cm,0cm) rectangle (1.0cm+\x cm,\y cm) %die Säulen
        node at (0.5cm + \x cm,\y cm + 0.3cm) {\value}; %die Prozente über den Säulen

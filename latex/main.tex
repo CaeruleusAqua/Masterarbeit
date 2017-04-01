@@ -364,7 +364,7 @@ in order to ensure a safe entry into the roundabout.
 For this purpose, a tracking and state estimation algorithm is developed in \cref{tracking}, which should grant that.
 
 % Zur Evaluation dieser Algorythmen wurden mehrere Datensammlungen auf den nahe gelegenen schwedischen AstaZero Prüfgelände in Sandhult [\cref{astazero}]
-% durchgeführt, für alle nicht dort durchgeführten Expirimente werden in einer dafür erstellten Simuation durchgeführt. In dieser Simulation
+% durchgeführt, für alle nicht dort durchgeführten Expirimente werden in einer dafür erstellten Simulation durchgeführt. In dieser Simulation
 % wird ein Innerstätischer Kreiverkehr mit Fuß un Radweg nachgebaut, welche der Kreisverkehr auf AstaZero nicht bieten kann.
 
 In order to evaluate the sensor setup with these algorythms, were collected several data collections at the Swedish AstaZero test area nearby Sandhult (see \cref{astazero}
@@ -1476,7 +1476,7 @@ This is done as long as the confidence value of the object does not reach zero. 
 the position is matched with all objects in the prediction phase. If the new object is within three meters to the predicted position, the cluster is assigned to the object
 and the correction step of the EKF is performed. If more than one object matches these condition the closest object is assigned.
 
-\chapter{Simuation}
+\chapter{Simulation}
 % Die Simulationsumgebeung, welche verwendet wird ist VREP \footnote{\url{http://www.coppeliarobotics.com/}}. VREP wurde für verschiedenne Robottikanwendungen entwickelt.
 % VREP erlaubt es innerhalb eines Graphischen beliebige \ac{MKS}, basierend auf diversen Physikengines zu konstruieren. Weiterhin verfügt VREP bereits über
 % viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Simulation kann über ein RemoteAPI Interface mit nahezu jerder Programmiersprache kommunizieren.
@@ -1487,7 +1487,7 @@ the Velodyne VLP-16. The whole simulation can communicate via a RemoteAPI interf
 
 
 
-\section{Simuation Scenario}
+\section{Simulation Scenario}
 
 
 \begin{figure}[!ht]
@@ -1665,7 +1665,7 @@ which contains the center point of the roundabout, references to all lanes, and 
 
 
 \subsubsection{Localization}
-% Da wir uns innherlab der Simuation bewegen, können wir für die Lokalisierung eine perfekte position annehmen.
+% Da wir uns innherlab der Simulation bewegen, können wir für die Lokalisierung eine perfekte position annehmen.
 % Lokalisierung in rahmen der Karte bedeutet, das wir die aktuelle bekannte position auf ein Lanesegment mappen wollen.
 % Da die lanes nur in Form von Punkten und Breite gegeben sind, werden für jeden Laneabschnitt Rechtecke berechnet und für jedes Rechteck geprüft,
 % ob sich die aktuelle Postion innehalb des Rechteckes befindet. Dies wird gemacht, indem Das Rechteck (und die Position) in eine
@@ -1809,7 +1809,7 @@ The vehicle then changes to StartState
 
 We start with the evaluation in the simulation. This allows us to make a statement about the calculated values ​​such as position and speed, since the real values can be easily read within the simulation.
 
-\section{Simuation}
+\section{Simulation}
 
 
 \subsection{Detection Distance Performance}
