@@ -70,6 +70,38 @@ for sim_key in simulation.keys():
         pylab.clf()
         #pylab.show()
 
+for sim_key in simulation.keys():
+    if sim_key != "mycar":
+        print sim_key
+
+        for mess in mapping[sim_key]:
+            times = list()
+            distances = list()
+            distances_car = list()
+
+
+            for data in measurements[mess]:
+                dist = np.linalg.norm(np.array(data[1][:2]) - np.array(simulation[sim_key][data[0]][1][:2]))
+                car_dist = np.linalg.norm(np.array(data[1][:2]) - np.array(simulation["mycar"][data[0]][1][:2]))
+                # print np.array(simulation[sim_key][data[0]][1])
+                if data[0] < 150:
+                    distances_car.append(car_dist *10.0)
+                    distances.append(dist * 10.0)
+            if measurements[mess][0][0] < 150 and len(measurements[mess]) > 2:
+                #pylab.plot(distances_car, distances,'o' ,label=str(mess),linewidth=0.5)
+                pylab.scatter(distances_car, distances,label=str(mess),s=0.5)
+
+
+
+        pylab.ylabel("position error [m]")
+        pylab.xlabel("distance to car [m]")
+        pylab.title(str(sim_key))
+        pylab.legend(loc='upper left')
+        pylab.tight_layout()
+        pylab.savefig(str(sim_key)+'_pos_err_dist.pdf')#,bbox_inches='tight')
+        pylab.clf()
+        #pylab.show()
+
 
 for sim_key in simulation.keys():
     if sim_key != "mycar":
