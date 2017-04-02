@@ -1170,8 +1170,8 @@ other hand it can provide a wrong orientation as seen in \cref{min_box}.
 
 \begin{figure}[!ht]
 %\begin{center}
-\caption{Error with minimum Boundingbox \cite{Himmelsbach2009}}
-\includegraphics[width=\textwidth]{bilder/min_bound.png}
+\caption{Error with minimum Boundingbox \cite{Zhang}}
+\includegraphics[width=\textwidth]{bilder/min_bound_wrong.png}
 \label{min_box}
 %\end{center}
 \end{figure}
@@ -2104,10 +2104,12 @@ das die Fahrräder nicht genug fläche für den Sensor bieten, so dass der Groß
 Im folgen werten wir das Simulationsscenario an sich aus, idem wir die beiden krittischen Situationen das einfahren und ausfahren des testfahrzeuges aus dem Kreisverkehr 
 innerhalb der Objektdetection Ansehen.
 
-Betrachten wir als ersten die einfahr situation. Das Auto hate bereit am Fahrbahnrand angehalten.
+Betrachten wir als ersten die einfahr situation. Fahrzeug Auto hat bereits am Fahrbahnrand angehalten.
+In  \cref{roundabout_entrance_1} können wir sehen, dass alle Fahrzeuge korrekt erkannt wurden.
+
 
 \begin{figure}[htb]
-  \caption{Roundabout Entrance} 
+  \caption{Roundabout Entrance 1} 
     \centering
     \begin{minipage}[t]{0.49\textwidth}
         \centering
@@ -2118,22 +2120,183 @@ Betrachten wir als ersten die einfahr situation. Das Auto hate bereit am Fahrbah
         \centering
 	\includegraphics[width=\textwidth]{bilder/sim02.png}
     \end{minipage}
-    \label{roundabout_entrance}
+    \label{roundabout_entrance_1}
 \end{figure}
+
+Einige Zeitschritte später sehen wir jedoch, dass unser Fahrzeug weiter in den Kreisverkehr reingefahren ist und dann wieder angehalten hat.
+Das liegt darin begründet, das Fahrzeug B kurz zuvor von Fahrzeug A verdeckt war und desshalb das Tracking versagt, wie in \cref{roundabout_entrance_2} zusehen.
+
+
+\begin{figure}[htb]
+  \caption{Roundabout Entrance 2} 
+    \centering
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+          \includegraphics[width=\textwidth]{bilder/sim03.png}
+    \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+	\includegraphics[width=\textwidth]{bilder/sim04.png}
+    \end{minipage}
+    \label{roundabout_entrance_2}
+\end{figure}
+
+Diese Situation tritt noch ein weiteres mal auf, bis, wie in \cref{roundabout_entrance_3} zu sehen, das Fahrzeug sicher in den Kreisverkehr einfahren kann.
+
+\begin{figure}[htb]
+  \caption{Roundabout Entrance 3} 
+    \centering
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+          \includegraphics[width=\textwidth]{bilder/sim05.png}
+    \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+	\includegraphics[width=\textwidth]{bilder/sim06.png}
+    \end{minipage}
+    \label{roundabout_entrance_3}
+\end{figure}
+
+
+Betrachten wir nun das herausfahren aus dem Kreisverkehr. In \cref{roundabout_exit_1} zu sehen, ist dass der Fahrzeug aus dem Kreisverkehr ausfahren will, jedoch vom Radfahrer daran gehindert wird.
+
+\begin{figure}[htb]
+  \caption{Roundabout Exit 1} 
+    \centering
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+          \includegraphics[width=\textwidth]{bilder/sim07.png}
+    \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+	\includegraphics[width=\textwidth]{bilder/sim08.png}
+    \end{minipage}
+    \label{roundabout_exit_1}
+\end{figure}
+
+Dieser wird erfolgreich erkannt, sodass das Fahrzeug erfolgreich vor dem Radweg  anhält. Zu sehen in \cref{roundabout_exit_2}
+
+\begin{figure}[htb]
+  \caption{Roundabout Exit 2} 
+    \centering
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+          \includegraphics[width=\textwidth]{bilder/sim09.png}
+    \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+	\includegraphics[width=\textwidth]{bilder/sim10.png}
+    \end{minipage}
+    \label{roundabout_exit_2}
+\end{figure}
+
+Nachdem der Radwegwieder frei ist, kann das Fahrzeug den Kreisverkehr sicher verlassen, siehe \cref{roundabout_exit_3}
+
+\begin{figure}[htb]
+  \caption{Roundabout Exit 3} 
+    \centering
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+          \includegraphics[width=\textwidth]{bilder/sim11.png}
+    \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+	\includegraphics[width=\textwidth]{bilder/sim12.png}
+    \end{minipage}
+    \label{roundabout_exit_3}
+\end{figure}
+
+Im weiteren Verlauf der Simulation treten immer wieder situationen auf, in dem das Auto aufgrund verdeckter Fahrzeuge den Kreisverkehr zu früh befährt.
+Dabei kahm es in keinem Fall zu einer Kollision. Jedoch ist dieser Zustand nicht optimal. Das Tracking kann die verdeckten Fahrzeuge meißt bis einen Zeitschritt
+bevor es wieder sichtbar wird verfolgen. Doch Der Konfidence wert des Objektes wird zu schnell zu niedrig und das Objekt wird verworfen. Weiterhin führt der Zeitraum in dem das Objekt am verschinden ist
+zu einer falschen Rotation des Ojektes für wenige Zeitschritte, wie schon in \cref{lost} zu sehen. Was dazu führt, dass die Berechnte Trajektorie des Trackings verfälscht wird und kein
+Optimales Tracking mehr erfolgen kann.
 
 \section{Real Measurements}
 
-Probleme mit Noise von umgebeung\\
+Betrachten wir im folgenden Messdaten vom Realen Testfahrzeug ``Snowfox'' aud dem AstaZero Testgelände. 
+Als Testumgebung wurde hier der Testraoundabout in \cref{astazero} gewählt. Daei handelt es sich um ein mini roundabout mit einem Durchmesser von 18m.
+Im rahmen des Scenarios fährt unser Fahrzeug von Norden in den Testkreisverkehr ein.
+In diesem Befindet sich bereits ein weiteres Fahrzeug, welches bei der Einfahrt beobachtet werden muss. Weiterhin befindet sich ein Fußgänger innehalb des Kreisverkehres, welcher
+bei der Ausfahrt beachtet werden muss.
 
-Probleme Segementierung (mit diagramm ground detection (x,y,z wert des Normalenverktors))\\
+\subsection{Segmentation}
 
-Probleme mit verschmelzen von objekten\\
+Im gegensatzt zur simulation erlauben es die Realen messdaten nicht, unsere Messwerte an Vergleichsdaten zu überprüfen. Die Messdaten sind jedoch unglich viel wertvoller,
+da sie keine Klinisch reine Umgebeung darstellen. Beispielsweise ist die Straße im gegensatzt zu Umgebung erhöht, diese ist dazu voller dicher Vegetation.
+Dies weiterhin ist unsere Straße nicht perfekt Plan, was eine weitere Herausforderung für die Segmentierung darstellt.
+
+Zur evalierung der Segemntierung wurden alle Messframes von and begutachtet. Dabei wurden falsch positive Segementierungen der Straße notiert.
+Falsch positiv beideutet in diesem Fall, das Teile der Straße als nicht grund Klassifiziert wurden. 
+Mehrere falsche erkennungen innerhalb eine Messframes wurden als ein Fehler gewertet.
+Es werden nur teile der Straße herangezogen, da alle anderen Bereich durch eine Karter herausgefiltert werden könnten. Weiterhin weil, eine bewertung per hand sonst nicht machbar währe.
+Zur bewertung der False negative wurde nur das Auto begutachtet,
+da der Fußgänger auch als mensch in den Daten oft nicht zu erkennen ist. Damit eine Ekrennung als false Negative gewertet wird, müssen alle
+teile des Fahrzeuges als Boden klassiffiziert werden. Es wurden insgesammt 819 Messframes Ausgewertet.
+
+Die Auswertung der False positives hat 20 fälle egeben. Ein Beispiel dazu ist in \cref{false_pos_seg_1} zu sehen. Alle Hellblauen Bereich stellen
+dabei Boden dar, während schwarze bereiche potenzielle Objekte darstellen.
+
+\begin{figure}[!htb]
+  \caption{Car0 velocity} 
+  \centering
+  \includegraphics[width=\textwidth]{bilder/false_pos1.png}
+ \label{false_pos_seg_1}
+\end{figure}
+
+
+Es wurden in den Messframes keine False negativen gefunden. Die Gesammtanzahl der Fehler liegt somit bei 2.4\%. 
+In wie Fern sich die Fahlenden Messwerte des Sensors im hintern Bereich des Fahrzeuges auswirken lässt sich anhand der Daten leider nicht
+evalieren. Allerdings ist auch zu sagen das niemals ein Falspositive als Objekt erkannt wurde, das ist daruf zurückzuführen,
+dass dei False Positives immer nur für einen einzenen Frame vorhanden sind. Daher werden diese Durch den Confidence wert herausgefiltert und
+und würden das Fahrverhalten der Autonomen Fahrzeues nicht beeinträchtigen. Zu beachten ist allerdings auch, das die Segmentierung mit einem
+\ac{RANSAC} abreitet, welcher nicht determinitisch ist. Daher kann dies bei einem weiteren durchlauf anders aussehen.
+
+\subsection{Confidence Filter}
+Weiterhin bieten uns die echten messwerte die Möglichkeit den Confiden Filter zu evaluieren. 
+Da hier sehr viel Vegetation nicht als boden klassifiziert wird, was sich in geisterobjekten entlang des Straßenrandes auswirkt.
+Dazu betrachten wir im folgenden zwei momentaufnahmen (\cref{conf_filter}), einmal mit Filter und einmal ohne, um die qualität bewerten zu können.
+
+\begin{figure}[htb]
+  \caption{Confidence Filtering} 
+    \centering
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+          \includegraphics[width=\textwidth]{bilder/filter_off.png}
+          without filtering
+    \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+	\includegraphics[width=\textwidth]{bilder/filter_on.png}
+	with filtering
+    \end{minipage}
+    \label{conf_filter}
+\end{figure}
+
+Wie wir sehen können wird ein großteil aller ungültigen Onjekte herausgefiltert. Lediglich einige kleinere Objekte bleibe erhalten.
+Diese befinden sich jedoch stets außerhalb der Fahrbahn und ließen sich ebenfalls über eine Karte herausfiltern.
+Eine abschließende aussage leiße sich jedoch nur mit aufnahmen in einer echten Urbanen Umgebung, mit mehreren Fahrzeugen und andern Verkehrsteilnehmern machen
+
+\subsection{Pedetrian}
+In diesem Abschnitt wird der Fußgänger im Scenario genauer untersucht. Dieser ist in diesem Szenarion besonder schwer zu erkennen,
+da der Kreisverkehr nicht über einen Fußweg verfügt und sich der Fußgängerdireckt am Sraßenrand befindet.
+Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von anderen Onjekten am Straßenrand, wie z.B. Leitpfosen, zu unterschiden ist.
+
 
 
 \section{Performance}
 
 Benchmark und Profilingchart einfügen.\\
 
+Bench:
+32,3214074916652
+147,121689361702
 
 
 

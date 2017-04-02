@@ -41,6 +41,8 @@
 \BOOKMARK [2][-]{subsection.8.1.1}{Detection Distance Performance}{section.8.1}% 41
 \BOOKMARK [2][-]{subsection.8.1.2}{Measurements Performance}{section.8.1}% 42
 \BOOKMARK [1][-]{section.8.2}{Real Measurements}{chapter.8}% 43
-\BOOKMARK [1][-]{section.8.3}{Performance}{chapter.8}% 44
-\BOOKMARK [0][-]{chapter.9}{Conclusions}{}% 45
-\BOOKMARK [0][-]{chapter.10}{Future Work}{}% 46
+\BOOKMARK [2][-]{subsection.8.2.1}{Segmentation}{section.8.2}% 44
+\BOOKMARK [2][-]{subsection.8.2.2}{Confidence Filter}{section.8.2}% 45
+\BOOKMARK [1][-]{section.8.3}{Performance}{chapter.8}% 46
+\BOOKMARK [0][-]{chapter.9}{Conclusions}{}% 47
+\BOOKMARK [0][-]{chapter.10}{Future Work}{}% 48
