@@ -29,7 +29,9 @@
 \usepackage{xargs}                      % Use more than one optional parameter in a new commands
 \usepackage{acronym}
 \usepackage{tabularx}
+\usepackage{multirow}
 \usepackage{subcaption}
+
 
 \newbibmacro*{bbx:parunit}{%
   \ifbibliography
@@ -1519,7 +1521,7 @@ And in urban areas due to their size, they are frequent. Furthermore, due to its
 % Fahrzeuge an der vorderseite mit Distanzsensoren ausgestattet. Sollte dieser Sensor ein Fahrzeug erkennen, geht das Fahrzeug in eine  Adaptive Cruise Control modus und
 % passt sich dem vorderen Fahrzeug an. Das Adaptive Cruise Control ist dabei als einfacher proportional regler umgesetzt.
 
-Inside the scenario there are three bicycles, two pedestrians and three other vehicles driving around the roundabout. The objects are moving on fixed paths.
+Inside the scenario there are three bicycles, one pedestrian and three other vehicles driving around the roundabout. The objects are moving on fixed paths.
 The speed of all traffic is adapted to the type. The pedestrian moves with the 5km/h usually asumed for pedestrians.
 The bike with 15km/h. The two cars move at different speeds between 25 and 35 km/h. In order to avoid a collision of the vehicles,
 both vehicles are equipped with distance sensors at the front. If this sensor detects a vehicle, the vehicle enters an \acl{ACC} mode and adapts to the front vehicle.
@@ -1810,6 +1812,8 @@ We start with the evaluation in the simulation. This allows us to make a stateme
 
 \section{Simulation}
 
+\subsection{Gernral Performance ans Measurements}
+
 
 \subsection{Detection Distance Performance}
 % Zuerst sehen wir uns die allgemeine Erkkneungsperformance des Algorythmussses an, dazu vergleichen wir die ersten beiden Zeitschritte der Simulation.
@@ -1970,9 +1974,13 @@ Since the pure view of the position error is not very meaningful, we now look at
  \label{car_pos_err}
 \end{figure}
 
-Lassen wir den Positionsfehler von Objekt 154 außer acht, sehen wir, dass der Fahler mit der Entfernung konstant zunimmt. Was auf dem ersten Blick intutiv logisch erscheint,
-erinnern wir uns jedoch an \cref{detection_performance2} zuück, sehen wird das Das Objekt innherlab der Messdaten auch bei grlößen entfernungeb korrekt erkannt wird.
-Das Konstate ansteigen der Position ist stadtdessen in einer limitierung der Simulationssoftware zu suchen.
+% Lassen wir den Positionsfehler von Objekt 154 außer acht, sehen wir, dass der Fahler mit der Entfernung konstant zunimmt. Was auf dem ersten Blick intutiv logisch erscheint,
+% erinnern wir uns jedoch an \cref{detection_performance2} zuück, sehen wird das Das Objekt innherlab der Messdaten auch bei grlößen entfernungeb korrekt erkannt wird.
+% Das Konstate ansteigen der Position ist stadtdessen in einer limitierung der Simulationssoftware zu suchen.
+
+If we ignore the position error of object 154, we see that the error increases constantly with distance. 
+What appears at first look intuitively logical, however, if we remember \cref{detection_performance2}, we see, the object will be recognized correctly, even in the case of greater distances.
+The constant rise of the error is to be found in a limitation of the simulation software.
 
 \begin{figure}[!htb]
   \caption{Simualtion Sensor Resolution} 
@@ -1981,18 +1989,22 @@ Das Konstate ansteigen der Position ist stadtdessen in einer limitierung der Sim
  \label{sen_res}
 \end{figure}
 
-Auf \cref{sen_res} gut zu sehen, ist das die Auflösung der Sensor messwerte mit zunehmender Entfernung immer weiter abnimmt, was zu einer Rasterung der Messkreise führt. Dies ist darin begründet,
-das dieser mit hilfe von OpenGL simuliert wird, welches mit fixed point arithmetic arbeitet. Im letzten im bild ersichtlichen Messlayer des Sensors beträgt die 
-Auflösung des Sensors nur noch 2m. Diese Eigenschaft tritt offensichtlich nicht mit dem Realensensort auf. Leider Wurden keine geeigenten messdaten für den realen Velodyn sensor aufgenommnen.
-die Eine evaluierung dahingehend ermöglichen
+% Auf \cref{sen_res} gut zu sehen, ist das die Auflösung der Sensor messwerte mit zunehmender Entfernung immer weiter abnimmt, was zu einer Rasterung der Messkreise führt. Dies ist darin begründet,
+% das dieser mit hilfe von OpenGL simuliert wird, welches mit fixed point arithmetic arbeitet. Im letzten im bild ersichtlichen Messlayer des Sensors beträgt die 
+% Auflösung des Sensors nur noch 2m. Diese Eigenschaft tritt offensichtlich nicht mit dem Realensensort auf. Leider Wurden keine geeigenten messdaten für den realen Velodyn sensor aufgenommnen.
+% die Eine evaluierung dahingehend ermöglichen
+On \cref{sen_res}, the resolution of the sensor readings decreases with increasing distance, which leads to a rastering of the measuring circuits. 
+This is due to the fact that it is simulated with the aid of OpenGL, which works with fixed point arithmetic. In the last image sensor of the sensor, the resolution of the sensor is only 2m.
+This property obviously does not occur with the real sensor. Unfortunately, no suitable measuring data were recorded for the real Velodyne sensor, which would enable an evaluation to be carried out.
 
-.
 \subsubsection{Speed}
 
-Das für die bewältiging des Simulationsszenarios abgesehen von der Position auch die Geschwindigkeit der Objekte besonders wichtig ist, vergleichen wir im
-folgenden die Geschwindigkeit der erkannnten Objekte mit den realen werten in der Simulation. Dazu sind in \cref{car2_speed} die Messwerte
-grafisch dargestellt. Der Graph Car2 stellt dabei die Idealen werte aus der Simualtion dar.
+% Das für die bewältiging des Simulationsszenarios abgesehen von der Position auch die Geschwindigkeit der Objekte besonders wichtig ist, vergleichen wir im
+% folgenden die Geschwindigkeit der erkannnten Objekte mit den realen werten in der Simulation. Dazu sind in \cref{car2_speed} die Messwerte
+% grafisch dargestellt. Der Graph Car2 stellt dabei die Idealen werte aus der Simualtion dar.
 
+Since, apart from the position, the speed of the objects is particularly important for the simulation scenario, we compare the speed of the objects detected with the real values in the simulation.
+For this purpose, the measured values are displayed graphically in \cref {car2_speed}. The graph Car2 represents the ideal values from the simualtion.
 
 \begin{figure}[!htb]
   \caption{Car2 Speed} 
@@ -2001,21 +2013,53 @@ grafisch dargestellt. Der Graph Car2 stellt dabei die Idealen werte aus der Simu
  \label{car2_speed}
 \end{figure}
 
-Da die geschwindigkeit der Objekte aus der Position abgeleitet ist, ist sie im initalen Zeitschritt null was gut in der Abbildung zu erkennen ist.
-Weiterhin fällt ausßerdem auf, dass die Messwerte den idealen werten zwar folgen, jedoch verzögert sind. Dies lässt sich ebenfalls auf die Ableitung der Geschwindigkeit
-aus der Positionsänderung zurückführen.  Liegt jedoch auch am von Kalman Filter verwendetetn \ac{CTRV} Model, welchen von einer konstanten gewschwindigkeit ausgeht.
-Aus diesem Grund wirkt der Kalman Filter hier wie ein einfacher Tiefpass und verzögert die Werte zusätlich. Außreißer treten jedoch auch hier auf, wenn Tracking im begriff ist, das Objekt zu verlieren.
+% Da die geschwindigkeit der Objekte aus der Position abgeleitet ist, ist sie im initalen Zeitschritt null was gut in der Abbildung zu erkennen ist.
+% Weiterhin fällt ausßerdem auf, dass die Messwerte den idealen werten zwar folgen, jedoch verzögert sind. Dies lässt sich ebenfalls auf die Ableitung der Geschwindigkeit
+% aus der Positionsänderung zurückführen.  Liegt jedoch auch am von Kalman Filter verwendetetn \ac{CTRV} Model, welchen von einer konstanten gewschwindigkeit ausgeht.
+% Aus diesem Grund wirkt der Kalman Filter hier wie ein einfacher Tiefpass und verzögert die Werte zusätlich. Außreißer treten jedoch auch hier auf, wenn Tracking im begriff ist, das Objekt zu verlieren.
 
-Beterachten wir ein andrers Fahrzeug, mit einer konstaten Geschwindigekeit in \cref{car0_speed}. 
+Since the velocity of the objects is derived from the position, it is zero in the inital time step, which is clearly shown in the figure. 
+Furthermore, it is also found that the measured values follow the ideal values, but are delayed.
+This can also be attributed to the derivative of the velocity from the change in position. However, it is also based on the \ac{CTRV} model used by Kalman Filter, 
+which assumes a constant speed. For this reason, the Kalman filter acts here as a simple lowpass and delays the values additionally. 
+outliers, however, also occur here when tracking is in the concept of losing the object.
+
+% Beterachten wir ein andrers Fahrzeug, mit einer konstaten Geschwindigekeit in \cref{car0_speed}. 
+Consider another vehicle, with a constant speed in \cref{car0_speed}.
 \begin{figure}[!htb]
   \caption{Car2 Speed} 
   \centering
   \includegraphics[width=\textwidth]{bilder/Car0_speed.pdf}
  \label{car0_speed}
 \end{figure}
-Hier ist gut zu erkennen, dass sich die werte nach einer kurzen einschwingzeit stets nahe am echte wert befinden. Die Stärkern abweichungen in den ersten drei Sekunden sidn auf eine Instabile
-erkennung des Fahrzeiges aufgrund eines Ungünstigen winkels des Fahrzeuges zum realen Fahrzeug zurückzuführen.  Besoders im Zeitraum von Sekunde 8 bis 14 ist jedoch immer eine optimale
-erkennung des Fahrzeuges gegeben und die Messwerte haben nur eine geringe Abweichung.
+% Hier ist gut zu erkennen, dass sich die werte nach einer kurzen einschwingzeit stets nahe am echte wert befinden. Die Stärkern abweichungen in den ersten drei Sekunden sidn auf eine Instabile
+% erkennung des Fahrzeiges aufgrund eines Ungünstigen winkels des Fahrzeuges zum realen Fahrzeug zurückzuführen.  Besoders im Zeitraum von Sekunde 8 bis 14 ist jedoch immer eine optimale
+% erkennung des Fahrzeuges gegeben und die Messwerte haben nur eine geringe Abweichung.
+
+Here it is easy to see that the values are always close to the real value after a short settling time. The larger differences during the first three seconds are due to an unstable detection
+of the vehicle due to an unfavorable angle of the vehicle to the test vehicle. However, an optimum recognition of the vehicle is always given, particularly in the period of seconds 8 to 14,
+and the here measured values have only a slight deviation.
+
+
+\subsubsection{Classification}
+Für die Berwertung der Klassifizierung wurde ein Simualtionsdurchlauf mit einer länge von 3min und 11 Sekunden aufgenommen (1917 samples), und automatisch ausgwertet.
+
+\begin{tabularx}{\textwidth}{X|r|r|r|r}
+\hline \textbf{Object Name} & \textbf{Car [\%]} & \textbf{Bike [\%]} & \textbf{Pedestian [\%]} & \textbf{Unclassified [\%]} \\\hline
+Pedestian & 0 & 0 & 100 & 0 \\\hline
+Car0 & 100 & 0 & 0 & 0 \\\hline
+Car1 & 100 & 0 & 0 & 0 \\\hline
+Car2 & 98.2 & 0.73 & 0.98 & 0 \\\hline
+Bike0 & 0 & 0.5 & 99.5 & 0 \\\hline
+Bike1 & 0 & 0 & 100 & 0 \\\hline
+Bike2 & 1.9 & 1.2 & 96.9 & 0 \\
+\end{tabularx}
+
+Einfach zu erkennen ist, das die Autos als auch der Fußgänger mit hoher zuverlässigkeit klassifiziert werden. Lediglich Car2 wird wenige male flasch klassifiziert.
+Was bereits in bezug auf \cref{lost} gekärt wurde. Leider ist auch zu erkennen, das die Radfahrer nahzu immer flasch klassifiziert  werden
+
+
+
 
 
 \subsubsection{Scenario Handling}

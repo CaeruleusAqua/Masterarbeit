@@ -20,6 +20,7 @@ simulation["Pedestrian"] = simulation.pop("Bill_base")
 print measurements.keys()
 print simulation.keys()
 
+print "Simulation Time: ",len(simulation["Car2"])/10
 pylab.rc('font',**{'family':'serif','serif':['Computer Modern Roman']})
 pylab.rc('text', usetex=True)
 
@@ -41,7 +42,6 @@ for key in measurements.keys():
 
 
 
-pylab.figure(num=1, figsize=(4.72441, 4.72441*0.62), facecolor='w', edgecolor='k')
 for sim_key in simulation.keys():
     if sim_key != "mycar":
         print ""
@@ -75,6 +75,32 @@ for sim_key in simulation.keys():
             print "Bike: ",bicycle / float(counter)
             print "unk: ",unknown / float(counter)
 
+
+
+for sim_key in simulation.keys():
+    if sim_key != "mycar":
+        print ""
+        print sim_key
+        pos_err = 0
+        counter = 0
+
+        for mess in mapping[sim_key]:
+            times = list()
+            distances = list()
+
+
+            for data in measurements[mess]:
+                dist = np.linalg.norm(np.array(data[1][:2]) - np.array(simulation[sim_key][data[0]][1][:2]))*10
+                pos_err += dist
+                counter+=1
+                # print np.array(simulation[sim_key][data[0]][1])
+
+
+
+
+        print "average Position error: ",pos_err / float(counter)
+        print "redetects: ",len(mapping[sim_key])
+        #pylab.show()
 
 
 
