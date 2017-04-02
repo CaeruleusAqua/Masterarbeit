@@ -144,7 +144,7 @@ I would also like to thank all the other colleagues from Gothenburg, who have su
 % Um trotzdem einen Verleich zur Sensoraustattung und Verkehrsbeobachtung zu haben werden an dieser Stelle einige Paper der \acs{DARPA} Urban Challenge herangezogen.
 % Die DARPA Urban Challenge ist ein Rennen zwischen autonomen Fahrzeugen, welches im Jahre 2007 von der \ac{DARPA} ausgetragen wurde. \cite{Buehler2010} Das Rennen fand in bebautem Gebiet
 % einer verlassenen Kaserne des ehemaligen Air Force-Stützpunktes George Air Force Base statt, die Karte kann ist in \cref{darpa_map} zu sehen.
-Even if Autonomous Driving is an actual research subject, there are so far no publications known to the author, which deal explicitly with roundabouts.
+Even if autonomous driving is an actual research subject, there are so far no publications known to the author, which deal explicitly with roundabouts.
 In order to have a comparison to the sensor equipment and traffic monitoring, some papers of the \acs{DARPA} Urban Challenge are used here. 
 The DARPA Urban Challenge is a race between autonomous vehicles, which was launched in 2007 by the \ac{DARPA} \cite {Buehler2010}.
 The race took place in the built-up area of an abandoned barracks of the former Air Force base George Air Force Base, the map can be seen in \cref{darpa_map}
@@ -226,7 +226,7 @@ the problem was limited by limiting the range.
 % Das Team erreichte im Wettbewerb den zweiten Platz  \cite{Release2007}.
 
 For the segmentation of the objects, two time steps of the virtual laser scan are compared with one another. Areas in which a change is detected are then classified 
-as objects and tracked using a particle filter. The tracker estimates the position, the rotation, the speed, and the size of the object.
+as objects and tracked using a particle filter. The tracker estimates, the position, the rotation, the speed, and the size of the object.
 The team reached the second prize in the competition \cite{Release2007}.
 
 
@@ -237,7 +237,7 @@ The team reached the second prize in the competition \cite{Release2007}.
 % in eine lokale Karte eingetragen, also fusioniert werden. Für das eigentliche Tracking wird ein ``Rao-Blackwellized Particle Filter''\cite{miller2007rao} genutzt.
 Team Cornell \cite{Campbell2007} uses two side Ibeo Alasca XTs for the object detection. In addition, three RADAR sensors are used on the vehicle front, 
 which allow the Doppler shift to detect moving objects. The team has also evaluated a Velodyne 3D LiDAR, but decided on the price and the roll, pitch problems
-for the Alasca XT, which ejects 4 nearly parallel scans and makes it so easy to detect the ground. The team does not give any information about the
+for the Alasca XT, which ejects four nearly parallel scans and makes it so easy to detect the ground. The team does not give any information about the
 segmentation of the objects, it is merely said that the sensor raw data is written into a local map, ie fused. For the actual tracking a 
 ``Rao-Blackwellized Particle Filter'' \cite{miller2007rao} is used.
 
@@ -248,7 +248,7 @@ segmentation of the objects, it is merely said that the sensor raw data is writt
 % Bei höheren geschwindigkeiten wird auf die jeweiligen außeren Kameras umgeschalten, um eine höhere Tiefensicht zu erhalten. Um Objekte zu detektieren wird haupsächlich dieses System genutzt.
 % Dabei wird von einer Flachen Fahrbahn ausgegangen, und alles was nicht flach ist als Objekt erkannt und dann mit den Rohdaten der LiDAR sensoren fusioniert.
 % Team TerraMax beschreibt kein weiteres Tracken der Objekte.
-Team TerraMax \cite{Corp2005} also uses the Ibeo Alasca XT and an additional three SICK LMS-291 LiDAR sensors. The Ibeo sensor is front-mounted and the SICK sensors 
+Team TerraMax \cite{Corp2005} also uses the Ibeo Alasca XT and additional three SICK LMS-291 LiDAR sensors. The Ibeo sensor is front-mounted and the SICK sensors 
 cover the lateral or rear area. Furthermore, the team makes intensive use of a self-developed panorama camera system, which is mounted in an identical version, once
 on the front and on the rear of the car. The system consists of three cameras each, depending on the speed, two cameras are used to calculate a stereo image of the environment.
 At higher speeds, the respective outer cameras are switched over in order to obtain a higher depth of view. In order to detect objects, this system is mainly used.
@@ -352,7 +352,7 @@ The difficulty lies in the use of a single and in a comparatively low priced env
 % der Segmentierung häufig fehl. \todo{beleg} Aus diesem Grund wird für die Segmentierung eine Groundplane basierender Algorithms implementiert.
 
 In its current application, this sensor offers a comparatively low resolution in the area wich is relevant for this work.
-Therefore, with many gradient-based algorythms, segmentation will often fail, beacuse the gradients becomes to smal.
+Therefore, with many gradient-based algorythms, segmentation will often fail, beacuse the gradients becomes to small.
 For this reason, a ground plane based algorithm is implemented for the segmentation.
 
 % Außerdem ist es Bauartbedingt in Kreisverkehren mit bebauten Mittelinseln und Mehrspurigen Kreisverkehren nötig
@@ -364,12 +364,12 @@ in order to ensure a safe entry into the roundabout.
 For this purpose, a tracking and state estimation algorithm is developed in \cref{tracking}, which should grant that.
 
 % Zur Evaluation dieser Algorythmen wurden mehrere Datensammlungen auf den nahe gelegenen schwedischen AstaZero Prüfgelände in Sandhult [\cref{astazero}]
-% durchgeführt, für alle nicht dort durchgeführten Expirimente werden in einer dafür erstellten Simuation durchgeführt. In dieser Simulation
+% durchgeführt, für alle nicht dort durchgeführten Expirimente werden in einer dafür erstellten Simulation durchgeführt. In dieser Simulation
 % wird ein Innerstätischer Kreiverkehr mit Fuß un Radweg nachgebaut, welche der Kreisverkehr auf AstaZero nicht bieten kann.
 
 In order to evaluate the sensor setup with these algorythms, were collected several data collections at the Swedish AstaZero test area nearby Sandhult (see \cref{astazero}
 \footnote{\url{http://www.astazero.com/wp-content/uploads/2016/09/\%C3\%96versiktsskiss_mod.pdf} (03/24/2017)}).
-Some other expiriments not carried out there, are carried out in a simulation made for this purpose. In this simulation a roundabout in a urban area 
+Some other experiments not carried out there, are carried out in a simulation made for this purpose. In this simulation a roundabout in a urban area 
 with pavement and bikeway is designed, which the roundabout on AstaZero can not offer.
 
 \begin{figure}[!ht]
@@ -399,7 +399,7 @@ For this purpose, the simulation is monitored over a longer period of time and t
 % Wie bereits diskutiert wird sich die auswahl der Senoren auf das Applanix POS-LV und den Velodyne VLP-16 beschränken. Da der Velodyne für die 
 % erkennung anderer Verkehrsteilnehmer der wichtigste sensor ist, wird nun untersucht, in wie fern der Sensor für die Ekennung geeignet ist.
 
-As already discussed, the selection of senors will be limited to the Applanix POS-LV and the Velodyne VLP-16. Since the Velodyne is the more
+As already discussed, the selection of sensors will be limited to the Applanix POS-LV and the Velodyne VLP-16. Since the Velodyne is the more
 important sensor for the recognition of other traffic users, it is now investigated how far the sensor is suitable for the detection.
 
 \section{Theoretical Analysis}
@@ -423,14 +423,14 @@ Large Roundabout& >40m &  - \\\hline
 % nicht relevant sind sehen wir uns nur die acht winkel im bereich von -1 bis -15 Grad an. 
 
 For a comparison to the Velodyne VLP-16, we will look at the visual range of the sensor in the 2D side view. The sensor provides 16 measurements at the same azimuth angle,
-with a distance of 2 degrees.Since for the evaluation, and unfortunately also for the detection, the angles greater than 0 degrees are not relevant, because they look into
+with a distance of 2 degrees. Since for the evaluation, and unfortunately also for the detection, the angles greater than 0 degrees are not relevant, because they look into
 the air. So we only see the eight angles in the range of -1 to -15 degrees.
 
 % Bei der auswertung gehen wir davon aus, das wir versuchen einen Kleinwagen mit einer länge von 4 Metern und 1.5 Metern höhe zu erkennen. Dabei gehen wir von dem Idealfall aus, das sich das Fahrzeug
 % auf uns zu bewegt. Weiterhin gehen wir von einer Befestigungshöhe des Sensors von 2.1 Metern aus, da dies letztendlich die montagehöhte des Sensors uf dem Testfahrzeug darstellt.
 
 In this evaluation we assume that we try to detect a small car with a length of 4 meters and 1.5 meters height. In doing so, we start from
-the ideal situation that the vehicle drives in your direction.
+the ideal situation that the vehicle drives in the direction of the test vehicle.
 Furthermore, we assume a mounting height of the sensor of 2.1 meters as this is finally the mounting height of the sensor on the test vehicle.
 
 \paragraph{Range 0-25m}
@@ -439,8 +439,7 @@ Furthermore, we assume a mounting height of the sensor of 2.1 meters as this is 
 % Daher sehen wir, das der Mini Roundabout mit dem Sensr geut abgedeckt werden kann, wir uns jedoch gendanken über verdeckte hindernisse machen müssen.
 
 For the range from 0m to 25m, we see in \cref{velodyne_range_25} that in the worst case, we still get at least one measurement from the sensor. 
-Is the vehicle very much at the
-Sensor, we get even a large part of the available resolution, whereby close to behind lying flat vehicles can be hidden. Therefore, we can see 
+Is the vehicle very much at the sensor, we get even a large part of the available resolution, whereby close to behind lying flat vehicles can be hidden. Therefore, we can see 
 that the mini roundabout can be covered with the sensor, but we have to think about hidden obstacles.
 
 \begin{figure}[!ht]
@@ -491,7 +490,7 @@ However, there is a higher likelihood that vehicles have already been hidden in 
 % Eventuell ist es so möglich den Kreisverkher als einfache Vorfahrtsituation zu betreachten.
 
 As we can see, we can excellent cover the area up to 25 meters and thus observe the mini roundabout completely, for larger roundabouts the sensor is only conditionally suitable. 
-For all the following considerations, we shall consider only miniature circuits or smaller small roundabouts. 
+For all the following considerations, we shall consider only mini roundabouts or smaller small roundabouts. 
 For all other roundabouts, evaluate whether it is necessary to observe all the vehicles in the roundabout, as the distance from driveway to driveway increases accordingly.
 It is maybe possible to consider the roundabout as a simple yield sign situation.
 
@@ -1476,7 +1475,7 @@ This is done as long as the confidence value of the object does not reach zero. 
 the position is matched with all objects in the prediction phase. If the new object is within three meters to the predicted position, the cluster is assigned to the object
 and the correction step of the EKF is performed. If more than one object matches these condition the closest object is assigned.
 
-\chapter{Simuation}
+\chapter{Simulation}
 % Die Simulationsumgebeung, welche verwendet wird ist VREP \footnote{\url{http://www.coppeliarobotics.com/}}. VREP wurde für verschiedenne Robottikanwendungen entwickelt.
 % VREP erlaubt es innerhalb eines Graphischen beliebige \ac{MKS}, basierend auf diversen Physikengines zu konstruieren. Weiterhin verfügt VREP bereits über
 % viele fertige Sensormodell, wie beispielsweise den Velodyne VLP-16. Die ganze Simulation kann über ein RemoteAPI Interface mit nahezu jerder Programmiersprache kommunizieren.
@@ -1487,7 +1486,7 @@ the Velodyne VLP-16. The whole simulation can communicate via a RemoteAPI interf
 
 
 
-\section{Simuation Scenario}
+\section{Simulation Scenario}
 
 
 \begin{figure}[!ht]
@@ -1665,7 +1664,7 @@ which contains the center point of the roundabout, references to all lanes, and 
 
 
 \subsubsection{Localization}
-% Da wir uns innherlab der Simuation bewegen, können wir für die Lokalisierung eine perfekte position annehmen.
+% Da wir uns innherlab der Simulation bewegen, können wir für die Lokalisierung eine perfekte position annehmen.
 % Lokalisierung in rahmen der Karte bedeutet, das wir die aktuelle bekannte position auf ein Lanesegment mappen wollen.
 % Da die lanes nur in Form von Punkten und Breite gegeben sind, werden für jeden Laneabschnitt Rechtecke berechnet und für jedes Rechteck geprüft,
 % ob sich die aktuelle Postion innehalb des Rechteckes befindet. Dies wird gemacht, indem Das Rechteck (und die Position) in eine
@@ -1809,13 +1808,17 @@ The vehicle then changes to StartState
 
 We start with the evaluation in the simulation. This allows us to make a statement about the calculated values ​​such as position and speed, since the real values can be easily read within the simulation.
 
-\section{Simuation}
+\section{Simulation}
 
 
 \subsection{Detection Distance Performance}
-Zuerst sehen wir uns die allgemeine Erkkneungsperformance des Algorythmussses an, dazu vergleichen wir die ersten beiden Zeitschritte der Simulation.
-Diese sind in \cref{detection_performance} zu sehen. Die Abbildungen stellen dabei einen Bereich von 120x120 metern dar, sodass wir etwas mehr als die hälfte Messbereich den Sensors abdecken.
-Im ersten Zeitschritt wird nichts erkannt, da der Algorythmus mindestenz einen Zeitschritt braucht, um den Confidence wert der erkenntnen Objekte über den threshold zu heben.
+% Zuerst sehen wir uns die allgemeine Erkkneungsperformance des Algorythmussses an, dazu vergleichen wir die ersten beiden Zeitschritte der Simulation.
+% Diese sind in \cref{detection_performance} zu sehen. Die Abbildungen stellen dabei einen Bereich von 120x120 metern dar, sodass wir etwas mehr als die hälfte Messbereich den Sensors abdecken.
+% Im ersten Zeitschritt wird nichts erkannt, da der Algorythmus mindestenz einen Zeitschritt braucht, um den Confidence wert der erkenntnen Objekte über den threshold zu heben.
+
+First, let's look at the general perception performance of the algorithm, we compare the first two steps of the simulation.
+These are shown in \cref{detection_performance}. The figures represent a range of 120x120 meters, so that we cover slightly more than half the measuring range of the sensor.
+In the first step, nothing is recognized since the algorithm requires at least one step in time to raise the confidence value of the detected objects over the detection threshold.
 
 
 \begin{figure}[htb]
@@ -1836,17 +1839,27 @@ Im ersten Zeitschritt wird nichts erkannt, da der Algorythmus mindestenz einen Z
 \end{figure}
 
 
-Im zweiten Zeitschritt sehen wir das 3 objekte erkannt werden. Bei allen dieser Objekte handelt es sich um Fahrzeuge. Das Fahrzeug in der unteren in linken seite hat dabei eine Entfernung von 68 metern zum Testfahrzeug und wurde korrekt erkannt und klassifizierfiziert.
-Die Farbe der Boxen stellt dabei den Typ der Klassizierung dar, grüne boxen sind Fahrzeuge, blaue boxen Radfahrer.
+% Im zweiten Zeitschritt sehen wir das 3 objekte erkannt werden. Bei allen dieser Objekte handelt es sich um Fahrzeuge. Das Fahrzeug in der unteren in linken seite hat dabei eine Entfernung von 68 metern zum Testfahrzeug und wurde korrekt erkannt und klassifizierfiziert.
+% Die Farbe der Boxen stellt dabei den Typ der Klassizierung dar, grüne boxen sind Fahrzeuge, blaue boxen Radfahrer.
 
-Die maximlae entfernung bei der Fahrzeug vollständig erkannt werden kann wurd in im Rahmen der Simulation mit nahe 95m bestimmt. was durch die Reichweite des Sensors limitiert
-wird. Ob das Fahrzeug dabei korrekt Klassifiziert, hängt von der Ausrichtung des Fahrzeuges ab. Bewegt sich das Fahreug gerade auf das Testfahrzeug zu kann nur die Front des Fahrzeuges gesehen werden.
-Das fürt dazu, dass das Fahrzeug eine Falsche größe hat, und als Radfahrer oder Fußgänger erkannt wird. Da für die Berecnung der Größe ein Historamm herangezogen wird, hat diese Falsche Klassifisierung
-solange bestand, bis das Historamm auf die richtige größe konvergiert.
+In the second step we see the three objects recognized. All of these objects are vehicles. The vehicle in the lower left side has a distance of 68 meters to the test vehicle and 
+was correctly recognized and classified. The color of the boxes represents the type of classifying, green boxes are vehicles, blue boxing cyclists.
 
-Sehen wir uns den zweiten Zeiitschritt genauer an \cref{detection_performance2} können wir ekennen, das sowohl Fußgänger und Radfahrer, obwohl in den Daten sichtbar (Rote Boxen), nicht erkannt werden.
-Dies ist darin begründet, dass diese den $minPts$ Threshold des \ac{DBSCAN} nicht überschreiten. Dies ist erst der Fall wenn diese sich näher am Testfahrzeug befinden, genauer innerhalb des 6. Messlayers des Sensors (ca 23m)
+% Die maximlae entfernung bei der Fahrzeug vollständig erkannt werden kann wurd in im Rahmen der Simulation mit nahe 95m bestimmt. was durch die Reichweite des Sensors limitiert
+% wird. Ob das Fahrzeug dabei korrekt Klassifiziert, hängt von der Ausrichtung des Fahrzeuges ab. Bewegt sich das Fahreug gerade auf das Testfahrzeug zu kann nur die Front des Fahrzeuges gesehen werden.
+% Das fürt dazu, dass das Fahrzeug eine Falsche größe hat, und als Radfahrer oder Fußgänger erkannt wird. Da für die Berecnung der Größe ein Historamm herangezogen wird, hat diese Falsche Klassifisierung
+% solange bestand, bis das Historamm auf die richtige größe konvergiert.
 
+The maximum distance at which the vehicle can be fully detected can be determined within the scope of the simulation with close to 95m.
+Which is limited by the range of the sensor. Whether the vehicle is classified correctly depends on the orientation of the vehicle. 
+If the vehicle moves straight to the test vehicle, only the front of the vehicle can be seen. This means that the vehicle has an incorrect size and is recognized as a cyclist or pedestrian. 
+Since a histogram is used for the calculation of the size, this false classification is existing until the histogram maximum converges to the correct size.
+
+% Sehen wir uns den zweiten Zeiitschritt genauer an \cref{detection_performance2} können wir ekennen, das sowohl Fußgänger und Radfahrer, obwohl in den Daten sichtbar (Rote Boxen), nicht erkannt werden.
+% Dies ist darin begründet, dass diese den $minPts$ Threshold des \ac{DBSCAN} nicht überschreiten. Dies ist erst der Fall wenn diese sich näher am Testfahrzeug befinden, genauer innerhalb des 6. Messlayers des Sensors (ca 23m)
+
+Let's take a closer look at the second time step. In \cref{detection_performance2}, we can recognize that both pedestrians and cyclists, although visible in the data (red boxes), are not recognized. 
+This is because they do not exceed the $minPts$ Threshold of the \ac{DBSCAN}. This is only the case when they are closer to the test vehicle, more precisely within the 6th sensor measuring sensor (about 23m).
 \begin{figure}[!htb]
   \caption{Detection Distance Performance Pedestians/Cyclists} 
   \centering
@@ -1858,9 +1871,14 @@ Dies ist darin begründet, dass diese den $minPts$ Threshold des \ac{DBSCAN} nic
 
 \subsection{Measurements Performance}
 
-In diesen abschnitt evaluieren wir die qualität in der Simulation messbaren größen, Geschwindigkeit und Position der Objekte.
-Dazu wurde ein während der Simulation ständig sichtbares Fahzzeug ausgewählt. Dies ist das einzige Fahrzeug, was sich nicht ständig innerhalb des Kreisverkehres befindet, sondern in diesen einfährt und wieder verlässt.
-Der Pfad des Fahhrzeuges ist in \cref{car_path1} zu sehen. Der Fehler der Position wurde dabei aus der euklidischen distanz der Position innerhalb der Simulation und der erkannten Position berechnet.
+% In diesen abschnitt evaluieren wir die qualität in der Simulation messbaren größen, Geschwindigkeit und Position der Objekte.
+% Dazu wurde ein während der Simulation ständig sichtbares Fahzzeug ausgewählt. Dies ist das einzige Fahrzeug, was sich nicht ständig innerhalb des Kreisverkehres befindet, sondern in diesen einfährt und wieder verlässt.
+% Der Pfad des Fahhrzeuges ist in \cref{car_path1} zu sehen. Der Fehler der Position wurde dabei aus der euklidischen distanz der Position innerhalb der Simulation und der erkannten Position berechnet.
+
+In this section we evaluate the quality of the measurable variables, like speed and position of the objects in the simulation.
+For this purpose a vehicle which was constantly visible during the simulation is chosen.
+This is the only vehicle, which is not always within the roundabout, but enters and leaves the roundabout again. 
+The path of the car is shown in \cref{car_path1}. The position error was calculated from the Euclidean distance of the position within the simulation and the position detected.
 
 \begin{figure}[!htb]
   \caption{Car Path} 
@@ -1871,8 +1889,11 @@ Der Pfad des Fahhrzeuges ist in \cref{car_path1} zu sehen. Der Fehler der Positi
 
 \subsubsection{Position Error}
 
-Betrachten wir nun den Fehler der Position über die Zeit \cref{car_pos_err}. Die Legende der Abbildung ist die jeweilige ID des Trackings zu erkennen.
-Es ist ersichtlich, das das dem Fahrzeug zwei verschiedene ID's zugeordnet wurden, was bedeutet, das das Tracking das Fahrzeug einmal verloren hat.
+% Betrachten wir nun den Fehler der Position über die Zeit \cref{car_pos_err}. Die Legende der Abbildung ist die jeweilige ID des Trackings zu erkennen.
+% Es ist ersichtlich, das das dem Fahrzeug zwei verschiedene ID's zugeordnet wurden, was bedeutet, das das Tracking das Fahrzeug einmal verloren hat.
+
+Let's look at the position error over the time in \cref{car_pos_err}. The legend of the figure shows the respective ID of the tracking. 
+It can be seen that to the vehicle, two different ID's have been assigned, which means that the tracking has once lost the vehicle.
 
 \begin{figure}[!htb]
   \caption{Car Position Error} 
@@ -1880,14 +1901,22 @@ Es ist ersichtlich, das das dem Fahrzeug zwei verschiedene ID's zugeordnet wurde
   \includegraphics[width=\textwidth]{bilder/Car2_pos_err.pdf}
  \label{car_pos_err}
 \end{figure}
-Betrachten wir die Daten genauer, sehen wir, dass die Position in dem Bereich, in dem das Fahhzeug stabil erkannt werden kann einen Fehler, von rund 0.8 metern aufweißt.
-in dem Moment in dem Das Fahrzeug nicht mehr getrackt werden kann, steigt der fehler rasant an, bis das Tracking das Objekt als ungütig erkennt.
-Weiterhin ist zu erkennen, das nachdem dem Fahrzeug eine neue ID zugewiesen wurde, der Positionsfehler insgeammt höher ist.
+% Betrachten wir die Daten genauer, sehen wir, dass die Position in dem Bereich, in dem das Fahhzeug stabil erkannt werden kann einen Fehler, von rund 0.8 metern aufweißt.
+% in dem Moment in dem Das Fahrzeug nicht mehr getrackt werden kann, steigt der fehler rasant an, bis das Tracking das Objekt als ungütig erkennt.
+% Weiterhin ist zu erkennen, das nachdem dem Fahrzeug eine neue ID zugewiesen wurde, der Positionsfehler insgeammt höher ist.
+Looking at the data more precisely, we see that the position, in the range where the vehicle can be detected stably, has an error of about 0.8 meters. 
+In the moment, the vehicle can no longer be tracked, the error increases rapidly until tracking detects the object as unfavorable. 
+Furthermore, it can be seen that after the vehicle has been assigned a new ID, the position error is generally higher.
 
-Die Ursache des größen Fehlers in der Position liegt unter anderem im verhalten des Kalman Filters. Wie in \cref{kalman_error} zu sehen
-befindet sich die Position des Filters (hellblau) beri eine Fahrzeug innerhalb des Kreisverkehres immer etwas ausßerhalb des Rechteckmittelpunktes.
-Dies ist darin begründet, das dr Filter mit einem \ac{CTRV} Modell arbeitet, was nicht ganz das Verhalten der Fahrzeuge wiederspiegelt.
-Denn diese Bewegen sich nicht in die Richtung ihrer aktuellen ausrichtung, sondern annährend iherer  Fahrdynamik.
+% Die Ursache des größen Fehlers in der Position liegt unter anderem im verhalten des Kalman Filters. Wie in \cref{kalman_error} zu sehen
+% befindet sich die Position des Filters (hellblau) beri eine Fahrzeug innerhalb des Kreisverkehres immer etwas ausßerhalb des Rechteckmittelpunktes.
+% Dies ist darin begründet, das dr Filter mit einem \ac{CTRV} Modell arbeitet, was nicht ganz das Verhalten der Fahrzeuge wiederspiegelt.
+% Denn diese Bewegen sich nicht in die Richtung ihrer aktuellen ausrichtung, sondern annährend iherer  Fahrdynamik.
+
+The reason of the large error in the position lies, among other things, in the behavior of the Kalman filter.
+As seen in \cref{kalman_error}, the position of the filter (light blue circle) in a vehicle within the roundabout is always slightly outside the center of the rectangle. 
+This is because the filter works with a \ac{CTRV} model, which does not quite reflect the behavior of the vehicles.
+Because these are not in the direction of their current orientation, but rather in their driving dynamics.
 
 \begin{figure}[!htb]
   \caption{Car Position Error} 
@@ -1896,9 +1925,8 @@ Denn diese Bewegen sich nicht in die Richtung ihrer aktuellen ausrichtung, sonde
  \label{kalman_error}
 \end{figure}
 
-
-
-Sehen wir uns im Folgenden in \cref{lost} an, warum das Fahrzeug veroren ging und der Positionfehler gestiegen ist.
+% Sehen wir uns im Folgenden in \cref{lost} an, warum das Fahrzeug veroren ging und der Positionfehler gestiegen ist.
+Let's look at \cref{lost} in the following section, why the vehicle went lost and the position error has risen.
 
 \begin{figure}[htb]
   \caption{Tracking Error} 
@@ -1915,15 +1943,25 @@ Sehen wir uns im Folgenden in \cref{lost} an, warum das Fahrzeug veroren ging un
     \label{lost}
 \end{figure}
 
-Darin ist zu erkennen, dass das Objekt  zum Großtei durch Objekt 98 verdeckt wird,  dadurch ist sowohl die Position als auch die Ausrichtung des Objektes Fehlerhaft.
-Der Kalman Filter (hellblauer punkt und pfeil) behält jedoch grob die Bewegungsrichtung bei. Der Confidence wert des onjektes scheit jedoch nichtr auszureichen um das Objekt bis zu dem
-Zeitpunkt zurückzuverfolgen, bis dieses wieder sichtbar ist. Im zweite teil der Abbildung sehen wird, das das Fahrzeug einige Zeitschritte später wieder erkannt werden kann.
-Da wir das Fahrzeug nun niur von hinten sehen können. Wird die Größe des Fahrzeuges Falsch erkannt. Dadurch wird dieses als Fahrrad klassifiziert und da die Position
-des Fahrzeiges aus dem Mittelpunkt des Rechteckes berechnet wird führt dies zu einem Systematischen Fehler. Wir sehen auch, das wir im vordern Bereich des Fahrzeuges Messerte bekommen.
-Dies sind die Räder des Fahrzeuges, die wir aufgrund des Steilen Messwinkels sehen können. Da die Distanz zum Rest des Objektes allerdings zu groß ist, werden diese nicht 
-zum Objekt hinzugefügt.
+% Darin ist zu erkennen, dass das Objekt  zum Großtei durch Objekt 98 verdeckt wird,  dadurch ist sowohl die Position als auch die Ausrichtung des Objektes Fehlerhaft.
+% Der Kalman Filter (hellblauer punkt und pfeil) behält jedoch grob die Bewegungsrichtung bei. Der Confidence wert des onjektes scheit jedoch nichtr auszureichen um das Objekt bis zu dem
+% Zeitpunkt zurückzuverfolgen, bis dieses wieder sichtbar ist. Im zweite teil der Abbildung sehen wird, das das Fahrzeug einige Zeitschritte später wieder erkannt werden kann.
+% Da wir das Fahrzeug nun niur von hinten sehen können. Wird die Größe des Fahrzeuges Falsch erkannt. Dadurch wird dieses als Fahrrad klassifiziert und da die Position
+% des Fahrzeiges aus dem Mittelpunkt des Rechteckes berechnet wird führt dies zu einem Systematischen Fehler. Wir sehen auch, das wir im vordern Bereich des Fahrzeuges Messerte bekommen.
+% Dies sind die Räder des Fahrzeuges, die wir aufgrund des Steilen Messwinkels sehen können. Da die Distanz zum Rest des Objektes allerdings zu groß ist, werden diese nicht 
+% zum Objekt hinzugefügt.
 
-Da die Reine bertrachtung des Positionsfehlers nicht serh ausssagekrftig ist, sehen wir uns nun den Fahler in abhängigkeit von der Entfernung zu Testfahrzeug an.
+It can be seen that the object is hidden by the object 98, which means that both the position and the orientation of the object are faulty. 
+The Kalman filter (light blue circle and arrow), however, roughly maintain the direction of movement.
+However, the confidence value of the object is not sufficient to trace the object back to the point in time until it is visible again. 
+In the second part of the figure, the vehicle will be rerecognized. 
+Since we now can only see the vehicle from behind, the size of the vehicle is detected wrongly and it is classified as a bicycle.
+Since the position of the vehicle is calculated from the center of the rectangle, this leads to a systematic error. 
+We also see that we get measurement in the front area of the vehicle. These are the wheels of the vehicle, which we can see due to the steep angle of measurement. 
+However, since the distance to the rest of the object is too large, they are not added to the object.
+
+% Da die Reine bertrachtung des Positionsfehlers nicht serh ausssagekrftig ist, sehen wir uns nun den Fahler in abhängigkeit von der Entfernung zu Testfahrzeug an.
+Since the pure view of the position error is not very meaningful, we now look at the error depending on the distance to test vehicle in \cref{car_pos_err}.
 
 \begin{figure}[!htb]
   \caption{Car Position Error / Distance} 
@@ -1981,7 +2019,8 @@ erkennung des Fahrzeuges gegeben und die Messwerte haben nur eine geringe Abweic
 
 
 \subsubsection{Scenario Handling}
-Im folgen werten wir das Simulationsscenario an sich aus, idem wir uns die beiden Krittischen Situationen das einfacehn und ausfahren der testfahrzeuges aus
+Im folgen werten wir das Simulationsscenario an sich aus, idem wir die beiden krittischen Situationen das einfahren und ausfahren des testfahrzeuges aus dem Kreisverkehr 
+innerhalb der Objektdetection Ansehen.
 
 
 Bild mit Rotationsproblemen\\

@@ -30,14 +30,14 @@
 \BOOKMARK [2][-]{subsection.6.5.1}{Constant Turn Rate and Velocity Model}{section.6.5}% 30
 \BOOKMARK [2][-]{subsection.6.5.2}{Extendet Kalman Filter}{section.6.5}% 31
 \BOOKMARK [2][-]{subsection.6.5.3}{Reassigning}{section.6.5}% 32
-\BOOKMARK [0][-]{chapter.7}{Simuation}{}% 33
-\BOOKMARK [1][-]{section.7.1}{Simuation Scenario}{chapter.7}% 34
+\BOOKMARK [0][-]{chapter.7}{Simulation}{}% 33
+\BOOKMARK [1][-]{section.7.1}{Simulation Scenario}{chapter.7}% 34
 \BOOKMARK [1][-]{section.7.2}{Simulation Logic}{chapter.7}% 35
 \BOOKMARK [2][-]{subsection.7.2.1}{Sensor Connection}{section.7.2}% 36
 \BOOKMARK [2][-]{subsection.7.2.2}{Mapping}{section.7.2}% 37
 \BOOKMARK [2][-]{subsection.7.2.3}{State Machine}{section.7.2}% 38
 \BOOKMARK [0][-]{chapter.8}{Evaluation}{}% 39
-\BOOKMARK [1][-]{section.8.1}{Simuation}{chapter.8}% 40
+\BOOKMARK [1][-]{section.8.1}{Simulation}{chapter.8}% 40
 \BOOKMARK [2][-]{subsection.8.1.1}{Detection Distance Performance}{section.8.1}% 41
 \BOOKMARK [2][-]{subsection.8.1.2}{Measurements Performance}{section.8.1}% 42
 \BOOKMARK [1][-]{section.8.2}{Real Measurements}{chapter.8}% 43

@@ -226,7 +226,7 @@ These roundabouts are called mini roundabout. The roundabout island must then be
 The outer diameter should be at least 13 m, so that the circular island does not become too small.
 Larger outer diameters make driving easier. Outer diameters of more than 22m, however, do not offer any transport advantages.
 From an outside diameter of about 22 m, therefore, the installation of a small roundabout with 26 m is generally more convenient.
-Bypasses are generally not required in the areas where mini roundabout can be used.
+Bypasses are generally not required in the areas where mini roundabout can be used.\cite{man06}
 
 
 \subsubsection{Small Roundabout}
@@ -241,7 +241,7 @@ Bypasses are generally not required in the areas where mini roundabout can be us
 \end{figure}
 
 The small roundabout has a single lane circular path and single lane circular driveways and exits. The roundabout island is not passable and can be building area.
-The outer diameter must be at least 26 m. Bypasses can be set up for driving geometric reasons or to increase performance.
+The outer diameter must be at least 26 m. Bypasses can be set up for driving geometric reasons or to increase performance.\cite{man06}
 
 
 \subsubsection{Two-lane Passable Roundabout}
@@ -266,7 +266,7 @@ the circular path of a small roundabout can be designed to be two-lane driveable
 At such a roundabout, the circular path is so wide that cars can travel side by side in a circle.
 If a further increase in the capacity is required, individual circular driveway can also be carried out in two lanes, if pedestrians and cyclists are not to be considered regularly.
 For safety reasons, circular exits are always carried out in single lanes.
-For geometrical reasons, the outer diameter must be at least 40 m for two-laned accessibility.
+For geometrical reasons, the outer diameter must be at least 40 m for two-laned accessibility.\cite{man06}
 
 
 \subsubsection{Large Roundabout}
@@ -282,7 +282,7 @@ For geometrical reasons, the outer diameter must be at least 40 m for two-laned 
 
 %Große Kreisverkehre mit zwei oder mehreren durch Markierungen gekennzeichnete Fahrstreifen auf der Kreisfahrbahn sollen bei enger
 %Abstimmung zwischen Knotenpunktentwurf und Verkehrssteuerung nur mit Lichtsignalanlage betrieben werden.
-Large Roundabouts with two or more lanes marked by markers on the circular path should be operated only with a light signaling system and closely coordinated roundabout design and traffic control,
+Large Roundabouts with two or more lanes marked by markers on the circular path should be operated only with a light signaling system and closely coordinated roundabout design and traffic control.\cite{man06}
 
 
 \section{\acl{RANSAC}}
@@ -301,7 +301,7 @@ by calculating an outliers free data set, the so-called consensus set.
 % Der \ac{RANSAC} hat also drei zu Bestimmende Parameter,m welche das ergebnis beeinflussen.
 
 The \ac{RANSAC} requires more data points than is required for the unambiguous determination of the model. 
-From this set of data points randomly as many data points are selected, as necessary to the model unambiguously. 
+From this set of data points randomly as many data points are selected, as necessary to define the model unambiguously. 
 From the remaining data, those which have a spacing which is smaller than a certain limit value are then selected.
 This set now represents the ``consensus set''. If it contains a certain minimum number of values, a good model was probably found and the consensus set is stored.
 These steps are repeated several times. Then the subset that contains the most points is selected. Using this subset, 
@@ -340,10 +340,10 @@ Note that the \ac{RANSAC} is not a deterministic algorythm, beacuse of the rando
 \ac{DBSCAN} \cite{DBSCAN} is a deterministic data mining algorithm for cluster analysis. The algorithm is based on density connectivity,
 that means, it binds points based on its distance to clusters, \ac {DBSCAN}, iterates over all data points that have not yet been processed, 
 each processed data point is marked as processed. A range query request is then made for each of these points. If the size of the returned neighborhood is lower then a certain limit (minPts),
-the point is marked as noise. Otherwise, a new clusrer is created by performing a new range request for each point in the neighborhood 
-and adding the Points to the cluster and marked them as processed. This is repeated until all the points in the cluster are marked as processed, so no further points can be reached in the neighborhood.
+the point is marked as noise. Otherwise, a new cluster is created by performing a new range request for each point in the neighborhood 
+and adding the points to the cluster and marked them as processed. This is repeated until all the points in the cluster are marked as processed, so no further points can be reached in the neighborhood.
 Figure \ref{dbscan} shows an example, with a point threshold of one. So the blue point is marked as noise, because there are no neighbors inside of the maximum allowed distance.
-\ac{DBSCAN} also makes a differentiation between core (red) and border (green) points, where core points are dense, means the can reach the minPts limit, while border points are not dense, but can be reached by
+\ac{DBSCAN} also makes a differentiation between core (red) and border (green) points, where core points are dense, means they can reach the minPts limit, while border points are not dense, but can be reached by
 point which is dense.
 
 \begin{figure}[!ht]
