@@ -413,12 +413,12 @@ how far the Velodyne is able to overlook the situation. For this purpose we will
 \begin{figure}[!ht]
 %\begin{center}
 \caption{Roundabout Sizes}
-  \begin{tabularx}{\textwidth}{|X|X|X|}
+  \begin{tabularx}{\textwidth}{X|X|X}
   \hline \textbf{Roundabout Type} & \textbf{min Size} & \textbf{max Size} \\\hline
   Mini Roundabout& 13m & 22m \\\hline
   Small Roundabout& 26m  & 40m \\\hline
   Two-lane Passable Roundabout& 40m & - \\\hline
-  Large Roundabout& >40m &  - \\\hline
+  Large Roundabout& >40m &  - \\
   \end{tabularx}
 \label{roundabout_size}
 %\end{center}
@@ -1091,7 +1091,7 @@ which would cause a great inaccuracy. With these points $(\vec{R};\vec{L})$ (\cr
 After applying the correction, the size of the obstacle is calculated. For this purpose, the maximum and minimum x and y values of
 rotated objects are used. With these values, a histogram for the length and width of the obstacle, rounded to 0.5 m, is now established over time. \todo{warum 0.5m??}
 The most probable value is then selected. This causes the size of the obstacle to change more often before the size converges to a stable value.
-Since the size of the objectat the begin can be very small, there is a lower limit of 0.9m for both values. Measured values for a sample object can be seen in \cref{obst_hist}.
+Since the size of the object the begin can be very small, there is a lower limit of 0.9m for both values. Measured values for a sample object can be seen in \cref{obst_hist}.
 \begin{figure}[!ht]
 \begin{center}
 \caption{Object Size Histogram}
@@ -1125,8 +1125,27 @@ In the case of length, however, we see that the algorythm tends to calculate to 
 measured when the vehicle is moving towards the sensor. Because to the internal vehicle structure, the sensor is not able to see through the vehicle, so the
 values are to smal.
 
-For the subsequent filtering of the measured values with the help of an extended Kalman filter, 
-the position of the vehicle from the center of the bounding box is now determined, using the mean value of the four corner points
+% Aus diesen werten wird nun die Bounding Box des Objektes berechnet.  Dazu muss erneut eine Unterschidung vorgenommen werden.
+% Befindet sich das Objekt links neben der y-achse wird aus Ankerpunkt der maximale x und y wert genutzt und das Objekt anhand
+% der berechneten länge und breite nach links unten aufgespannt.Befindet sich das Objekt jedoch rechts von der y-achse wird stadtsessen der minimale y-wet genutzt
+% und das Objekt nach rechts unten aufgespannt. Was das ganze grafisch für alle vier Fälle bedeutet ist in \cref{obst_cases} veranschaulicht.
+
+The Bounding Box of the object is now calculated from these values. To this end, a further distinction must be made.
+If the object is to the left of the y-axis, the maximum x and y value is used as an anchor point and the object is stretched to the lower left using the calculated length and width.
+However, if the object is to the right of the y-axis, the minimum y-value is used and the object is stretched to the lower right. 
+What the whole graphically means is illustrated in \cref{obst_cases} for all four cases .
+
+\begin{figure}[!ht]
+\begin{center}
+\caption{Bounding Box Calculation Cases}
+\includegraphics[width=0.8\textwidth]{bilder/cases.pdf}
+\label{obst_cases}
+\end{center}
+\end{figure}
+
+
+For the subsequent filtering of the measured values with the help of an extended Kalman filter, the position of the vehicle from the center of the bounding box is now
+determined, using the mean value of the four corner points
 
 % Die für die Berechnung der Bewegungsrichtung genutzte Position ist jedoch eine andere, da die so eben berechnete Position zu diesem Zeitpunkt noch nicht zur verfügung steht und
 % die Position kurz nach der Initialen erkennung durch die häufigen Größenändrungen sehr instabil ist. Deswegen wird als Position immer die maximale x-Koordinate der Cluster gesnutzt.
@@ -1823,9 +1842,6 @@ The vehicle then changes to StartState
 We start with the evaluation in the simulation. This allows us to make a statement about the calculated values such as position and speed, since the real values can be easily read within the simulation.
 
 \section{Simulation}
-
-\subsection{Gernral Performance ans Measurements}
-
 
 \subsection{Detection Distance Performance}
 % Zuerst sehen wir uns die allgemeine Erkkneungsperformance des Algorythmussses an, dazu vergleichen wir die ersten beiden Zeitschritte der Simulation.

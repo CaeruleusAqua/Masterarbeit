@@ -30,7 +30,6 @@
 \usepackage{acronym}
 \usepackage{tabularx}
 \usepackage{multirow}
-\usepackage{subcaption}
 
 
 \newbibmacro*{bbx:parunit}{%
@@ -192,7 +191,7 @@ The type and number of the sensors, for the object detection, used by the teams 
 % Und innerhalb dieser gegen die Bildverarbeitung mit zwei 2D Kameras gegengeprüft. Eine Klassifizierung wird nur nach bewegten und unbewegten Objekten vorgnommen, als angnommen,
 % das alle bewegten Objekte Autos sind. Das Team erreichte im Wettbewerb den dritten Platz \cite{Release2007}.
 
-Team VictorTango \cite{Atreya2007} uses two Ibeo Alasca XT sensors, with a range of 200m and an opening angle of 240 degrees to cover the front area of ​​the vehicle, 
+Team VictorTango \cite{Atreya2007} uses two Ibeo Alasca XT sensors, with a range of 200m and an opening angle of 240 degrees to cover the front area of the vehicle, 
 the two sensors are complementary fused to increase the vertical resolution. Each sensor has a vertical resolution of four layers. For the rear area, a single 2D Ibeo A0 LiDAR is used. 
 In addition, four Sick LMS291 LiDARs are used, but these are not used for object detection but are installed vertically in order to search for edges on the road in high resolution.
 However, the object segmentation is not implemented by Team VictorTango itself. In the meantime, a comercial ECU supplied by Ibeo is used, which directly detects objects in the data from the Ibeo sensors.
@@ -408,17 +407,24 @@ important sensor for the recognition of other traffic users, it is now investiga
 % Unter \cref{types_of_roundabouts} haben wir vier verschieden Typen von Kresiverkehren festehalten. Um die den Praktischen nutzetn des Velodyne VLP-16
 % zu bewerten wird nun Analysiert, in wie fern dieser in der lage ist diese Zu überblicken. Dazu sehen wir uns im folgenden die Größenverhältnisse  an.
 
-Under \cref{types_of_roundabouts} we have established four different types of roundabouts. In order to evaluate the practical use of the Velodyne VLP-16 is now analyzed,
-how far the Velodyne is able to overlook the situation. For this purpose we will look at the size ratios.
+Under \cref{types_of_roundabouts} we have listed four different types of roundabouts. In order to evaluate the practical use of the Velodyne VLP-16 is now analyzed,
+how far the Velodyne is able to overlook the situation. For this purpose we will look at the size ratios in \cref{roundabout_size}.
+
+\begin{figure}[!ht]
+%\begin{center}
+\caption{Roundabout Sizes}
+  \begin{tabularx}{\textwidth}{|X|X|X|}
+  \hline \textbf{Roundabout Type} & \textbf{min Size} & \textbf{max Size} \\\hline
+  Mini Roundabout& 13m & 22m \\\hline
+  Small Roundabout& 26m  & 40m \\\hline
+  Two-lane Passable Roundabout& 40m & - \\\hline
+  Large Roundabout& >40m &  - \\\hline
+  \end{tabularx}
+\label{roundabout_size}
+%\end{center}
+\end{figure}
 
 
-\begin{tabularx}{\textwidth}{|X|X|X|}
-\hline \textbf{Roundabout Type} & \textbf{min Size} & \textbf{max Size} \\\hline
-Mini Roundabout& 13m & 22m \\\hline
-Small Roundabout& 26m  & 40m \\\hline
-Two-lane Passable Roundabout& 40m & - \\\hline
-Large Roundabout& >40m &  - \\\hline
-\end{tabularx}
 
 % Um nun ein Vergleich zum Velodyne VLP-16 zeihen zu können, sehen wir uns den sichtbereich des Sensors von der seite an.
 % Der Sensor liefert uns 16 Messungen im selben Azimuthwinkel, im Abstand von 2 Grad. Da für die Ausertung, und leider auch für die Erkennung, die Winkel größer als 0 Grad 
@@ -1085,7 +1091,7 @@ which would cause a great inaccuracy. With these points $(\vec{R};\vec{L})$ (\cr
 After applying the correction, the size of the obstacle is calculated. For this purpose, the maximum and minimum x and y values of
 rotated objects are used. With these values, a histogram for the length and width of the obstacle, rounded to 0.5 m, is now established over time. \todo{warum 0.5m??}
 The most probable value is then selected. This causes the size of the obstacle to change more often before the size converges to a stable value.
-Since the size of the objectat the begin can be very small, there is a lower limit of 0.9m for both values. Measured values for a sample object can be seen in \cref{obst_hist}.
+Since the size of the object the begin can be very small, there is a lower limit of 0.9m for both values. Measured values for a sample object can be seen in \cref{obst_hist}.
 \begin{figure}[!ht]
 \begin{center}
 \caption{Object Size Histogram}
@@ -1118,6 +1124,27 @@ It can be seen that the distribution of the width, is similar to a normal distri
 In the case of length, however, we see that the algorythm tends to calculate to small values, which results from the fact that this can only be inadequately
 measured when the vehicle is moving towards the sensor. Because to the internal vehicle structure, the sensor is not able to see through the vehicle, so the
 values are to smal.
+
+Aus diesen werten wird nun die Bounding Box des Objektes berechnet.  Dazu muss erneut eine Unterschidung vorgenommen werden.
+Befindet sich das Objekt links neben der y-achse berechnen sich die Außenpunkte der box zu:
+
+\begin{align*}
+P_x1 = max_y - width
+\end{align*}
+
+Rect(0, 0) = max_x - lenght;
+            Rect(1, 0) = max_y - width;
+
+            Rect(0, 1) = max_x;
+            Rect(1, 1) = max_y - width;
+
+            Rect(0, 2) = max_x;
+            Rect(1, 2) = max_y;
+
+            Rect(0, 3) = max_x - lenght;
+            Rect(1, 3) = max_y;
+
+For this purpose, we again need to make a distinction depending on the y-value of the object center.
 
 For the subsequent filtering of the measured values with the help of an extended Kalman filter, 
 the position of the vehicle from the center of the bounding box is now determined, using the mean value of the four corner points
@@ -1742,8 +1769,14 @@ The maximum speed of the simulated test vehicle is set to 30 km/h.
 
 Before each call of a state, all objects delivered by the object detection are picked up and mapped to the lanes held in the map.
 Objects that were not on a track or path are rejected.
-Furthermore, the expected intersection points of your own vehicle with all paths in the roundabout is calculated. 
-\todo{bild mit intersection position}
+Furthermore, the expected intersection points of your own vehicle with all paths in the roundabout is calculated (see magenta points in \cref{intersection_pos}). 
+\begin{figure}[!ht]
+\begin{center}
+\caption{Intersection Points}
+\includegraphics[width=\textwidth]{bilder/intersection_pos.png}
+\label{intersection_pos}
+\end{center}
+\end{figure}
 This is necessary because the vehicle is not driving straight into the roundabout and the position in the Map can be slightly corrupted. For this purpose,
 the intersection points of trajectory and lanes are calculated from the expected vehicle trajectory and the simplified roundabout model.
 
@@ -1808,7 +1841,7 @@ The vehicle then changes to StartState
 % Wir starten mit der Evaluierung in der Simualtion. Diese erlaubt es uns eine aussage über die Eekannten Werte wie Position und Geschwindigkeit zumachen,
 % da die realen weete innerhalb der Simulation einfach ausgelesen werden können.
 
-We start with the evaluation in the simulation. This allows us to make a statement about the calculated values ​​such as position and speed, since the real values can be easily read within the simulation.
+We start with the evaluation in the simulation. This allows us to make a statement about the calculated values such as position and speed, since the real values can be easily read within the simulation.
 
 \section{Simulation}
 
@@ -1923,7 +1956,7 @@ This is because the filter works with a \ac{CTRV} model, which does not quite re
 Because these are not in the direction of their current orientation, but rather in their driving dynamics.
 
 \begin{figure}[!htb]
-  \caption{Car Position Error} 
+  \caption{Kalman Error} 
   \centering
   \includegraphics[width=0.5\textwidth]{bilder/kalman.png}
  \label{kalman_error}
@@ -1965,13 +1998,13 @@ We also see that we get measurement in the front area of the vehicle. These are 
 However, since the distance to the rest of the object is too large, they are not added to the object.
 
 % Da die Reine bertrachtung des Positionsfehlers nicht serh ausssagekrftig ist, sehen wir uns nun den Fahler in abhängigkeit von der Entfernung zu Testfahrzeug an.
-Since the pure view of the position error is not very meaningful, we now look at the error depending on the distance to test vehicle in \cref{car_pos_err}.
+Since the pure view of the position error is not very meaningful, we now look at the error depending on the distance to test vehicle in \cref{car_pos_err_dist}.
 
 \begin{figure}[!htb]
   \caption{Car Position Error / Distance} 
   \centering
   \includegraphics[width=\textwidth]{bilder/Car2_pos_err_dist.pdf}
- \label{car_pos_err}
+ \label{car_pos_err_dist}
 \end{figure}
 
 % Lassen wir den Positionsfehler von Objekt 154 außer acht, sehen wir, dass der Fahler mit der Entfernung konstant zunimmt. Was auf dem ersten Blick intutiv logisch erscheint,
@@ -1994,20 +2027,21 @@ The constant rise of the error is to be found in a limitation of the simulation 
 % Auflösung des Sensors nur noch 2m. Diese Eigenschaft tritt offensichtlich nicht mit dem Realensensort auf. Leider Wurden keine geeigenten messdaten für den realen Velodyn sensor aufgenommnen.
 % die Eine evaluierung dahingehend ermöglichen
 On \cref{sen_res}, the resolution of the sensor readings decreases with increasing distance, which leads to a rastering of the measuring circuits. 
-This is due to the fact that it is simulated with the aid of OpenGL, which works with fixed point arithmetic. In the last image sensor of the sensor, the resolution of the sensor is only 2m.
+This is due to the fact that it is simulated with the aid of OpenGL, which works with fixed point arithmetic. In the last in the image visible measurement layer of the sensor,
+the resolution of the sensor is only 2m.
 This property obviously does not occur with the real sensor. Unfortunately, no suitable measuring data were recorded for the real Velodyne sensor, which would enable an evaluation to be carried out.
 
-\subsubsection{Speed}
+\subsubsection{Velocity Error}
 
 % Das für die bewältiging des Simulationsszenarios abgesehen von der Position auch die Geschwindigkeit der Objekte besonders wichtig ist, vergleichen wir im
 % folgenden die Geschwindigkeit der erkannnten Objekte mit den realen werten in der Simulation. Dazu sind in \cref{car2_speed} die Messwerte
 % grafisch dargestellt. Der Graph Car2 stellt dabei die Idealen werte aus der Simualtion dar.
 
-Since, apart from the position, the speed of the objects is particularly important for the simulation scenario, we compare the speed of the objects detected with the real values in the simulation.
+Since, apart from the position, the speed of the objects is particularly important for the simulation scenario, we compare the velocity of the objects detected with the real values in the simulation.
 For this purpose, the measured values are displayed graphically in \cref {car2_speed}. The graph Car2 represents the ideal values from the simualtion.
 
 \begin{figure}[!htb]
-  \caption{Car2 Speed} 
+  \caption{Car2 velocity} 
   \centering
   \includegraphics[width=\textwidth]{bilder/Car2_speed.pdf}
  \label{car2_speed}
@@ -2027,7 +2061,7 @@ outliers, however, also occur here when tracking is in the concept of losing the
 % Beterachten wir ein andrers Fahrzeug, mit einer konstaten Geschwindigekeit in \cref{car0_speed}. 
 Consider another vehicle, with a constant speed in \cref{car0_speed}.
 \begin{figure}[!htb]
-  \caption{Car2 Speed} 
+  \caption{Car0 velocity} 
   \centering
   \includegraphics[width=\textwidth]{bilder/Car0_speed.pdf}
  \label{car0_speed}
@@ -2043,22 +2077,30 @@ and the here measured values have only a slight deviation.
 
 \subsubsection{Classification}
 Für die Berwertung der Klassifizierung wurde ein Simualtionsdurchlauf mit einer länge von 3min und 11 Sekunden aufgenommen (1917 samples), und automatisch ausgwertet.
+Aus diesen Daten wurde \cref{classification} erstellt.
 
-\begin{tabularx}{\textwidth}{X|r|r|r|r}
-\hline \textbf{Object Name} & \textbf{Car [\%]} & \textbf{Bike [\%]} & \textbf{Pedestian [\%]} & \textbf{Unclassified [\%]} \\\hline
-Pedestian & 0 & 0 & 100 & 0 \\\hline
-Car0 & 100 & 0 & 0 & 0 \\\hline
-Car1 & 100 & 0 & 0 & 0 \\\hline
-Car2 & 98.2 & 0.73 & 0.98 & 0 \\\hline
-Bike0 & 0 & 0.5 & 99.5 & 0 \\\hline
-Bike1 & 0 & 0 & 100 & 0 \\\hline
-Bike2 & 1.9 & 1.2 & 96.9 & 0 \\
-\end{tabularx}
+\begin{figure}[!htb]
+  \caption{Classification} 
+  \centering
+  \begin{tabularx}{\textwidth}{X|r|r|r|r}
+  \hline \textbf{Object Name} & \textbf{Car [\%]} & \textbf{Bike [\%]} & \textbf{Pedestian [\%]} & \textbf{Unclassified [\%]} \\\hline
+    Pedestian & 0 & 0 & 100 & 0 \\\hline
+    Car0 & 100 & 0 & 0 & 0 \\\hline
+    Car1 & 100 & 0 & 0 & 0 \\\hline
+    Car2 & 98.2 & 0.73 & 0.98 & 0 \\\hline
+    Bike0 & 0 & 0.5 & 99.5 & 0 \\\hline
+    Bike1 & 0 & 0 & 100 & 0 \\\hline
+    Bike2 & 1.9 & 1.2 & 96.9 & 0 \\
+  \end{tabularx}
+ \label{classification}
+\end{figure}
 
-Einfach zu erkennen ist, das die Autos als auch der Fußgänger mit hoher zuverlässigkeit klassifiziert werden. Lediglich Car2 wird wenige male flasch klassifiziert.
-Was bereits in bezug auf \cref{lost} gekärt wurde. Leider ist auch zu erkennen, das die Radfahrer nahzu immer flasch klassifiziert  werden
 
 
+
+In \cref{classification} einfach zu erkennen ist, das die Autos als auch der Fußgänger mit hoher zuverlässigkeit klassifiziert werden. Lediglich Car2 wird wenige male flasch klassifiziert.
+Was bereits in bezug auf \cref{lost} gekärt wurde. Leider ist auch zu erkennen, das die Radfahrer nahzu immer flasch klassifiziert werden. Dies liegt daran,
+das die Fahrräder nicht genug fläche für den Sensor bieten, so dass der Großteil der Messungen nur auf der Person auf dem Fahrrad liegen.
 
 
 
@@ -2066,15 +2108,22 @@ Was bereits in bezug auf \cref{lost} gekärt wurde. Leider ist auch zu erkennen,
 Im folgen werten wir das Simulationsscenario an sich aus, idem wir die beiden krittischen Situationen das einfahren und ausfahren des testfahrzeuges aus dem Kreisverkehr 
 innerhalb der Objektdetection Ansehen.
 
+Betrachten wir als ersten die einfahr situation. Das Auto hate bereit am Fahrbahnrand angehalten.
 
-Bild mit Rotationsproblemen\\
-
-
-Bilder Classifizierung der Objekte (Radfahrer falsch etc...)\\
-
-Bilder Erfolgreiche erkennungen.\\
-
-Digramm komplettausfall erkennung (ab welcher entfernung)\\
+\begin{figure}[htb]
+  \caption{Roundabout Entrance} 
+    \centering
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+          \includegraphics[width=\textwidth]{bilder/sim01.png}
+    \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+        \centering
+	\includegraphics[width=\textwidth]{bilder/sim02.png}
+    \end{minipage}
+    \label{roundabout_entrance}
+\end{figure}
 
 \section{Real Measurements}
 
