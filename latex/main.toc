@@ -74,7 +74,7 @@
 \contentsline {section}{\numberline {8.2}Real Measurements}{51}{section.8.2}
 \contentsline {subsection}{\numberline {8.2.1}Segmentation}{51}{subsection.8.2.1}
 \contentsline {subsection}{\numberline {8.2.2}Confidence Filter}{52}{subsection.8.2.2}
-\contentsline {subsection}{\numberline {8.2.3}Pedestrian}{53}{subsection.8.2.3}
+\contentsline {subsection}{\numberline {8.2.3}Pedestrian}{52}{subsection.8.2.3}
 \contentsline {section}{\numberline {8.3}Performance}{53}{section.8.3}
 \contentsline {chapter}{\numberline {9}Conclusions}{56}{chapter.9}
 \select@language {english}

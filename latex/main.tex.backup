@@ -2073,8 +2073,10 @@ and the here measured values have only a slight deviation.
 
 
 \subsubsection{Classification}
-Für die Berwertung der Klassifizierung wurde ein Simulationsdurchlauf mit einer länge von 3min und 11 Sekunden aufgenommen (1917 samples), und automatisch ausgwertet.
-Aus diesen Daten wurde \cref{classification} erstellt.
+% Für die Berwertung der Klassifizierung wurde ein Simulationsdurchlauf mit einer länge von 3min und 11 Sekunden aufgenommen (1917 samples), und automatisch ausgwertet.
+% Aus diesen Daten wurde \cref{classification} erstellt.
+For the evaluation of the classification, a simulation run with a length of 3 minutes and 11 seconds was recorded (1917 samples), and automatically evaluated. 
+From this data, \cref{classification} was created.
 
 \begin{figure}[!htb]
   \caption{Classification} 
@@ -2095,19 +2097,23 @@ Aus diesen Daten wurde \cref{classification} erstellt.
 
 
 
-In \cref{classification} einfach zu erkennen ist, das die Autos als auch der Fußgänger mit hoher zuverlässigkeit klassifiziert werden. Lediglich Car2 wird wenige male flasch klassifiziert.
-Was bereits in bezug auf \cref{lost} gekärt wurde. Leider ist auch zu erkennen, das die Radfahrer nahzu immer flasch klassifiziert werden. Dies liegt daran,
-das die Fahrräder nicht genug fläche für den Sensor bieten, so dass der Großteil der Messungen nur auf der Person auf dem Fahrrad liegen.
+% In \cref{classification} einfach zu erkennen ist, das die Autos als auch der Fußgänger mit hoher zuverlässigkeit klassifiziert werden. Lediglich Car2 wird wenige male flasch klassifiziert.
+% Was bereits in bezug auf \cref{lost} gekärt wurde. Leider ist auch zu erkennen, das die Radfahrer nahzu immer flasch klassifiziert werden. Dies liegt daran,
+% das die Fahrräder nicht genug fläche für den Sensor bieten, so dass der Großteil der Messungen nur auf der Person auf dem Fahrrad liegen.
+It is easy to recognize in \cref{classification}, that the cars as well as the pedestrian are classified with high reliability. Only Car2 is wrongly classified a few times.
+What has already been clarified with regard to \cref{lost}. Unfortunately, it can also be seen that the cyclists are classified almost always classified. 
+This is because the bicycles do not provide enough space for the sensor so that most of the measurements are only on the person on the bike.
 
 
 
 \subsubsection{Scenario Handling}
-Im folgen werten wir das Simulationsscenario an sich aus, idem wir die beiden krittischen Situationen das einfahren und ausfahren des testfahrzeuges aus dem Kreisverkehr 
-innerhalb der Objektdetection Ansehen.
+%Im folgen werten wir das Simulationsscenario an sich aus, idem wir die beiden krittischen Situationen das einfahren und ausfahren des testfahrzeuges aus dem Kreisverkehr 
+%innerhalb der Objektdetection Ansehen.
+In the following, we investigate the simulation scenario itself, by looking at the two critical situations in which the test vehicle, enters and exis the roundabout.
 
-Betrachten wir als ersten die einfahr situation. Fahrzeug Auto hat bereits am Fahrbahnrand angehalten.
-In  \cref{roundabout_entrance_1} können wir sehen, dass alle Fahrzeuge korrekt erkannt wurden.
-
+% Betrachten wir als ersten die einfahr situation. Fahrzeug Auto hat bereits am Fahrbahnrand angehalten.
+% In  \cref{roundabout_entrance_1} können wir sehen, dass alle Fahrzeuge korrekt erkannt wurden.
+Let us first consider the entrance situation. The vehicle has already stopped at the edge of the road. In \cref{roundabout_entrance_1} it can be seen that all vehicles are detected correctly.
 
 \begin{figure}[htb]
   \caption{Roundabout Entrance 1} 
@@ -2124,9 +2130,11 @@ In  \cref{roundabout_entrance_1} können wir sehen, dass alle Fahrzeuge korrekt 
     \label{roundabout_entrance_1}
 \end{figure}
 
-Einige Zeitschritte später sehen wir jedoch, dass unser Fahrzeug weiter in den Kreisverkehr reingefahren ist und dann wieder angehalten hat.
-Das liegt darin begründet, das Fahrzeug B kurz zuvor von Fahrzeug A verdeckt war und desshalb das Tracking versagt, wie in \cref{roundabout_entrance_2} zusehen.
+% Einige Zeitschritte später sehen wir jedoch, dass unser Fahrzeug weiter in den Kreisverkehr reingefahren ist und dann wieder angehalten hat.
+% Das liegt darin begründet, das Fahrzeug B kurz zuvor von Fahrzeug A verdeckt war und desshalb das Tracking versagt, wie in \cref{roundabout_entrance_2} zusehen.
 
+Some time later, however, it can be seen that the test vehicle continues to enter the roundabout and then stopped again.
+This is due to the fact that the vehicle B was covered by Vehicle A just a short time before, so the tracking fails as seen in \cref{roundabout_entrance_2}.
 
 \begin{figure}[htb]
   \caption{Roundabout Entrance 2} 
@@ -2143,7 +2151,8 @@ Das liegt darin begründet, das Fahrzeug B kurz zuvor von Fahrzeug A verdeckt wa
     \label{roundabout_entrance_2}
 \end{figure}
 
-Diese Situation tritt noch ein weiteres mal auf, bis, wie in \cref{roundabout_entrance_3} zu sehen, das Fahrzeug sicher in den Kreisverkehr einfahren kann.
+% Diese Situation tritt noch ein weiteres mal auf, bis, wie in \cref{roundabout_entrance_3} zu sehen, das Fahrzeug sicher in den Kreisverkehr einfahren kann.
+This situation occurs once more, until, as seen in \cref{roundabout_entrance_3}, the vehicle can safely enter the roundabout.
 
 \begin{figure}[htb]
   \caption{Roundabout Entrance 3} 
@@ -2161,7 +2170,8 @@ Diese Situation tritt noch ein weiteres mal auf, bis, wie in \cref{roundabout_en
 \end{figure}
 
 
-Betrachten wir nun das herausfahren aus dem Kreisverkehr. In \cref{roundabout_exit_1} zu sehen, ist dass der Fahrzeug aus dem Kreisverkehr ausfahren will, jedoch vom Radfahrer daran gehindert wird.
+% Betrachten wir nun das herausfahren aus dem Kreisverkehr. In \cref{roundabout_exit_1} zu sehen, ist dass der Fahrzeug aus dem Kreisverkehr ausfahren will, jedoch vom Radfahrer daran gehindert wird.
+Let us now look at the exit from the roundabout. To see in \ cref {roundabout_exit_1} is that the vehicle wants to leave the roundabout, but is blocked by the cyclist.
 
 \begin{figure}[htb]
   \caption{Roundabout Exit 1} 
@@ -2178,7 +2188,8 @@ Betrachten wir nun das herausfahren aus dem Kreisverkehr. In \cref{roundabout_ex
     \label{roundabout_exit_1}
 \end{figure}
 
-Dieser wird erfolgreich erkannt, sodass das Fahrzeug erfolgreich vor dem Radweg  anhält. Zu sehen in \cref{roundabout_exit_2}
+% Dieser wird erfolgreich erkannt, sodass das Fahrzeug erfolgreich vor dem Radweg  anhält. Zu sehen in \cref{roundabout_exit_2}
+This is successfully detected so that the vehicle stops successfully in front of the cycle path. To be seen in \cref{roundabout_exit_2}
 
 \begin{figure}[htb]
   \caption{Roundabout Exit 2} 
@@ -2195,7 +2206,8 @@ Dieser wird erfolgreich erkannt, sodass das Fahrzeug erfolgreich vor dem Radweg 
     \label{roundabout_exit_2}
 \end{figure}
 
-Nachdem der Radwegwieder frei ist, kann das Fahrzeug den Kreisverkehr sicher verlassen, siehe \cref{roundabout_exit_3}
+%Nachdem der Radwegwieder frei ist, kann das Fahrzeug den Kreisverkehr sicher verlassen, siehe \cref{roundabout_exit_3}
+Once the cycle path is clear, the vehicle can safely leave the roundabout, see \cref{roundabout_exit_3}
 
 \begin{figure}[htb]
   \caption{Roundabout Exit 3} 
@@ -2212,11 +2224,16 @@ Nachdem der Radwegwieder frei ist, kann das Fahrzeug den Kreisverkehr sicher ver
     \label{roundabout_exit_3}
 \end{figure}
 
-Im weiteren Verlauf der Simulation treten immer wieder situationen auf, in dem das Auto aufgrund verdeckter Fahrzeuge den Kreisverkehr zu früh befährt.
-Dabei kahm es in keinem Fall zu einer Kollision. Jedoch ist dieser Zustand nicht optimal. Das Tracking kann die verdeckten Fahrzeuge meißt bis einen Zeitschritt
-bevor es wieder sichtbar wird verfolgen. Doch Der Konfidence wert des Objektes wird zu schnell zu niedrig und das Objekt wird verworfen. Weiterhin führt der Zeitraum in dem das Objekt am verschinden ist
-zu einer falschen Rotation des Ojektes für wenige Zeitschritte, wie schon in \cref{lost} zu sehen. Was dazu führt, dass die Berechnte Trajektorie des Trackings verfälscht wird und kein
-Optimales Tracking mehr erfolgen kann.
+% Im weiteren Verlauf der Simulation treten immer wieder situationen auf, in dem das Auto aufgrund verdeckter Fahrzeuge den Kreisverkehr zu früh befährt.
+% Dabei kahm es in keinem Fall zu einer Kollision. Jedoch ist dieser Zustand nicht optimal. Das Tracking kann die verdeckten Fahrzeuge meißt bis einen Zeitschritt
+% bevor es wieder sichtbar wird verfolgen. Doch Der Konfidence wert des Objektes wird zu schnell zu niedrig und das Objekt wird verworfen. Weiterhin führt der Zeitraum in dem das Objekt am verschinden ist
+% zu einer falschen Rotation des Ojektes für wenige Zeitschritte, wie schon in \cref{lost} zu sehen. Was dazu führt, dass die Berechnte Trajektorie des Trackings verfälscht wird und kein
+% Optimales Tracking mehr erfolgen kann.
+In the further process of the simulation, situations occur again and again, in which the car moves too early from the roundabout due to hidden vehicles.
+At all the time, there was no collision. However, this condition is not optimal. Tracking can track the hidden vehicles until a time step before it becomes visible again.
+However, the object's confidence value becomes too low and the object is discarded. 
+Furthermore, the period in which the object disappears leads to a false rotation of the object for a few time steps as seen in \cref{lost}. 
+This causes the calculated trajectory of the tracking to be corrupted and no more optimal tracking can take place.
 
 \section{Real Measurements}
 
@@ -2226,22 +2243,42 @@ Im rahmen des Scenarios fährt unser Fahrzeug von Norden in den Testkreisverkehr
 In diesem Befindet sich bereits ein weiteres Fahrzeug, welches bei der Einfahrt beobachtet werden muss. Weiterhin befindet sich ein Fußgänger innehalb des Kreisverkehres, welcher
 bei der Ausfahrt beachtet werden muss.
 
+Consider the following test data from the real test vehicle ``Snowfox'' at the AstaZero proving ground. The test roundabout in \cref{astazero} was chosen 
+as test environment. This is a mini roundabout with a diameter of 18m. 
+In the context of the scenario, the test vehicle enters the test roundabout from the north. 
+There is also another vehicle and a pedestrian, which must be observed.
 \subsection{Segmentation}
 
-Im gegensatzt zur simulation erlauben es die Realen messdaten nicht, unsere Messwerte an Vergleichsdaten zu überprüfen. Die Messdaten sind jedoch unglich viel wertvoller,
-da sie keine Klinisch reine Umgebeung darstellen. Beispielsweise ist die Straße im gegensatzt zu Umgebung erhöht, diese ist dazu voller dicher Vegetation.
-Dies weiterhin ist unsere Straße nicht perfekt Plan, was eine weitere Herausforderung für die Segmentierung darstellt.
+% Im gegensatzt zur simulation erlauben es die Realen messdaten nicht, unsere Messwerte an Vergleichsdaten zu überprüfen. Die Messdaten sind jedoch unglich viel wertvoller,
+% da sie keine Klinisch reine Umgebeung darstellen. Beispielsweise ist die Straße im gegensatzt zu Umgebung erhöht, diese ist dazu voller dicher Vegetation.
+% Dies weiterhin ist unsere Straße nicht perfekt Plan, was eine weitere Herausforderung für die Segmentierung darstellt.
 
-Zur evalierung der Segemntierung wurden alle Messframes von and begutachtet. Dabei wurden falsch positive Segementierungen der Straße notiert.
-Falsch positiv beideutet in diesem Fall, das Teile der Straße als nicht grund Klassifiziert wurden. 
-Mehrere falsche erkennungen innerhalb eine Messframes wurden als ein Fehler gewertet.
-Es werden nur teile der Straße herangezogen, da alle anderen Bereich durch eine Karter herausgefiltert werden könnten. Weiterhin weil, eine bewertung per hand sonst nicht machbar währe.
-Zur bewertung der False negative wurde nur das Auto begutachtet,
-da der Fußgänger auch als mensch in den Daten oft nicht zu erkennen ist. Damit eine Ekrennung als false Negative gewertet wird, müssen alle
-teile des Fahrzeuges als Boden klassiffiziert werden. Es wurden insgesammt 819 Messframes Ausgewertet.
+In contrast to the simulation, the real measurement data does not allow the measured values to be compared to comparative data. 
+However, the measurement data are much more valuable, since they are not a clinically pure environment.
+For example, the road is higher in contrast to the surrounding area, which is full of dense vegetation. 
+Furthermore, our road is not a perfect plane, which is another challenge for segmentation.
 
-Die Auswertung der False positives hat 20 fälle egeben. Ein Beispiel dazu ist in \cref{false_pos_seg_1} zu sehen. Alle Hellblauen Bereich stellen
-dabei Boden dar, während schwarze bereiche potenzielle Objekte darstellen.
+% Zur evalierung der Segemntierung wurden alle Messframes von and begutachtet. Dabei wurden falsch positive Segementierungen der Straße notiert.
+% Falsch positiv beideutet in diesem Fall, das Teile der Straße als nicht grund Klassifiziert wurden. 
+% Mehrere falsche erkennungen innerhalb eine Messframes wurden als ein Fehler gewertet.
+% Es werden nur teile der Straße herangezogen, da alle anderen Bereich durch eine Karter herausgefiltert werden könnten. Weiterhin weil, eine bewertung per hand sonst nicht machbar währe.
+% Zur bewertung der False negative wurde nur das Auto begutachtet,
+% da der Fußgänger auch als mensch in den Daten oft nicht zu erkennen ist. Damit eine Ekrennung als false Negative gewertet wird, müssen alle
+% teile des Fahrzeuges als Boden klassiffiziert werden. Es wurden insgesammt 819 Messframes Ausgewertet.
+
+For the evaluation of the segmentation all measuring frames were examined by hand. 
+False-positive segmentations of the street were noted. False-positive in this case, are the parts of the road which are classified as not ground. 
+Several false detections within one measurement frame were considered one error.
+Only parts of the road used as all other area could be filtered out by a map. 
+Furthermore because, an assessment by hand would otherwise not be feasible.
+For the evaluation of the false-negative, only the car was examined, since the pedestrian is often not seen as a human in the data. 
+In order for measurement frame to be recognized as false negative, all parts of the vehicle must be classified as ground. 
+A total of 819 measurement frames were evaluated.
+
+% Die Auswertung der False positives hat 20 fälle egeben. Ein Beispiel dazu ist in \cref{false_pos_seg_1} zu sehen. Alle Hellblauen Bereich stellen
+% dabei Boden dar, während schwarze bereiche potenzielle Objekte darstellen.
+The evaluation of the False positives has given 20 cases. An example is shown in \cref{false_pos_seg_1}. 
+All light blue areas represent ground while black areas represent potential objects.
 
 \begin{figure}[!htb]
   \caption{Car0 velocity} 
@@ -2251,17 +2288,26 @@ dabei Boden dar, während schwarze bereiche potenzielle Objekte darstellen.
 \end{figure}
 
 
-Es wurden in den Messframes keine False negativen gefunden. Die Gesammtanzahl der Fehler liegt somit bei 2.4\%. 
-In wie Fern sich die Fahlenden Messwerte des Sensors im hintern Bereich des Fahrzeuges auswirken lässt sich anhand der Daten leider nicht
-evalieren. Allerdings ist auch zu sagen das niemals ein Falspositive als Objekt erkannt wurde, das ist daruf zurückzuführen,
-dass dei False Positives immer nur für einen einzenen Frame vorhanden sind. Daher werden diese Durch den Confidence wert herausgefiltert und
-und würden das Fahrverhalten der Autonomen Fahrzeues nicht beeinträchtigen. Zu beachten ist allerdings auch, das die Segmentierung mit einem
-\ac{RANSAC} abreitet, welcher nicht determinitisch ist. Daher kann dies bei einem weiteren durchlauf anders aussehen.
+% Es wurden in den Messframes keine False negativen gefunden. Die Gesammtanzahl der Fehler liegt somit bei 2.4\%. 
+% In wie Fern sich die Fahlenden Messwerte des Sensors im hintern Bereich des Fahrzeuges auswirken lässt sich anhand der Daten leider nicht
+% evalieren. Allerdings ist auch zu sagen das niemals ein Falspositive als Objekt erkannt wurde, das ist daruf zurückzuführen,
+% dass dei False Positives immer nur für einen einzenen Frame vorhanden sind. Daher werden diese Durch den Confidence wert herausgefiltert und
+% und würden das Fahrverhalten der Autonomen Fahrzeues nicht beeinträchtigen. Zu beachten ist allerdings auch, das die Segmentierung mit einem
+% \ac{RANSAC} abreitet, welcher nicht determinitisch ist. Daher kann dies bei einem weiteren durchlauf anders aussehen.
+No false negatives were found in the measurement frames. The total number of errors is therefore 2.4 \%.
+How the missing measured values of the sensor in the rear area of the vehicle affect, can not be evaliert by the data unfortunately.
+However, it is also said that a false positive object was never recognized as an object,
+which is due to the fact that the false positives are only present for a single frame. 
+Therefore, these are filtered out by the confidence value and would not interfere with the driving behavior of the autonomous vehicle. 
+Note, however, that the segmentation proceeds with a \ac{RANSAC}, which is not deterministic. Therefore, this may look different in another cycle.
 
 \subsection{Confidence Filter}
-Weiterhin bieten uns die echten messwerte die Möglichkeit den Confiden Filter zu evaluieren. 
-Da hier sehr viel Vegetation nicht als boden klassifiziert wird, was sich in geisterobjekten entlang des Straßenrandes auswirkt.
-Dazu werden im folgenden zwei momentaufnahmen betrachtet (\cref{conf_filter}), einmal mit Filter und einmal ohne, um die qualität bewerten zu können.
+% Weiterhin bieten uns die echten messwerte die Möglichkeit den Confiden Filter zu evaluieren. 
+% Da hier sehr viel Vegetation nicht als boden klassifiziert wird, was sich in geisterobjekten entlang des Straßenrandes auswirkt.
+% Dazu werden im folgenden zwei momentaufnahmen betrachtet (\cref{conf_filter}), einmal mit Filter und einmal ohne, um die qualität bewerten zu können.
+Furthermore, the real measured values offer the possibility to evaluate the confidence filter.
+Since here very much vegetation is not classified as ground, which results in ghost objects along the road edge.
+To this end, two snapshots are taken (\cref{conf_filter}), once with a filter and once without, in order to evaluate the quality.
 
 \begin{figure}[htb]
   \caption{Confidence Filtering} 
@@ -2280,16 +2326,21 @@ Dazu werden im folgenden zwei momentaufnahmen betrachtet (\cref{conf_filter}), e
     \label{conf_filter}
 \end{figure}
 
-Wie wir sehen können wird ein großteil aller ungültigen Onjekte herausgefiltert. Lediglich einige kleinere Objekte bleibe erhalten.
-Diese befinden sich jedoch stets außerhalb der Fahrbahn und ließen sich ebenfalls über eine Karte herausfiltern.
-Eine abschließende aussage lässt sich jedoch nur mit aufnahmen in einer echten Urbanen Umgebung, mit mehreren Fahrzeugen und andern Verkehrsteilnehmern machen
-
+% Wie wir sehen können wird ein großteil aller ungültigen Onjekte herausgefiltert. Lediglich einige kleinere Objekte bleibe erhalten.
+% Diese befinden sich jedoch stets außerhalb der Fahrbahn und ließen sich ebenfalls über eine Karte herausfiltern.
+% Eine abschließende aussage lässt sich jedoch nur mit aufnahmen in einer echten Urbanen Umgebung, mit mehreren Fahrzeugen und andern Verkehrsteilnehmern machen
+As we can see, most of the invalid objects are filtered out. Only a few smaller objects remain.
+These are, however, always outside the road and also could be filtered out on a map.
+However, a final statement can only be made with measurement data in a real urban environment, with several vehicles and other traffic participants.
 
 \todo{we and our enterfernen !! Überall!!}
 \subsection{Pedestrian}
-In diesem Abschnitt wird der Fußgänger im Scenario genauer untersucht. Dieser ist in diesem Szenarion besonder schwer zu erkennen,
-da der Kreisverkehr nicht über einen Fußweg verfügt und sich der Fußgängerdireckt am Sraßenrand befindet.
-Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von anderen Onjekten am Straßenrand, wie z.B. Leitpfosten \cref{refPosts}, zu unterschiden ist.
+% In diesem Abschnitt wird der Fußgänger im Scenario genauer untersucht. Dieser ist in diesem Szenarion besonder schwer zu erkennen,
+% da der Kreisverkehr nicht über einen Fußweg verfügt und sich der Fußgängerdireckt am Sraßenrand befindet.
+% Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von anderen Onjekten am Straßenrand, wie z.B. Leitpfosten \cref{refPosts}, zu unterschiden ist.
+In this section the pedestrian in the scenario is examined more closely. This is particularly difficult to see in this scenario, 
+since the roundabout does not have a footpath and the pedestrian is located on the road edge.
+This leads to the fact that pedestrian from the bird's eye view it is not to differ from other objects, like Reflector Posts (see \cref{refPosts}), on the road edge.
 
 \begin{figure}[!htb]
   \caption{Pedestian and Reflector Posts} 
@@ -2297,18 +2348,24 @@ Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von ande
   \includegraphics[width=0.5\textwidth]{bilder/reflector_posts.png}
  \label{refPosts}
 \end{figure}
-
-Problematisch ist dabei vorallem, das der Fußgänger nur durch seine Größe klassiffiziert wird.
-Dies führt dazu das er nicht von kleinen Statischen elementen zu unterscheiden ist. Befindet dieser sich
-nahe an einem statsichen Hindernis, kann es passieren, das diese als ein großes hinderiss erkannt werden. 
-Das gleich würde auch bei größeren Menschenmassen an einem Fußgängerüberweg passieren. Dies ist in dieser Aufnahme 
-jdeoch nicht passiert und der Fußgänger konnte zu jeder zeit erfolgreich als eigenständiges Objekt erkannt werden.
+% 
+% Problematisch ist dabei vorallem, das der Fußgänger nur durch seine Größe klassiffiziert wird.
+% Dies führt dazu das er nicht von kleinen Statischen elementen zu unterscheiden ist. Befindet dieser sich
+% nahe an einem statsichen Hindernis, kann es passieren, das diese als ein großes hinderiss erkannt werden. 
+% Das gleich würde auch bei größeren Menschenmassen an einem Fußgängerüberweg passieren. Dies ist in dieser Aufnahme 
+% jdeoch nicht passiert und der Fußgänger konnte zu jeder zeit erfolgreich als eigenständiges Objekt erkannt werden.
+The problem is, in particular, that the pedestrian is only classified by its size. 
+This leads to the fact that he is not to be distinguished from small static elements.
+If this is close to a static obstacle, it can happen that these are recognized as a major obstacle.
+The same would happen even with larger human masses on a pedestrian crossing.
+This has not happened in this recording, however, and the pedestrian could be successfully recognized as an independent object at any time.
 
 
 \section{Performance}
 
 Abschließend gehen wir aud die laufzeit des Programmes ein dazu wurden Benchmarks auf zwei verschiedenen Systemen vorgenommen, die visualisierung der Messwerte wurde dabei deaktiviert.
 Dazu wurden insgesammt 893 Messframes ausgewertet und die bearbeitungszeit für jeden Frame gelogt. 
+Das programm wurde dazu mit folgenden Flags compiliert: ``-march=native -O3 -flto -pipe'' (GCC 6.3.1)
 
 Dazu wurden folgende Testsysteme genutzt:
 \begin{description}
@@ -2341,7 +2398,11 @@ Ergebnisse:
 \end{description}
 \end{description}
 
-Da die reinen laufzeitwerte wenig aussagekraft haben, wird im folgenden das Profiling chart (\cref{profiling}) des Programmes betrachtet.
+Da die Messerte des Velodyne Sensors mit 10Hz kommen, ist eine laufzeit von wneiger als 100ms nötig um die Daten in echtzeit auswerten zu können.
+Zu sehen ist das das ältere Desktop system diesen wert nicht erreicht. Das neuere Notebook hingegen erreich diesen Wert.
+Da sich das Fahrzeug jedoch mit zum teile hohen geschindigkeiten bewegt währe ein kleinerer wert wünschenswert um die
+Verzögerung der Messwerte zu reduzieren. Dabei sei Angemerkt, das es raum für optimierunen gibt. 
+Da die reinen laufzeitwerte dazu wenig aussagekraft haben, wird im folgenden das Profiling chart (\cref{profiling}) des Programmes betrachtet.
 Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die Anzahl der Instuktionen abschätzt.
 
 
@@ -2354,9 +2415,14 @@ Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die
 
 
 \footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}.
-Wie wir sehen fallen fast 40\% der instruktionen auf die bereichsanfrage des \ac{DBSCAN}
+Es fällt auf, dass  fast 40\% der instruktionen auf die bereichsanfrage des \ac{DBSCAN} fallen. kommen weitere Funktionen des DBSACN hinzu
+kommen erhöht sich dern anteil auf über 50\%. Ein weiterer groteil der Laufzeit entfällt auf die kovertierung der Messwerte in kartesische kordinaten (6.1\%)
+sowie Speicherverwaltung der Poincloud (23,61\%). Also fallen über 75\% der laufzeit auf wenig funktionlität des Programmes.
+Um das Programm zu optimieren sollte also eine Alternative für den \ac{DBSCAN} gefunden werden. Wenn der Clusering algorythmus direckt auf den Polarkoordinaten
+arbeiten könnte fällt auch das Konvertieren der Pointcloud weg. Weiterhin ist es natürlich auch möglich den vorhandenen Algorythmus zu paralelisieren.
+Besonders für die Bereichsanfrage des \ac{DBSCAN} ließe sich das einfach umsetzten.
 
-\chapter{Conclusions and Future Work}
+\chapter{Conclusions}
 Kann in mehrere Unterkapitel gegliedert werden\\\\
 Greift Thesen oder Fragestellungen aus der Einleitung wieder auf\\\\
 Fasst die Arbeit knapp und prägnant zusammen\\\\
