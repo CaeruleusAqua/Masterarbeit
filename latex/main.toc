@@ -53,30 +53,30 @@
 \contentsline {subsection}{\numberline {6.5.3}Reassigning}{35}{subsection.6.5.3}
 \contentsline {chapter}{\numberline {7}Simulation}{36}{chapter.7}
 \contentsline {section}{\numberline {7.1}Simulation Scenario}{36}{section.7.1}
-\contentsline {section}{\numberline {7.2}Simulation Logic}{37}{section.7.2}
-\contentsline {subsection}{\numberline {7.2.1}Sensor Connection}{37}{subsection.7.2.1}
-\contentsline {subsection}{\numberline {7.2.2}Mapping}{38}{subsection.7.2.2}
-\contentsline {subsubsection}{Localization}{38}{section*.63}
-\contentsline {subsection}{\numberline {7.2.3}State Machine}{40}{subsection.7.2.3}
-\contentsline {paragraph}{Start - State}{41}{section*.67}
-\contentsline {paragraph}{ToRoundabout - State}{41}{section*.68}
-\contentsline {paragraph}{Brake - State}{41}{section*.69}
-\contentsline {paragraph}{InRoundabout - State}{41}{section*.70}
-\contentsline {paragraph}{ExitRoundabout - State}{41}{section*.72}
-\contentsline {chapter}{\numberline {8}Evaluation}{43}{chapter.8}
-\contentsline {section}{\numberline {8.1}Simulation}{43}{section.8.1}
-\contentsline {subsection}{\numberline {8.1.1}Detection Distance Performance}{43}{subsection.8.1.1}
-\contentsline {subsection}{\numberline {8.1.2}Measurements Performance}{44}{subsection.8.1.2}
-\contentsline {subsubsection}{Position Error}{45}{section*.76}
-\contentsline {subsubsection}{Speed Error}{48}{section*.83}
-\contentsline {subsubsection}{Classification}{49}{section*.86}
-\contentsline {subsubsection}{Scenario Handling}{49}{section*.88}
+\contentsline {section}{\numberline {7.2}Simulation Logic}{38}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Sensor Connection}{38}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Mapping}{39}{subsection.7.2.2}
+\contentsline {subsubsection}{Localization}{40}{section*.65}
+\contentsline {subsection}{\numberline {7.2.3}State Machine}{41}{subsection.7.2.3}
+\contentsline {paragraph}{Start - State}{42}{section*.69}
+\contentsline {paragraph}{ToRoundabout - State}{42}{section*.70}
+\contentsline {paragraph}{Brake - State}{42}{section*.71}
+\contentsline {paragraph}{InRoundabout - State}{42}{section*.72}
+\contentsline {paragraph}{ExitRoundabout - State}{43}{section*.74}
+\contentsline {chapter}{\numberline {8}Evaluation}{44}{chapter.8}
+\contentsline {section}{\numberline {8.1}Simulation}{44}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}Detection Distance Performance}{44}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}Measurements Performance}{45}{subsection.8.1.2}
+\contentsline {subsubsection}{Position Error}{46}{section*.77}
+\contentsline {subsubsection}{Speed Error}{48}{section*.84}
+\contentsline {subsubsection}{Classification}{49}{section*.87}
+\contentsline {subsubsection}{Scenario Handling}{50}{section*.89}
 \contentsline {section}{\numberline {8.2}Real Measurements}{51}{section.8.2}
-\contentsline {subsection}{\numberline {8.2.1}Segmentation}{51}{subsection.8.2.1}
-\contentsline {subsection}{\numberline {8.2.2}Confidence Filter}{52}{subsection.8.2.2}
+\contentsline {subsection}{\numberline {8.2.1}Segmentation}{52}{subsection.8.2.1}
+\contentsline {subsection}{\numberline {8.2.2}Confidence Filter}{53}{subsection.8.2.2}
 \contentsline {subsection}{\numberline {8.2.3}Pedestrian}{53}{subsection.8.2.3}
-\contentsline {section}{\numberline {8.3}Performance}{53}{section.8.3}
-\contentsline {chapter}{\numberline {9}Conclusions}{55}{chapter.9}
+\contentsline {section}{\numberline {8.3}Performance}{54}{section.8.3}
+\contentsline {chapter}{\numberline {9}\unhbox \voidb@x \hbox {Conclusions and Future}}{56}{chapter.9}
 \select@language {english}
 \select@language {english}
 \select@language {english}
@@ -149,11 +149,15 @@
 \select@language {english}
 \select@language {english}
 \select@language {english}
-\select@language {ngerman}
+\select@language {english}
 \select@language {english}
 \select@language {ngerman}
 \select@language {english}
 \select@language {ngerman}
+\select@language {english}
+\select@language {ngerman}
+\select@language {english}
+\select@language {english}
 \select@language {english}
 \select@language {english}
 \select@language {english}

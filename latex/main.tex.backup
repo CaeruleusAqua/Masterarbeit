@@ -1549,9 +1549,18 @@ The Adaptive Cruise Control is implemented as a simple proportional controller.
 % die Aufgabe des Fahrzeues ist dabei sich sicher in den Kreisfehr einzusortieren und den Kreisverkehr sicher zu verlassen. Dabei Muss das Fahhzeug sowohl aud den Fußgänger, den Radfahrer
 % und die Andren Fahrzeuge innerhalb des Kreisverkehres achten. Dazu ist das Fahrzeug mit einem virtuellen Velodyne VLP-16 ausgestattet.
 
-The autonomous vehicle also moves along a fixed path, which leads from the right into the roundabout and leaves the roundabout at the third exit. 
+The autonomous vehicle also moves along a fixed path (see \cref{mycar_path}), which leads from the right into the roundabout and leaves the roundabout at the third exit. 
 The task of the vehicle is to safely enter the roundabout and safely leave the roundabout. In doing so, the vehicle must pay attention both to the pedestrians,
 the cyclists and the other vehicles within the roundabout. For this, the vehicle is equipped with a virtual Velodyne VLP-16 and the previously described algorithms deliver the detected objects.
+
+\begin{figure}[!ht]
+\begin{center}
+\caption{Test Vehicle Path}
+\includegraphics[width=\textwidth]{bilder/mycar_path.png}
+\label{mycar_path}
+\end{center}
+\end{figure}
+
 
 \section{Simulation Logic}
 
@@ -2426,7 +2435,7 @@ It is, of course, also possible to parallelize the existing algorithm. Especiall
 
 
 \todo{pfad des Eigenen Fahrzeuges hinzufügen}
-\todo{fall zeigen wo trackin funktioniert bei verdecken hinderniss\
+\todo{fall zeigen wo trackin funktioniert bei verdecken hinderniss}
 \chapter{Conclusions}
 
 % Letztendlich ist zu beantworten ob die Sensorausstattung des Tesfahrzeuges ``Snowfox'' ausreichend ist um
@@ -2449,57 +2458,85 @@ It is, of course, also possible to parallelize the existing algorithm. Especiall
 % Qualität der Messwerte Position und Geschwindigkeit stark schwankend. An dieser Stelle würde ein besserer Sensor
 % jedoch keine Abhilfe schaffen. Stattdessen ließe sich dass Problem abmildern, wenn verhindert wird, dass die direkt
 % gemessene Orientierung und Geschwindigkeit des Fahrzeuges kurz vor dem Tracking Verlust
+% Dies währe eventuell durch ein frühzeitiges Abbrechen des Update Schrittes im Kalman Filter
+% bei starken Größenänderungen des Objektes möglich, alternativ könne auch die Varianz der Messwerte im Filter adaptiv
+% Gestaltet werden. Dazu währen jedoch weitere Untersuchungen nötig. Weitere Probleme gibt es mit der Klassifizierung der Objekte
+% während Fahrzeuge und Fußgänger stets gut erkannt wurden, ist die Klassifizierung der Radfahrer fehlgeschlagen.
+% Generell stellt es ein Problem dar, dass Objekte zu anhand ihrer Größe klassifiziert werden.
+% Denn statische Objekte können so auch beliebig als Auto, Radfahrer oder Fußgänger klassifiziert werden.
+% Da die erkannten Objekte grundsätzlich alle roh Messdaten gespeichert haben währe es leicht
+% ddiese an einen externen erweiterten Klassifizierer weiterzuleiten. Ob die Messdaten für eine erweiterten Klassifizierung
+% geeignet sind muss jedoch noch untersucht werden. Da das Testfahrzeug in Zukunft jedoch mit weiteren Sensoren wie Kameras ausgestattet sein wird, können diese Daten ebenfalls zur Klassifizierung herangezogen
+% werden. Zur Erkennung von Fußgängern mit Hilfe von Kameras gibt es bereits einige Veröffentlichungen \cite{Lee2015,Tuong2011}
+% eine Fusion beider Methoden währe eine interessante alternative.
+% Die Segmentierung der Objekte aus den Messdaten kann als erfolg gewertet werden, hier sind keine größeren
+% Fehler aufgetreten, welch nicht durch die nachfolgende Filterung korrigiert werden konnten.
+% Da die Segmentierung jedoch sehr Ressourcen intensiv ist, sollten je nach zur Verfügung
+% stehender Rechenzeit weitere Algorithmen evaluiert werden.
+% Abschließend kann gesagt werden, das sowohl aus der Simulation und den realen Messungen hervorgeht,
+% das der Velodyne in Kombination mit dem Applanix System ausreichend ist um mini und kleine Kreisverkehre 
+% zu beobachten und das bessere Sensoren beim Tracking und der Segmentierung keine nennenswerten Vorteile bieten würden.
+% Sinnvoll währe jedoch der Einsatz mehrerer Sensoren, welche schräg auf dem Fahrzeug montiert sind.
+% Das würde sowohl die nutzbare Auflösung erhöhen als auch eine erhöhte Qualität der Segmentierung erlauben
+% da für diese, aufgrund der Bodenerkennung besonders der Nahbereich wichtig ist.
 
-In the end, the question is, is the Sensor configuration of the test vehicle ``Snowfox'' sufficient to safely handle 
-and observe roundabouts.To answer this, the sensor equipment of the vehicle was examined in the introduction. 
-It was found that a part of the sensor system can not be evaluated and therefore the evaluation must be restricted 
+In the end, the question is, is the Sensor configuration of the test vehicle ''Snowfox'' sufficient to safely handle
+and observe roundabouts. To answer this, the sensor equipment of the vehicle was examined in the introduction.
+It was found that a part of the sensor system can not be evaluated and therefore the evaluation must be restricted
 to a Velodyn VLP-16 LIDAR and an Applanix POS LV (Position and Orientation System).
 Furthermore, it was investigated which sensor equipment was used in comparable projects.
 
 For this purpose, the \ac{DARPA} Urban Challenge has been used and found that there are teams
 with comparable but not the same sensor equipment.
-However, there were also simplified requirements in competition. 
-Thus no pedestrians or cyclists had to be recognized.
+However, there were also simplified requirements in competition.
+Thus, no pedestrians or cyclists had to be recognized.
 
-Then the sensor was subjected to a theoretical test. According to this the sensor 
+Then the sensor was subjected to a theoretical test. According to this the sensor
 should be able to survey mini and small roundabouts.
 
-An object detection and tracking algorithm was then developed to support the previous theoretical studies. 
+An object detection and tracking algorithm was then developed to support the previous theoretical studies.
 This was then evaluated within a simulation and on the basis of real measurement data.
 
 Within the context of the simulation, the measurable variables like position, speed, and classification were examined.
 A moderate quality was attributed to the measured values.
-However, this could be improved by the use of a better vehicle model in the Kalman filter. 
+However, this could be improved by the use of a better vehicle model in the Kalman filter.
 However, since the tracking loses the objects often when they are hidden, the quality of the measured
-values position and speed is highly variable. At this point, however, a better sensor would not provide a advantage. 
+values position and speed is highly variable. At this point, however, a better sensor would not provide an advantage.
 Instead, it would be possible to mitigate the problem if the directly measured orientation and speed of the vehicle
 is prevented from being distorted shortly before tracking loss.
 
+This might possibly be possible by an early termination of the updating step in the Kalman filter
+with strong changes in the size of the object, alternatively, the variance of the measured values in the
+filter could also be adjusted adaptively. For this, however, further investigations are necessary.
+Further problems exist with the classification of the objects while vehicles and pedestrians were always well-recognized,
+the classification of the cyclists failed at all time. In general, it is a problem that objects are classified by their size.
+Because of this static objects can be classified as car, cyclist or pedestrian.
+Since the detected objects have basically stored all raw measurement data, it would be easy to forward this
+to an external extended classifier. 
+
+Whether the measurement data is suitable for an extended classification must however still be examined.
+However, since the test vehicle will in the future be equipped with further sensors such as cameras, 
+these data can also be used for classification purposes. 
+For the detection of pedestrians with the help of cameras, there are already some publications \cite{Lee2015, Tuong2011} 
+a fusion of both methods would be an interesting alternative.
+
+
+The segmentation of the objects from the measured data can be evaluated as success, 
+no major errors have occurred here, which could not be corrected by the subsequent filtering.
+However, since the segmentation is very resource-intensive, further algorithms should be evaluated depending on 
+the available computing time.
+
+
+In conclusion, it can be said that both the simulation and the real measurements,
+of the Velodyne in combination with the Applanix system,
+is sufficient to observe mini and small roundabout.
+Better sensors would not offer any significant advantages in tracking and segmentation.
+However, the use of several sensors which are mounted obliquely on the vehicle would be sensible.
+This would increase both the usable resolution and an increased quality of the segmentation.
+Since for these, especially the close-up measurements of the ground are important.
 
 
 
-
-stark verfälscht wird. Dies währe eventuell durch ein frühzeitiges Abbrechen des Update Schrittes im Kalman Filter
-bei starken Größenänderungen des Objektes möglich, alternativ könne auch die Varianz der Messwerte im Filter adaptiv
-Gestaltet werden. Dazu währen jedoch weitere Untersuchungen nötig. Weitere Probleme gibt es mit der Klassifizierung der Objekte
-während Fahrzeuge und Fußgänger stets gut erkannt wurden, ist die Klassifizierung der Radfahrer fehlgeschlagen.
-Generell stellt es ein Problem dar, dass Objekte zu anhand ihrer Größe klassifiziert werden.
-Denn statische Objekte können so auch beliebig als Auto, Radfahrer oder Fußgänger klassifiziert werden.
-Da die erkannten Objekte grundsätzlich alle roh Messdaten gespeichert haben währe es leicht
-ddiese an einen externen erweiterten Klassifizierer weiterzuleiten. Ob die Messdaten für eine erweiterten Klassifizierung
-geeignet sind muss jedoch noch untersucht werden. Da das Testfahrzeug in Zukunft jedoch mit weiteren Sensoren wie Kameras ausgestattet sein wird, können diese Daten ebenfalls zur Klassifizierung herangezogen
-werden. Zur Erkennung von Fußgängern mit Hilfe von Kameras gibt es bereits einige Veröffentlichungen \cite{Lee2015,Tuong2011}
-eine Fusion beider Methoden währe eine interessante alternative.
-Die Segmentierung der Objekte aus den Messdaten kann als erfolg gewertet werden, hier sind keine größeren
-Fehler aufgetreten, welch nicht durch die nachfolgende Filterung korrigiert werden konnten.
-Da die Segmentierung jedoch sehr Ressourcen intensiv ist, sollten je nach zur Verfügung
-stehender Rechenzeit weitere Algorithmen evaluiert werden.
-Abschließend kann gesagt werden, das sowohl aus der Simulation und den realen Messungen hervorgeht,
-das der Velodyne in Kombination mit dem Applanix System ausreichend ist um mini und kleine Kreisverkehre 
-zu beobachten und das bessere Sensoren beim Tracking und der Segmentierung keine nennenswerten Vorteile bieten würden.
-Sinnvoll währe jedoch der Einsatz mehrerer Sensoren, welche schräg auf dem Fahrzeug montiert sind.
-Das würde sowohl die nutzbare Auflösung erhöhen als auch eine erhöhte Qualität der Segmentierung erlauben
-da für diese, aufgrund der Bodenerkennung besonders der Nahbereich wichtig ist.
 
 
 

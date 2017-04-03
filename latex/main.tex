@@ -1539,19 +1539,37 @@ And in urban areas due to their size, they are frequent. Furthermore, due to its
 % Fahrzeuge an der vorderseite mit Distanzsensoren ausgestattet. Sollte dieser Sensor ein Fahrzeug erkennen, geht das Fahrzeug in eine  Adaptive Cruise Control modus und
 % passt sich dem vorderen Fahrzeug an. Das Adaptive Cruise Control ist dabei als einfacher proportional regler umgesetzt.
 
-Inside the scenario there are three bicycles, one pedestrian and three other vehicles driving around the roundabout. The objects are moving on fixed paths.
+Inside the scenario there are three bicycles, one pedestrian and three other cars driving around the roundabout. 
+The objects are moving on a fixed path. Basically the drive all the time in a circle on their according type of way,
+excepting one car, which is driving on the path in \cref{car_path1}.
 The speed of all traffic is adapted to the type. The pedestrian moves with the 5km/h usually assumed for pedestrians,
-the bike with 15km/h and the two cars move at different speeds between 25 and 35 km/h. In order to avoid a collision of the vehicles,
-both vehicles are equipped with distance sensors at the front. If this sensor detects a vehicle, the vehicle enters an \acl{ACC} mode and adapts to the front vehicle.
-The Adaptive Cruise Control is implemented as a simple proportional controller.
+the bike with 15km/h and the three cars move at different speeds between 25 and 35 km/h. In order to avoid a collision of the vehicles,
+all cars are equipped with distance sensors at the front. If this sensor detects an object, the car enters an \acl{ACC} mode and adapts to the front object.
+The \acl{ACC} is implemented as a simple proportional controller.
+
+\begin{figure}[!htb]
+  \caption{Car Path} 
+  \centering
+  \includegraphics[width=\textwidth]{bilder/car_path.png}
+ \label{car_path1}
+\end{figure}
 
 % Das autonome Fahrzeug bewegt sich dabei ebenfalls auf eine festen Pfad, dieser führt von rechts in den Kreisverkehr ein und verlässt den Kreisverkehr an der dritten ausfahrt.
 % die Aufgabe des Fahrzeues ist dabei sich sicher in den Kreisfehr einzusortieren und den Kreisverkehr sicher zu verlassen. Dabei Muss das Fahhzeug sowohl aud den Fußgänger, den Radfahrer
 % und die Andren Fahrzeuge innerhalb des Kreisverkehres achten. Dazu ist das Fahrzeug mit einem virtuellen Velodyne VLP-16 ausgestattet.
 
-The autonomous vehicle also moves along a fixed path, which leads from the right into the roundabout and leaves the roundabout at the third exit. 
+The autonomous vehicle also moves along a fixed path (see \cref{mycar_path}), which leads from the right into the roundabout and leaves the roundabout at the third exit. 
 The task of the vehicle is to safely enter the roundabout and safely leave the roundabout. In doing so, the vehicle must pay attention both to the pedestrians,
 the cyclists and the other vehicles within the roundabout. For this, the vehicle is equipped with a virtual Velodyne VLP-16 and the previously described algorithms deliver the detected objects.
+
+\begin{figure}[!ht]
+\begin{center}
+\caption{Test Vehicle Path}
+\includegraphics[width=\textwidth]{bilder/mycar_path.png}
+\label{mycar_path}
+\end{center}
+\end{figure}
+
 
 \section{Simulation Logic}
 
@@ -1902,13 +1920,6 @@ In this section the quality of the measurable variables is evaluated, like the s
 For this purpose a vehicle which was constantly visible during the simulation is chosen.
 This is the only vehicle, which is not always within the roundabout, but enters and leaves the roundabout again. 
 The path of the car is shown in \cref{car_path1}. The position error was calculated from the Euclidean distance of the position within the simulation and the position detected.
-
-\begin{figure}[!htb]
-  \caption{Car Path} 
-  \centering
-  \includegraphics[width=\textwidth]{bilder/car_path.png}
- \label{car_path1}
-\end{figure}
 
 \subsubsection{Position Error}
 
@@ -2424,10 +2435,7 @@ So to optimize the program, an alternative for the \ ac {DBSCAN} should be found
 If the clustering algorithm could work directly on the polar coordinates, the conversion of the point cloud would also unnecessary.
 It is, of course, also possible to parallelize the existing algorithm. Especially the range request of the \ac{DBSCAN} could be implemented easily parallelized.
 
-
-\todo{pfad des Eigenen Fahrzeuges hinzufügen}
-\todo{fall zeigen wo trackin funktioniert bei verdecken hinderniss\
-\chapter{Conclusions}
+\chapter{\mbox{Conclusions and Future}}
 
 % Letztendlich ist zu beantworten ob die Sensorausstattung des Tesfahrzeuges ``Snowfox'' ausreichend ist um
 % sicher mit Kreisverkehren umzugehen.
