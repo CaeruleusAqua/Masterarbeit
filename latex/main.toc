@@ -47,36 +47,36 @@
 \contentsline {section}{\numberline {6.5}State Estimation}{32}{section.6.5}
 \contentsline {subsection}{\numberline {6.5.1}Constant Turn Rate and Velocity Model}{32}{subsection.6.5.1}
 \contentsline {subsection}{\numberline {6.5.2}Extendet Kalman Filter}{33}{subsection.6.5.2}
-\contentsline {subsubsection}{Prediction}{33}{section*.60}
-\contentsline {subsubsection}{Updating}{34}{section*.61}
-\contentsline {subsubsection}{Initial Uncertainties}{35}{section*.63}
+\contentsline {subsubsection}{Prediction}{33}{section*.58}
+\contentsline {subsubsection}{Updating}{34}{section*.59}
+\contentsline {subsubsection}{Initial Uncertainties}{35}{section*.61}
 \contentsline {subsection}{\numberline {6.5.3}Reassigning}{35}{subsection.6.5.3}
 \contentsline {chapter}{\numberline {7}Simulation}{36}{chapter.7}
 \contentsline {section}{\numberline {7.1}Simulation Scenario}{36}{section.7.1}
 \contentsline {section}{\numberline {7.2}Simulation Logic}{37}{section.7.2}
 \contentsline {subsection}{\numberline {7.2.1}Sensor Connection}{37}{subsection.7.2.1}
 \contentsline {subsection}{\numberline {7.2.2}Mapping}{38}{subsection.7.2.2}
-\contentsline {subsubsection}{Localization}{38}{section*.69}
+\contentsline {subsubsection}{Localization}{38}{section*.67}
 \contentsline {subsection}{\numberline {7.2.3}State Machine}{40}{subsection.7.2.3}
-\contentsline {paragraph}{Start - State}{41}{section*.74}
-\contentsline {paragraph}{ToRoundabout - State}{41}{section*.75}
-\contentsline {paragraph}{Brake - State}{41}{section*.77}
-\contentsline {paragraph}{InRoundabout - State}{41}{section*.78}
-\contentsline {paragraph}{ExitRoundabout - State}{41}{section*.81}
+\contentsline {paragraph}{Start - State}{41}{section*.71}
+\contentsline {paragraph}{ToRoundabout - State}{41}{section*.72}
+\contentsline {paragraph}{Brake - State}{41}{section*.73}
+\contentsline {paragraph}{InRoundabout - State}{41}{section*.74}
+\contentsline {paragraph}{ExitRoundabout - State}{41}{section*.77}
 \contentsline {chapter}{\numberline {8}Evaluation}{43}{chapter.8}
 \contentsline {section}{\numberline {8.1}Simulation}{43}{section.8.1}
 \contentsline {subsection}{\numberline {8.1.1}Detection Distance Performance}{43}{subsection.8.1.1}
 \contentsline {subsection}{\numberline {8.1.2}Measurements Performance}{44}{subsection.8.1.2}
-\contentsline {subsubsection}{Position Error}{45}{section*.85}
-\contentsline {subsubsection}{Velocity Error}{48}{section*.92}
-\contentsline {subsubsection}{Classification}{49}{section*.95}
-\contentsline {subsubsection}{Scenario Handling}{49}{section*.97}
+\contentsline {subsubsection}{Position Error}{45}{section*.81}
+\contentsline {subsubsection}{Speed Error}{48}{section*.88}
+\contentsline {subsubsection}{Classification}{49}{section*.91}
+\contentsline {subsubsection}{Scenario Handling}{49}{section*.93}
 \contentsline {section}{\numberline {8.2}Real Measurements}{51}{section.8.2}
 \contentsline {subsection}{\numberline {8.2.1}Segmentation}{51}{subsection.8.2.1}
 \contentsline {subsection}{\numberline {8.2.2}Confidence Filter}{52}{subsection.8.2.2}
-\contentsline {subsection}{\numberline {8.2.3}Pedestrian}{52}{subsection.8.2.3}
+\contentsline {subsection}{\numberline {8.2.3}Pedestrian}{53}{subsection.8.2.3}
 \contentsline {section}{\numberline {8.3}Performance}{53}{section.8.3}
-\contentsline {chapter}{\numberline {9}Conclusions}{56}{chapter.9}
+\contentsline {chapter}{\numberline {9}Conclusions}{55}{chapter.9}
 \select@language {english}
 \select@language {english}
 \select@language {english}

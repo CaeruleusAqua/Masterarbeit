@@ -757,41 +757,6 @@
       \verb http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=5354493
       \endverb
     \endentry
-    \entry{Holmes2007}{article}{}
-      \name{author}{3}{}{%
-        {{hash=68070fafc9b5eaa00d05b2acef9dffbb}{%
-           family={Holmes},
-           familyi={H\bibinitperiod},
-           given={M},
-           giveni={M\bibinitperiod}}}%
-        {{hash=a13df2b1bf8eefb0cde5629896252dde}{%
-           family={Gray},
-           familyi={G\bibinitperiod},
-           given={a},
-           giveni={a\bibinitperiod}}}%
-        {{hash=d049d104eacbb995906e568bb71c189a}{%
-           family={Isbell},
-           familyi={I\bibinitperiod},
-           given={C},
-           giveni={C\bibinitperiod}}}%
-      }
-      \strng{namehash}{16cf8a94c8e7dd23da57e797ff632ae0}
-      \strng{fullhash}{16cf8a94c8e7dd23da57e797ff632ae0}
-      \strng{authornamehash}{16cf8a94c8e7dd23da57e797ff632ae0}
-      \strng{authorfullhash}{16cf8a94c8e7dd23da57e797ff632ae0}
-      \field{sortinit}{H}
-      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Workshop on Efficient Machine Learning}
-      \field{langid}{english}
-      \field{number}{1}
-      \field{title}{{Fast SVD for large-scale matrices}}
-      \field{volume}{1}
-      \field{year}{2007}
-      \field{pages}{2\bibrangedash 3}
-      \range{pages}{2}
-    \endentry
     \entry{Kelly1994}{book}{}
       \name{author}{1}{}{%
         {{hash=d2904722ee9ec7753a1f84842ea03ebc}{%
@@ -900,6 +865,32 @@
       \endverb
       \verb{eprint}
       \verb 8177588788
+      \endverb
+    \endentry
+    \entry{Lee2012}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bc45a438cd3243fffcd63a585ba4a9f7}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={D\bibnamedelima O\bibnamedelima Q},
+           giveni={D\bibinitperiod\bibinitdelim O\bibinitperiod\bibinitdelim Q\bibinitperiod}}}%
+      }
+      \strng{namehash}{bc45a438cd3243fffcd63a585ba4a9f7}
+      \strng{fullhash}{bc45a438cd3243fffcd63a585ba4a9f7}
+      \strng{authornamehash}{bc45a438cd3243fffcd63a585ba4a9f7}
+      \strng{authorfullhash}{bc45a438cd3243fffcd63a585ba4a9f7}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Computing the solution to Least Squares Problems is of great importance in a wide range of fields ranging from numerical linear algebra to econometrics and optimization. This paper aims to present numerically stable and computationally efficient algorithms for computing the solution to Least Squares Problems. In order to evaluate and compare the stability and efficiency of our proposed algorithms, the theoretical complexities and numerical results have been analyzed. Contents}
+      \field{langid}{english}
+      \field{title}{{Numerically efficient methods for solving least squares problems}}
+      \field{year}{2012}
+      \field{pages}{1\bibrangedash 15}
+      \range{pages}{15}
+      \verb{file}
+      \verb :home/storm/workspace/Masterarbeit/documents/Lee.pdf:pdf
       \endverb
     \endentry
     \entry{lester2008gang}{book}{}
