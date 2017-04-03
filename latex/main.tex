@@ -690,11 +690,11 @@ see \cref{LLSQ_MIN}\footnote{\url{https://en.wikipedia.org/wiki/Linear_least_squ
 However, since the algorithm is using preselected points from the \ac{RANSAC} distance criterion, this poses no problem.
 
 \begin{figure}[!ht]
-%\begin{center}
+\begin{center}
 \caption{Linear Least Squares (LLSQ)}
 \includesvg[width=0.5\textwidth]{Linear_least_squares_min}
 \label{LLSQ_MIN}
-%\end{center}
+\end{center}
 \end{figure}
 
 % Die Darstellung einer Ebene in Koordinatenform sieht wie folgt aus: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Da wir eine Ebene im R3 betrachten, ist dieses Gleichungsystem überbestimmt.
@@ -1200,7 +1200,6 @@ recognized after at least one iteration. This value was empirically determined a
 
 
 \section{Classification}
-\todo{implementierung Plausibilitätstest}
 % Nun wird eine  Klassifizierung der Objekte anhand ihrer Größe vorgenommen, es findet keine Klassifizierung nach bewegten und unbewegten Objeten Stadt.
 % Unterschieden werden lediglich Fußgänger, Radfahrer, und Fahrzeuge, und Sonstige. Als Klassifizierungs kritterium wird die Größe der Onjekte genutzt.
 % Die Klassifizierung sieht wie folgt aus:
@@ -1241,8 +1240,6 @@ If one of these values is exceeded, the confidence is also halved.
 
 
 \section{State Estimation}
-\todo{Ergänzen Kalman Filter: Normalveteilung müsste überprüft werden, aber da der EKF für Tracking state of the art ist.. nehmen wir an, das dass funkiniert. referenzen dazu suchen !!!}
-
 % Nachfolgende des Trackings wird auf den Erkannten Objekten eine Zustandschätzung durchgeführt. Dies ist nötig, da Objekte während der Fahrt verdenkt werden können,
 % sei es durch andere bewegte Objekte oder Gebaüde. Eine schätzung des Zustandes über den Erkennungshorizont hinaus erlaubt es uns eine Aussage über die Position von
 % Objekten zu treffe, welche im Moment nicht sichtbar sind. Weiterin erlaubt es auf einfache Weise zeitweise nicht erkannte Objekte wiederzuerkennen, also dem Objekt
@@ -1315,6 +1312,14 @@ J(\vec{x})=
 % Zusätlich zu unserem Modell werden noch weitere Werte benötigt. Dazu zehen wir uns die Berechnungsforschrift an:
 
 The Extendet Kalman Filter (EKF) \cite{Ribeiro2004} is the nonlinear version of the Kalman filter, which is linearized by an estimate of the current mean and the covariance.
+% Um den Extendet Kalman Filter (EKF) nutzen zu können müsste eigentlich überprüft werden, ob
+% die Messwerte einer Normalveteilung unterliegen. Da der EKF jedoch quasi standart beim Tracking jedlicher Art
+% ist \cite{Li2010,Wan2006} wird dies angenommen und nicht weiter untersucht.
+
+In order to be able to use the Extendet Kalman filter (EKF), it should actually be checked whether the measured values
+​​are subject to a normal distribution. However, since the EKF is so to say 
+standard in the tracking of any kind\cite{Li2010, Wan2006}, this is assumed and not further investigated.
+
 In addition to the model, further values are required. For this purpose, the calculation rules of the necessary steps are analyzed.
 
 \subsubsection{Prediction}
@@ -1407,14 +1412,6 @@ J(\vec{x})=
 
 
 \subsubsection{Updating}
-\todo{correction step EKF näher beschreiben
-da der nicht standard im ekf is
-was machst du mit statevector
-(wohl nur werte überschreiben)
-was machst du mit uncertainty
-so den state estimation teil hab ich durchgelesen
-}
-
 The predictions are finally corrected with the new information of the measurements.
 
 \begin{align*}
@@ -1515,7 +1512,6 @@ the Velodyne VLP-16. The whole simulation can communicate via a RemoteAPI interf
 
 \section{Simulation Scenario}
 
-
 \begin{figure}[!ht]
 %\begin{center}
 \caption{VREP}
@@ -1525,16 +1521,13 @@ the Velodyne VLP-16. The whole simulation can communicate via a RemoteAPI interf
 \end{figure}
 
 
-
-
-\todo{referenzen zu ``roundabout in law'' mit formelsymbolen und so}
 % Für Das Simalations Scenario wurde eine einfacher kleiner Kresiverkehr mit einem Außendurchmesser von 26m und ein Minikreisverkehr designt, da dies auf grund seiner größe 
 % in Kombination mit dem VLP-16, welcher in diesem Bereich noch eine akzeptable auflösung verfügt, das interessanteste Objekt darstellen.
 % Und im Innerstätischen Bereich auf grund ihrer größe haufig anzutreffen sind. Zum testen der Onjektdetektion bietet der Kleine Kreisverkehr auf Grund seiner bebaubaren
 % mittelinsel gute möglichkeiten das Tracking zu testen. Weiterhin ist es aufgrund seiner Größe möglich den kompletten Kreisverkehr zu überblicken.
 % Das Ganze Senarion wurde aufgrund von limitierungen in Vrep um den Faktor 10 herunterscaliert.
 
-For the simulation scenario, a simple small roundabout with an outside diameter of 30m, according to the rules in \cite{man06} was designed. According this the cycle path must have a minimum distance of 4 m to the road and
+For the simulation scenario, a simple small roundabout with an outside diameter of 30m, according to the rules in \cite{man06} was designed. According this the bikeway must have a minimum distance of 4 m to the road and
 the lane width of the circular driveway and circular exit should be 3.75m. The recommended corner rounding radius is according to \cite{man06} 12m.
 
 The small roundabout was chosen because this is the most interesting object due to its size in combination with the VLP-16, which still has an acceptable resolution in this area.
@@ -1626,7 +1619,7 @@ At this time, only the classes required for the simulation are implemented. Ther
 % Daher wurde die Klasse Lane um ein Typ attribut erweitert, was es ermöglicht diese Als Rad oder Fußweg zu deklarieren.
 % Der Aufbau der erweiterten Pythonklassen kann in \cref{parer_objects} begutachtet werden.
 Furthermore, the model included in OpenDAVINCI had to be extended, since OpenDAVINCI unfortunately does not support other types of paths.
-Therefore, the class lane has been extended by one type attribute, which makes it possible to declare this as a bicycle or footpath.
+Therefore, the class lane has been extended by one type attribute, which makes it possible to declare this as a bicycle or pavement.
 The structure of the extended Python classes can be examined in \cref{parer_objects}.
 
 \begin{figure}[!ht]
@@ -1669,7 +1662,7 @@ The structure of the extended Python classes can be examined in \cref{parer_obje
 
 For the handling of the roundabout, however, the map format had to be further extended. According to RASt \cite{rast06}, a roundabout should be as circular as possible, 
 for the sake of simplicity, it is assumed that the roundabout in simulation is a perfect circle. This means that both roads,
-cycle paths and footpaths are perfectly circular and can be described by an inner and outer radius. For this reason, a class ROUNDABOUT [\cref{roundabout_class}] was added to the description of the roundabout,
+bikeway and pavement are perfectly circular and can be described by an inner and outer radius. For this reason, a class ROUNDABOUT [\cref{roundabout_class}] was added to the description of the roundabout,
 which contains the center point of the roundabout, references to all lanes, and inner and outer radii. Furthermore, the connections to the connecting lanes are defined therein.
 
 \begin{figure}[!ht]
@@ -1721,7 +1714,7 @@ The whole situation is symbolized in \cref{mapping}. The blue rectangle represen
 % Fehler und die Entfernung ergibt sich praktischer weise aus den Vorherigen Berechnungen, sodass dieser nicht umgesetzt wurde.
 As seen in \cref{mapping}, the individual segments are usually not at a 180 degree angle to each other. Therefore, the rectangles can overlap and more than one rectangle can 
 be returned for one position. In this case, the direction of movement from the object is used and the most recent segment of the direction of movement is selected.
-If several lanes cross over, for example, cycle paths that intersect the roundabout, the correct segment is selected based on the object type, ie: auto -> road or cyclist -> cycle path.
+If several lanes cross over, for example, bikeway that intersect the roundabout, the correct segment is selected based on the object type, ie: auto -> road or cyclist -> bikeway.
 Furthermore, the x-coordinate of the object in the rotated and shifted coordinate system is returned, which is necessary for the distance calculations. It is always assumed that the
 object is in the middle of the track. Alternatively, the `` Ray Casting Algorithm '' \cite{Galetzka2017} can be used for this problem. Since it is assumed for all
 distance calculations that the object is in the middle of the track, this calculation results in a very small error and the distance is practically derived from the
@@ -1826,7 +1819,6 @@ If the vehicle feeds the target exit at 10m, the state will be changed to ExitRo
 % Das Fahrzeug bleib solange im ExitRoundabout State bis das Fahrzeug durch die Simulation auf die startposition zurückgestetzt wird.
 % Danach wechselt das Fahrzeug in den StartState
 
-\todo{radweg und fußweg vereinheitlichen}
 The ExitRaoundabout - State checks whether there are obstacles on the bikeway or pavement within a given area.
 If this is the case, the vehicle changes to the Brake - State and stops in front of the bikeway. The vehicle does not move until the specified area is free again.
 The vehicle remains in the ExitRoundabout - State until the vehicle is reset to the starting position by the simulation.
@@ -2184,7 +2176,7 @@ Now the exit from the roundabout is considered. To see in \cref{roundabout_exit_
 \end{figure}
 
 % Dieser wird erfolgreich erkannt, sodass das Fahrzeug erfolgreich vor dem Radweg  anhält. Zu sehen in \cref{roundabout_exit_2}
-This is successfully detected so that the vehicle stops successfully in front of the cycle path. To be seen in \cref{roundabout_exit_2}
+This is successfully detected so that the vehicle stops successfully in front of the bikeway. To be seen in \cref{roundabout_exit_2}
 
 \begin{figure}[htb]
   \caption{Roundabout Exit 2} 
@@ -2202,7 +2194,7 @@ This is successfully detected so that the vehicle stops successfully in front of
 \end{figure}
 
 %Nachdem der Radwegwieder frei ist, kann das Fahrzeug den Kreisverkehr sicher verlassen, siehe \cref{roundabout_exit_3}
-Once the cycle path is clear, the vehicle can safely leave the roundabout, see \cref{roundabout_exit_3}
+Once the bikeway is clear, the vehicle can safely leave the roundabout, see \cref{roundabout_exit_3}
 
 \begin{figure}[htb]
   \caption{Roundabout Exit 3} 
@@ -2333,7 +2325,7 @@ However, a final statement can only be made with measurement data in a real urba
 % da der Kreisverkehr nicht über einen Fußweg verfügt und sich der Fußgängerdireckt am Sraßenrand befindet.
 % Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von anderen Onjekten am Straßenrand, wie z.B. Leitpfosten \cref{refPosts}, zu unterschiden ist.
 In this section the pedestrian in the scenario is examined more closely. This is particularly difficult to see in this scenario, 
-since the roundabout does not have a footpath and the pedestrian is located on the road edge.
+since the roundabout does not have a pavement and the pedestrian is located on the road edge.
 This leads to the fact that pedestrian from the bird's eye view it is not to differ from other objects, like Reflector Posts (see \cref{refPosts}), on the road edge.
 
 \begin{figure}[!htb]

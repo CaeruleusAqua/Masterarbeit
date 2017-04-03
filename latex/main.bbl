@@ -967,6 +967,55 @@
       \verb http://www.roboticsproceedings.org/rss12/p42.pdf
       \endverb
     \endentry
+    \entry{Li2010}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=86d8cd66cb62928ca1ec636d8cd2e11c}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xin},
+           giveni={X\bibinitperiod}}}%
+        {{hash=51ad853fe74d1aca63ed1bb5e040f691}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Kejun},
+           giveni={K\bibinitperiod}}}%
+        {{hash=f27ec46ccd272a021fd78bdac92dd490}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Wei},
+           giveni={W\bibinitperiod}}}%
+        {{hash=2af761d9bef859ea29248418adce0dd7}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{284665cdb8fdaad5646c78846ea3b2ae}
+      \strng{fullhash}{c2eb9792afdca91dc6da5317a62db545}
+      \strng{authornamehash}{284665cdb8fdaad5646c78846ea3b2ae}
+      \strng{authorfullhash}{c2eb9792afdca91dc6da5317a62db545}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The 2010 IEEE International Conference on Information and Automation}
+      \field{isbn}{978-1-4244-5701-4}
+      \field{langid}{english}
+      \field{month}{6}
+      \field{title}{{A multiple object tracking method using Kalman filter}}
+      \field{year}{2010}
+      \field{pages}{1862\bibrangedash 1866}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/ICINFA.2010.5512258
+      \endverb
+      \verb{url}
+      \verb http://ieeexplore.ieee.org/document/5512258/
+      \endverb
+    \endentry
     \entry{miller2007rao}{inproceedings}{}
       \name{author}{2}{}{%
         {{hash=7567e0ecb3831ef79c8becfcad2a6dba}{%
@@ -1756,6 +1805,40 @@
       \field{title}{Zur Verkehrssicherheit innerörtlicher Knotenpunkte - Knotenpunkte mit Lichtsignalsteuerung, mit Vorfahrtregelung durch Verkehrszeichen, Kreisverkehrsplätze}
       \field{volume}{40}
       \field{year}{1994}
+    \endentry
+    \entry{Wan2006}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=45f9a9056dd0adcc5a812a1f4a5b4b95}{%
+           family={Wan},
+           familyi={W\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{45f9a9056dd0adcc5a812a1f4a5b4b95}
+      \strng{fullhash}{45f9a9056dd0adcc5a812a1f4a5b4b95}
+      \strng{authornamehash}{45f9a9056dd0adcc5a812a1f4a5b4b95}
+      \strng{authorfullhash}{45f9a9056dd0adcc5a812a1f4a5b4b95}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2006 IEEE Nonlinear Statistical Signal Processing Workshop}
+      \field{isbn}{978-1-4244-0579-4}
+      \field{langid}{english}
+      \field{month}{9}
+      \field{title}{{Sigma-Point Filters: An Overview with Applications to Integrated Navigation and Vision Assisted Control}}
+      \field{year}{2006}
+      \field{pages}{201\bibrangedash 202}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1109/NSSPW.2006.4378854
+      \endverb
+      \verb{url}
+      \verb http://ieeexplore.ieee.org/document/4378854/
+      \endverb
     \endentry
     \entry{Zhang}{article}{}
       \name{author}{5}{}{%

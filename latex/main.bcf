@@ -2221,13 +2221,15 @@
     <bcf:citekey order="67">kong2015kinematic</bcf:citekey>
     <bcf:citekey order="68">Schubert2008</bcf:citekey>
     <bcf:citekey order="69">Ribeiro2004</bcf:citekey>
-    <bcf:citekey order="70">Kelly1994</bcf:citekey>
-    <bcf:citekey order="71">man06</bcf:citekey>
+    <bcf:citekey order="70">Li2010</bcf:citekey>
+    <bcf:citekey order="70">Wan2006</bcf:citekey>
+    <bcf:citekey order="71">Kelly1994</bcf:citekey>
     <bcf:citekey order="72">man06</bcf:citekey>
-    <bcf:citekey order="73">Berger2010</bcf:citekey>
-    <bcf:citekey order="74">rast06</bcf:citekey>
-    <bcf:citekey order="75">Galetzka2017</bcf:citekey>
-    <bcf:citekey order="76">lester2008gang</bcf:citekey>
+    <bcf:citekey order="73">man06</bcf:citekey>
+    <bcf:citekey order="74">Berger2010</bcf:citekey>
+    <bcf:citekey order="75">rast06</bcf:citekey>
+    <bcf:citekey order="76">Galetzka2017</bcf:citekey>
+    <bcf:citekey order="77">lester2008gang</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global/" type="entry" sortscheme="nty" sortnamekeyscheme="global" labelprefix="">
   <bcf:sorting>
