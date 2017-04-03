@@ -596,7 +596,7 @@ Furthermore, this only allows the removal of planar surfaces, means only flat no
 Another common method is the removal of the base plate on the basis of a statistical mean value \cite{Zhang}.
 However, this method also requires a calibration of the sensor distance to the ground. 
 And the determination of further threshold values which are dependent on the environment.
-The advantages of both methods are their low computational performance and runtime $\mathcal{O}(n)$.
+The advantages of both methods are their low computational performance and run time $\mathcal{O}(n)$.
 Better methods such as gradient-based expansion algorithms require a starting point that can be identified as a bottom plate.
 A further possibility is the description of objects as convex objects \cite{5164280}, which can also be described on the basis of the gradients.
 The advantage of this method is that no initial position is required for the bottom plate, but this is very processing power intensive.
@@ -679,14 +679,15 @@ pointcloud are marked by their distance to the plane as ground. As distance thre
 % dass nicht der abstand der Punkte zur eben optimiert wird, sondern der Abstand der Punkte zur Ebene entlang einer Achse (in unserem Fall der z Achse) siehe \cref{LLSQ_MIN}.
 % Das kann zu Problemen führen, wenn die Punkte weit gestreut, also weit von der Optimalen Ebene entfert sind. Da wir unsere Punkte innhalb des \ac{RANSAC} allerdings anhand eines 
 % Distanzkriteriums vorselektieren, stellt dies kein Problem dar.
+% SVD has a complexity of $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, since the plane fitting inside
+% of the \ac{RANSAC} is very often called with a large number of points, running to the \ac{SVD} within the \ac{RANSAC} causes a very high running time.
+% For this reason, a \ac{LLSQ} algorithm with some optimization is used here.
 
-\todo{Macht das überhaut sinn? Laut ransac sollte das Planefitting nicht iterativ ausgeführt werden???? Fuck!}
-For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. SVD has a complexity of $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, since the plane fitting inside
-of the \ac{RANSAC} is very often called with a large number of points, running to the \ac{SVD} within the \ac{RANSAC} causes a very high running time.
-For this reason, a \ac{LLSQ} algorithm with some optimization is used here.
+For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. Technically, SVD performs a linear least square\cite{Lee2012}.
+Since there is already ready knowledge about the position of the plane, the linear least square is calculated by hand and some optimization are made.
 When using the \ac{LLSQ}, it is important to note that the \ac{LLSQ} is not optimizing the distance of the points to the plane but the distance of the points along an axis (in our case the z-axis),
 see \cref{LLSQ_MIN}\footnote{\url{https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics) (03/06/2017)}}. This can lead to problems, if the points are scattered far apart from the optimal plane.
-However, since we are using our preselected points from the \ac{RANSAC} distance criterion, this poses no problem.
+However, since the algorithm is using preselected points from the \ac{RANSAC} distance criterion, this poses no problem.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -701,8 +702,8 @@ However, since we are using our preselected points from the \ac{RANSAC} distance
 % Die Vektoren $\vec{x},\vec{y},\vec{z}$ stellen dabei die zu fittenden Punkte dar.
 % In Matrixschreibweise:
 
-The representation of a plane in coordinate form is as follows: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Since we consider a plane in $\mathbb{R}^3$, this system of equations is overdetermined.
-Since we want to optimize our plane in the direction of the z-axis, we set parameter c to 1 and can now simply solve our equation system by z: $a\vec{x} + b\vec{y} + d = -\vec{z}$.
+The representation of a plane in coordinate form is as follows: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Since the plane is in $\mathbb{R}^3$, this system of equations is overdetermined.
+To optimize th plane in the direction of the z-axis, parameter c is set to one and the equation system is simply solved by z : $a\vec{x} + b\vec{y} + d = -\vec{z}$.
 The vectors $\vec{x},\vec{y},\vec{z}$ represent the points to be taped.
 In matrix notation:
 
@@ -729,13 +730,13 @@ d
 \end{align*}
 
 %Dieses Sytem hat üblicherweise keine Lösung, unser eigentliches Ziel ist jeoch auch nicht extakte lösungen für $\vec\beta$ zu finden sondern eine gute näherung $\hat{\beta}$ dafür:
-This system usually doesn't have a solution, but our real goal isn't finding an extact solution for $\vec\beta$, we want to find a good approximation $\hat{\beta}$ for this:
+This system usually doesn't have a solution, but the real goal isn't finding an extact solution for $\vec\beta$, it is to find a good approximation $\hat{\beta}$ for this:
 
 \begin{align*}
 \hat{\beta} = \min{(|| \vec{z} - X\vec{\beta} ||^2)}
 \end{align*}
 
-We can do this by multiplying our equation by the transpose of our point matrix $X$ \cite{Goldberger1964}:
+This is done by multiplying the equation by the transpose of the point matrix $X$ \cite{Goldberger1964}:
 
 \begin{align*}
 (X^TX) \hat{\beta} &= X^T \vec{z}\\
@@ -773,8 +774,8 @@ y_0 & y_1 & \dots & y_n \\
 % nun ein weiterer Trick um rechenleistung zu sparen.
 % Nach dem Multiplizieren der Transponierten erhalten wir:
 
-This equation system can now be solved with the inverse of $(X^TX)$. Since the calculation of inverse matrices with $\mathcal{O}(dim^3)$ is also expensive, now another trick to save computing power.
-After multiplying with the transpose we get:
+This equation system can now be solved with the inverse of $(X^TX)$. Since the calculation of inverse matrices with $\mathcal{O}(dim^3)$ is expensive, now another way to save computing power.
+After multiplying with the transpose:
 
 \begin{align*}
 \begin{bmatrix}
@@ -797,8 +798,8 @@ d
 
 % Gut zu sehen sind hier die Summen in den Randbereichen der Matrix X und dem Vektor $\vec{z}$. Diese können wir auf Null setzten, wenn wir alle Punkte relativ zum Mittelwert-Punkt
 % aller Punkte definieren, also $P_i = P_i - \overline{P}$. Nun erhalten wir:
-The sums in the boundary areas of the matrix X and the vector $\vec{z}$ are good to see. We can set these to zero if we define all points relative to the mean point of all points,
-ie $P_i = P_i - \overline{P}$. Now we get:
+The sums in the boundary areas of the matrix X and the vector $\vec{z}$ are good to see. They can be set to zero, if all points are defined relative to the mean point of all points,
+ie $P_i = P_i - \overline{P}$.
 
 \begin{align*}
 \begin{bmatrix}
@@ -954,7 +955,7 @@ measurement from the sensor can have errors within a real scenario, which can be
 In fact, \ac{DBSCAN} is itself of linear complexity. However, most computing times are caused by the neighborhood calculation.
 But instead of the range request via a tree structure, we here profit from the behavior, that measurements in a small neighborhood have a similar azimuth angle.
 For this purpose, we examine two additional entries for each measured value to the left and right in our array. 
-Therefore, we need to check $5 \cdot 16 = 80$ values. The runtime of the range request can therefore also be performed in linear complexity. \todo{linear complexity ???????? und erklären welchen Einfluss das ganze hat!}
+Therefore, we need to check $5 \cdot 16 = 80$ values. The run time of the range request can therefore also be performed in linear complexity. \todo{linear complexity ???????? und erklären welchen Einfluss das ganze hat!}
 All measured values previously classified as ground are skipped during the calculation. In addition, the construction of a KD-tree is omitted, which also leaves us a run-time advantage.
 All clusters are stored by the algorithm as a list of references to the original array to avoid unnecessary copying.
 
@@ -2035,7 +2036,7 @@ This property obviously does not occur with the real sensor. Unfortunately, no s
 % grafisch dargestellt. Der Graph Car2 stellt dabei die Idealen werte aus der Simualtion dar.
 
 Since, apart from the position, the velocity of the objects is particularly important for the simulation scenario, we compare the velocity of the objects detected with the real values in the simulation.
-For this purpose, the measured values are displayed graphically in \cref {car2_speed}. The graph Car2 represents the ideal values from the simulation.
+For this purpose, the measured values are displayed graphically in \cref{car2_speed}. The graph Car2 represents the ideal values from the simulation.
 
 \begin{figure}[!htb]
   \caption{Car2 velocity} 
@@ -2171,7 +2172,7 @@ This situation occurs once more, until, as seen in \cref{roundabout_entrance_3},
 
 
 % Betrachten wir nun das herausfahren aus dem Kreisverkehr. In \cref{roundabout_exit_1} zu sehen, ist dass der Fahrzeug aus dem Kreisverkehr ausfahren will, jedoch vom Radfahrer daran gehindert wird.
-Let us now look at the exit from the roundabout. To see in \ cref {roundabout_exit_1} is that the vehicle wants to leave the roundabout, but is blocked by the cyclist.
+Let us now look at the exit from the roundabout. To see in \cref{roundabout_exit_1} is that the vehicle wants to leave the roundabout, but is blocked by the cyclist.
 
 \begin{figure}[htb]
   \caption{Roundabout Exit 1} 
@@ -2363,11 +2364,15 @@ This has not happened in this recording, however, and the pedestrian could be su
 
 \section{Performance}
 
-Abschließend gehen wir aud die laufzeit des Programmes ein dazu wurden Benchmarks auf zwei verschiedenen Systemen vorgenommen, die visualisierung der Messwerte wurde dabei deaktiviert.
-Dazu wurden insgesammt 893 Messframes ausgewertet und die bearbeitungszeit für jeden Frame gelogt. 
-Das programm wurde dazu mit folgenden Flags compiliert: ``-march=native -O3 -flto -pipe'' (GCC 6.3.1)
+% Abschließend gehen wir aud die laufzeit des Programmes ein dazu wurden Benchmarks auf zwei verschiedenen Systemen vorgenommen, die visualisierung der Messwerte wurde dabei deaktiviert.
+% Dazu wurden insgesammt 893 Messframes ausgewertet und die bearbeitungszeit für jeden Frame gelogt. 
+% Das programm wurde dazu mit folgenden Flags compiliert: ``-march=native -O3 -flto -pipe'' (GCC 6.3.1)
+Finally, the run-time of the program is investigated by running benchmarks on two different systems,
+the visualization of the measured values has been deactivated. For this purpose, a total of 893 measurement
+frames were evaluated and the processing time for each frame was logged. 
+The program was compiled with the following flags: `` -march = native -O3 -flto -pipe '' (GCC 6.3.1)
 
-Dazu wurden folgende Testsysteme genutzt:
+The following test systems were used:
 \begin{description}
 \item[Desktop Computer]\hfill
 \begin{description}
@@ -2383,7 +2388,7 @@ Dazu wurden folgende Testsysteme genutzt:
 \end{description}
 \end{description}
 
-Ergebnisse:
+Results:
 
 \begin{description}
 \item[Desktop Computer]\hfill
@@ -2398,12 +2403,18 @@ Ergebnisse:
 \end{description}
 \end{description}
 
-Da die Messerte des Velodyne Sensors mit 10Hz kommen, ist eine laufzeit von wneiger als 100ms nötig um die Daten in echtzeit auswerten zu können.
-Zu sehen ist das das ältere Desktop system diesen wert nicht erreicht. Das neuere Notebook hingegen erreich diesen Wert.
-Da sich das Fahrzeug jedoch mit zum teile hohen geschindigkeiten bewegt währe ein kleinerer wert wünschenswert um die
-Verzögerung der Messwerte zu reduzieren. Dabei sei Angemerkt, das es raum für optimierunen gibt. 
-Da die reinen laufzeitwerte dazu wenig aussagekraft haben, wird im folgenden das Profiling chart (\cref{profiling}) des Programmes betrachtet.
-Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die Anzahl der Instuktionen abschätzt.
+% Da die Messerte des Velodyne Sensors mit 10Hz kommen, ist eine laufzeit von wneiger als 100ms nötig um die Daten in echtzeit auswerten zu können.
+% Zu sehen ist das das ältere Desktop system diesen wert nicht erreicht. Das neuere Notebook hingegen erreich diesen Wert.
+% Da sich das Fahrzeug jedoch mit zum teile hohen geschindigkeiten bewegt währe ein kleinerer wert wünschenswert um die
+% Verzögerung der Messwerte zu reduzieren. Dabei sei Angemerkt, das es raum für optimierunen gibt. 
+% Da die reinen laufzeitwerte dazu wenig aussagekraft haben, wird im folgenden das Profiling chart (\cref{profiling}) des Programmes betrachtet.
+% Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die Anzahl der Instuktionen abschätzt.
+Since the measured values of the Velodyne sensor come with a rate of 10Hz, so a running time of less than 100ms is necessary in order to be able to evaluate the data 
+in real time. To see the older desktop system does not reach this value. The newer notebook, on the other hand, achieves this. 
+However, since the vehicle moves at partly high speeds, a smaller value would be desirable in order to reduce the delay of the measured values. 
+It should be noted that there is room for optimization. Since the pure run time values have little meaning in this regard, 
+the following is the profiling chart of the program is shown in \cref{profiling}. 
+The profiling is created with callgrind\footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}, which estimates the run time over the number of instructions.
 
 
 \begin{figure}[!htb]
@@ -2413,14 +2424,19 @@ Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die
  \label{profiling}
 \end{figure}
 
-
-\footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}.
-Es fällt auf, dass  fast 40\% der instruktionen auf die bereichsanfrage des \ac{DBSCAN} fallen. kommen weitere Funktionen des DBSACN hinzu
-kommen erhöht sich dern anteil auf über 50\%. Ein weiterer groteil der Laufzeit entfällt auf die kovertierung der Messwerte in kartesische kordinaten (6.1\%)
-sowie Speicherverwaltung der Poincloud (23,61\%). Also fallen über 75\% der laufzeit auf wenig funktionlität des Programmes.
-Um das Programm zu optimieren sollte also eine Alternative für den \ac{DBSCAN} gefunden werden. Wenn der Clusering algorythmus direckt auf den Polarkoordinaten
-arbeiten könnte fällt auch das Konvertieren der Pointcloud weg. Weiterhin ist es natürlich auch möglich den vorhandenen Algorythmus zu paralelisieren.
-Besonders für die Bereichsanfrage des \ac{DBSCAN} ließe sich das einfach umsetzten.
+% Es fällt auf, dass  fast 40\% der instruktionen auf die bereichsanfrage des \ac{DBSCAN} fallen. kommen weitere Funktionen des DBSACN hinzu
+% kommen erhöht sich dern anteil auf über 50\%. Ein weiterer groteil der Laufzeit entfällt auf die kovertierung der Messwerte in kartesische kordinaten (6.1\%)
+% sowie Speicherverwaltung der Poincloud (23,61\%). Also fallen über 75\% der laufzeit auf wenig funktionlität des Programmes.
+% Um das Programm zu optimieren sollte also eine Alternative für den \ac{DBSCAN} gefunden werden. Wenn der Clusering algorythmus direckt auf den Polarkoordinaten
+% arbeiten könnte fällt auch das Konvertieren der Pointcloud weg. Weiterhin ist es natürlich auch möglich den vorhandenen Algorythmus zu paralelisieren.
+% Besonders für die Bereichsanfrage des \ac{DBSCAN} ließe sich das einfach umsetzten.
+It is noticeable that almost 40\% of the instructions fall on the range request of the \ac{DBSCAN}.
+If additional functions of the DBSACN are added, the proportion increases to over 50\%. A further major part of the run time is the conversion of the measured
+values into Cartesian coordinates (6.1 \%) as well as the memory management of the poincloud (23.6\%). 
+Thus, over 75\% of the run time fall on little functionality of the program. 
+So to optimize the program, an alternative for the \ ac {DBSCAN} should be found. 
+If the clusering  algorithm could work directly on the polar coordinates, the conversion of the pointcloud would also unnecessary.
+It is, of course, also possible to parallelize the existing algorithm. Especially the range request of the \ac{DBSCAN} could be implemented easily parallelized.
 
 \chapter{Conclusions}
 Kann in mehrere Unterkapitel gegliedert werden\\\\

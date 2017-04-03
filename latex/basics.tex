@@ -3,8 +3,8 @@
 \section{Roundabouts}
 % Kreisverkehre erfreuen sich in Deutschland an steigender belibetheit. \todo{referenz} Wie in \cref{conflict_roundabout} zu sehen  haben sie eine kleinere Anzhahl an Konflikktpunkten (8)
 % im gegensatz zu kreuzungen (32) und  tragen daher stark zur sicherheit im Straßenverkehr bei, was die Unfallrate Reduziert
-Roundabouts are growing in popularity in Germany. \todo{reference} As seen in \cref{conflict_roundabout}, they have a smaller number of points of conflict (8)
-as opposed to crossroads (32), thus contributing greatly to road safety, which reduces the rate of accidents.
+Roundabouts are growing in popularity in Germany\footnote{\url{http://www.autokarma.de/allgemein/deutschland-kreisverkehre/} (03/09/2017)}.
+As seen in \cref{conflict_roundabout}, they have a smaller number of points of conflict (8) as opposed to crossroads (32), thus contributing greatly to road safety, which reduces the rate of accidents.
 
 \begin{figure}[!ht]
   %\addcontentsline{lof}{figure}{LaTeX--Strukturelemente}
@@ -157,8 +157,6 @@ For miniature roundabouts, the roundabout island is crossable. \cite{man06}
 %Die Kreisfahrbahn ist die Fahrbahn, die zum Umfahren der Kreisinsel
 %dient. Ein ggf. vorhandener Innenring ist verkehrsrechtlich nicht Be-
 %standteil der Kreisfahrbahn (VwV-StVO zu §9a V., Rn. 5).
-
-%%TODO
 The circular path is the road that serves to drive the roundabout island. An inner ring, if present, is not part of the circular path (VwV-StVO zu §9a V., Rn. 5). \cite{man06}
 \end{defi}
 
@@ -312,10 +310,9 @@ the model parameters are calculated using one of the usual compensation methods.
  \item minimum size of the ``Consensus Set''
  \item distance threshold value (eps)
 \end{itemize}
+% Zu beachten ist, das der \ac{RANSAC} durch die zufällige Auswahl der Datenpunkte kein deterministischer algorythmus ist.
+Figure \ref{ransac} shows an example for an good ``consensus set''. Note that the \ac{RANSAC} is not a deterministic algorythm, beacuse of the random selection of the data points.
 
-Figure \ref{ransac} shows an example for an good ``consensus set''.
-
-\todo{missing refernce to pics in dbscan and ransac}
 \begin{figure}[!ht]
 \begin{center}
 \caption{\acs{RANSAC}}
@@ -323,11 +320,6 @@ Figure \ref{ransac} shows an example for an good ``consensus set''.
 \label{ransac}
 \end{center}
 \end{figure}
-
-
-
-% Zu beachten ist, das der \ac{RANSAC} durch die zufällige Auswahl der Datenpunkte kein deterministischer algorythmus ist.
-Note that the \ac{RANSAC} is not a deterministic algorythm, beacuse of the random selection of the data points.
 
 \section{\acl{DBSCAN}}
 % \ac{DBSCAN} \cite{DBSCAN} ist ein deterministischer Data-Mining-Algorithmus zur Clusteranalyse. Der Algorithmus basiert auf der Dichteverbundenheit, das heißt er bindet punkte basierend auf iher Enterferung zu Clustern

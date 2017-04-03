@@ -679,14 +679,15 @@ pointcloud are marked by their distance to the plane as ground. As distance thre
 % dass nicht der abstand der Punkte zur eben optimiert wird, sondern der Abstand der Punkte zur Ebene entlang einer Achse (in unserem Fall der z Achse) siehe \cref{LLSQ_MIN}.
 % Das kann zu Problemen führen, wenn die Punkte weit gestreut, also weit von der Optimalen Ebene entfert sind. Da wir unsere Punkte innhalb des \ac{RANSAC} allerdings anhand eines 
 % Distanzkriteriums vorselektieren, stellt dies kein Problem dar.
+% SVD has a complexity of $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, since the plane fitting inside
+% of the \ac{RANSAC} is very often called with a large number of points, running to the \ac{SVD} within the \ac{RANSAC} causes a very high running time.
+% For this reason, a \ac{LLSQ} algorithm with some optimization is used here.
 
-\todo{Macht das überhaut sinn? Laut ransac sollte das Planefitting nicht iterativ ausgeführt werden???? Fuck!}
-For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. SVD has a complexity of $\mathcal{O}(\min\{mn^2, m^2n\}$ \cite{Holmes2007}, since the plane fitting inside
-of the \ac{RANSAC} is very often called with a large number of points, running to the \ac{SVD} within the \ac{RANSAC} causes a very high running time.
-For this reason, a \ac{LLSQ} algorithm with some optimization is used here.
+For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. Technically, SVD performs a linear least square\cite{Lee2012}.
+Since there is already ready knowledge about the position of the plane, the linear least square is calculated by hand and some optimization are made.
 When using the \ac{LLSQ}, it is important to note that the \ac{LLSQ} is not optimizing the distance of the points to the plane but the distance of the points along an axis (in our case the z-axis),
 see \cref{LLSQ_MIN}\footnote{\url{https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics) (03/06/2017)}}. This can lead to problems, if the points are scattered far apart from the optimal plane.
-However, since we are using our preselected points from the \ac{RANSAC} distance criterion, this poses no problem.
+However, since the algorithm is using preselected points from the \ac{RANSAC} distance criterion, this poses no problem.
 
 \begin{figure}[!ht]
 %\begin{center}
@@ -701,8 +702,8 @@ However, since we are using our preselected points from the \ac{RANSAC} distance
 % Die Vektoren $\vec{x},\vec{y},\vec{z}$ stellen dabei die zu fittenden Punkte dar.
 % In Matrixschreibweise:
 
-The representation of a plane in coordinate form is as follows: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Since we consider a plane in $\mathbb{R}^3$, this system of equations is overdetermined.
-Since we want to optimize our plane in the direction of the z-axis, we set parameter c to 1 and can now simply solve our equation system by z: $a\vec{x} + b\vec{y} + d = -\vec{z}$.
+The representation of a plane in coordinate form is as follows: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Since the plane is in $\mathbb{R}^3$, this system of equations is overdetermined.
+To optimize th plane in the direction of the z-axis, parameter c is set to one and the equation system is simply solved by z : $a\vec{x} + b\vec{y} + d = -\vec{z}$.
 The vectors $\vec{x},\vec{y},\vec{z}$ represent the points to be taped.
 In matrix notation:
 
@@ -729,13 +730,13 @@ d
 \end{align*}
 
 %Dieses Sytem hat üblicherweise keine Lösung, unser eigentliches Ziel ist jeoch auch nicht extakte lösungen für $\vec\beta$ zu finden sondern eine gute näherung $\hat{\beta}$ dafür:
-This system usually doesn't have a solution, but our real goal isn't finding an extact solution for $\vec\beta$, we want to find a good approximation $\hat{\beta}$ for this:
+This system usually doesn't have a solution, but the real goal isn't finding an extact solution for $\vec\beta$, it is to find a good approximation $\hat{\beta}$ for this:
 
 \begin{align*}
 \hat{\beta} = \min{(|| \vec{z} - X\vec{\beta} ||^2)}
 \end{align*}
 
-We can do this by multiplying our equation by the transpose of our point matrix $X$ \cite{Goldberger1964}:
+This is done by multiplying the equation by the transpose of the point matrix $X$ \cite{Goldberger1964}:
 
 \begin{align*}
 (X^TX) \hat{\beta} &= X^T \vec{z}\\
@@ -773,8 +774,8 @@ y_0 & y_1 & \dots & y_n \\
 % nun ein weiterer Trick um rechenleistung zu sparen.
 % Nach dem Multiplizieren der Transponierten erhalten wir:
 
-This equation system can now be solved with the inverse of $(X^TX)$. Since the calculation of inverse matrices with $\mathcal{O}(dim^3)$ is also expensive, now another trick to save computing power.
-After multiplying with the transpose we get:
+This equation system can now be solved with the inverse of $(X^TX)$. Since the calculation of inverse matrices with $\mathcal{O}(dim^3)$ is expensive, now another way to save computing power.
+After multiplying with the transpose:
 
 \begin{align*}
 \begin{bmatrix}
@@ -797,8 +798,8 @@ d
 
 % Gut zu sehen sind hier die Summen in den Randbereichen der Matrix X und dem Vektor $\vec{z}$. Diese können wir auf Null setzten, wenn wir alle Punkte relativ zum Mittelwert-Punkt
 % aller Punkte definieren, also $P_i = P_i - \overline{P}$. Nun erhalten wir:
-The sums in the boundary areas of the matrix X and the vector $\vec{z}$ are good to see. We can set these to zero if we define all points relative to the mean point of all points,
-ie $P_i = P_i - \overline{P}$. Now we get:
+The sums in the boundary areas of the matrix X and the vector $\vec{z}$ are good to see. They can be set to zero, if all points are defined relative to the mean point of all points,
+ie $P_i = P_i - \overline{P}$.
 
 \begin{align*}
 \begin{bmatrix}
@@ -821,7 +822,7 @@ d
 
 % Nun können wir d ebenfalls auf Null setzten, denn wenn alle unsere Punkte relativ zum Mittelwert-Punkt sind, dann läuft auch unsere Ebene immer durch diesen Punkt. Daher können wir 
 % nun eine komplette Dimension streichen:
-Now we can also set $d$ to zero, because if all our points are relative to the mean point, then our plane always runs through this point. Therefore we now can get rid of a complete dimension:
+Now $d$ can be also set to zero, because if all the points are relative to the mean point, then the plane always runs through this point. Therefore a complete dimension now can be removed:
 
 \begin{align*}
 \begin{bmatrix}
@@ -854,16 +855,14 @@ b &= \frac{\sum x_i y_i \cdot \sum x_i z_i - \sum x_i x_i \cdot \sum y_i z_i }{D
 
 It should be noted that the determinant can not be zero or near zero. However, since the angle between the vehicle and the plane is always close to 90 degrees,
 the determinant is typically very large. If the determinant is nevertheless close to zero (not equal to zero), the calculation is carried out in spite of the fact that
-this also leads to a large error in the fitting. This is desirable at this point since the \ac{RANSAC} sorts out invalid layers based on the error.
+this also leads to a large error in the fitting. This is desirable at this point since the \ac{RANSAC} sorts out invalid planes based on the error.
 If the determinant is exactly zero, the calculation is continued with a small value for the determinant.
 
 % Aus dem Normalenvektor $\vec{n}$ und dem Mittelwert-Punkt $\overline{P}$ können wir nun wieder die Hessische Normalenvektor bestimmen.
 % 
 % Letztendlich haben wir so den Algorithms von $\mathcal{O}(m^2n)$ auf $\mathcal{O}(n) $ runterbrechen können.
 
-From the normal vector $\vec{n}$ and the mean point $\overline{P}$, we can again determine the Hessian normal vector.
-\todo{komplexität und argumentation überprüfen}
-In the end, we have been able to break down the algorithm from $\mathcal{O}(m^2n)$ to $\mathcal{O}(n)$.
+From the normal vector $\vec{n}$ and the mean point $\overline{P}$,  the Hessian normal vector is again determined.
 
 \section{Clustering}
 % In aktuellen Arbeiten mit 3D-LiDAR Daten werden de Daten haufig als erstes in eine Heightmap projeziert \cite{Zhang,Himmelsbach2009,Li2016}.
@@ -2035,7 +2034,7 @@ This property obviously does not occur with the real sensor. Unfortunately, no s
 % grafisch dargestellt. Der Graph Car2 stellt dabei die Idealen werte aus der Simualtion dar.
 
 Since, apart from the position, the velocity of the objects is particularly important for the simulation scenario, we compare the velocity of the objects detected with the real values in the simulation.
-For this purpose, the measured values are displayed graphically in \cref {car2_speed}. The graph Car2 represents the ideal values from the simulation.
+For this purpose, the measured values are displayed graphically in \cref{car2_speed}. The graph Car2 represents the ideal values from the simulation.
 
 \begin{figure}[!htb]
   \caption{Car2 velocity} 
@@ -2171,7 +2170,7 @@ This situation occurs once more, until, as seen in \cref{roundabout_entrance_3},
 
 
 % Betrachten wir nun das herausfahren aus dem Kreisverkehr. In \cref{roundabout_exit_1} zu sehen, ist dass der Fahrzeug aus dem Kreisverkehr ausfahren will, jedoch vom Radfahrer daran gehindert wird.
-Let us now look at the exit from the roundabout. To see in \ cref {roundabout_exit_1} is that the vehicle wants to leave the roundabout, but is blocked by the cyclist.
+Let us now look at the exit from the roundabout. To see in \cref{roundabout_exit_1} is that the vehicle wants to leave the roundabout, but is blocked by the cyclist.
 
 \begin{figure}[htb]
   \caption{Roundabout Exit 1} 
@@ -2413,7 +2412,7 @@ in real time. To see the older desktop system does not reach this value. The new
 However, since the vehicle moves at partly high speeds, a smaller value would be desirable in order to reduce the delay of the measured values. 
 It should be noted that there is room for optimization. Since the pure run time values have little meaning in this regard, 
 the following is the profiling chart of the program is shown in \cref{profiling}. 
-The profiling is created with callgrind, which estimates the run time over the number of instructions.
+The profiling is created with callgrind\footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}, which estimates the run time over the number of instructions.
 
 
 \begin{figure}[!htb]
@@ -2423,8 +2422,6 @@ The profiling is created with callgrind, which estimates the run time over the n
  \label{profiling}
 \end{figure}
 
-
-\footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}.
 % Es fällt auf, dass  fast 40\% der instruktionen auf die bereichsanfrage des \ac{DBSCAN} fallen. kommen weitere Funktionen des DBSACN hinzu
 % kommen erhöht sich dern anteil auf über 50\%. Ein weiterer groteil der Laufzeit entfällt auf die kovertierung der Messwerte in kartesische kordinaten (6.1\%)
 % sowie Speicherverwaltung der Poincloud (23,61\%). Also fallen über 75\% der laufzeit auf wenig funktionlität des Programmes.
@@ -2433,7 +2430,7 @@ The profiling is created with callgrind, which estimates the run time over the n
 % Besonders für die Bereichsanfrage des \ac{DBSCAN} ließe sich das einfach umsetzten.
 It is noticeable that almost 40\% of the instructions fall on the range request of the \ac{DBSCAN}.
 If additional functions of the DBSACN are added, the proportion increases to over 50\%. A further major part of the run time is the conversion of the measured
-values into Cartesian coordinates (6.1 \%) as well as the memory management of the Poincloud (23.6\1%). 
+values into Cartesian coordinates (6.1 \%) as well as the memory management of the poincloud (23.6\%). 
 Thus, over 75\% of the run time fall on little functionality of the program. 
 So to optimize the program, an alternative for the \ ac {DBSCAN} should be found. 
 If the clusering  algorithm could work directly on the polar coordinates, the conversion of the pointcloud would also unnecessary.
