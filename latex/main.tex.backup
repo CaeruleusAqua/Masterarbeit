@@ -2341,7 +2341,7 @@ Ergebnisse:
 \end{description}
 \end{description}
 
-Da die reinen laufzeitwerte wenig aussagekraft haben, wird im folgenden das Profiling chart des Programmes betrachtet.
+Da die reinen laufzeitwerte wenig aussagekraft haben, wird im folgenden das Profiling chart (\cref{profiling}) des Programmes betrachtet.
 Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die Anzahl der Instuktionen abschätzt.
 
 
@@ -2349,10 +2349,12 @@ Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die
   \caption{Pedestian and Reflector Posts} 
   \centering
   \includegraphics[width=\textwidth]{bilder/call.png}
- \label{refPosts}
+ \label{profiling}
 \end{figure}
 
-Wie wir sehen fallen fast 40\% de
+
+\footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}.
+Wie wir sehen fallen fast 40\% der instruktionen auf die bereichsanfrage des \ac{DBSCAN}
 
 \chapter{Conclusions and Future Work}
 Kann in mehrere Unterkapitel gegliedert werden\\\\

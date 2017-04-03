@@ -2309,6 +2309,7 @@ jdeoch nicht passiert und der Fußgänger konnte zu jeder zeit erfolgreich als e
 
 Abschließend gehen wir aud die laufzeit des Programmes ein dazu wurden Benchmarks auf zwei verschiedenen Systemen vorgenommen, die visualisierung der Messwerte wurde dabei deaktiviert.
 Dazu wurden insgesammt 893 Messframes ausgewertet und die bearbeitungszeit für jeden Frame gelogt. 
+Das programm wurde dazu mit folgenden Flags compiliert: ``-march=native -O3 -flto -pipe'' (GCC 6.3.1)
 
 Dazu wurden folgende Testsysteme genutzt:
 \begin{description}
@@ -2341,7 +2342,11 @@ Ergebnisse:
 \end{description}
 \end{description}
 
-Da die reinen laufzeitwerte wenig aussagekraft haben, wird im folgenden das Profiling chart des Programmes betrachtet.
+Da die Messerte des Velodyne Sensors mit 10Hz kommen, ist eine laufzeit von wneiger als 100ms nötig um die Daten in echtzeit auswerten zu können.
+Zu sehen ist das das ältere Desktop system diesen wert nicht erreicht. Das neuere Notebook hingegen erreich diesen Wert.
+Da sich das Fahrzeug jedoch mit zum teile hohen geschindigkeiten bewegt währe ein kleinerer wert wünschenswert um die
+Verzögerung der Messwerte zu reduzieren. Dabei sei Angemerkt, das es raum für optimierunen gibt. 
+Da die reinen laufzeitwerte dazu wenig aussagekraft haben, wird im folgenden das Profiling chart (\cref{profiling}) des Programmes betrachtet.
 Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die Anzahl der Instuktionen abschätzt.
 
 
@@ -2349,14 +2354,19 @@ Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die
   \caption{Pedestian and Reflector Posts} 
   \centering
   \includegraphics[width=\textwidth]{bilder/call.png}
- \label{refPosts}
+ \label{profiling}
 \end{figure}
 
 
 \footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}.
-Wie wir sehen fallen fast 40\% der instruktionen auf
+Es fällt auf, dass  fast 40\% der instruktionen auf die bereichsanfrage des \ac{DBSCAN} fallen. kommen weitere Funktionen des DBSACN hinzu
+kommen erhöht sich dern anteil auf über 50\%. Ein weiterer groteil der Laufzeit entfällt auf die kovertierung der Messwerte in kartesische kordinaten (6.1\%)
+sowie Speicherverwaltung der Poincloud (23,61\%). Also fallen über 75\% der laufzeit auf wenig funktionlität des Programmes.
+Um das Programm zu optimieren sollte also eine Alternative für den \ac{DBSCAN} gefunden werden. Wenn der Clusering algorythmus direckt auf den Polarkoordinaten
+arbeiten könnte fällt auch das Konvertieren der Pointcloud weg. Weiterhin ist es natürlich auch möglich den vorhandenen Algorythmus zu paralelisieren.
+Besonders für die Bereichsanfrage des \ac{DBSCAN} ließe sich das einfach umsetzten.
 
-\chapter{Conclusions and Future Work}
+\chapter{Conclusions}
 Kann in mehrere Unterkapitel gegliedert werden\\\\
 Greift Thesen oder Fragestellungen aus der Einleitung wieder auf\\\\
 Fasst die Arbeit knapp und prägnant zusammen\\\\
