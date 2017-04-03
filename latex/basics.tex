@@ -19,8 +19,6 @@ As seen in \cref{conflict_roundabout}, they have a smaller number of points of c
 % Weiterhin erlauben es Kreisverkehre auch Knotenpunkte mit mehr als 4 Straßen zu konstuieren, was ihnen einen weiteren Vorteil verschafft.
 % Leider gibt es diesbezüglich im Rahmen des autonomen fahrens keine dem autor bekannten Veröffentlichungen.
 
-
-
 % For example, in 2009 a survey of 54426 accidents in the inner city area was made. The number of accidents in roundabouts was 1150 (2.1 \%) \cite {Bondzio2012}.
 % You can see the statistics in \cref{accident_roundabout}.
 % Furthermore, circular traffic also allows nodes to be constituted with more than 4 roads, which gives them a further advantage.
@@ -47,12 +45,7 @@ Although this study is not representative, it is to be assumed that the number o
 which seems reasonable on account of the space conditions in the inner-city limits.
 Furthermore, circular traffic also allows nodes to be constituted with more than 4 roads, which gives them a further advantage.
 Unfortunately, there are no publications known to the author in the context of autonomous driving and roundabouts.
-
 %\definecolor{myblue}{HTML}{92dcec}
-
-
-
-
 
 \begin{figure}[!ht]
 \begin{center}
@@ -311,7 +304,7 @@ the model parameters are calculated using one of the usual compensation methods.
  \item distance threshold value (eps)
 \end{itemize}
 % Zu beachten ist, das der \ac{RANSAC} durch die zufällige Auswahl der Datenpunkte kein deterministischer algorythmus ist.
-Figure \ref{ransac} shows an example for an good ``consensus set''. Note that the \ac{RANSAC} is not a deterministic algorythm, beacuse of the random selection of the data points.
+Figure \ref{ransac} shows an example for an good ``consensus set''. Note that the \ac{RANSAC} is not a deterministic algorithm, beacuse of the random selection of the data points.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -346,17 +339,11 @@ point which is dense.
 \end{center}
 \end{figure}
 
-
 The \ac {DBSCAN} therefore has two parameters to determine, which influence the result.
 \begin{itemize}
  \item maximum distance of the neighborhood points
  \item minimum number of points required to form a dense region (minPts)
 \end{itemize}
-
-
-
-
-
 
 \section{Middleware OpenDAVINCI}
 % Autonome Software ist typischer weise ein verteiletes System, auf heutigen Fahrzeugen basiert dieses System auf ECUs und Bussystemen wie CAN,LIN.
@@ -370,7 +357,6 @@ The \ac {DBSCAN} therefore has two parameters to determine, which influence the 
 % von GPS koordinaten in lokale kartesische genutzt werden kann. Dazu ist die Angabe einer referenz GPS postion nötig, welche um den Berechnugsfehler klein zu halten,
 % nicht zu weit entfernt sein sollte.
 
-
 Autonomous software is typically a distributed system, on today's vehicles this system is based on ECUs and bus systems such as CAN, LIN.
 Distributed software makes it easier to integrate complex components within the system. In the area of autonomous driving, however,
 the historical structure of vehicles with ECUs and CAN is not optimal \cite{Broy2006}. In order to handle the many components required,
@@ -379,7 +365,7 @@ there are several middelwares which handle and abstract communication within the
 OpenDaVINCI is a real-time runtime environment designed for autonomous vehicles. OpenDaVINCI is based on Hesperia \cite{Berger2010}. 
 Communication between the components in OpenDaVINCI is based on UDP Multicast, which enables real-time communication between components and computing units \cite{Kurose2013} .
 For the communication, OpenDaVINCI offers time-triggered transmitters and data-triggered receivers, 
-from which the data-triggered receiver is used to connect our software. Furthermore, OpenDaVINCI offers many further functionalities,
+from which the data-triggered receiver is used to connect the here developed software. Furthermore, OpenDaVINCI offers many further functionalities,
 which can be used, for example the handling of World Geodetic System 1984 (WGS84), for the conversion of GPS coordinates into local Cartesian coordinates.
 For this purpose, a reference GPS position is required, which should not be too far away to keep the calculation error small.
 

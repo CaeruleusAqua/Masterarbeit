@@ -71,10 +71,10 @@ Therefore, only the Velodyne LiDAR and the Applanix system will be described in 
 The Velodyne VLP-16 is a 360 degree 3D laser scanner with a rotational speed of 5 to 20 revolutions per second \cite{manVEL}.
 It provides a vertical FOV of 30 degrees, at 2 degrees resolution.
 With a range of 100m it can cover a circumference of 200m diameter. 
-Furthermore, the VLP-16 can be syncronized with the Applanix POS LV, which allows a low-jitter signal. 
+Furthermore, the VLP-16 can be syncronized with the Applanix POS LV, which allows a correct heading of the data. 
 A further function of the Velodyne sensor is that it can react to different measuring pulses. 
 By evaluating the last pulse instead of the strongest pulse it is possible to see through transparent objects. 
-This allows us to determine the width of the vehicle in a later part of this work, as the Velodyne can look through the glass windows of the vehicle. 
+This allows to determine the width of the vehicle in a later part of this work, as the Velodyne can look through the glass windows of the vehicle. 
 At a set speed of 10Hz, the VLP-16 provides a resolution of 0.2 degrees with a variance of +- 3cm. 
 The VLP-16 is centered on the roof of the XC90 in order to achieve the highest possible positioning to achieve a panoramic view of the vehicle.
 It is important to note that this alignment is unacceptable to the sensor because the sensor has a vertical field of view of -15 to +15 degrees.
@@ -84,10 +84,6 @@ reveals that the VLP-16 has been constituted for use with drones, while the larg
 \footnote{\url{http://velodyneLiDAR.com/hdl-64e.html} (03/09/2017)}
 is advertised explicitly for the urban automotive sector, and has a field of view of +2 to -24.9 degrees and thus for use in the
 Automotive sector appears to be more appropriate. The resulting problems will be discussed later.
-
-
-
-
 
 
 \subsubsection{Applanix POS LV}
