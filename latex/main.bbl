@@ -893,6 +893,75 @@
       \verb :home/storm/workspace/Masterarbeit/documents/Lee.pdf:pdf
       \endverb
     \endentry
+    \entry{Lee2015}{article}{}
+      \name{author}{8}{}{%
+        {{hash=ae5e6ad9fed7c4e4d8327e44f06bb92e}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Ji\bibnamedelima Hoon},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=ac303bde9fdcc3162f8a38633b83ecc8}{%
+           family={Choi},
+           familyi={C\bibinitperiod},
+           given={Jong\bibnamedelima Suk},
+           giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=7b07336a04211912494bec50289ad9be}{%
+           family={Jeon},
+           familyi={J\bibinitperiod},
+           given={Eun\bibnamedelima Som},
+           giveni={E\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=7dd5de19e24f09f9f417851ed48f1f7f}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Yeong\bibnamedelima Gon},
+           giveni={Y\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=f3740f6b3a8e17d5972aa6a4cf38cb92}{%
+           family={Le},
+           familyi={L\bibinitperiod},
+           given={Toan\bibnamedelima Thanh},
+           giveni={T\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=54e2ff234a91280287bd890b58ab6949}{%
+           family={Shin},
+           familyi={S\bibinitperiod},
+           given={Kwang\bibnamedelima Yong},
+           giveni={K\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=e4baaeb03f22f1f7b99dc6a158723b68}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Hyeon\bibnamedelima Chang},
+           giveni={H\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=dd97e06c3db8f6f059545a16e84cee1b}{%
+           family={Park},
+           familyi={P\bibinitperiod},
+           given={Kang\bibnamedelima Ryoung},
+           giveni={K\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{0ad59e4a890e201e0458104d56e394b6}
+      \strng{fullhash}{a5773051ba3362e6e20afd3b2d3f43a3}
+      \strng{authornamehash}{0ad59e4a890e201e0458104d56e394b6}
+      \strng{authorfullhash}{a5773051ba3362e6e20afd3b2d3f43a3}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{With the development of intelligent surveillance systems, the need for accurate detection of pedestrians by cameras has increased. However, most of the previous studies use a single camera system, either a visible light or thermal camera, and their performances are affected by various factors such as shadow, illumination change, occlusion, and higher background temperatures. To overcome these problems, we propose a new method of detecting pedestrians using a dual camera system that combines visible light and thermal cameras, which are robust in various outdoor environments such as mornings, afternoons, night and rainy days. Our research is novel, compared to previous works, in the following four ways: First, we implement the dual camera system where the axes of visible light and thermal cameras are parallel in the horizontal direction. We obtain a geometric transform matrix that represents the relationship between these two camera axes. Second, two background images for visible light and thermal cameras are adaptively updated based on the pixel difference between an input thermal and pre-stored thermal background images. Third, by background subtraction of thermal image considering the temperature characteristics of background and size filtering with morphological operation, the candidates from whole image (CWI) in the thermal image is obtained. The positions of CWI (obtained by background subtraction and the procedures of shadow removal, morphological operation, size filtering, and filtering of the ratio of height to width) in the visible light image are OPEN ACCESS Sensors 2015, 15 10581 projected on those in the thermal image by using the geometric transform matrix, and the searching regions for pedestrians are defined in the thermal image. Fourth, within these searching regions, the candidates from the searching image region (CSI) of pedestrians in the thermal image are detected. The final areas of pedestrians are located by combining the detected positions of the CWI and CSI of the thermal image based on OR operation. Experimental results showed that the average precision and recall of detecting pedestrians are 98.13{\%} and 88.98{\%}, respectively.}
+      \field{issn}{14248220}
+      \field{journaltitle}{Sensors (Switzerland)}
+      \field{langid}{english}
+      \field{number}{5}
+      \field{title}{{Robust pedestrian detection by combining visible and thermal infrared cameras}}
+      \field{volume}{15}
+      \field{year}{2015}
+      \field{pages}{10580\bibrangedash 10615}
+      \range{pages}{36}
+      \verb{doi}
+      \verb 10.3390/s150510580
+      \endverb
+      \verb{file}
+      \verb :home/storm/workspace/Masterarbeit/documents/sensors-15-10580-v2.pdf:pdf
+      \endverb
+      \keyw{Dual camera system,Pedestrian detection,Thermal image,Visible light image}
+    \endentry
     \entry{lester2008gang}{book}{}
       \name{author}{1}{}{%
         {{hash=e025e259a73e4c320c139b14d06edf94}{%
@@ -1571,6 +1640,49 @@
       \field{series}{FGSV (Series)}
       \field{title}{Richtlinien für die Anlage von Stadtstra{ß}en: RASt 06}
       \field{year}{2007}
+    \endentry
+    \entry{Tuong2011}{article}{}
+      \name{author}{3}{}{%
+        {{hash=5e9c90d198ec3a7b32cecaec6f363c9d}{%
+           family={Tuong},
+           familyi={T\bibinitperiod},
+           given={Nguyen\bibnamedelima Xuan},
+           giveni={N\bibinitperiod\bibinitdelim X\bibinitperiod}}}%
+        {{hash=c2ad285eb682bccdfe2685694db2188f}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=c45d8c33e4ef56b7d84b362173fe9d96}{%
+           family={Knoll},
+           familyi={K\bibinitperiod},
+           given={Alois},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{b7582bfe107101d7b110319d3801ab3e}
+      \strng{fullhash}{b7582bfe107101d7b110319d3801ab3e}
+      \strng{authornamehash}{b7582bfe107101d7b110319d3801ab3e}
+      \strng{authorfullhash}{b7582bfe107101d7b110319d3801ab3e}
+      \field{sortinit}{T}
+      \field{sortinithash}{423d138a005a533b47e6475e39378bf2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Robotics and Embedded Systems, Technische Universit¨ at M¨ unchen, Germany}
+      \field{langid}{english}
+      \field{title}{{Robust Pedestrian Detection and Tracking From A Moving Vehicle}}
+      \field{year}{2011}
+      \field{pages}{78780H--78780H\bibrangedash 12}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1117/12.871994
+      \endverb
+      \verb{file}
+      \verb :home/storm/workspace/Masterarbeit/documents/Mueller2011c.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://proceedings.spiedigitallibrary.org/proceeding.aspx?articleid=731708
+      \endverb
+      \keyw{direct linear transformation,histograms of oriented gradients,particle filter,speeded}
     \endentry
     \entry{Urmson2007}{article}{}
       \name{author}{32}{}{%

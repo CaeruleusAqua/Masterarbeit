@@ -1317,7 +1317,7 @@ The Extendet Kalman Filter (EKF) \cite{Ribeiro2004} is the nonlinear version of 
 % ist \cite{Li2010,Wan2006} wird dies angenommen und nicht weiter untersucht.
 
 In order to be able to use the Extendet Kalman filter (EKF), it should actually be checked whether the measured values
-​​are subject to a normal distribution. However, since the EKF is so to say 
+are subject to a normal distribution. However, since the EKF is so to say 
 standard in the tracking of any kind\cite{Li2010, Wan2006}, this is assumed and not further investigated.
 
 In addition to the model, further values are required. For this purpose, the calculation rules of the necessary steps are analyzed.
@@ -1831,6 +1831,7 @@ The vehicle then changes to Start - State.
 
 The evaluation starts inside of the simulation. This allows to make a statement 
 about the calculated values such as position and speed, since the real values can be easily read within the simulation.
+
 \section{Simulation}
 
 \subsection{Detection Distance Performance}
@@ -1839,7 +1840,7 @@ about the calculated values such as position and speed, since the real values ca
 % Im ersten Zeitschritt wird nichts erkannt, da der Algorythmus mindestenz einen Zeitschritt braucht, um den Confidence wert der erkenntnen Objekte über den threshold zu heben.
 
 First, the general perception performance of the algorithm is analyzed, so the first two steps of the simulation are compared.
-These are shown in \cref{detection_performance}. The figures represent a range of 120x120 meters, so that they cover slightly more than half the measuring range of the sensor.
+These are shown in \cref{detection_performance}. The figures are zoomed and represent a range of 80x80 meters.
 In the first step, nothing is recognized since the algorithm requires at least one step in time to raise the confidence value of the detected objects over the detection threshold.
 
 
@@ -1848,13 +1849,13 @@ In the first step, nothing is recognized since the algorithm requires at least o
     \centering
     \begin{minipage}[t]{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{bilder/alg/img100001_r.png}
+        \includegraphics[width=\textwidth]{bilder/alg/img100001_s.png}
         Timestep 1
     \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
     \hfill
     \begin{minipage}[t]{0.49\textwidth}
         \centering
-	\includegraphics[width=\textwidth]{bilder/alg/img100002_r.png}
+	\includegraphics[width=\textwidth]{bilder/alg/img100002_s.png}
         Timestep 2
     \end{minipage}
     \label{detection_performance}
@@ -1885,7 +1886,7 @@ This is because they do not exceed the $minPts$ threshold of the \ac{DBSCAN}. Th
 \begin{figure}[!htb]
   \caption{Detection Distance Performance Pedestrians/Cyclists} 
   \centering
-  \includegraphics[width=\textwidth]{bilder/alg/img100002_m.png}
+  \includegraphics[width=\textwidth]{bilder/alg/img100002_m_s.png}
  \label{detection_performance2}
 \end{figure}
 
@@ -2423,14 +2424,112 @@ So to optimize the program, an alternative for the \ ac {DBSCAN} should be found
 If the clustering algorithm could work directly on the polar coordinates, the conversion of the point cloud would also unnecessary.
 It is, of course, also possible to parallelize the existing algorithm. Especially the range request of the \ac{DBSCAN} could be implemented easily parallelized.
 
+
+\todo{pfad des Eigenen Fahrzeuges hinzufügen}
+\todo{fall zeigen wo trackin funktioniert bei verdecken hinderniss\
 \chapter{Conclusions}
-Kann in mehrere Unterkapitel gegliedert werden\\\\
-Greift Thesen oder Fragestellungen aus der Einleitung wieder auf\\\\
-Fasst die Arbeit knapp und prägnant zusammen\\\\
-Ordnet die Ergebnisse in Gesamtzusammenhänge ein\\\\
-Zieht Schlussfolgerungen aus den erarbeiteten Ergebnissen\\\\
-Kann auch eigene Bewertungen oder Meinungen enthalten\\\\
-Gibt eine Ausblick auf mögliche Konsequenzen oder notwendige weitere zu lösende Probleme
+
+% Letztendlich ist zu beantworten ob die Sensorausstattung des Tesfahrzeuges ``Snowfox'' ausreichend ist um
+% sicher mit Kreisverkehren umzugehen.
+% Dazu wurde in der Einleitung die Sensorausstattung des Fahrzeuges untersucht. Dabei wurde festgestellt,
+% dass sich ein Teil der Sensorik nicht auswerten lässt und sich die Auswertung deshalb auf ein Velodyn VLP 16 LIDAR
+% und ein Applanix POS LV (Position and Orientation System) beschränken muss. Weiterhin, wurde untersucht,
+% welche Sensorausstattung in vergleichbaren Projekten genutzt wurde. 
+% Es wurde dazu die \ac{DARPA} Urban
+% Challenge herangezogen und festgestellt, dass es Teams mit vergleichbarer aber nicht gleicher Sensorausstattung gibt.
+% Jedoch auch, dass im Wettbewerb vereinfachte Anforderungen herrschten. So mussten keine Fußgänger oder Radfahrer erkannt werden.
+% Daraufhin wurde der Sensor einer theoretischen Untersuchung unterzogen. Nach dieser sollte der Sensor in der Lage
+% sein mini und kleine Kreisverkehre zu überblicken. Daraufhin wurde ein Objekterkennung und Tracking Algorithmus
+% entwickelt, um die vorherigen theoretischen Untersuchungen zu unterstützen. Dieser wurde dann innerhalb einer Simulation
+% und anhand von realen Messdaten evaluiert.
+% Im Rahmen der Simulation wurden besonders die Messbaren Größen
+% Position, Geschwindigkeit, und Klassifizierung untersucht. Den Messwerten wurde zeitweise eine mäßige Qualität
+% bescheinigt. Diese könnte jedoch durch den Einsatz eines besseren Fahrzeugmodelles im Kalman Filter verbessert werden.
+% Da dass Tracking die Objekte jedoch regelmäßig verliert, wenn diese verdeckt werden, ist die
+% Qualität der Messwerte Position und Geschwindigkeit stark schwankend. An dieser Stelle würde ein besserer Sensor
+% jedoch keine Abhilfe schaffen. Stattdessen ließe sich dass Problem abmildern, wenn verhindert wird, dass die direkt
+% gemessene Orientierung und Geschwindigkeit des Fahrzeuges kurz vor dem Tracking Verlust
+% Dies währe eventuell durch ein frühzeitiges Abbrechen des Update Schrittes im Kalman Filter
+% bei starken Größenänderungen des Objektes möglich, alternativ könne auch die Varianz der Messwerte im Filter adaptiv
+% Gestaltet werden. Dazu währen jedoch weitere Untersuchungen nötig. Weitere Probleme gibt es mit der Klassifizierung der Objekte
+% während Fahrzeuge und Fußgänger stets gut erkannt wurden, ist die Klassifizierung der Radfahrer fehlgeschlagen.
+% Generell stellt es ein Problem dar, dass Objekte zu anhand ihrer Größe klassifiziert werden.
+% Denn statische Objekte können so auch beliebig als Auto, Radfahrer oder Fußgänger klassifiziert werden.
+% Da die erkannten Objekte grundsätzlich alle roh Messdaten gespeichert haben währe es leicht
+% ddiese an einen externen erweiterten Klassifizierer weiterzuleiten. Ob die Messdaten für eine erweiterten Klassifizierung
+% geeignet sind muss jedoch noch untersucht werden. Da das Testfahrzeug in Zukunft jedoch mit weiteren Sensoren wie Kameras ausgestattet sein wird, können diese Daten ebenfalls zur Klassifizierung herangezogen
+% werden. Zur Erkennung von Fußgängern mit Hilfe von Kameras gibt es bereits einige Veröffentlichungen \cite{Lee2015,Tuong2011}
+% eine Fusion beider Methoden währe eine interessante alternative.
+% Die Segmentierung der Objekte aus den Messdaten kann als erfolg gewertet werden, hier sind keine größeren
+% Fehler aufgetreten, welch nicht durch die nachfolgende Filterung korrigiert werden konnten.
+% Da die Segmentierung jedoch sehr Ressourcen intensiv ist, sollten je nach zur Verfügung
+% stehender Rechenzeit weitere Algorithmen evaluiert werden.
+% Abschließend kann gesagt werden, das sowohl aus der Simulation und den realen Messungen hervorgeht,
+% das der Velodyne in Kombination mit dem Applanix System ausreichend ist um mini und kleine Kreisverkehre 
+% zu beobachten und das bessere Sensoren beim Tracking und der Segmentierung keine nennenswerten Vorteile bieten würden.
+% Sinnvoll währe jedoch der Einsatz mehrerer Sensoren, welche schräg auf dem Fahrzeug montiert sind.
+% Das würde sowohl die nutzbare Auflösung erhöhen als auch eine erhöhte Qualität der Segmentierung erlauben
+% da für diese, aufgrund der Bodenerkennung besonders der Nahbereich wichtig ist.
+
+In the end, the question is, is the Sensor configuration of the test vehicle ''Snowfox'' sufficient to safely handle
+and observe roundabouts. To answer this, the sensor equipment of the vehicle was examined in the introduction.
+It was found that a part of the sensor system can not be evaluated and therefore the evaluation must be restricted
+to a Velodyn VLP-16 LIDAR and an Applanix POS LV (Position and Orientation System).
+Furthermore, it was investigated which sensor equipment was used in comparable projects.
+
+For this purpose, the \ac{DARPA} Urban Challenge has been used and found that there are teams
+with comparable but not the same sensor equipment.
+However, there were also simplified requirements in competition.
+Thus, no pedestrians or cyclists had to be recognized.
+
+Then the sensor was subjected to a theoretical test. According to this the sensor
+should be able to survey mini and small roundabouts.
+
+An object detection and tracking algorithm was then developed to support the previous theoretical studies.
+This was then evaluated within a simulation and on the basis of real measurement data.
+
+Within the context of the simulation, the measurable variables like position, speed, and classification were examined.
+A moderate quality was attributed to the measured values.
+However, this could be improved by the use of a better vehicle model in the Kalman filter.
+However, since the tracking loses the objects often when they are hidden, the quality of the measured
+values position and speed is highly variable. At this point, however, a better sensor would not provide an advantage.
+Instead, it would be possible to mitigate the problem if the directly measured orientation and speed of the vehicle
+is prevented from being distorted shortly before tracking loss.
+
+This might possibly be possible by an early termination of the updating step in the Kalman filter
+with strong changes in the size of the object, alternatively, the variance of the measured values in the
+filter could also be adjusted adaptively. For this, however, further investigations are necessary.
+Further problems exist with the classification of the objects while vehicles and pedestrians were always well-recognized,
+the classification of the cyclists failed at all time. In general, it is a problem that objects are classified by their size.
+Because of this static objects can be classified as car, cyclist or pedestrian.
+Since the detected objects have basically stored all raw measurement data, it would be easy to forward this
+to an external extended classifier. 
+
+Whether the measurement data is suitable for an extended classification must however still be examined.
+However, since the test vehicle will in the future be equipped with further sensors such as cameras, 
+these data can also be used for classification purposes. 
+For the detection of pedestrians with the help of cameras, there are already some publications \cite{Lee2015, Tuong2011} 
+a fusion of both methods would be an interesting alternative.
+
+
+The segmentation of the objects from the measured data can be evaluated as success, 
+no major errors have occurred here, which could not be corrected by the subsequent filtering.
+However, since the segmentation is very resource-intensive, further algorithms should be evaluated depending on 
+the available computing time.
+
+
+In conclusion, it can be said that both the simulation and the real measurements,
+of the Velodyne in combination with the Applanix system,
+is sufficient to observe mini and small roundabout.
+Better sensors would not offer any significant advantages in tracking and segmentation.
+However, the use of several sensors which are mounted obliquely on the vehicle would be sensible.
+This would increase both the usable resolution and an increased quality of the segmentation.
+Since for these, especially the close-up measurements of the ground are important.
+
+
+
+
+
 
 \printbibliography
 
