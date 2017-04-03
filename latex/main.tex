@@ -478,7 +478,7 @@ Therefore the detection of vehicles in a small roundabout is already a challenge
 % Für den Bereich größer als 50m sehen wir in \cref{velodyne_range_75}, dass die Auflösung im verleich zu näheren Objekten gleich bleibt. Jedoch steigt hier die Warscheinlichkeit, dass
 % fahrzeuge bereits im voherigen bereich verdeckt wurden.
 
-For the area greater than 50m, we see in \cref{velodyne_range_75} that the resolution remains the same in the same way as for closer objects.
+For the area greater than 50m, can be seen in \cref{velodyne_range_75} that the resolution remains the same in the same way as for closer objects.
 However, there is a higher likelihood that vehicles have already been hidden in the previous area.
 
 \begin{figure}[!ht]
@@ -532,7 +532,7 @@ could not be prevented.
 % nur im ersten Messlayer.
 
 Since the monitoring of the rear area is not important for the roundabout observation, the missing measurements in the rear area are negligible. 
-Since we have the highest resolution in the front area of the sensor, the missing measurements in the front range are not important,
+Since the sensor have the highest resolution in the front area, the missing measurements in the front range are not important,
 also these are only in the first measurement layer.
 
 
@@ -568,7 +568,7 @@ always provide sufficient measurements in the front area, in addition to keeping
 % Dies ist nötig, um zeitabhängige größen wie die Geschwindigkeit und Drehrate der erkannten Objekte zu bestimmen. Im letzten Schritt werden die Objekten anhand der Zuvor bestimmten Parameter
 % in Typen classifiziert. 
 
-In the following chapter, the Velodyne VLP-16 with the detection of traffic users we will be analyzed. Starting with the segmentation,
+In the following chapter, the Velodyne VLP-16 with the detection of traffic users will be analyzed. Starting with the segmentation,
 that is, in the first step all measured values which do not represent potential traffic are removed. 
 In the next step, the remaining measured values are combined with the aid of a clustering algorithm. 
 In the third step the objects are abstracted and tracked, that is, trying to establish a relationship between the objects between different time steps.
@@ -685,7 +685,7 @@ point cloud are marked by their distance to the plane as ground. As distance thr
 
 For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. Technically, SVD performs a linear least square\cite{Lee2012}.
 Since there is already ready knowledge about the position of the plane, the linear least square is calculated by hand and some optimization are made.
-When using the \ac{LLSQ}, it is important to note that the \ac{LLSQ} is not optimizing the distance of the points to the plane but the distance of the points along an axis (in our case the z-axis),
+When using the \ac{LLSQ}, it is important to note that the \ac{LLSQ} is not optimizing the distance of the points to the plane but the distance of the points along an axis (in this case the z-axis),
 see \cref{LLSQ_MIN}\footnote{\url{https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics) (03/06/2017)}}. This can lead to problems, if the points are scattered far apart from the optimal plane.
 However, since the algorithm is using preselected points from the \ac{RANSAC} distance criterion, this poses no problem.
 
@@ -909,7 +909,7 @@ that always a complete 360 degree measurement is given. The number of measuremen
 entriesPerAzimuth and corresponds to the Velodyne VLP-16. In order to arrive at the actual measured values, two distance values must be merged and converted to an unsigned 16-bit integer,
 which then contains the measurement in cm. In each case, 16 of these values result in a measuring frame in which the polar angle must be mapped to a range between -15 and +15 degrees.
 After the spherical data of each measurement point have been reconstructed, the coordinate system is rotated with the help of the heading of the Applanix POS LV
-which is added to the azimuth angle. As a result, the y-axis of our coordinate system is always aligned to the north, which greatly simplifies the subsequent tracking of the objects.
+which is added to the azimuth angle. As a result, the y-axis of the coordinate system is always aligned to the north, which greatly simplifies the subsequent tracking of the objects.
 Afterwards the spherical data is converted into Cartesian coordinates and stored in a point data structure, to see in \cref{pcdc}.
 
 \begin{figure}[!ht]
@@ -952,7 +952,7 @@ Furthermore, \ac{DBSCAN} can deal with noise and recognize as this. This makes t
 measurement from the sensor can have errors within a real scenario, which can be asumed as noise effect. 
 In fact, \ac{DBSCAN} is itself of linear complexity. However, most computing times are caused by the neighborhood calculation.
 But instead of the range request via a tree structure, here can be profited from the behavior, that measurements in a small neighborhood have a similar azimuth angle.
-For this purpose, two additional entries for each measured value to the left and right in our array are examined. 
+For this purpose, two additional entries for each measured value to the left and right in the array are examined. 
 Therefore, it is necessary to check $5 \cdot 16 = 80$ values, which is much less then checking every other point in the point cloud. %The run time of the range request can therefore also be performed in linear complexity.
 All measured values previously classified as ground are skipped during the calculation. In addition, the construction of a KD-tree is omitted, which also leaves us a run-time advantage.
 All clusters are stored by the algorithm as a list of references to the original array to avoid unnecessary copying.
@@ -1013,7 +1013,7 @@ The ID is derived from the ID of the initial used cluster
 In each further step, all clusters with the previously identical ID are used to update the objects. New objects are created from clusters with new IDs.
 
 The first important step in the update process is the calculation of the movement direction of an object, because the following calculations are based on this.
-When calculating the direction of movement, it must be noted that the movement of our own vehicle must be separated out. The position data of the Applanix POS-LV are used for this purpose.
+When calculating the direction of movement, it must be noted that the movement of the test vehicle must be separated out. The position data of the Applanix POS-LV are used for this purpose.
 Since both the position data of the Applanix system and the detected position of the vehicle have errors, the direction of movement is updated only with a minimum movement of 2m.
 
 \begin{align*}
@@ -1022,7 +1022,7 @@ Since both the position data of the Applanix system and the detected position of
 \theta &= \atantwo(\Delta y,\Delta x)
 \end{align*}
 
-with $P$ - position of the object, $C$ - position of our own vehicle
+with $P$ - position of the object, $C$ - position of the test vehicle
 
 % Das Ergebnis kann in \cref{obst_rot} betrachtet werden. Gut zu erkennen ist, dass die Bewegungsrichtung (Pfeil) nicht mit der Ausrichtung des Objekte (schwarz) übereinstimmt,
 % die Boundingbox jedoch korrekt ausgerichtet ist. Wie diese Berechnung zustande kommt wird im folgenden geklärt.
@@ -1698,7 +1698,7 @@ which contains the center point of the roundabout, references to all lanes, and 
 % Achsen aligned Position gedreht und in den Koordinatenursprung verschoben wird. Weiterhin muss das Rechteck vergrößert werden, sofern wir nicht das letzte Lanesegment bearbeiten,
 % da sonst eine Lücke zwischen den Rechtecken verbleiben würde. Dazu wird der Winkel zum nächsen Linienabschnitt genutzt.  Sas ganze ist in \cref{mapping} Symbolisiert.
 % Wobei das blaue Rechteck das aktuell zu bearbeitende darstellt, das grüne Rechteck das nachfolgende und das orange die nötige Verlängerung
-Inside of the simulation, a perfect position we be assumed for the localization. Localization within the map means mapping 
+Inside of the simulation, a perfect position can be assumed for the localization. Localization within the map means mapping 
 the current known position to a lane segment. Since the lanes are only given in the form of points and width, rectangles are calculated
 for each lane segment and the current position is checked against each rectangle.
 This is done by rotating the rectangle (and the position) to an axis-aligned position and moving it to the coordinate origin. Furthermore, the rectangle must be enlarged if not
@@ -1766,7 +1766,7 @@ The maximum speed of the simulated test vehicle is set to 30 km/h.
 
 Before each call of a state, all objects delivered by the object detection are picked up and mapped to the lanes held in the map.
 Objects that were not on a track or path are rejected.
-Furthermore, the expected intersection points of our own vehicle with all paths in the roundabout is calculated (see magenta points in \cref{intersection_pos}). 
+Furthermore, the expected intersection points of the test vehicle with all paths in the roundabout is calculated (see magenta points in \cref{intersection_pos}). 
 \begin{figure}[!ht]
 \begin{center}
 \caption{Intersection Points}
@@ -1806,7 +1806,7 @@ If this condition does not apply, the vehicle enters the Brake - State.
 % Nach den das Fahrzeug zum stehen gebracht wurde wechselt dieses wieder in den ToRoundabout-State.
 In this state, the distance of the test vehicle to the next intersection point is calculated.
 With this distance, the necessary negative acceleration is now calculated in order to get the vehicle standing up to this point,
-and sent to the vehicle. After the vehicle has been brought to a standstill, we change back into the last called state.
+and sent to the vehicle. After the vehicle has been brought to a standstill, it changes back into the last called state.
 
 \paragraph{InRoundabout - State}
 % Wenn sich das Fahrzeug innerhalb des Kreisverkehres befindet, führ es ein \ac{ACC} aus. Das heißt das Fahrzeug fährt mit konstanter geschwindigkeit, bis es
@@ -2105,7 +2105,7 @@ This is because the bicycles do not provide enough space for the sensor so that 
 \subsubsection{Scenario Handling}
 %Im folgen werten wir das Simulationsscenario an sich aus, idem wir die beiden krittischen Situationen das einfahren und ausfahren des testfahrzeuges aus dem Kreisverkehr 
 %innerhalb der Objektdetection Ansehen.
-In the following, we investigate the simulation scenario itself, by looking at the two critical situations in which the test vehicle, enters and exits the roundabout.
+In the following, the simulation scenario itself is investigated, by looking at the two critical situations in which the test vehicle, enters and exits the roundabout.
 
 % Betrachten wir als ersten die einfahr situation. Fahrzeug Auto hat bereits am Fahrbahnrand angehalten.
 % In  \cref{roundabout_entrance_1} können wir sehen, dass alle Fahrzeuge korrekt erkannt wurden.
@@ -2251,7 +2251,7 @@ There is also another vehicle and a pedestrian, which must be observed.
 In contrast to the simulation, the real measurement data does not allow the measured values to be compared to comparative data. 
 However, the measurement data are much more valuable, since they are not a clinically pure environment.
 For example, the road is higher in contrast to the surrounding area, which is full of dense vegetation. 
-Furthermore, our road is not a perfect plane, which is another challenge for segmentation.
+Furthermore, the road is not a perfect plane, which is another challenge for segmentation.
 
 % Zur evalierung der Segemntierung wurden alle Messframes von and begutachtet. Dabei wurden falsch positive Segementierungen der Straße notiert.
 % Falsch positiv beideutet in diesem Fall, das Teile der Straße als nicht grund Klassifiziert wurden. 
