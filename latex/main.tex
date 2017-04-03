@@ -1243,6 +1243,7 @@ If one of these values is exceeded, the confidence is also halved.
 
 
 \section{State Estimation}
+\todo{Ergänzen Kalman Filter: Normalveteilung müsste überprüft werden, aber da der EKF für Tracking state of the art ist.. nehmen wir an, das dass funkiniert. referenzen dazu suchen !!!}
 
 % Nachfolgende des Trackings wird auf den Erkannten Objekten eine Zustandschätzung durchgeführt. Dies ist nötig, da Objekte während der Fahrt verdenkt werden können,
 % sei es durch andere bewegte Objekte oder Gebaüde. Eine schätzung des Zustandes über den Erkennungshorizont hinaus erlaubt es uns eine Aussage über die Position von
@@ -2260,7 +2261,7 @@ und würden das Fahrverhalten der Autonomen Fahrzeues nicht beeinträchtigen. Zu
 \subsection{Confidence Filter}
 Weiterhin bieten uns die echten messwerte die Möglichkeit den Confiden Filter zu evaluieren. 
 Da hier sehr viel Vegetation nicht als boden klassifiziert wird, was sich in geisterobjekten entlang des Straßenrandes auswirkt.
-Dazu betrachten wir im folgenden zwei momentaufnahmen (\cref{conf_filter}), einmal mit Filter und einmal ohne, um die qualität bewerten zu können.
+Dazu werden im folgenden zwei momentaufnahmen betrachtet (\cref{conf_filter}), einmal mit Filter und einmal ohne, um die qualität bewerten zu können.
 
 \begin{figure}[htb]
   \caption{Confidence Filtering} 
@@ -2281,26 +2282,81 @@ Dazu betrachten wir im folgenden zwei momentaufnahmen (\cref{conf_filter}), einm
 
 Wie wir sehen können wird ein großteil aller ungültigen Onjekte herausgefiltert. Lediglich einige kleinere Objekte bleibe erhalten.
 Diese befinden sich jedoch stets außerhalb der Fahrbahn und ließen sich ebenfalls über eine Karte herausfiltern.
-Eine abschließende aussage leiße sich jedoch nur mit aufnahmen in einer echten Urbanen Umgebung, mit mehreren Fahrzeugen und andern Verkehrsteilnehmern machen
+Eine abschließende aussage lässt sich jedoch nur mit aufnahmen in einer echten Urbanen Umgebung, mit mehreren Fahrzeugen und andern Verkehrsteilnehmern machen
 
-\subsection{Pedetrian}
+
+\todo{we and our enterfernen !! Überall!!}
+\subsection{Pedestrian}
 In diesem Abschnitt wird der Fußgänger im Scenario genauer untersucht. Dieser ist in diesem Szenarion besonder schwer zu erkennen,
 da der Kreisverkehr nicht über einen Fußweg verfügt und sich der Fußgängerdireckt am Sraßenrand befindet.
-Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von anderen Onjekten am Straßenrand, wie z.B. Leitpfosen, zu unterschiden ist.
+Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von anderen Onjekten am Straßenrand, wie z.B. Leitpfosten \cref{refPosts}, zu unterschiden ist.
 
+\begin{figure}[!htb]
+  \caption{Pedestian and Reflector Posts} 
+  \centering
+  \includegraphics[width=0.5\textwidth]{bilder/reflector_posts.png}
+ \label{refPosts}
+\end{figure}
+
+Problematisch ist dabei vorallem, das der Fußgänger nur durch seine Größe klassiffiziert wird.
+Dies führt dazu das er nicht von kleinen Statischen elementen zu unterscheiden ist. Befindet dieser sich
+nahe an einem statsichen Hindernis, kann es passieren, das diese als ein großes hinderiss erkannt werden. 
+Das gleich würde auch bei größeren Menschenmassen an einem Fußgängerüberweg passieren. Dies ist in dieser Aufnahme 
+jdeoch nicht passiert und der Fußgänger konnte zu jeder zeit erfolgreich als eigenständiges Objekt erkannt werden.
 
 
 \section{Performance}
 
-Benchmark und Profilingchart einfügen.\\
+Abschließend gehen wir aud die laufzeit des Programmes ein dazu wurden Benchmarks auf zwei verschiedenen Systemen vorgenommen, die visualisierung der Messwerte wurde dabei deaktiviert.
+Dazu wurden insgesammt 893 Messframes ausgewertet und die bearbeitungszeit für jeden Frame gelogt. 
 
-Bench:
-32,3214074916652
-147,121689361702
+Dazu wurden folgende Testsysteme genutzt:
+\begin{description}
+\item[Desktop Computer]\hfill
+\begin{description}
+\item[CPU] AMD Phenom II X4 955 3.2 GHz
+\item[RAM] 8GB DDR2 800
+\item[OS] Arch Linux 4.9.16-1-lts
+\end{description}
+\item[Notebook]\hfill
+\begin{description}
+\item[CPU] Intel Core i5-4210U 1.7 - 2.7 GHz
+\item[RAM] 8GB DDR3 1333
+\item[OS] Arch Linux 4.9.16-1-lts
+\end{description}
+\end{description}
+
+Ergebnisse:
+
+\begin{description}
+\item[Desktop Computer]\hfill
+\begin{description}
+\item[Mean] 147.12 ms
+\item[Standard Deviation] 32.3 ms
+\end{description}
+\item[Notebook]\hfill
+\begin{description}
+\item[Mean] 30.7 ms
+\item[Standard Deviation] 1.75ms
+\end{description}
+\end{description}
+
+Da die reinen laufzeitwerte wenig aussagekraft haben, wird im folgenden das Profiling chart des Programmes betrachtet.
+Das Profiling cahrt wurde mit callgrind erstellt, welches die laufzeit über die Anzahl der Instuktionen abschätzt.
 
 
+\begin{figure}[!htb]
+  \caption{Pedestian and Reflector Posts} 
+  \centering
+  \includegraphics[width=\textwidth]{bilder/call.png}
+ \label{refPosts}
+\end{figure}
 
-\chapter{Conclusions}
+
+\footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}.
+Wie wir sehen fallen fast 40\% der instruktionen auf
+
+\chapter{Conclusions and Future Work}
 Kann in mehrere Unterkapitel gegliedert werden\\\\
 Greift Thesen oder Fragestellungen aus der Einleitung wieder auf\\\\
 Fasst die Arbeit knapp und prägnant zusammen\\\\
@@ -2308,7 +2364,6 @@ Ordnet die Ergebnisse in Gesamtzusammenhänge ein\\\\
 Zieht Schlussfolgerungen aus den erarbeiteten Ergebnissen\\\\
 Kann auch eigene Bewertungen oder Meinungen enthalten\\\\
 Gibt eine Ausblick auf mögliche Konsequenzen oder notwendige weitere zu lösende Probleme
-\chapter{Future Work}
 
 \printbibliography
 
