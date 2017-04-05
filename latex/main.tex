@@ -437,7 +437,7 @@ the air. So only the eight angles in the range of -1 to -15 degrees can be used.
 % auf uns zu bewegt. Weiterhin gehen wir von einer Befestigungshöhe des Sensors von 2.1 Metern aus, da dies letztendlich die montagehöhte des Sensors uf dem Testfahrzeug darstellt.
 
 In this evaluation is assumed that a small car with a length of 4 meters and 1.5 meters height is to detect.
-It is also asumed the ideal situation that the vehicle drives in the direction of the test vehicle.
+It is also assumed the ideal situation that the vehicle drives in the direction of the test vehicle.
 Furthermore, a mounting height of the sensor of 2.1 meters as this is finally the mounting height of the sensor on the test vehicle, is assumed.
 
 \paragraph{Range 0-25m}
@@ -610,7 +610,7 @@ The advantage of this method is that no initial position is required for the bot
 
 For the application with the Velodyne VLP-16, the problem is in addition that the resolution of the sensor is very low in height.
 Depending on the distance of the vehicle within the required range, only two layers fall on the test vehicles, which means that gradient-based methods fail reliably,
-beacuse the gradients are too small and the depletion of the necessary thresholds leads to frequent false positives. 
+because the gradients are too small and the depletion of the necessary thresholds leads to frequent false positives. 
 The method of the statistical mean and the method based on the z-coordinate, suffer from the chassis of the Volvo XC90 SUV. 
 The height of the vehicle varies by several centimeters by changing the driving profile (Sport / Eco, etc.). Even slightly increased speed in the roundabout (about 30 km/h)
 lead to a clear lateral inclination of the vehicle. Therefore, another method is proposed. The detection of a ground plane in the measurement data.
@@ -622,7 +622,7 @@ lead to a clear lateral inclination of the vehicle. Therefore, another method is
 % von einer Lane Detection geliefert werden.
 
 For the detection of the ground plane the following assumptions are made: the road can be presented approximately as a plane in $\mathbb{R}^3$.
-Further, the ground plane is the lowest plane in the mesurement area. Therefore, in the first step, the data set in polar coordinates is divided into 30 of cake piece formed segments.
+Further, the ground plane is the lowest plane in the measurement area. Therefore, in the first step, the data set in polar coordinates is divided into 30 of cake piece formed segments.
 From this segments, two segments [\cref{segments}] are then selected in front and rear, which are not neighbored. The selection of the segments follows from the assumption
 that the road is in front or behind the vehicle. In future, the selection of the segments could also be optimized with the help of the vehicle steering angle 
 or the valid range can be provided by a lane detection.
@@ -703,7 +703,7 @@ However, since the algorithm is using preselected points from the \ac{RANSAC} di
 % In Matrixschreibweise:
 
 The representation of a plane in coordinate form is as follows: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Since the plane is in $\mathbb{R}^3$, this system of equations is overdetermined.
-To optimize th plane in the direction of the z-axis, parameter c is set to one and the equation system is simply solved by z : $a\vec{x} + b\vec{y} + d = -\vec{z}$.
+To optimize the plane in the direction of the z-axis, parameter c is set to one and the equation system is simply solved by z : $a\vec{x} + b\vec{y} + d = -\vec{z}$.
 The vectors $\vec{x},\vec{y},\vec{z}$ represent the points to be taped.
 In matrix notation:
 
@@ -730,7 +730,7 @@ d
 \end{align*}
 
 %Dieses Sytem hat üblicherweise keine Lösung, unser eigentliches Ziel ist jeoch auch nicht extakte lösungen für $\vec\beta$ zu finden sondern eine gute näherung $\hat{\beta}$ dafür:
-This system usually doesn't have a solution, but the real goal isn't finding an extact solution for $\vec\beta$, it is to find a good approximation $\hat{\beta}$ for this:
+This system usually doesn't have a solution, but the real goal isn't finding an exact solution for $\vec\beta$, it is to find a good approximation $\hat{\beta}$ for this:
 
 \begin{align*}
 \hat{\beta} = \min{(|| \vec{z} - X\vec{\beta} ||^2)}
@@ -880,7 +880,7 @@ Since the tree has to be rebuilt after each 360 degree measurement this is an pr
 % Middleware geliefert werden. Das OpenDAVINCI auf der Übertragung der Daten mit UDP Multicast setzt, werden die Daten in einer Kompakten form übertragen, welche in einen einzigen
 % UDP Frame passt.\\
 Here a method is suggested which combines the advantages of both methods. It is therefore necessary to know how the data from the OpenDAVINCI
-Middleware is delivered. Because the OpenDAVINCI Middleware relies on the transmission of the data with UDP Multicast, the data is transferred in a 
+middleware is delivered. Because the OpenDAVINCI middleware relies on the transmission of the data with UDP Multicast, the data is transferred in a 
 compact form that fits into a single UDP frame. The structure can be seen in \cref{odv_ds}.
 
 \begin{figure}[!ht]
@@ -904,7 +904,7 @@ compact form that fits into a single UDP frame. The structure can be seen in \cr
 % einem Unsigned 16Bit Integer umgewandelt werden, welcher dann die Messung in cm enthält. Jeweils 16 dieser Werte ergeben dann einen Messframe in dem der Polarwinkel
 % auf einen Bereich zwischen -15 und +15 abgebildtet werden muss. Nachdem die sphärische Daten jedes Messpunktes widerhergestellt wurden, werden diese In Kartesische umgewandelt und
 % in eine Punkt Datenstruktur gespeichert. 
-In this case, a constant rotational rate of the sensor output is asumed, which results in an equidistant distance of the measured values. Important to know is also 
+In this case, a constant rotational rate of the sensor output is assumed, which results in an equidistant distance of the measured values. Important to know is also 
 that always a complete 360 degree measurement is given. The number of measurements per azimuth is recorded in 
 entriesPerAzimuth and corresponds to the Velodyne VLP-16. In order to arrive at the actual measured values, two distance values must be merged and converted to an unsigned 16-bit integer,
 which then contains the measurement in cm. In each case, 16 of these values result in a measuring frame in which the polar angle must be mapped to a range between -15 and +15 degrees.
@@ -932,8 +932,8 @@ Afterwards the spherical data is converted into Cartesian coordinates and stored
 
 % Diese wird wiedrrum in ein Statisches 2 Dimensionales Array Gespeichert: Points[2000][16]. Die Reihenfolge der Daten wird dabei beibehalten, um einen effizenten Zugriff auf die Werte
 % auf basis ihres azimuth winkels zu ermoglichen. Diese Datenstruktur stellt nun die Basis für den Nachfolgenden Clustering alorythmus dar.
-This is stored  again  in a static two-dimensional array: Points [2000] [16]. The order of the data is keeped thereby to allow efficient access to 
-the values based on their azimuth angle. This data structure now provides the base for the subsequent clustering alorythm.
+This is stored  again  in a static two-dimensional array: Points [2000] [16]. The order of the data is kept thereby to allow efficient access to 
+the values based on their azimuth angle. This data structure now provides the base for the subsequent clustering algorithm.
 
 % Auf dieser Basis wird nun ein \ac{DBSCAN} \cite{DBSCAN} ausgeführt. Der \ac{DBSCAN} Algorithms hat dabei folgende Vorteile.
 % Im Gegensatz beispielsweise zum K-Means-Algorithmus, muss nicht im vornherein bekannt sein, wie viele Cluster existieren. Der Algorithmus kann Cluster beliebiger Form 
@@ -949,7 +949,7 @@ the values based on their azimuth angle. This data structure now provides the ba
 On this basis, a \ac{DBSCAN} \cite{DBSCAN} is now executed. The \ac{DBSCAN} algorithm has the following advantages. In contrast to the K-Means algorithm,
 for example, it is not necessary to know how many clusters exist. The algorithm can recognize clusters of any shape (e.g., not only spherical).
 Furthermore, \ac{DBSCAN} can deal with noise and recognize as this. This makes the \ac{DBSCAN} optimal candidate for this work, because the objects can be have any shape and 
-measurement from the sensor can have errors within a real scenario, which can be asumed as noise effect. 
+measurement from the sensor can have errors within a real scenario, which can be assumed as noise effect. 
 In fact, \ac{DBSCAN} is itself of linear complexity. However, most computing times are caused by the neighborhood calculation.
 But instead of the range request via a tree structure, here can be profited from the behavior, that measurements in a small neighborhood have a similar azimuth angle.
 For this purpose, two additional entries for each measured value to the left and right in the array are examined. 
@@ -1426,7 +1426,7 @@ P_k &= (I - K_k H_k) P_k
 Since all states of the system are directly measured there is no observation function for the measurements, means 
 $h(\hat{x}_k)$ equals $\hat{x}_k$. Because of this, the observation matrix $H$ results in a simple Identity matrix.
 
-For the Measurement Noise Covariance Matrix $R$ experimental determined values are used. Since the position is quite sure a small value of 1 
+For the measurement noise covariance matrix $R$ experimental determined values are used. Since the position is quite sure a small value of 1 
 and a value of 0.1 for the rotation, for the same reason, is assumed. For the speed a quite high value of 4 is chosen,
 because it is derived from the position over time. The same for the yaw rate with a value of 0.1. Again no correlation between all other values is assumed,
 which it is most likely not true, but would need more further investigation.
@@ -1460,7 +1460,7 @@ R=
 
 In this step of the filter it must be noted that it is working with $\theta$ which is defined in the range of $ [- 180^{\circ} \le \theta \le 180^{\circ}] $ and therefore singularities can occur.
 Because the measurement data is noisy, the state may be at 179 degrees and is updated with a value of $ -179^{\circ} $. For the sake of simplicity it is assumed that both values are equally weighted,
-the update step results in a value of 0 degrees, which is obviously wrong. Therefore, before each updating step, $ 360 $ degree is added or suptracted,
+the update step results in a value of 0 degrees, which is obviously wrong. Therefore, before each updating step, $ 360 $ degree is added or subtracted,
 so the distance between state and measured value is minimized. After updating, the internal state is again normalized to the range $ [- 180^{\circ} \le \theta \le 180^{\circ}] $.
 Consider now again the example with the corrected values, state: $ 179-360 = -181 $ degree and measured value: $ -179 $ degree, now there is the correct value of $ -180 $ degree.
 
@@ -1506,7 +1506,7 @@ and the correction step of the EKF is performed. If more than one object matches
 
 The simulation environment being used is VREP \footnote{\url{http://www.coppeliarobotics.com/}}. VREP has been developed for various robotic applications.
 VREP allows to construct any \ac{MKS} based on various physics engines within a graphic editor. Furthermore, VREP already has many ready-to-use sensor models, such as
-the Velodyne VLP-16. The whole simulation can communicate via a RemoteAPI interface with nearly every programming language.
+the Velodyne VLP-16. The whole simulation can communicate via a Remote-API interface with nearly every programming language.
 
 
 
@@ -1630,7 +1630,7 @@ The OpenDAVINCI internal Compressed Scenario Data Format (SCNX) \cite{Berger2010
 to formulate different traffic situations. The SCNX format offers, among other things, the classes ROAD, LANE for the modeling of roads. One ROAD can consist of several LANEs.
 A lane consists of a set of points which describe the course of the lane. The lane can be assigned with the attribute's lane mark and width. 
 Individual lanes can be connected to each other. What makes it possible to build a complicated road network with these simple models. 
-Since OpenDAVINCI does not provide a Python interface for parsing the Scenariofiles, a special Lexer was implemented for the processing of the Scenariofiles. 
+Since OpenDAVINCI does not provide a Python interface for parsing the scenario files, a special Lexer was implemented for the processing of the scenario files. 
 At this time, only the classes required for the simulation are implemented. Therefore, a lane can only be described by a point model, while OpenDAVINCI offers additional models.
 
 % Weiterhin musste das in OpenDAVINCI enthaltene Modell erweitert werden, da OpenDAVINCI leider keine andern Arten von wegen unterstützt.
@@ -1988,7 +1988,7 @@ In the following section, in \cref{lost} is shown, why the vehicle went lost and
 It can be seen that the object is hidden by the object 98, which means that both the position and the orientation of the object are faulty. 
 The Kalman filter (light blue circle and arrow), however, roughly maintain the direction of movement.
 However, the confidence value of the object is not sufficient to trace the object back to the point in time until it is visible again. 
-In the second part of the figure, the vehicle will be rerecognized. 
+In the second part of the figure, the vehicle will be recognized again. 
 Since the vehicle  now can only seen from behind, the size of the vehicle is detected wrongly and it is classified as a bicycle.
 Since the position of the vehicle is calculated from the center of the rectangle, this leads to a systematic error. 
 There are also measurements in the front area of the vehicle. These are the wheels of the vehicle, which can be seen due to the steep angle of measurement. 
@@ -2266,7 +2266,7 @@ Furthermore, the road is not a perfect plane, which is another challenge for seg
 % teile des Fahrzeuges als Boden klassiffiziert werden. Es wurden insgesammt 819 Messframes Ausgewertet.
 
 For the evaluation of the segmentation all measuring frames were examined by hand. 
-False-positive segmentations of the street were noted. False-positive in this case, are the parts of the road which are classified as not ground. 
+false-positive segmentations of the street were noted. false-positive in this case, are the parts of the road which are classified as not ground. 
 Several false detections within one measurement frame were considered one error.
 Only parts of the road used as all other area could be filtered out by a map. 
 Furthermore because, an assessment by hand would otherwise not be feasible.
@@ -2276,7 +2276,7 @@ A total of 819 measurement frames were evaluated.
 
 % Die Auswertung der False positives hat 20 fälle egeben. Ein Beispiel dazu ist in \cref{false_pos_seg_1} zu sehen. Alle Hellblauen Bereich stellen
 % dabei Boden dar, während schwarze bereiche potenzielle Objekte darstellen.
-The evaluation of the False positives has given 20 cases. An example is shown in \cref{false_pos_seg_1}. 
+The evaluation of the false-positives has given 20 cases. An example is shown in \cref{false_pos_seg_1}. 
 All light blue areas represent ground while black areas represent potential objects.
 
 \begin{figure}[!htb]
@@ -2293,10 +2293,10 @@ All light blue areas represent ground while black areas represent potential obje
 % dass dei False Positives immer nur für einen einzenen Frame vorhanden sind. Daher werden diese Durch den Confidence wert herausgefiltert und
 % und würden das Fahrverhalten der Autonomen Fahrzeues nicht beeinträchtigen. Zu beachten ist allerdings auch, das die Segmentierung mit einem
 % \ac{RANSAC} abreitet, welcher nicht determinitisch ist. Daher kann dies bei einem weiteren durchlauf anders aussehen.
-No false negatives were found in the measurement frames. The total number of errors is therefore 2.4 \%.
+No false-negatives were found in the measurement frames. The total number of errors is therefore 2.4 \%.
 How the missing measured values of the sensor in the rear area of the vehicle affect, can not be evaluated by the data unfortunately.
-However, it is also said that a false positive object was never recognized as an object,
-which is due to the fact that the false positives are only present for a single frame.
+However, it is also said that a false-positive object was never recognized as an object,
+which is due to the fact that the false-positives are only present for a single frame.
 Therefore, these are filtered out by the confidence value and would not interfere with the driving behavior of the autonomous vehicle.
 Note, however, that the segmentation proceeds with a \ac{RANSAC}, which is not deterministic. Therefore, this may look different in another cycle.
 
@@ -2411,7 +2411,7 @@ in real time. To see the older desktop system does not reach this value. The new
 However, since the vehicle moves at partly high speeds, a smaller value would be desirable in order to reduce the delay of the measured values. 
 It should be noted that there is room for optimization. Since the pure run time values have little meaning in this regard, 
 the following is the profiling chart of the program is shown in \cref{profiling}. 
-The profiling is created with callgrind\footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}, which estimates the run time over the number of instructions.
+The profiling is created with Callgrind\footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}, which estimates the run time over the number of instructions.
 
 
 \begin{figure}[!htb]
