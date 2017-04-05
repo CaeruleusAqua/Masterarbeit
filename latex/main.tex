@@ -94,8 +94,8 @@
 \title{Autonomous Driving in Urban Centers - Roundabout Monitoring}
 \author{Julian-B. Scholle}
 
-%\supervisor{Themensteller\\
-%  Betreuer}
+\supervisor{Jun.-Prof. Dr. Sebastian Zug\\
+Associate Prof. Christian Berger}
 
 \pagenumbering{Roman}
 
@@ -665,7 +665,7 @@ However, before the plane is added as a possible solution candidate, it is check
 This means that the distance of the plane should move between 1.9m and 2.2m, which corresponds approximately to the mounting height of the Velodyne sensor.
 
 The number of iterations of the \ac{RANSAC} is limited to 50. After the run of the \ac{RANSAC}, the plane with the lowest error is taken and all points in the
-point cloud are marked by their distance to the plane as ground. As distance threshold, an optimum value of 0.5 m was determined experimentally.
+point cloud are marked by their distance to the plane as ground. As distance threshold, an optimum value of 0.5m was determined experimentally.
 
 
 \subsection{Plane Fitting}
@@ -1028,7 +1028,7 @@ with $P$ - position of the object, $C$ - position of the test vehicle
 % die Boundingbox jedoch korrekt ausgerichtet ist. Wie diese Berechnung zustande kommt wird im folgenden geklärt.
 
 The result can be viewed in \cref{obst_rot}. It is easy to see that the direction of movement (arrow) does not conform with the orientation of the object (black), 
-but the bounding box is correctly oriented. How this calculation comes from is clarified in the following.
+but the bounding box is correctly oriented. Where this calculation comes from is clarified in the following.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -1043,7 +1043,7 @@ but the bounding box is correctly oriented. How this calculation comes from is c
 
 Based on the direction of movement, the alignment of the vehicle is now calculated. To do this, all clusters assigned to the object are grouped together and 
 the whole coordinate system is rotated by $-\theta$, so that the vehicle is in a horizontal position.
-Then the object is divided into 3 equal sized segments (\cref{obst_devide}).
+Then the object is divided into three equal sized segments (\cref{obst_devide}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -1086,7 +1086,7 @@ which would cause a great inaccuracy. With these points $(\vec{R};\vec{L})$ (\cr
 % gibt es für beide Werte einen unteren Grenzwert von 0.9m . Messerte für ein Beispielobjekt sind in \cref{obst_hist} zu sehen.
 
 After applying the correction, the size of the obstacle is calculated. For this purpose, the maximum and minimum x and y values of
-rotated objects are used. With these values, a histogram for the length and width of the obstacle, rounded to 0.5 m, is now established over time.
+rotated objects are used. With these values, a histogram for the length and width of the obstacle, rounded to 0.5m, is now established over time.
 The most probable value is then selected. This causes the size of the obstacle to change more often before the size converges to a stable value.
 Here 0.5m are used, because the bonding box is also calculated for pedestrians and one meter is too much for pedestrians and there small size.
 Measured values for a sample object can be seen in \cref{obst_hist}.
@@ -1804,7 +1804,7 @@ In this state the vehicle is driving at a maximum speed of 30 km/h
 % fährt das Fahrzeug in den Kreisverkehr ein, und wechselt in den Zustand InRoundabout. Dafür wird die nötige beschleunigung soweit reduziert,
 % das die bedingung noch erfüllt ist. Sollte diese Bedingung nicht zutreffen, geht das Fahrzeug in den Zustand Brake.
 The vehicle is in this state, if it is not yet located in the roundabout. At each call, the remaining distance,
-of all obstacle's which are moving in the direction of the intersection, to the intersection point is calculated.
+of all obstacles which are moving in the direction of the intersection, to the intersection point is calculated.
 Based on these distances and the object speeds the estimated time window is calculated, in which the obstacles reach the intersection point.
 A time window is also calculated from the maximum acceleration and speed of the test vehicle and the calculated distance to the intersection point.
 If this time window is smaller than one of the obstacles plus a safety interval of two seconds, the vehicle enters the roundabout and changes to the InRoundabout - State.
@@ -1927,7 +1927,7 @@ The path of the car is shown in \cref{car_path1}. The position error was calcula
 % Es ist ersichtlich, das das dem Fahrzeug zwei verschiedene ID's zugeordnet wurden, was bedeutet, das das Tracking das Fahrzeug einmal verloren hat.
 
 In \cref{car_pos_err} the position error over the time is shown. The legend of the figure shows the respective ID of the tracking. 
-It can be seen that to the vehicle, two different ID's have been assigned, which means that the tracking has once lost the vehicle.
+It can be seen that to the vehicle, two different IDs have been assigned, which means that the tracking has once lost the vehicle.
 
 \begin{figure}[!htb]
   \caption{Car Position Error} 
@@ -2082,8 +2082,8 @@ From this data, \cref{classification} was created.
   \caption{Classification} 
   \centering
   \begin{tabularx}{\textwidth}{X|r|r|r|r}
-  \hline \textbf{Object Name} & \textbf{Car [\%]} & \textbf{Bike [\%]} & \textbf{Pedestian [\%]} & \textbf{Unclassified [\%]} \\\hline
-    Pedestian & 0 & 0 & 100 & 0 \\\hline
+  \hline \textbf{Object Name} & \textbf{Car [\%]} & \textbf{Bike [\%]} & \textbf{Pedestrian [\%]} & \textbf{Unclassified [\%]} \\\hline
+    Pedestrian & 0 & 0 & 100 & 0 \\\hline
     Car0 & 100 & 0 & 0 & 0 \\\hline
     Car1 & 100 & 0 & 0 & 0 \\\hline
     Car2 & 98.2 & 0.73 & 0.98 & 0 \\\hline
@@ -2278,9 +2278,9 @@ A total of 819 measurement frames were evaluated.
 % dabei Boden dar, während schwarze bereiche potenzielle Objekte darstellen.
 The evaluation of the false-positives has given 20 cases. An example is shown in \cref{false_pos_seg_1}. 
 All light blue areas represent ground while black areas represent potential objects.
-
+\todo{bild ändern!}
 \begin{figure}[!htb]
-  \caption{Car0 speed} 
+  \caption{False-Positive Example} 
   \centering
   \includegraphics[width=\textwidth]{bilder/false_pos1.png}
  \label{false_pos_seg_1}
@@ -2338,10 +2338,10 @@ However, a final statement can only be made with measurement data in a real urba
 % Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von anderen Onjekten am Straßenrand, wie z.B. Leitpfosten \cref{refPosts}, zu unterschiden ist.
 In this section the pedestrian in the scenario is examined more closely. This is particularly difficult to see in this scenario, 
 since the roundabout does not have a pavement and the pedestrian is located on the road edge.
-This leads to the fact that pedestrian from the bird's eye view it is not to differ from other objects, like Reflector Posts (see \cref{refPosts}), on the road edge.
+This leads to the fact that pedestrian from the bird's eye view it is not to differ from other objects, like reflector posts (see \cref{refPosts}), on the road edge.
 
 \begin{figure}[!htb]
-  \caption{Pedestian and Reflector Posts} 
+  \caption{Pedestrian and Reflector Posts} 
   \centering
   \includegraphics[width=0.5\textwidth]{bilder/reflector_posts.png}
  \label{refPosts}
@@ -2415,7 +2415,7 @@ The profiling is created with Callgrind\footnote{\url{http://valgrind.org/docs/m
 
 
 \begin{figure}[!htb]
-  \caption{Pedestian and Reflector Posts} 
+  \caption{Pedestrian and Reflector Posts} 
   \centering
   \includegraphics[width=\textwidth]{bilder/call.png}
  \label{profiling}
