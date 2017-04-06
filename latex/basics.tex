@@ -325,7 +325,7 @@ Figure \ref{ransac} shows an example for a good consensus set. Note that the \ac
 
 \ac{DBSCAN} \cite{DBSCAN} is a deterministic data mining algorithm for cluster analysis. The algorithm is based on density connectivity,
 that means, it binds points, based on its distance, to clusters. \ac {DBSCAN} iterates over all data points that have not yet been processed, 
-each processed data point is marked as processed. A range query request is then made for each of these points. If the size of the returned neighborhood is lower than a certain limit (minPts), the point is marked as noise.
+each processed data point is marked as processed. A range request is then made for each of these points. If the size of the returned neighborhood is lower than a certain limit (minPts), the point is marked as noise.
 Otherwise, a new cluster is created by performing a new range request for each point in the neighborhood and then adding these new points to the cluster.
 The old points then are marked as processed. This is repeated until all the points in the cluster are marked as processed, so no further points can be reached in the neighborhood.
 Figure \ref{dbscan} shows an example, with a point threshold of one. So the blue point is marked as noise, because there are no neighbors inside of the maximum allowed distance.

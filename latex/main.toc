@@ -46,7 +46,7 @@
 \contentsline {section}{\numberline {6.4}Classification}{31}{section.6.4}
 \contentsline {section}{\numberline {6.5}State Estimation}{32}{section.6.5}
 \contentsline {subsection}{\numberline {6.5.1}Constant Turn Rate and Velocity Model}{32}{subsection.6.5.1}
-\contentsline {subsection}{\numberline {6.5.2}Extendet Kalman Filter}{33}{subsection.6.5.2}
+\contentsline {subsection}{\numberline {6.5.2}Extended Kalman Filter}{33}{subsection.6.5.2}
 \contentsline {subsubsection}{Prediction}{33}{section*.58}
 \contentsline {subsubsection}{Updating}{34}{section*.59}
 \contentsline {subsubsection}{Initial Uncertainties}{35}{section*.60}

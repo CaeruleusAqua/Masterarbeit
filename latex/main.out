@@ -28,7 +28,7 @@
 \BOOKMARK [1][-]{section.6.4}{Classification}{chapter.6}% 28
 \BOOKMARK [1][-]{section.6.5}{State Estimation}{chapter.6}% 29
 \BOOKMARK [2][-]{subsection.6.5.1}{Constant Turn Rate and Velocity Model}{section.6.5}% 30
-\BOOKMARK [2][-]{subsection.6.5.2}{Extendet Kalman Filter}{section.6.5}% 31
+\BOOKMARK [2][-]{subsection.6.5.2}{Extended Kalman Filter}{section.6.5}% 31
 \BOOKMARK [2][-]{subsection.6.5.3}{Reassigning}{section.6.5}% 32
 \BOOKMARK [0][-]{chapter.7}{Simulation}{}% 33
 \BOOKMARK [1][-]{section.7.1}{Simulation Scenario}{chapter.7}% 34
