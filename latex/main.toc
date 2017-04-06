@@ -12,28 +12,28 @@
 \contentsline {subsection}{\numberline {2.1.1}Roundabouts in Law}{5}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Elements of a Roundabout}{6}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}Types of Roundabouts}{7}{subsection.2.1.3}
-\contentsline {subsubsection}{Mini Roundabout}{7}{section*.13}
-\contentsline {subsubsection}{Small Roundabout}{8}{section*.15}
-\contentsline {subsubsection}{Two-lane Passable Roundabout}{8}{section*.17}
-\contentsline {subsubsection}{Large Roundabout}{9}{section*.19}
+\contentsline {subsubsection}{Mini Roundabout}{7}{section*.14}
+\contentsline {subsubsection}{Small Roundabout}{8}{section*.16}
+\contentsline {subsubsection}{Two-lane Passable Roundabout}{8}{section*.18}
+\contentsline {subsubsection}{Large Roundabout}{9}{section*.20}
 \contentsline {section}{\numberline {2.2}\acl {RANSAC}}{9}{section.2.2}
 \contentsline {section}{\numberline {2.3}\acl {DBSCAN}}{10}{section.2.3}
 \contentsline {section}{\numberline {2.4}Middleware OpenDAVINCI}{10}{section.2.4}
 \contentsline {chapter}{\numberline {3}State of the Art}{12}{chapter.3}
 \contentsline {section}{\numberline {3.1}DARPA Urban Teams}{13}{section.3.1}
-\contentsline {subsubsection}{Team VictorTango}{13}{section*.27}
-\contentsline {subsubsection}{Stanford Racing Team}{13}{section*.28}
-\contentsline {subsubsection}{Team Cornell}{14}{section*.30}
-\contentsline {subsubsection}{TerraMax}{14}{section*.31}
-\contentsline {subsubsection}{Tartan Racing}{14}{section*.32}
-\contentsline {subsubsection}{Team Caltech}{14}{section*.33}
+\contentsline {subsubsection}{Team VictorTango}{13}{section*.28}
+\contentsline {subsubsection}{Stanford Racing Team}{13}{section*.29}
+\contentsline {subsubsection}{Team Cornell}{14}{section*.31}
+\contentsline {subsubsection}{TerraMax}{14}{section*.32}
+\contentsline {subsubsection}{Tartan Racing}{14}{section*.33}
+\contentsline {subsubsection}{Team Caltech}{14}{section*.34}
 \contentsline {section}{\numberline {3.2}Conclusion}{15}{section.3.2}
 \contentsline {chapter}{\numberline {4}Methodology}{16}{chapter.4}
 \contentsline {chapter}{\numberline {5}Sensor Analysis}{18}{chapter.5}
 \contentsline {section}{\numberline {5.1}Theoretical Analysis}{18}{section.5.1}
-\contentsline {paragraph}{Range 0-25m}{18}{section*.36}
-\contentsline {paragraph}{Range 25-50m}{19}{section*.38}
-\contentsline {paragraph}{Range >50m}{19}{section*.40}
+\contentsline {paragraph}{Range 0-25m}{18}{section*.37}
+\contentsline {paragraph}{Range 25-50m}{19}{section*.39}
+\contentsline {paragraph}{Range >50m}{19}{section*.41}
 \contentsline {section}{\numberline {5.2}Practical Analysis}{19}{section.5.2}
 \contentsline {chapter}{\numberline {6}Objekt Detection}{22}{chapter.6}
 \contentsline {section}{\numberline {6.1}Ground Removal}{22}{section.6.1}
@@ -47,30 +47,30 @@
 \contentsline {section}{\numberline {6.5}State Estimation}{32}{section.6.5}
 \contentsline {subsection}{\numberline {6.5.1}Constant Turn Rate and Velocity Model}{32}{subsection.6.5.1}
 \contentsline {subsection}{\numberline {6.5.2}Extendet Kalman Filter}{33}{subsection.6.5.2}
-\contentsline {subsubsection}{Prediction}{33}{section*.56}
-\contentsline {subsubsection}{Updating}{34}{section*.57}
-\contentsline {subsubsection}{Initial Uncertainties}{35}{section*.58}
+\contentsline {subsubsection}{Prediction}{33}{section*.58}
+\contentsline {subsubsection}{Updating}{34}{section*.59}
+\contentsline {subsubsection}{Initial Uncertainties}{35}{section*.60}
 \contentsline {subsection}{\numberline {6.5.3}Reassigning}{35}{subsection.6.5.3}
 \contentsline {chapter}{\numberline {7}Simulation}{36}{chapter.7}
 \contentsline {section}{\numberline {7.1}Simulation Scenario}{36}{section.7.1}
 \contentsline {section}{\numberline {7.2}Simulation Logic}{38}{section.7.2}
 \contentsline {subsection}{\numberline {7.2.1}Sensor Connection}{38}{subsection.7.2.1}
 \contentsline {subsection}{\numberline {7.2.2}Mapping}{39}{subsection.7.2.2}
-\contentsline {subsubsection}{Localization}{40}{section*.65}
+\contentsline {subsubsection}{Localization}{40}{section*.67}
 \contentsline {subsection}{\numberline {7.2.3}State Machine}{41}{subsection.7.2.3}
-\contentsline {paragraph}{Start - State}{42}{section*.69}
-\contentsline {paragraph}{ToRoundabout - State}{42}{section*.70}
-\contentsline {paragraph}{Brake - State}{42}{section*.71}
-\contentsline {paragraph}{InRoundabout - State}{42}{section*.72}
-\contentsline {paragraph}{ExitRoundabout - State}{43}{section*.74}
+\contentsline {paragraph}{Start - State}{42}{section*.71}
+\contentsline {paragraph}{ToRoundabout - State}{42}{section*.72}
+\contentsline {paragraph}{Brake - State}{42}{section*.73}
+\contentsline {paragraph}{InRoundabout - State}{42}{section*.74}
+\contentsline {paragraph}{ExitRoundabout - State}{43}{section*.76}
 \contentsline {chapter}{\numberline {8}Evaluation}{44}{chapter.8}
 \contentsline {section}{\numberline {8.1}Simulation}{44}{section.8.1}
 \contentsline {subsection}{\numberline {8.1.1}Detection Distance Performance}{44}{subsection.8.1.1}
 \contentsline {subsection}{\numberline {8.1.2}Measurements Performance}{45}{subsection.8.1.2}
-\contentsline {subsubsection}{Position Error}{46}{section*.77}
-\contentsline {subsubsection}{Speed Error}{48}{section*.84}
-\contentsline {subsubsection}{Classification}{49}{section*.87}
-\contentsline {subsubsection}{Scenario Handling}{50}{section*.89}
+\contentsline {subsubsection}{Position Error}{46}{section*.79}
+\contentsline {subsubsection}{Speed Error}{48}{section*.86}
+\contentsline {subsubsection}{Classification}{49}{section*.89}
+\contentsline {subsubsection}{Scenario Handling}{50}{section*.91}
 \contentsline {section}{\numberline {8.2}Real Measurements}{51}{section.8.2}
 \contentsline {subsection}{\numberline {8.2.1}Segmentation}{52}{subsection.8.2.1}
 \contentsline {subsection}{\numberline {8.2.2}Confidence Filter}{53}{subsection.8.2.2}

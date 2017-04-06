@@ -33,18 +33,18 @@ As seen in \cref{conflict_roundabout}, they have a smaller number of points of c
 % der Klasse Mini bzw. Kleiner Kreisverkehr zugeordnet werden können. Auch wenn diese Untersuchung nicht repräsentativ ist, ist davon auszugehen, das die Anzahl der Kleinen und Minikreisverkehre im 
 % innerstätischenbereich größer ist, als die der großen kreisverkehre, was aufgrund der Platzverhältnisse im Innenstadtbereich sinnvoll erscheint.
 
-In \cite{Baumert1998, brilon2002verkehrssicherheit, brilon2004uberprufung,voss1994verkehrssicherheit}, is examined, the safety of roundabouts in the inner city area.
+In \cite{Baumert1998, brilon2002verkehrssicherheit, brilon2004uberprufung,voss1994verkehrssicherheit} is examined the safety of roundabouts in the inner city area.
 The evaluation was graphically prepared. Where \cref{accident_rate} shows the accident rate, which makes a statement about the general risk of an accident.
 While \cref{charge_rate} shows the accident charge rate, which divides the costs of the accidents on all vehicles and represents a measure of the severity of the accidents,
 both material and personal injury are included. It can be seen that the mini roundabouts [\cref{mini_roundabout}] and small roundabouts [\cref{smal_roundabout}] have a significant 
-lower risk than other intersection points, in both the risk of accidents and severity. While large roundabouts are roughly comparable with normal crossings. 
+lower risk than other intersection points, in both the risk of accidents and severity, while large roundabouts are roughly comparable with normal crossings. 
 In \cite{Bondzio2012} this is reasonable to the higher speed in this roundabout. From this it can be deduced that the small and mini roundabouts from the point of risk,
 are to be preferred over the large roundabout. It should be noted that during the investigation of \cite{Bondzio2012} with 100 roundabouts it is noticeable that 83\%
 of the roundabouts have a diameter of less than 35m and can therefore be assigned the class mini or small roundabout.
 Although this study is not representative, it is to be assumed that the number of small and mini roundabouts in the inner-city limits is larger than that of the large roundabouts,
 which seems reasonable on account of the space conditions in the inner-city limits.
 Furthermore, circular traffic also allows nodes to be constituted with more than 4 roads, which gives them a further advantage.
-Unfortunately, there are no publications known to the author in the context of autonomous driving and roundabouts.
+%Unfortunately, there are no publications known to the author in the context of autonomous driving and roundabouts.
 %\definecolor{myblue}{HTML}{92dcec}
 
 \begin{figure}[!ht]
@@ -65,8 +65,8 @@ Unfortunately, there are no publications known to the author in the context of a
                               2/0.53/Small Roundabout,  %\y ist Höhe der Säulen
                               3.5/1.14/Two-lane Passable R.,
                               5/6.57/Large Roundabout,
-                              6.5/1.55/crossroad,
-                              8/1.45/crossroad w traffic lights}
+                              6.5/1.55/Crossroad,
+                              8/1.45/Crossroad w Traffic Lights}
     {
      \draw[fill=gray!50] (\x cm,0cm) rectangle (1.0cm+\x cm,\y cm) %die Säulen
        node at (0.5cm + \x cm,\y cm + 0.3cm) {\y}; %die Prozente über den Säulen
@@ -97,8 +97,8 @@ Unfortunately, there are no publications known to the author in the context of a
                               2/1.55/3.1/Small Roundabout,  %\y ist Höhe der Säulen
                               3.5/4.7/9.4/Two-lane Passable R.,
                               5/6.9/13.8/Large Roundabout,
-                              6.5/6.15/12.3/crossroad,
-                              8/6.9/13.8/crossroad w. traffic lights}
+                              6.5/6.15/12.3/Crossroad,
+                              8/6.9/13.8/Crossroad w. Traffic Lights}
     {
      \draw[fill=gray!50] (\x cm,0cm) rectangle (1.0cm+\x cm,\y cm) %die Säulen
        node at (0.5cm + \x cm,\y cm + 0.3cm) {\value}; %die Prozente über den Säulen
@@ -125,12 +125,13 @@ In the following, we present an overview of the legal aspects in Germany.
 %
 In Germany, there is no law stipulating the exact construction of roundabouts.
 Instead, the elements of the rural roads and urban roads are dealt with in ``Directives for the Design of Rural Roads'' \cite{ral13}
-and the ``Directives for the Design of Urban Roads''  \cite{rast06}. These guidelines are also relevant to the choice of a convenient junction type when linking roads.
+and the \ac{RASt}  \cite{rast06}. These guidelines are also relevant to the choice of a convenient junction type when linking roads.
 The considerations discussed there are based on traffic variables, area-related characteristics, economic criteria and spatial planning or urban planning requirements. 
 The guidelines also regulate the basic design and operational formation of roundabouts.
-The  Directives for the Design of Urban Roads \cite{rast06} are relevant for this dispute. Since the access the RASt is limited, most of the information is coming from
-\cite{man06} whereupon RASt is based on.
+The  Directives for the Design of Urban Roads \cite{rast06} are relevant for this dispute. Since the access the \ac{RASt} is limited, most of the information is coming from
+\cite{man06} whereupon \ac{RASt} is based on.
 \subsection{Elements of a Roundabout}
+In the following, all important elements of a roundabout will be named and briefly described.
 
 \begin{figure}[!ht]
 %%\begin{center}
@@ -158,7 +159,7 @@ The circular path is the road that serves to drive the roundabout island. An inn
 % Innenring. Sie ist abhängig vom Außendurchmesser und der angestrebten
 % Verkehrsführung (ein- oder zweistreifig). Die Randstreifenbreite orientiert
 % sich an der maßgebenden durchgehenden Fahrbahn.
-The structural width includes the circular track and a paved inner ring, if any. It is dependent on the outer diameter and the desired traffic routeing (one or two lanes). 
+The structural width includes the circular track and a paved inner ring, if any. It is dependent on the outer diameter and the desired traffic routing (one or two lanes). 
 The edge strip width is oriented on the relevant continuous roadway. \cite{man06}
 \end{defi}
 
@@ -283,7 +284,7 @@ Large Roundabouts with two or more lanes marked by markers on the circular path 
 The \ac{RANSAC} \cite{Fischler1981} is an algorithm for estimating a model within a series of readings with outliers and rough errors. Due to its robustness, 
 it is mainly used in the evaluation of automatic measurements primarily in the field of image processing. 
 In this case, \ac{RANSAC} is supporting traditional compensation methods such as the least squares method, which usually fail with a larger number of outliers,
-by calculating an outliers free data set, the so-called consensus set. 
+by calculating an outlier free data set, the so-called consensus set. 
 
 % Der \ac{RANSAC} benötogt mehr datenpunkte als für die eindeutige bestimmeung des Modells benötigt werden.
 %  Aus diesem Set von Datenpunkten werden dann zufällig soviele Datenpunkte ausgwählt, wie nötig sind um das Model eindeutig zu berstimmen.
@@ -293,18 +294,18 @@ by calculating an outliers free data set, the so-called consensus set.
 
 The \ac{RANSAC} requires more data points than is required for the unambiguous determination of the model. 
 From this set of data points randomly as many data points are selected, as necessary to define the model unambiguously. 
-From the remaining data, those which have a spacing which is smaller than a certain limit value are then selected.
-This set now represents the ``consensus set''. If it contains a certain minimum number of values, a good model was probably found and the consensus set is stored.
+From the remaining data, those which have a spacing, from these model, which is smaller than a certain limit value are then selected.
+This set now represents the consensus set. If this contains a certain minimum number of values, a good model was probably found and the consensus set is stored.
 These steps are repeated several times. Then the subset that contains the most points is selected. Using this subset, 
 the model parameters are calculated using one of the usual compensation methods. The \ac{RANSAC} therefore has three parameters to determine, which influence the result:
 
 \begin{itemize}
  \item number of iterations
- \item minimum size of the ``Consensus Set''
+ \item minimum size of the consensus set
  \item distance threshold value (eps)
 \end{itemize}
 % Zu beachten ist, das der \ac{RANSAC} durch die zufällige Auswahl der Datenpunkte kein deterministischer algorythmus ist.
-Figure \ref{ransac} shows an example for an good ``consensus set''. Note that the \ac{RANSAC} is not a deterministic algorithm, beacuse of the random selection of the data points.
+Figure \ref{ransac} shows an example for a good consensus set. Note that the \ac{RANSAC} is a none deterministic algorithm, because of the random selection of the data points.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -323,13 +324,12 @@ Figure \ref{ransac} shows an example for an good ``consensus set''. Note that th
 % Dies wird solage ausgeführt, bsi alle im Cluster befeindlich punkte als Bearbeitet makiert sind, also keine Weiteren punkte in der nachbarschaft erreichbar sind.
 
 \ac{DBSCAN} \cite{DBSCAN} is a deterministic data mining algorithm for cluster analysis. The algorithm is based on density connectivity,
-that means, it binds points based on its distance to clusters, \ac {DBSCAN}, iterates over all data points that have not yet been processed, 
-each processed data point is marked as processed. A range query request is then made for each of these points. If the size of the returned neighborhood is lower then a certain limit (minPts),
-the point is marked as noise. Otherwise, a new cluster is created by performing a new range request for each point in the neighborhood 
-and adding the points to the cluster and marked them as processed. This is repeated until all the points in the cluster are marked as processed, so no further points can be reached in the neighborhood.
+that means, it binds points, based on its distance, to clusters. \ac {DBSCAN} iterates over all data points that have not yet been processed, 
+each processed data point is marked as processed. A range query request is then made for each of these points. If the size of the returned neighborhood is lower than a certain limit (minPts), the point is marked as noise.
+Otherwise, a new cluster is created by performing a new range request for each point in the neighborhood and then adding these new points to the cluster.
+The old points then are marked as processed. This is repeated until all the points in the cluster are marked as processed, so no further points can be reached in the neighborhood.
 Figure \ref{dbscan} shows an example, with a point threshold of one. So the blue point is marked as noise, because there are no neighbors inside of the maximum allowed distance.
-\ac{DBSCAN} also makes a differentiation between core (red) and border (green) points, where core points are dense, means they can reach the minPts limit, while border points are not dense, but can be reached by
-point which is dense.
+\ac{DBSCAN} also makes a differentiation between core (red) and border (green) points, where core points are dense, means they can reach the minPts limit, while border points are not dense, but can be reached by a point which is dense.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -357,13 +357,13 @@ The \ac {DBSCAN} therefore has two parameters to determine, which influence the 
 % von GPS koordinaten in lokale kartesische genutzt werden kann. Dazu ist die Angabe einer referenz GPS postion nötig, welche um den Berechnugsfehler klein zu halten,
 % nicht zu weit entfernt sein sollte.
 
-Autonomous software is typically a distributed system, on today's vehicles this system is based on ECUs and bus systems such as CAN, LIN.
+Autonomous software is typically a distributed system, on today's vehicles this system is based on ECUs and bus systems such as CAN and LIN.
 Distributed software makes it easier to integrate complex components within the system. In the area of autonomous driving, however,
 the historical structure of vehicles with ECUs and CAN is not optimal \cite{Broy2006}. In order to handle the many components required,
 it is also advantageous to decouple components within an ECU or a computing unit. For this purpose,
 there are several middelwares which handle and abstract communication within the components. As part of the Copplar project, the OpenDaVINCI middleware is used here.
 OpenDaVINCI is a real-time runtime environment designed for autonomous vehicles. OpenDaVINCI is based on Hesperia \cite{Berger2010}. 
-Communication between the components in OpenDaVINCI is based on UDP Multicast, which enables real-time communication between components and computing units \cite{Kurose2013} .
+Communication between the components in OpenDaVINCI is based on UDP multicast, which enables real-time communication between components and computing units \cite{Kurose2013} .
 For the communication, OpenDaVINCI offers time-triggered transmitters and data-triggered receivers, 
 from which the data-triggered receiver is used to connect the here developed software. Furthermore, OpenDaVINCI offers many further functionalities,
 which can be used, for example the handling of World Geodetic System 1984 (WGS84), for the conversion of GPS coordinates into local Cartesian coordinates.
