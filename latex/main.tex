@@ -1244,8 +1244,7 @@ If one of these values is exceeded, the confidence is also halved.
 % die gleich ID zuzuweisen wie zuvor. 
 Following the tracking, a state estimation is performed on the detected objects. This is necessary because objects can be hidden during the movement,
 be it by other moving objects or buildings. An estimation of the state beyond the detection horizon allows to make a statement about the position of 
-objects which are not visible at the moment. Furthermore, it allows to easily redetect objects that have not been detected at a time, i.e., to assign the same ID to the object as before
-, and allows a well filtering of the measured objects.
+objects which are not visible at the moment. Furthermore, it allows to easily redetect objects that have not been detected at a time, i.e., to assign the same ID to the object as before, and allows a well filtering of the measured objects.
 
 % Aus dem zuvor durchgführten Tracking können wir die Aktuelle Position, Geschwindigekeit, Drehung und Drehgeschwindigkeit erhalten. 
 % Für eine Zustandschätzung mit den für Fahrzeuge üblichen Bicycle Model fehlen \todo{reference} und Angangen über den Radstand und Gewicht des Fahrzeues.
@@ -1316,7 +1315,7 @@ The extended Kalman filter (EKF) \cite{Ribeiro2004} is the nonlinear version of 
 
 In order to be able to use the extended Kalman filter (EKF), it should actually be checked whether the measured values
 are subject to a normal distribution. However, since the EKF is so to say 
-standard in the tracking of any kind\cite{Li2010, Wan2006}, this is assumed and not further investigated.
+standard in the tracking of any kind \cite{Li2010, Wan2006}, this is assumed and not further investigated.
 
 In addition to the model, further values are required. For this purpose, the calculation rules of the necessary steps are analyzed.
 
@@ -1353,7 +1352,7 @@ P_{k}&=J_{k-1} P_{k-1} {J^T_{k-1}} + Q_{k-1}
 For the process noise covariance Matrix $Q$, are assumed some typical worst case values for vehicles from \cite{Kelly1994} as the starting point,
 maximum acceleration: $a = 8.8 \frac{m}{s^2}$, maximum turn rate: $\omega = 0.1 \frac{rad}{s}$,   maximum turn rate acceleration: $\dot\omega = 0.1 \frac{rad}{s^2}$.
 These values are then integrated until the unit is correct. Finally, since variance needed, the values are squared. 
-Also, no correlation between all other values is assumed so only there are only values in the main diagonal.
+Also, no correlation between all other values is assumed, so there are only values in the main diagonal.
 
 \begin{align*}
 Q=
@@ -1410,7 +1409,7 @@ J(\vec{x})=
 
 
 \subsubsection{Updating}
-The predictions are finally corrected with the new information of the measurements.
+The state is finally corrected with the new information of the measurements.
 
 \begin{align*}
 \tilde{y}_k &= z_k -h(\hat{x}_{k})\\
@@ -1421,12 +1420,12 @@ P_k &= (I - K_k H_k) P_k
 \end{align*}
 
 
-Since all states of the system are directly measured there is no observation function for the measurements, means 
+Since all states of the system are directly delivered from the tracking there is no observation function for the measurements, means 
 $h(\hat{x}_k)$ equals $\hat{x}_k$. Because of this, the observation matrix $H$ results in a simple identity matrix.
 
-For the measurement noise covariance matrix $R$ experimental determined values are used. Since the position is quite sure a small value of 1 
-and a value of 0.1 for the rotation, for the same reason, is assumed. For the speed a quite high value of 4 is chosen,
-because it is derived from the position over time. The same for the yaw rate with a value of 0.1. Again no correlation between all other values is assumed,
+For the measurement noise covariance matrix $R$ experimental determined values are used. Since the position is quite accurate, a small value of 1 for the position
+and a value of 0.1 for the rotation, for the same reason, is assumed. For the speed a high value of 4 is chosen,
+because it is derived from the position over time. The same for the yaw rate with a value of 0.4. Again no correlation between all other values is assumed,
 which it is most likely not true, but would need more further investigation.
 
 \begin{align*}
@@ -1436,7 +1435,7 @@ R=
 0 & 1 & 0 & 0 & 0\\
 0 & 0 & 0.1 & 0 & 0\\
 0 & 0 & 0 & 4 & 0\\
-0 & 0 & 0 & 0 & 0.1
+0 & 0 & 0 & 0 & 0.4
 \end{bmatrix} 
 \end{align*}
 
@@ -1593,8 +1592,8 @@ Since the position in VREP is specified in Cartesian coordinates, they are trans
 % Zwar werden die Daten ebenfalls in Polarkoordinaten ausgegeben, jedoch werden nur Messwerte ausgegen, wenn diese auf ein Onjekt treffen. Da ein Großteil des Scenarios leerer Raum ist
 % weisen die Messdaten viele löcher auf, wesshalb diese in eine geeignete Form transformiert werden müsssen.
 The connection of the Velodyne VLP-16 is more difficult because the structure of the measured data differs significantly from the original Velodyne.
-Although the data is also output in polar coordinates, only measured values are output when they hit an object. Since a large part of the scenario is empty space,
-the measurement data have many holes on them. But the object detection needs continuous measurements, so they must be transformed into a suitable form.
+Although the data is delivered in polar coordinates also, only measured values are outputted when they hit an object. Since a large part of the scenario is empty space,
+the measurement data have many holes. But the object detection needs continuous measurements, so they must be transformed into a suitable form.
 
 % Dabei ist zu beachten, das das Onjekttracking eine vollständige 360 Gram Messung erwartet, dazu muss zusätzlich gewartet werden, bis alle Nötigen Messdaten vorliegendn.
 % Der virtualle Velodynle liefet eine Messrate von 10Hz, und ist dabei in 4 Segmente eingeteilt, welche nacheinander ausgelesen werden. Der zur simulation verwendete Zeitschritt
@@ -1607,12 +1606,12 @@ The time step used for the simulation is 50 ms, so that two segments can be read
 % vorliegen, jedoch eine sehr viel höhere Auflösung als der originale Sensor haben, werden die Messwerte auf die Originale auflösung von 0.2 bzw. 2 Grad heruntergerundet und die Messerte in ein
 % Entsprechendes zweidimensionales Array fester größe eingetragen eingetragen. Sodass nicht erfasste bereiche den Wert Null erhalten.
 
-The measured data are provided as a list of spherical coordinates (radius $r$, polar angle $\theta $, azimuth angle $\Phi$).
+The measured data is provided as a list of spherical coordinates (radius $r$, polar angle $\theta $, azimuth angle $\Phi$).
 Since the azimuth and polar angles are not at equidistant intervals but have a much higher resolution than the original sensor,
-the measured values are rounded down to the original resolution of 0.2 and 2 degrees and the measured values are entered into a corresponding two-dimensional fixed-size array. Thus, areas that are not detected have the value zero.
+the measured values are rounded down to the original resolution of 0.2 and 2 degrees and the measured values are written into a corresponding two-dimensional fixed-size array. Thus, areas that are not detected have the value zero.
 
 % Nach dem alle Erforderlichen Messdaten gesammelt und umgewandelt wurden, werden diese über ein extra entwickeltes OpenDAVINCI-Python interface an die Objekterkennung gesendet.
-After all necessary measurement data have been collected and converted, they are sent to the object detection via a specially developed OpenDAVINCI-Python interface.
+After all necessary measurement data are collected and converted, they are sent to the object detection via a specially developed OpenDAVINCI-Python interface.
 Unnecessary data for the Applanix is simply set to zero.
 
 \subsection{Mapping}
@@ -1625,16 +1624,16 @@ Unnecessary data for the Applanix is simply set to zero.
 % beschreiben, währen OpenDAVINCI zusätzlich weitere Modelle anbietet.
 The OpenDAVINCI internal Compressed Scenario Data Format (SCNX) \cite{Berger2010} is used for mapping. This allows scenarios to be defined by describing and combining stationary and dynamic elements
 to formulate different traffic situations. The SCNX format offers, among other things, the classes ROAD, LANE for the modeling of roads. One ROAD can consist of several LANEs.
-A lane consists of a set of points which describe the course of the lane. The lane can be assigned with the attribute's lane mark and width. 
+A lane consists of a set of points which describe the course of the lane. The lane can be assigned with the attributes lane mark and width. 
 Individual lanes can be connected to each other. What makes it possible to build a complicated road network with these simple models. 
-Since OpenDAVINCI does not provide a Python interface for parsing the scenario files, a special Lexer was implemented for the processing of the scenario files. 
+Since OpenDAVINCI does not provide a Python interface for parsing the scenario files, a special lexer was implemented for the processing of the scenario files. 
 At this time, only the classes required for the simulation are implemented. Therefore, a lane can only be described by a point model, while OpenDAVINCI offers additional models.
 
 % Weiterhin musste das in OpenDAVINCI enthaltene Modell erweitert werden, da OpenDAVINCI leider keine andern Arten von wegen unterstützt.
 % Daher wurde die Klasse Lane um ein Typ attribut erweitert, was es ermöglicht diese Als Rad oder Fußweg zu deklarieren.
 % Der Aufbau der erweiterten Pythonklassen kann in \cref{parer_objects} begutachtet werden.
 Furthermore, the model included in OpenDAVINCI had to be extended, since OpenDAVINCI unfortunately does not support other types of paths.
-Therefore, the class lane has been extended by one type attribute, which makes it possible to declare this as a bikeway or pavement.
+Therefore, the class lane has been extended by a type attribute, which makes it possible to declare it as a bikeway or pavement.
 The structure of the extended Python classes can be examined in \cref{parer_objects}.
 
 \begin{figure}[!ht]
@@ -1729,11 +1728,11 @@ The whole situation is symbolized in \cref{mapping}. The blue rectangle represen
 % Fehler und die Entfernung ergibt sich praktischer weise aus den Vorherigen Berechnungen, sodass dieser nicht umgesetzt wurde.
 As seen in \cref{mapping}, the individual segments are usually not at a 180 degree angle to each other. Therefore, the rectangles can overlap and more than one rectangle can 
 be returned for one position. In this case, the direction of movement from the object is used and the most recent segment of the direction of movement is selected.
-If several lanes cross over, for example, bikeway that intersect the roundabout, the correct segment is selected based on the object type, i.e.: car -> road or cyclist -> bikeway.
+If several lanes cross over, for example, a bikeway that intersect the roundabout, the correct segment is selected based on the object type, i.e.: car -> road or cyclist -> bikeway.
 Furthermore, the x-coordinate of the object in the rotated and shifted coordinate system is returned, which is necessary for the distance calculations. It is always assumed that the
 object is in the middle of the track. Alternatively, the ``Ray Casting Algorithm'' \cite{Galetzka2017} can be used for this problem. Since it is assumed for all
 distance calculations that the object is in the middle of the track, this calculation results in a very small error and the distance is practically derived from the
-previous calculations so that this was not applied.
+previous calculations, so that this was not applied.
 
 \subsection{State Machine} 
 % Die Statemachine ist nach Gang of Four  \cite{lester2008gang} implemetiert. Dafür wurden X \todo{nummer anpassen} States Implementiert.
@@ -1741,7 +1740,7 @@ previous calculations so that this was not applied.
 % wurden mit dem realen Fahrzeug testfahrten aufgezeichnet, bei denen die maximalen subjekiv angenehmen Werte bestimmt wurden.
 The state machine is implemented according to Gang of Four \cite{lester2008gang}. For this, five States were implemented.
 A constant acceleration model is assumed for all vehicle computations. In order to determine the maximum positive and negative acceleration, 
-test runs with the real vehicle  were recorded and the maximum subjectively pleasant values being determined. 
+test runs with the real vehicle were recorded and the maximum subjectively pleasant values being determined. 
 
 The used recordings can be seen in \cref{max_accel}, the vehicle was accelerated from 0 to 25km/h or braked from 25 to 0km/h.
 The maximum values were read, so $3m/{s^2}$ for the maximum positive acceleration is assumed and $-4.5m/{s ^ 2}$ for the maximum negative acceleration.
@@ -1898,7 +1897,7 @@ Since a histogram is used for the calculation of the size, this false classifica
 % Dies ist darin begründet, dass diese den $minPts$ Threshold des \ac{DBSCAN} nicht überschreiten. Dies ist erst der Fall wenn diese sich näher am Testfahrzeug befinden, genauer innerhalb des 6. Messlayers des Sensors (ca 23m)
 
 Now a closer look at the second time step. In \cref{detection_performance2}, can be recognized that both, pedestrians and cyclists, although visible in the data (red boxes), are not detected. 
-This is because they do not exceed the $minPts$ threshold of the \ac{DBSCAN}. This is only the case when they are closer to the test vehicle, more precisely within the 6th sensor measuring sensor (about 23m).
+This is because they do not exceed the $minPts$ threshold of the \ac{DBSCAN}. This is only the case when they are closer to the test vehicle, more precisely within the 6th measuring layer (about 23m) of the sensor.
 \begin{figure}[!htb]
   \caption{Detection Distance Performance Pedestrians/Cyclists} 
   \centering
@@ -1948,7 +1947,7 @@ Furthermore, it can also be seen that, after the vehicle has been assigned a new
 The reason of the large error in the position is, among other things, the behavior of the Kalman filter.
 As seen in \cref{kalman_error}, the position of the filter (light blue circle) in a vehicle within the roundabout is always slightly outside the center of the rectangle. 
 This is because the filter works with a \ac{CTRV} model, which does not quite reflect the behavior of the vehicles.
-Because these are not in the direction of their current orientation, but rather in their driving dynamics.
+Because these are not driving in the direction of their current orientation, but in the direction of their driving dynamics.
 
 \begin{figure}[!htb]
   \caption{Kalman Error} 
@@ -1985,9 +1984,9 @@ In the following section, in \cref{lost} is shown, why the vehicle get lost and 
 
 It can be seen that the object is hidden by the object 98, which means that both the position and the orientation of the object are faulty. 
 The Kalman filter (light blue circle and arrow) roughly maintain the direction of movement.
-However, the confidence value of the object is not sufficient to trace the object back to the point in time until it is visible again. 
+However, the confidence value of the object is not sufficient to trace the object to the point in time until it is visible again. 
 In the second part of the figure the vehicle will be recognized again. 
-Since the vehicle  now can only seen from behind, the size of the vehicle is detected wrongly and it is classified as a bicycle.
+Since the vehicle now can only seen from behind, the size of the vehicle is detected wrongly and it is classified as a bicycle.
 Since the position of the vehicle is calculated from the center of the rectangle, this leads to a systematic error. 
 There are also measurements in the front area of the vehicle. These are the wheels of the vehicle, which can be seen due to the steep angle of measurement. 
 However, since the distance to the rest of the object is too large, they are not added to the object.
@@ -2007,7 +2006,7 @@ Since the pure view of the position error is not very meaningful, the error depe
 % Das Konstate ansteigen der Position ist stadtdessen in einer limitierung der Simulationssoftware zu suchen.
 
 If the position error of object 154 is ignored, it is clear that the error increases constantly with distance. 
-What appears at first look intuitively logical, however, remember \cref{detection_performance2}, the object will be recognized correctly, even in the case of higher distances.
+What appears at first looks intuitively and logical, however, remember \cref{detection_performance2}, the object will be recognized correctly, even in the case of higher distances.
 The constant rise of the error is to be found in a limitation of the simulation software.
 
 \begin{figure}[!htb]
@@ -2097,8 +2096,8 @@ From this data, \cref{classification} was created.
 % In \cref{classification} einfach zu erkennen ist, das die Autos als auch der Fußgänger mit hoher zuverlässigkeit klassifiziert werden. Lediglich Car2 wird wenige male flasch klassifiziert.
 % Was bereits in bezug auf \cref{lost} gekärt wurde. Leider ist auch zu erkennen, das die Radfahrer nahzu immer flasch klassifiziert werden. Dies liegt daran,
 % das die Fahrräder nicht genug fläche für den Sensor bieten, so dass der Großteil der Messungen nur auf der Person auf dem Fahrrad liegen.
-It is easy to recognize in \cref{classification}, that the cars as well as the pedestrian are classified with high reliability. Only Car2 is wrongly classified a few times.
-What has already been clarified with regard to \cref{lost}. Unfortunately, it can also be seen that the cyclists are classified almost always classified. 
+It is easy to recognize in \cref{classification}, that the cars as well as the pedestrian are classified with high reliability. Only Car2 is wrongly classified a few times,
+what has already been clarified with regard to \cref{lost}. Unfortunately, it can also be seen that the cyclists are classified almost always wrong. 
 This is because the bicycles do not provide enough space for the sensor so that most of the measurements are only on the person on the bike.
 
 
@@ -2225,8 +2224,8 @@ Once the bikeway is clear, the vehicle can safely leave the roundabout, see \cre
 % bevor es wieder sichtbar wird verfolgen. Doch Der Konfidence wert des Objektes wird zu schnell zu niedrig und das Objekt wird verworfen. Weiterhin führt der Zeitraum in dem das Objekt am verschinden ist
 % zu einer falschen Rotation des Ojektes für wenige Zeitschritte, wie schon in \cref{lost} zu sehen. Was dazu führt, dass die Berechnte Trajektorie des Trackings verfälscht wird und kein
 % Optimales Tracking mehr erfolgen kann.
-In the further process of the simulation, situations occur again and again, in which the car moves too early from the roundabout due to hidden vehicles.
-At all the time, there was no collision. However, this condition is not optimal. Tracking can track the hidden vehicles until a time step before it becomes visible again.
+In the further process of the simulation, situations occur again and again, in which the car moves too early into the roundabout due to hidden vehicles.
+At all the time, there was no collision. However, this condition is not optimal. The tracking can track the hidden vehicles until a time step before it becomes visible again.
 However, the object's confidence value becomes too low and the object is discarded. 
 Furthermore, the period in which the object disappears leads to a false rotation of the object for a few time steps as seen in \cref{lost}. 
 This causes the calculated trajectory of the tracking to be corrupted and no more optimal tracking can take place.
@@ -2335,7 +2334,7 @@ However, a final statement can only be made with measurement data in a real urba
 % Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von anderen Onjekten am Straßenrand, wie z.B. Leitpfosten \cref{refPosts}, zu unterschiden ist.
 In this section the pedestrian in the scenario is examined more closely. This is particularly difficult to see in this scenario, 
 since the roundabout does not have a pavement and the pedestrian is located on the road edge.
-This leads to the fact that pedestrian from the bird's eye view it is not to differ from other objects, like reflector posts (see \cref{refPosts}), on the road edge.
+This leads to the fact that pedestrian from the bird's eye view is not to differ from other objects, like reflector posts (see \cref{refPosts}), on the road edge.
 
 \begin{figure}[!htb]
   \caption{Pedestrian and Reflector Posts} 
@@ -2351,9 +2350,9 @@ This leads to the fact that pedestrian from the bird's eye view it is not to dif
 % jdeoch nicht passiert und der Fußgänger konnte zu jeder zeit erfolgreich als eigenständiges Objekt erkannt werden.
 The problem is, in particular, that the pedestrian is only classified by its size. 
 This leads to the fact that he is not to be distinguished from small static elements.
-If this is close to a static obstacle, it can happen that these are recognized as a major obstacle.
+If this is close to a static obstacle, it can happen that these are together recognized as a major obstacle.
 The same would happen even with larger human masses on a pedestrian crossing.
-This has not happened in this recording, however, and the pedestrian could be successfully recognized as an independent object at any time.
+This is not happened in this recording, however, and the pedestrian could be successfully recognized as an independent object at any time.
 
 
 \section{Performance}
@@ -2476,7 +2475,7 @@ It is, of course, also possible to parallelize the existing algorithm. Especiall
 % Das würde sowohl die nutzbare Auflösung erhöhen als auch eine erhöhte Qualität der Segmentierung erlauben
 % da für diese, aufgrund der Bodenerkennung besonders der Nahbereich wichtig ist.
 
-In the end, the question is, is the Sensor configuration of the test vehicle ''Snowfox'' sufficient to safely handle
+In the end, the question is, is the sensor configuration of the test vehicle ''Snowfox'' sufficient to safely handle
 and observe roundabouts. To answer this, the sensor equipment of the vehicle was examined in the introduction.
 It was found that a part of the sensor system can not be evaluated and therefore the evaluation must be restricted
 to a Velodyn VLP-16 LIDAR and an Applanix POS LV (Position and Orientation System).
@@ -2493,7 +2492,7 @@ should be able to survey mini and small roundabouts.
 An object detection and tracking algorithm was then developed to support the previous theoretical studies.
 This was then evaluated within a simulation and on the basis of real measurement data.
 
-Within the context of the simulation, the measurable variables like position, speed, and classification were examined.
+Within the context of the simulation, the measurable variables like position, speed, and class were examined.
 A moderate quality was attributed to the measured values.
 However, this could be improved by the use of a better vehicle model in the Kalman filter.
 However, since the tracking loses the objects often when they are hidden, the quality of the measured
@@ -2530,10 +2529,6 @@ Better sensors would not offer any significant advantages in tracking and segmen
 However, the use of several sensors which are mounted obliquely on the vehicle would be sensible.
 This would increase both the usable resolution and an increased quality of the segmentation.
 Since for these, especially the close-up measurements of the ground are important.
-
-
-
-
 
 
 \printbibliography
