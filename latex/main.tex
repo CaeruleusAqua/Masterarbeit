@@ -2105,7 +2105,7 @@ This is because the bicycles do not provide enough space for the sensor so that 
 \subsubsection{Scenario Handling}
 %Im folgen werten wir das Simulationsscenario an sich aus, idem wir die beiden krittischen Situationen das einfahren und ausfahren des testfahrzeuges aus dem Kreisverkehr 
 %innerhalb der Objektdetection Ansehen.
-In the following, the simulation scenario itself is investigated, by looking at the two critical situations in which the test vehicle, enters and exits the roundabout.
+In the following the simulation scenario itself is investigated by looking at the two critical situations in which the test vehicle enters and exits the roundabout.
 
 % Betrachten wir als ersten die einfahr situation. Fahrzeug Auto hat bereits am Fahrbahnrand angehalten.
 % In  \cref{roundabout_entrance_1} können wir sehen, dass alle Fahrzeuge korrekt erkannt wurden.
@@ -2262,26 +2262,25 @@ Furthermore, the road is not a perfect plane, which is another challenge for seg
 % teile des Fahrzeuges als Boden klassiffiziert werden. Es wurden insgesammt 819 Messframes Ausgewertet.
 
 For the evaluation of the segmentation all measuring frames were examined by hand. 
-false-positive segmentations of the street were noted. false-positive in this case, are the parts of the road which are classified as not ground. 
+False-positive segmentations of the street were noted. False-positive, in this case, are the parts of the road which are classified as non ground. 
 Several false detections within one measurement frame were considered one error.
 Only parts of the road used as all other area could be filtered out by a map. 
-Furthermore because, an assessment by hand would otherwise not be feasible.
+Furthermore, because an assessment by hand would otherwise not be feasible.
 For the evaluation of the false-negative, only the car was examined, since the pedestrian is often not seen as a human in the data. 
-In order for measurement frame to be recognized as false negative, all parts of the vehicle must be classified as ground. 
+In order for a measurement frame to be recognized as false-negative, all parts of the vehicle must be classified as ground. 
 A total of 819 measurement frames were evaluated.
 
 % Die Auswertung der False positives hat 20 fälle egeben. Ein Beispiel dazu ist in \cref{false_pos_seg_1} zu sehen. Alle Hellblauen Bereich stellen
 % dabei Boden dar, während schwarze bereiche potenzielle Objekte darstellen.
 The evaluation of the false-positives has given 20 cases. An example is shown in \cref{false_pos_seg_1}. 
 All light blue areas represent ground while black areas represent potential objects.
-\todo{bild ändern!}
+
 \begin{figure}[!htb]
   \caption{False-Positive Example} 
   \centering
   \includegraphics[width=\textwidth]{bilder/false_pos1.png}
  \label{false_pos_seg_1}
 \end{figure}
-
 
 % Es wurden in den Messframes keine False negativen gefunden. Die Gesammtanzahl der Fehler liegt somit bei 2.4\%. 
 % In wie Fern sich die Fahlenden Messwerte des Sensors im hintern Bereich des Fahrzeuges auswirken lässt sich anhand der Daten leider nicht
@@ -2326,7 +2325,7 @@ To this end, two snapshots are taken (\cref{conf_filter}), once with a filter an
 % Eine abschließende aussage lässt sich jedoch nur mit aufnahmen in einer echten Urbanen Umgebung, mit mehreren Fahrzeugen und andern Verkehrsteilnehmern machen
 As seen, most of the invalid objects are filtered out. Only a few smaller objects remain.
 These are, however, always outside the road and also could be filtered out on a map.
-However, a final statement can only be made with measurement data in a real urban environment, with several vehicles and other traffic participants.
+However, a final statement can only be made with measurement data in a real urban environment with several vehicles and other traffic participants.
 
 \subsection{Pedestrian}
 % In diesem Abschnitt wird der Fußgänger im Scenario genauer untersucht. Dieser ist in diesem Szenarion besonder schwer zu erkennen,
@@ -2334,7 +2333,7 @@ However, a final statement can only be made with measurement data in a real urba
 % Das Führt dazu das er für den Menschen aus der Vogelperspektive nicht von anderen Onjekten am Straßenrand, wie z.B. Leitpfosten \cref{refPosts}, zu unterschiden ist.
 In this section the pedestrian in the scenario is examined more closely. This is particularly difficult to see in this scenario, 
 since the roundabout does not have a pavement and the pedestrian is located on the road edge.
-This leads to the fact that pedestrian from the bird's eye view is not to differ from other objects, like reflector posts (see \cref{refPosts}), on the road edge.
+This leads to the fact that pedestrian from the bird's eye view are not to differ from other objects, like reflector posts (see \cref{refPosts}), on the road edge.
 
 \begin{figure}[!htb]
   \caption{Pedestrian and Reflector Posts} 
@@ -2405,7 +2404,7 @@ Results:
 Since the measured values of the Velodyne sensor come with a rate of 10Hz, so a running time of less than 100ms is necessary in order to be able to evaluate the data 
 in real time. To see the older desktop system does not reach this value. The newer notebook, on the other hand, achieves this. 
 However, since the vehicle moves at partly high speeds, a smaller value would be desirable in order to reduce the delay of the measured values. 
-It should be noted that there is room for optimization. Since the pure run time values have little meaning in this regard, 
+It should be noted that there is potential for optimization. Since the pure run time values have little meaning in this regard, 
 the following is the profiling chart of the program is shown in \cref{profiling}. 
 The profiling is created with Callgrind\footnote{\url{http://valgrind.org/docs/manual/cl-manual.html}}, which estimates the run time over the number of instructions.
 
@@ -2428,7 +2427,7 @@ If additional functions of the DBSACN are added, the proportion increases to ove
 values into Cartesian coordinates (6.1 \%) as well as the memory management of the point cloud (23.6\%).
 Thus, over 75\% of the run time fall on little functionality of the program.
 So to optimize the program, an alternative for the \ac{DBSCAN} should be found.
-If the clustering algorithm could work directly on the polar coordinates, the conversion of the point cloud would also unnecessary.
+If the clustering algorithm could work directly on the polar coordinates, the conversion of the point cloud would also be unnecessary.
 It is, of course, also possible to parallelize the existing algorithm. Especially the range request of the \ac{DBSCAN} could be implemented easily parallelized.
 
 \chapter{\mbox{Conclusions and Future}}
@@ -2475,13 +2474,13 @@ It is, of course, also possible to parallelize the existing algorithm. Especiall
 % Das würde sowohl die nutzbare Auflösung erhöhen als auch eine erhöhte Qualität der Segmentierung erlauben
 % da für diese, aufgrund der Bodenerkennung besonders der Nahbereich wichtig ist.
 
-In the end, the question is, is the sensor configuration of the test vehicle ''Snowfox'' sufficient to safely handle
+In the end, the question is, whether the sensor configuration of the test vehicle ''Snowfox'' is sufficient to safely handle
 and observe roundabouts. To answer this, the sensor equipment of the vehicle was examined in the introduction.
 It was found that a part of the sensor system can not be evaluated and therefore the evaluation must be restricted
 to a Velodyn VLP-16 LIDAR and an Applanix POS LV (Position and Orientation System).
 Furthermore, it was investigated which sensor equipment was used in comparable projects.
 
-For this purpose, the \ac{DARPA} Urban Challenge has been used and found that there are teams
+For this purpose, the \ac{DARPA} Urban Challenge has been investigated and found out that there are teams
 with comparable but not the same sensor equipment.
 However, there were also simplified requirements in competition.
 Thus, no pedestrians or cyclists had to be recognized.
@@ -2512,8 +2511,8 @@ to an external extended classifier.
 Whether the measurement data is suitable for an extended classification must however still be examined.
 However, since the test vehicle will be equipped,in the future, with further sensors such as cameras, 
 these data can also be used for classification purposes. 
-For the detection of pedestrians with the help of cameras, there are already some publications \cite{Lee2015, Tuong2011} 
-a fusion of both methods would be an interesting alternative.
+For the detection of pedestrians with the help of cameras, there are already some publications \cite{Lee2015, Tuong2011}.
+A fusion of both methods would be an interesting alternative.
 
 
 The segmentation of the objects from the measured data can be evaluated as success, 
