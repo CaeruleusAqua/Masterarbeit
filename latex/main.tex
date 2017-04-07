@@ -681,17 +681,61 @@ point cloud are marked by their distance to the plane as ground. As distance thr
 For plane fitting usually a \ac{SVD} is used \cite{Nurunnabi2012,Ram2007,Soderkvist2009}. Technically, SVD performs a linear least square \cite{Lee2012}.
 Since there is already ready knowledge about the position of the plane, the linear least square is calculated by hand and some optimizations are made.
 When using the \ac{LLSQ}, it is important to note that the \ac{LLSQ} is not optimizing the distance of the points to the plane but the distance of the points along an axis (in this case the z-axis),
-see \cref{LLSQ_MIN}\footnote{\url{https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics) (03/06/2017)}}. This can lead to problems, if the points are scattered far apart from the optimal plane.
+see \cref{LLSQ_MIN}. This can lead to problems, if the points are scattered far apart from the optimal plane.
 However, since the algorithm is using preselected points from the \ac{RANSAC} distance criterion, this poses no problem.
+%\footnote{\url{https://en.wikipedia.org/wiki/Linear_least_squares_(mathematics) (03/06/2017)}}
 
+%\todo{tikz bild??}
+%\begin{figure}[!ht]
+%\begin{center}
+%\caption{Linear Least Squares (LLSQ)}
+%\includesvg[width=0.5\textwidth]{Linear_least_squares_min}
+%\label{LLSQ_MIN}
+%\end{center}
+%\end{figure}
 
-\todo{tikz bild??}
 \begin{figure}[!ht]
-\begin{center}
-\caption{Linear Least Squares (LLSQ)}
-\includesvg[width=0.5\textwidth]{Linear_least_squares_min}
-\label{LLSQ_MIN}
-\end{center}
+	\begin{center}
+		\caption{Linear Least Squares (LLSQ)}
+		\begin{tikzpicture}
+		\begin{axis}[xticklabel=\empty,yticklabel=\empty,width=\textwidth, height=0.5\textwidth,
+		minor tick num=1,axis lines = middle,xlabel=$x$,ylabel=$y$,label style = {at={(ticklabel cs:1.1)}}]
+		\addplot[color=blue,thick] coordinates {
+			(0,0)
+			(10,5)
+		};
+		\addplot [only marks, color=red]coordinates {
+			(5,2.9) %(5,2.5)
+			(2,0.5) %(2,1)
+			(3,2.2) %(3,1.5)
+			(6,2.2) %(6,3)
+			(8,4.5) %(8,4)
+		};
+		\addplot [color=magenta,thick]coordinates {
+			(5,2.9)
+			(5,2.5)
+		};
+		\addplot [color=magenta,thick]coordinates {
+			(2,0.5)
+			(2,1)
+		};
+		\addplot [color=magenta,thick]coordinates {
+			(3,2.2)
+			(3,1.5)
+		};
+		\addplot [color=magenta,thick]coordinates {
+			(6,2.2)
+			(6,3)
+		};
+		\addplot [color=magenta,thick]coordinates {
+			(8,4.5)
+			(8,4)
+		};
+		\legend{Data,curve fit}
+		\end{axis}
+		\end{tikzpicture}
+		\label{LLSQ_MIN}
+	\end{center}
 \end{figure}
 
 % Die Darstellung einer Ebene in Koordinatenform sieht wie folgt aus: $ a\vec{x} + b\vec{y} + c\vec{z} + d = 0 $. Da wir eine Ebene im R3 betrachten, ist dieses Gleichungsystem überbestimmt.
@@ -1129,7 +1173,6 @@ The bounding box of the object is now calculated from these values. To this end,
 If the object is to the left of the y-axis, the maximum x- and y-value is used as an anchor point and the object is stretched to the lower left using the calculated length and width.
 However, if the object is to the right of the y-axis, the minimum y-value is used and the object is stretched to the lower right. 
 What the whole graphically means is illustrated in \cref{obst_cases} for all four cases.
-\todo{achsenbeschriftung}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -1964,12 +2007,12 @@ In the following section, in \cref{lost} is shown, why the vehicle get lost and 
     \centering
     \begin{minipage}[t]{\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{bilder/alg/lost.png}
+        \includegraphics[width=\textwidth]{bilder/alg/lost_wob.png}
     \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
-    \\
+    \\\vspace{-10pt}\rule{\textwidth}{0.1pt}
     \begin{minipage}[t]{\textwidth}
         \centering
-	\includegraphics[width=\textwidth]{bilder/alg/redetect.png}
+	\includegraphics[width=\textwidth]{bilder/alg/redetect_wob.png}
     \end{minipage}
     \label{lost}
 \end{figure}
