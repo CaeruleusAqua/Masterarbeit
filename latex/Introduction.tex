@@ -35,7 +35,7 @@ but also be safe with trams, buses, bicycles and all other traffic users.
 % Stereo Kamera und ein Velodyne VLP-16 LiDAR. Die Anordnung der Sensoren kann \cref{platform} entnommen werden.
 
 The test platform used in this work is a Volvo XC90 (2015) SUV, named Snowfox (see \cref{snowfox}). 
-This test platform is equipped with many sensors for environmental monitoring. This includes five radar sensors, all around the vehicle, where the front radar has a wider range.
+This test platform is equipped with many sensors for environmental monitoring. This includes five radar sensors, all around the vehicle, where the front radar has a higher range.
 As well as a stereo camera and a Velodyne VLP-16 LiDAR. The arrangement of the sensors can be taken from \cref{platform}.
 
 
@@ -78,7 +78,7 @@ This allows to determine the width of the other vehicles in a later part of this
 At a set speed of 10Hz, the VLP-16 provides a resolution of 0.2 degrees with a variance of +- 3cm. 
 The VLP-16 is centered on the roof of the XC90, in order to achieve the highest possible position and a panoramic view of the environment.
 It is important to note that this alignment is unacceptable to the sensor because the sensor has a vertical field of view of -15 to +15 degrees.
-As a result, all measurements over zero degrees are practically useless. The view of the manufacturer side
+As a result, all measurements over zero degrees are practically useless. The view of the manufacturer website
 \footnote{\url{http://velodyneLiDAR.com/vlp-16.html} (03/09/2017)}
 reveals that the VLP-16 has been constituted for use with drones, while the larger HDL-64E
 \footnote{\url{http://velodyneLiDAR.com/hdl-64e.html} (03/09/2017)}
@@ -92,7 +92,7 @@ automotive sector, appears to be more appropriate. The resulting problems will b
 % Im weiteren Verlauf wird außerdem das vom POS LV gelieferte Heading genutzt, welches eine Genauigkeit von 0.2 Grad liefert. Auch nach ausfall des GPS-Signals kann das POS-LV durch sein
 % Odeomerter und der Inertialsensork eine Position liefern. Diese wird jedoch über die Zeit schlechter, so das 60Sek nach Ausfall des GPS-Signals nich eine Genauigkeit von 2.51m erwartet
 % werden kann.\cite{manAP}
-The POS LV is a compact position and orientation system. It offers stable, reliable and reproducible positioning solutions for land-based vehicle applications. The POS LV provides an inertial sensor and odometer assisted GPS position measurement with an accuracy of up to 0.3m (up to 0.035m when using the RTK correction).
+The POS LV is a compact positioning and orientation system. It offers stable, reliable and reproducible positioning measurements for land-based vehicle applications. The POS LV provides an inertial sensor and odometer assisted GPS position measurement with an accuracy of up to 0.3m (up to 0.035m when using the RTK correction).
 Furthermore, the heading delivered by the POS LV is also used, which provides an accuracy of 0.2 degrees. Even after losing the GPS signal,
 the POS-LV can provide a position through its odometer and the inertial sensor. However, this will deteriorate over time so that an accuracy of 2.51m
 can be expected 60 seconds after the GPS signal is lost. \cite{manAP}
@@ -105,7 +105,7 @@ can be expected 60 seconds after the GPS signal is lost. \cite{manAP}
 % Ziel dieser Arbeit ist es Daher zu analysieren, welche Sensorausstattung für die beobachtung von Kreisverkehren vonnöten ist, bzw. ob die vorhandenne Sensorausstattung des ReVeRe Testfahrzeuges Snowfox
 % als ausreichend betrachtet werden kann.
 Since autonomous driving is a very wide, interdisciplinary subject, it is obvious, that not everything can be dealt within this work.
-Within the scope of \acs{DARPA} Challenge many papers were published on this subject. What has not yet been explicitly discussed in these publications
+Within the scope of the \acs{DARPA} Challenge many papers were published on this subject. What has not yet been explicitly discussed in these publications
 is the explicit handling of roundabouts, with autonomous vehicles, also the author is not aware of any further publications. 
 So the aim of this thesis is therefore to analyze what sensor equipment is necessary for the observation of roundabouts,
 or whether the existing sensor equipment of the ReVeRe test vehicle Snowfox can be regarded as sufficient.

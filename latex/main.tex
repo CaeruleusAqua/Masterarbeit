@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[ngerman,english]{babel}
+\selectlanguage{english}
 \usepackage{textcomp}
 \usepackage{mathptmx}
 \usepackage[scaled=0.9]{helvet}
@@ -106,7 +107,7 @@ Associate Prof. Christian Berger}
 \maketitle
 
 
-
+\selectlanguage{ngerman}
 \chapter*{Eidesstattliche Erklärung}
 Ich erkläre hiermit an Eides statt, dass ich die vorliegende Arbeit selbständig und
 ohne unerlaubte fremde Hilfe angefertigt, andere als die angegebenen Quellen und
@@ -120,14 +121,16 @@ Prüfungsamt vorgelegt und auch nicht veröffentlicht.
 $\overline{~~~~~~~~~\mbox{Julian-B. Scholle}~~~~~~~~~}$
 \end{flushright}
 
+\selectlanguage{english}
+
 
 \chapter*{Acknowledgements}
 % Danken möchte ich außerdem besonders Associate professor Christian Berger und J. Prof Sebastian Zug, führ ihre Organisatorische und Fachliche Unterstützung während und besonders im Vorfeld dieser Arbeit und
 % dem ``Deutschen Akademischen Austauschdienst'' - DAAD für ihre finanzielle Unterstüzung während meines Aufenthaltes in Göteborg.
 % Weiterhin danken möchte ich natürlich allen weiteren Kollegen aus Götborg, welche mich bei meiner Arbeit fachlich und moralisch untersützt haben.
 
-I would especially like to thank Associate Professor Christian Berger and J. Professor Sebastian Zug for their organizational and technical support during and especially in the run-up to this work and
-the ``Deutschen Akademischen Austauschdienst'' - DAAD for their financial support during my stay in Gothenburg.
+I would especially like to thank Associate Professor Christian Berger and J. Professor Sebastian Zug for their organizational and technical support during and especially in the run-up to this work and the ``the German Academic
+Exchange Service'' - DAAD for their financial support during my stay in Gothenburg, within the FITweltweit program.
 I would also like to thank all the other colleagues from Gothenburg, who have supported me professionally and morally.
 
 \include{shorts}
@@ -145,7 +148,7 @@ I would also like to thank all the other colleagues from Gothenburg, who have su
 % Um trotzdem einen Verleich zur Sensoraustattung und Verkehrsbeobachtung zu haben werden an dieser Stelle einige Paper der \acs{DARPA} Urban Challenge herangezogen.
 % Die DARPA Urban Challenge ist ein Rennen zwischen autonomen Fahrzeugen, welches im Jahre 2007 von der \ac{DARPA} ausgetragen wurde. \cite{Buehler2010} Das Rennen fand in bebautem Gebiet
 % einer verlassenen Kaserne des ehemaligen Air Force-Stützpunktes George Air Force Base statt, die Karte kann ist in \cref{darpa_map} zu sehen.
-Even if autonomous driving is an actual research subject, there are so far no publications known to the author, which deal explicitly with roundabouts.
+Even if autonomous driving is an actual research subject, there are so far no publications known to the author which deal explicitly with roundabouts.
 In order to have a comparison to the sensor equipment and traffic monitoring, some papers of the \acs{DARPA} Urban Challenge are used here. 
 The DARPA Urban Challenge is a race between autonomous vehicles, which was launched in 2007 by the \ac{DARPA} \cite {Buehler2010}.
 The race took place in the built-up area of an abandoned barrack of the George Air Force Base, the map can be seen in \cref{darpa_map}
@@ -169,7 +172,7 @@ On one-, two- and four-lane streets, roundabouts, 4-way intersections with stop 
 % insoweit angegeben, welche algorythmen für Segmentierung und Tracking genutzt werden.
 
 The evaluation is mainly limited to the final teams of the competition, since they have most likely developed a functioning concept.
-The type and number of the sensors, for the object detection, used by the teams and the algorithm used for segmentation and tracking, if indicated, are evaluated.
+The type and number of the sensors, for the object detection, used by the teams and the algorithms used for segmentation and tracking, if indicated, are evaluated.
 
 % \begin{tabularx}{\textwidth}{|X|X|X|X|X|X|}
 % \hline \textbf{Team} & \textbf{2D LiDAR} & \textbf{3D LiDAR (low res)} & \textbf{3D LiDAR (high res)} & \textbf{Radar} & \textbf{Camera}\\\hline
@@ -191,12 +194,12 @@ The type and number of the sensors, for the object detection, used by the teams 
 % Und innerhalb dieser gegen die Bildverarbeitung mit zwei 2D Kameras gegengeprüft. Eine Klassifizierung wird nur nach bewegten und unbewegten Objekten vorgnommen, als angnommen,
 % das alle bewegten Objekte Autos sind. Das Team erreichte im Wettbewerb den dritten Platz \cite{Release2007}.
 
-Team VictorTango \cite{Atreya2007} uses two Ibeo Alasca XT sensors, with a range of 200m and an opening angle of 240 degrees to cover the front area of the vehicle, 
-the two sensors are complementary fused to increase the vertical resolution. Each sensor has a vertical resolution of four layers. For the rear area, a single 2D Ibeo A0 LiDAR is used. 
-In addition, four Sick LMS291 LiDARs are used, but these are not used for object detection but are installed vertically in order to search for edges on the road in high resolution.
+Team VictorTango \cite{Atreya2007} uses two Ibeo Alasca XT LiDAR sensors, with a range of 200m and an opening angle of 240 degrees to cover the front area of the vehicle.
+The two sensors are complementary fused to increase the vertical resolution. Each sensor has a vertical resolution of four layers. For the rear area, a single 2D Ibeo A0 LiDAR is used. 
+In addition, four Sick LMS291 LiDARs are used. These are not used for object detection but are installed vertically in order to search for edges on the road in high resolution.
 However, the object segmentation is not implemented by Team VictorTango itself. In the meantime, a commercial ECU supplied by Ibeo is used, which directly detects objects in the data from the Ibeo sensors.
-The already finished objects are filtered using the road detection and then combined by a software component (Classification Center). And within that counter-checked against image processing
-with two 2D cameras. A classification is carried out only between moving and non moving objects, i.e., all moving objects are cars. The team reached the third prize in the competition \cite{Release2007}.
+The already detected objects are filtered using the road detection and then collected by a software component (Classification Center). And within this component counter-checked against the image processing
+with two 2D cameras. A classification is carried out only between moving and non-moving objects, i.e., all moving objects are classified as cars. The team achieved the third prize in the competition \cite{Release2007}.
 \subsubsection{Stanford Racing Team}
 
 % Das Stanford Racing Team \cite{Montemerlo2009} ferfügt über eine Große Zahl von Sensoren unteranderm den großen Velodyne HDL-64E 3D LiDAR mit einer Vertikalen Auflösung von 64 Lagen, einer 360 Grad Rundumsicht und 120m reichweite.
@@ -207,12 +210,12 @@ with two 2D cameras. A classification is carried out only between moving and non
 % Bei den 2D Sensoren wurde das Problem duch die Begrenzung der Reichweite behoben. 
 
 The Stanford Racing Team \cite{Montemerlo2009} has a large number of sensors with the large Velodyne HDL-64E 3D LiDAR with a vertical resolution of 64 layers, 
-a 360 degree panoramic view and a range of 120m. This is additionally supported by two SICK LD-LRS 2D LiDARs with 250m range at the rear of the vehicle, 2x Ibeo Alasca XT 
-sensors in the front area and additional five Bosch long range radars at the front of the vehicle. To evaluate the measurement data, all LiDAR sensors are transformed 
-into a virtual 2D laser scanner. The team describes, with the Velodyne sensor, problems with the roll and pitch angles of the vehicle which lead to false positives during the
-segmentation. These were corrected by the measurements of the Velodyne forming round circles (see \cref{stanford_junior_velodyne}). These circles have a fixed distance
-from each other, if the alignment is correct. The roll and pitch angles of the vehicle can be corrected by looking at these distances. In the case of the 2D sensors, 
-the problem was limited by limiting the range.
+a 360 degree panoramic view and a range of 120m. This is additionally supported by two SICK LD-LRS 2D LiDARs with 250m range at the rear of the vehicle, two Ibeo Alasca XT 
+sensors in the front area and additionally five Bosch long range radars at the front of the vehicle. To evaluate the measurement data, all LiDAR sensors are transformed 
+into a virtual 2D laser scanner. The team describes, with the Velodyne sensor, problems with the roll and pitch angles of the vehicle, which leads to false positives during the
+segmentation. These were corrected by the measurements of the Velodyne forming round circles (see \cref{stanford_junior_velodyne}). If the alignment is correct, these circles have a fixed distance
+from each other. The roll and pitch angles of the vehicle can be corrected by looking at these distances. In the case of the 2D sensors, 
+the tilt problem was limited by limiting the measurement range.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -227,7 +230,7 @@ the problem was limited by limiting the range.
 % Das Team erreichte im Wettbewerb den zweiten Platz  \cite{Release2007}.
 
 For the segmentation of the objects, two time steps of the virtual laser scan are compared with one another. Areas in which a change is detected are then classified 
-as objects and tracked using a particle filter. The tracker estimates, the position, the rotation, the speed, and the size of the object.
+as objects and tracked using a particle filter. The tracker estimates the position, the rotation, the speed, and the size of the object.
 The team reached the second prize in the competition \cite{Release2007}.
 
 
@@ -237,8 +240,9 @@ The team reached the second prize in the competition \cite{Release2007}.
 % welcher 4 nahezu paralele Scans ausssendet und es so einfach macht, den boden zu erkennen. Über die Segmentierung der Objekte macht das Team keine Angaben, es wird lediglich gesagt, das die Sensorrohdaten
 % in eine lokale Karte eingetragen, also fusioniert werden. Für das eigentliche Tracking wird ein ``Rao-Blackwellized Particle Filter''\cite{miller2007rao} genutzt.
 Team Cornell \cite{Campbell2007} uses two side Ibeo Alasca XTs for the object detection. In addition, three RADAR sensors are used on the vehicle front, 
-which allow the Doppler shift to detect moving objects. The team has also evaluated a Velodyne 3D LiDAR, but decided on the price and the roll, pitch problems
-for the Alasca XT, which ejects four nearly parallel scans and makes it so easy to detect the ground. The team does not give any information about the
+which allows the detection of moving objects by exploiting the Doppler effect. 
+The team has also evaluated a Velodyne 3D LiDAR, but decided on the price and the roll, pitch problems
+for the Alasca XT, which ejects four nearly parallel scans and  therefore makes it easy to detect the ground. The team does not give any information about the
 segmentation of the objects, it is merely said that the sensor raw data is written into a local map, i.e., fused. For the actual tracking a 
 ``Rao-Blackwellized Particle Filter'' \cite{miller2007rao} is used.
 
@@ -249,10 +253,10 @@ segmentation of the objects, it is merely said that the sensor raw data is writt
 % Bei höheren geschwindigkeiten wird auf die jeweiligen außeren Kameras umgeschalten, um eine höhere Tiefensicht zu erhalten. Um Objekte zu detektieren wird haupsächlich dieses System genutzt.
 % Dabei wird von einer Flachen Fahrbahn ausgegangen, und alles was nicht flach ist als Objekt erkannt und dann mit den Rohdaten der LiDAR sensoren fusioniert.
 % Team TerraMax beschreibt kein weiteres Tracken der Objekte.
-Team TerraMax \cite{Corp2005} also uses the Ibeo Alasca XT and additional three SICK LMS-291 LiDAR sensors. The Ibeo sensor is front-mounted and the SICK sensors 
-cover the lateral or rear area. Furthermore, the team makes intensive use of a self-developed panorama camera system, which is mounted in an identical version, each
+Team TerraMax \cite{Corp2005} also uses the Ibeo Alasca XT and additionally three SICK LMS-291 LiDAR sensors. The Ibeo sensor is front-mounted and the SICK sensors 
+cover the lateral and rear area. Furthermore, the team makes intensive use of a self-developed panorama camera system, which is mounted in an identical version, each
 on the front and on the rear of the car. The system consists of three cameras each, depending on the speed, two cameras are used to calculate a stereo image of the environment.
-At higher speeds, the respective outer cameras are switched over in order to obtain a higher depth of view. In order to detect objects, this system is mainly used.
+At higher speeds, the respective outer cameras are used in order to obtain a higher depth of field. In order to detect objects, this system is mainly used.
 In this case, a flat road is supposed, and everything which is not flat is detected as an object and then fused with the raw data of the LiDAR sensors. 
 Team TerraMax does not describe any further tracking of the objects.
 
@@ -261,7 +265,7 @@ Team TerraMax does not describe any further tracking of the objects.
 % Die Segmentierung der Objekte wird dabei auf jedem Sensor einzeln durchgeführt und die Erkannten Objekte werden erst im darauf folgenden Schritt fusioniert. Über die Segmentierung macht
 % das Team leider keine genauen angangen. Statische Objekte werden mithilfe einer cost map klassifiziert nund dynamische Objekte werden mit Hilfe eines Extendet Kalmanfiters und einem
 % Constant Turn Rate and Acceleration (CTRA) Model getrackt und in eine Objektdatenbak eingetragen. Das Team erreichte im Wettbewerb den ersten Platz  \cite{Release2007}.
-Tartan Racing \cite{Urmson2007} uses a combination of several sensors for environmental awareness, the Velodyne HDL-64E, the Ibeo Alasca XT, an ARS300 RADAR and various SICK 2D LiDARs.
+Tartan Racing \cite{Urmson2007} uses a combination of several sensors for environmental awareness: the Velodyne HDL-64E, the Ibeo Alasca XT, an ARS300 RADAR and various SICK 2D LiDARs.
 The segmentation of the objects is performed individually on each sensor and the detected objects are fused in the next step. Unfortunately,
 the team does not make any precise statements about segmentation. Static objects are classified using a cost map and dynamic objects are tracked using an
 Extended Kalman filter and a ``Constant Turn Rate and Acceleration'' (CTRA) model. Afterwards they are written into an object database. The team reached the first prize in the competition \cite{Release2007}.
@@ -295,15 +299,15 @@ the estimated velocity of the object is above a threshold, it is classified as a
 % Da Fußgänger und Radfahrer bedeutend kleiner sind als Fahrzeuge ist eine hohe Auflösung wünschenwert. 
 % Ob der Sensor für seine Aufgabe geeignet ist, gilt es im folgenden zu untersuchen.
 
-As seen, the teams share very different strategies to detect other vehicles. Some teams perform the segmentation before the fusing of the data, others afterwards.
-Some teams used a combination of image processing and LiDAR sensors, others trusted solely on LiDAR sensors. 
+As seen, the teams share very different strategies to detect other vehicles. Some teams perform the segmentation before the fusion of the data, others afterwards.
+Some teams used a combination of image processing and LiDAR sensors, others relied solely on LiDAR sensors. 
 It is also noticeable that the two best teams (Tartan Racing, Stanford Racing Team) use a Velodyne HDL-64E,
-which has the highest resolution in comparison to all other sensors. Nevertheless, this is always combined with other sensors, which have a higher range. 
+which has the highest resolution in comparison to all other sensors. Nevertheless, it is always combined with other sensors, which have a higher range. 
 Presumably the sensor equipment had a great influence on the outcome of the competition. Comparing the test vehicles of the teams with the test vehicle ``Snowfox'' the sensor equipment
 is most similar to the teams which have the Velodyne HDL-64E, which is similar to the Velodyne VLP-16.
-However, this sensor used by ``Snowfox'' was not yet on the market at the time of the competition \footnote{\url{http://www.spar3d.com/news/LiDAR/vol12no37-velodyne-announces-puck-LiDAR-sensor/}
-(03/23/2017)}. However, the VLP-16 has a significantly lower vertical resolution than the HDL-64E, but it is still above all other sensors.
-It must be said that the requirements in competition were below those of this project. Thus it was not necessary in the competition to distinguish between 
+However, this sensor used by ``Snowfox'' was not yet available on the market at the time of the competition \footnote{\url{http://www.spar3d.com/news/LiDAR/vol12no37-velodyne-announces-puck-LiDAR-sensor/}
+(03/23/2017)}. However, the VLP-16 has a significantly lower vertical resolution than the HDL-64E, but it is still above all other LiDAR sensors, used in the DARPA challenge.
+It must be said that the requirements in the competition were below those of this project. For example, it was not necessary in the competition to distinguish between 
 different traffic, since only the vehicles of the other teams were on the course. As other traffic, such as pedestrians and cyclists, have to be detected as part of this project, this places higher demands on classification and segmentation. Since pedestrians and cyclists are considerably smaller than vehicles, a high resolution is desirable. Whether the sensor is suitable for this task is to be investigated in the following.
 
 
